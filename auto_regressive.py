@@ -5,33 +5,20 @@ import tensorflow as tf
 from transformers import TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel
 import sys
 
-def get_distribution(model_info, model_name, context, num_return_seqs, current_len):
+def get_distribution(model_info, model_name, context, joint_vocab):
 
         model, tokenizer = model_info[model_name]
-        # encode context the generation is conditioned on
-        input_ids = tokenizer.encode(context, return_tensors='tf')
 
-        num_tokens = input_ids.shape[1]
-        #max_length=num_tokens + 1,
-        sample_outputs = model.generate(
-                input_ids,
-                do_sample=True,
-                top_k=50,
-                top_p=0.95,
-                max_length = num_tokens + 1,
-                no_repeat_ngram_size=2,
-                num_return_sequences=num_return_seqs
-        )
+        input = tokenizer(context,return_tensors='tf')
+        outputs = model(input)
 
-        distribution_dict = {}
-        for i, sample_output in enumerate(sample_outputs):
-                output = tokenizer.decode(sample_output, skip_special_tokens=True)
-                key = output.replace(context,'')
-                distribution_dict[key] = distribution_dict.get(key, 0) + 1
-        distribution_dict = {k: v/num_return_seqs for k,v in distribution_dict.items()}
+        probabilities = softmax(outputs[0])
+        ids = range(0,len(probabilities[0][0]))
+        vocab = tokenizer.convert_ids_to_tokens(ids)
 
-        return distribution_dict
+        distr_dict = dict(zip(vocab, probabilities[0][0]))
 
+        return distr_dict
 
 
 def js(p, q):
@@ -62,7 +49,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     highest = {}
     for model_name in ['GPT2','TransformerXL']:
         model, tokenizer = model_info[model_name]
-        next_word_distr = get_distribution(model_info, model_name, curr_context, num_return_seqs,current_len)
+        next_word_distr = get_distribution(model_info, model_name, curr_context)
         distrs[model_name] = next_word_distr
 
     A = distrs['GPT2']
@@ -70,16 +57,17 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     # average the two distributions
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
     highest = sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)
-    print(highest)
+    
     js_dict = {}
-    for i in range(0,1):
-        new_word = highest[i][0]
+    for i in range(0,5):
+        n = random.randint(0,K)
+        new_word = highest[n][0]
         print("NEW WORD", new_word)
         print("CURR PRE-NEW CONTEXT", curr_context)
         new_context =  curr_context + new_word
         print("NEW CONTEXT", new_context)
-        p = get_distribution(model_info, 'GPT2', new_context, num_return_seqs, current_len)
-        q = get_distribution(model_info,'TransformerXL', new_context, num_return_seqs, current_len)
+        p = get_distribution(model_info, 'GPT2', new_context)
+        q = get_distribution(model_info,'TransformerXL', new_context)
         print(p,q)
         js_result = js(p,q)
         js_dict[new_word] = js_result
@@ -88,7 +76,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     #print(js_dict)
     #print("JS List", sorted(js_dict.items(), key=lambda x: x[1]))
     highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0][0]
-print("highest JS word", highest_js_word)
+    print("highest JS word", highest_js_word)
     curr_context = curr_context + highest_js_word
 
     p = get_distribution(model_info,'GPT2', curr_context, num_return_seqs, current_len + 1)
@@ -104,4 +92,4 @@ model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.f
 curr_context = sys.argv[1:]
 curr_context = ' '.join(curr_context)
 auto_regressive(model_info, curr_context, 50, 1, 15, 0)
-                  
+                 
