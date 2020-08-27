@@ -1,4 +1,3 @@
-from nlp_adversarial_examples import *
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
