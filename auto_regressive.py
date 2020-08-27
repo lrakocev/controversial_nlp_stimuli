@@ -1,9 +1,12 @@
-from nlp_adversarial_examples import *
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
 from transformers import TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel
 import sys
+from scipy.special import softmax
+import torch
+import random
+import string
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
