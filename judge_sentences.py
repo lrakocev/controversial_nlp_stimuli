@@ -74,7 +74,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
         print("NEW CONTEXT", new_context)
         p = get_distribution(model_info, 'GPT2', new_context, joint_vocab)
         q = get_distribution(model_info,'TransformerXL', new_context, joint_vocab)
-       # print(p,q)
+        print(p,q)
         js_result = js(p,q)
         js_dict[new_word] = js_result
 
@@ -95,8 +95,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
 
-curr_context = sys.argv[1:]
-curr_context = ' '.join(curr_context)
+curr_context = "What"
 gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
 txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
@@ -104,3 +103,4 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
 auto_regressive(model_info, curr_context, 50, 1, 15, 0, joint_vocab)
                  
+
