@@ -11,43 +11,38 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
         input = tokenizer(context,return_tensors='tf')
         outputs = model(input)
-
-        ids = range(0,len(outputs))
-        vocab = tokenizer.convert_ids_to_tokens(ids)
-
-        final_vocab = vocab & joint_vocab
-
-        # get id's corresponding to the final_vocab
-
-        # only get the IDS of things that are in joint_vocab
-
-        # at this point, take only outputs over what's in the joint vocab 
-        probabilities = softmax(outputs[0])
         
+        ids = range(0,tokenizer.vocab_size)
+        vocab = tokenizer.convert_ids_to_tokens(ids)
+        
+        final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
 
-        distr_dict = dict(zip(vocab, probabilities[0][0]))
+        id_list = tokenizer.convert_tokens_to_ids(sorted(final_vocab))
+
+        outputs_array = np.asarray(outputs[0]).flatten()
+
+        final_outputs = [outputs_array[i] for i in id_list] 
+        
+        probabilities = softmax(final_outputs)
+
+        distr_dict = dict(zip(final_vocab, probabilities))
 
         return distr_dict
 
 
 def js(p, q):
 
-    intersection = p.keys() & q.keys()
-    p = {k:v for k,v in p.items() if k in intersection}
-    q = {k:v for k,v in q.items() if k in intersection}
+  p = [v for k, v in sorted(p.items())]
+  q = [v for k, v in sorted(q.items())]
 
-    p = [v for k, v in sorted(p.items())]
-    q = [v for k, v in sorted(q.items())]
+  p = np.asarray(p)
+  q = np.asarray(q)
 
-    p = np.asarray(p)
-    q = np.asarray(q)
-    # normalize
-    p /= p.sum()
-    q /= q.sum()
-    m = (p + q) / 2
-    return (entropy(p, m) + entropy(q, m)) / 2
-
-
+  # normalize
+  p /= p.sum()
+  q /= q.sum()
+  m = (p + q) / 2
+  return (entropy(p, m) + entropy(q, m)) / 2
 
 def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_len, total_js, joint_vocab):
 
@@ -69,10 +64,10 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     js_dict = {}
     for i in range(0,5):
         n = random.randint(0,len(avg_distr))
-        new_word = avg_distr.items()[n][0]
+        new_word = list(avg_distr.items())[n][0]
         print("NEW WORD", new_word)
         print("CURR PRE-NEW CONTEXT", curr_context)
-        new_context =  curr_context + new_word
+        new_context =  curr_context + " " + new_word
         print("NEW CONTEXT", new_context)
         p = get_distribution(model_info, 'GPT2', new_context, joint_vocab)
         q = get_distribution(model_info,'TransformerXL', new_context, joint_vocab)
@@ -83,7 +78,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
 
     highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0][0]
     print("highest JS word", highest_js_word)
-    curr_context = curr_context + highest_js_word
+    curr_context = curr_context + " " + highest_js_word
 
     p = get_distribution(model_info,'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
@@ -91,7 +86,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     total_js += js(p,q)
     print("CURR CONTEXT", curr_context, "JS", total_js)
     # then autoregressive again on this new current context
-    return auto_regressive(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js)
+    return auto_regressive(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab)
 
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
