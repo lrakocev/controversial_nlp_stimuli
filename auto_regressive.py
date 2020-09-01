@@ -64,10 +64,14 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     # average the two distributions
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
     
+    prob_list = [v for k, v in sorted(avg_distr.items())]
+    word_list = [k for k, v in sorted(avg_distr.items())]
+
     js_dict = {}
     for i in range(0,5):
-        n = random.randint(0,len(avg_distr))
-        new_word = list(avg_distr.items())[n][0]
+        n = list(np.random.multinomial(1,prob_list))
+        id = n.index(1)
+        new_word = word_list[id]
         print("NEW WORD", new_word)
         print("CURR PRE-NEW CONTEXT", curr_context)
         new_context =  curr_context + " " + new_word

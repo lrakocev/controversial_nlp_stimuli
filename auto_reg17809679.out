@@ -1,0 +1,2089 @@
+ModuleCmd_Load.c(213):ERROR:105: Unable to locate a modulefile for 'python'
+2020-09-01 00:35:07.065769: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:35:07.066150: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:35:07.066174: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:35:12.248711: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:35:12.411039: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:35:12.425968: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:35:12.426012: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:35:12.426024: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:35:12.426100: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:35:12.426154: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:35:12.426165: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:35:12.426524: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:35:12.436324: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:35:12.437044: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x564afb28d120 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:35:12.437065: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Friends
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Friends
+NEW WORD EXT
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who EXT
+NEW WORD blind
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who blind
+NEW WORD Arg
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Arg
+NEW WORD EXT
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who EXT
+highest JS word Friends
+CURR CONTEXT Who Friends JS 0.5095122456550598
+NEW WORD EXT
+CURR PRE-NEW CONTEXT Who Friends
+NEW CONTEXT Who Friends EXT
+NEW WORD bec
+CURR PRE-NEW CONTEXT Who Friends
+NEW CONTEXT Who Friends bec
+NEW WORD Default
+CURR PRE-NEW CONTEXT Who Friends
+NEW CONTEXT Who Friends Default
+NEW WORD tops
+CURR PRE-NEW CONTEXT Who Friends
+NEW CONTEXT Who Friends tops
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends
+NEW CONTEXT Who Friends 265
+highest JS word EXT
+CURR CONTEXT Who Friends EXT JS 1.0190243124961853
+NEW WORD Ch
+CURR PRE-NEW CONTEXT Who Friends EXT
+NEW CONTEXT Who Friends EXT Ch
+NEW WORD LO
+CURR PRE-NEW CONTEXT Who Friends EXT
+NEW CONTEXT Who Friends EXT LO
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT
+NEW CONTEXT Who Friends EXT 265
+NEW WORD private
+CURR PRE-NEW CONTEXT Who Friends EXT
+NEW CONTEXT Who Friends EXT private
+NEW WORD private
+CURR PRE-NEW CONTEXT Who Friends EXT
+NEW CONTEXT Who Friends EXT private
+highest JS word Ch
+CURR CONTEXT Who Friends EXT Ch JS 1.5285364985466003
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT Who Friends EXT Ch
+NEW CONTEXT Who Friends EXT Ch Â¢
+NEW WORD Font
+CURR PRE-NEW CONTEXT Who Friends EXT Ch
+NEW CONTEXT Who Friends EXT Ch Font
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch
+NEW CONTEXT Who Friends EXT Ch 265
+NEW WORD mort
+CURR PRE-NEW CONTEXT Who Friends EXT Ch
+NEW CONTEXT Who Friends EXT Ch mort
+NEW WORD EXT
+CURR PRE-NEW CONTEXT Who Friends EXT Ch
+NEW CONTEXT Who Friends EXT Ch EXT
+highest JS word Font
+CURR CONTEXT Who Friends EXT Ch Font JS 2.0380489230155945
+NEW WORD LO
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font
+NEW CONTEXT Who Friends EXT Ch Font LO
+NEW WORD Advertisement
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font
+NEW CONTEXT Who Friends EXT Ch Font Advertisement
+NEW WORD NAT
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font
+NEW CONTEXT Who Friends EXT Ch Font NAT
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font
+NEW CONTEXT Who Friends EXT Ch Font 265
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font
+NEW CONTEXT Who Friends EXT Ch Font 265
+highest JS word 265
+CURR CONTEXT Who Friends EXT Ch Font 265 JS 2.547561287879944
+NEW WORD Arg
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265
+NEW CONTEXT Who Friends EXT Ch Font 265 Returns
+NEW WORD particularly
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265
+NEW CONTEXT Who Friends EXT Ch Font 265 particularly
+NEW WORD bec
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265
+NEW CONTEXT Who Friends EXT Ch Font 265 bec
+NEW WORD Click
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265
+NEW CONTEXT Who Friends EXT Ch Font 265 Click
+highest JS word Arg
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg JS 3.057073473930359
+NEW WORD ERS
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW WORD particularly
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg particularly
+NEW WORD nes
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg nes
+NEW WORD Minecraft
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg Minecraft
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg 265
+highest JS word ERS
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS JS 3.566585600376129
+NEW WORD 0100
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW WORD Extreme
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS Extreme
+NEW WORD LO
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS LO
+NEW WORD emphasis
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS emphasis
+NEW WORD conn
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS conn
+highest JS word 0100
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 JS 4.076097905635834
+NEW WORD chrome
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW WORD vil
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 vil
+NEW WORD Ch
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 Ch
+NEW WORD Fast
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 Fast
+NEW WORD bec
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 bec
+highest JS word chrome
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome JS 4.585610210895538
+NEW WORD Army
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome Army
+NEW WORD rec
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW WORD particularly
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome particularly
+NEW WORD Font
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome Font
+NEW WORD MAN
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome MAN
+highest JS word rec
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec JS 5.095122516155243
+NEW WORD MAN
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW WORD Ott
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec Ott
+NEW WORD MAN
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW WORD Lie
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec Lie
+NEW WORD peace
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec peace
+highest JS word MAN
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN JS 5.6046348214149475
+NEW WORD particularly
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW WORD ED
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN ED
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN 265
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN 265
+NEW WORD ship
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN ship
+highest JS word particularly
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly JS 6.114147067070007
+NEW WORD LO
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW WORD Arg
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly Arg
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly 265
+NEW WORD jug
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly jug
+NEW WORD required
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly required
+highest JS word LO
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO JS 6.623659312725067
+NEW WORD Und
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO Und
+NEW WORD 265
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO 265
+NEW WORD dB
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO dB
+NEW WORD LO
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO LO
+NEW WORD Arg
+CURR PRE-NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO
+NEW CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO Arg
+highest JS word Und
+CURR CONTEXT Who Friends EXT Ch Font 265 Arg ERS 0100 chrome rec MAN particularly LO Und JS 7.133171379566193
+2020-09-01 00:38:10.156261: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:38:10.156428: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:38:10.156445: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:38:14.833096: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:38:14.985930: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:38:14.988663: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:38:14.988706: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:38:14.988717: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:38:14.988802: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:38:14.988851: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:38:14.988862: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:38:14.989224: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:38:14.999075: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:38:14.999819: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55854fbf39f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:38:14.999842: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where 774
+NEW WORD Mess
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where Mess
+NEW WORD hod
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where hod
+NEW WORD 012
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where 012
+NEW WORD Putin
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where Putin
+highest JS word Mess
+CURR CONTEXT Where Mess JS 0.4933411478996277
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess
+NEW CONTEXT Where Mess omen
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess
+NEW CONTEXT Where Mess omen
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess
+NEW CONTEXT Where Mess 774
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess
+NEW CONTEXT Where Mess 774
+NEW WORD hound
+CURR PRE-NEW CONTEXT Where Mess
+NEW CONTEXT Where Mess hound
+highest JS word omen
+CURR CONTEXT Where Mess omen JS 0.9866822957992554
+NEW WORD Coach
+CURR PRE-NEW CONTEXT Where Mess omen
+NEW CONTEXT Where Mess omen Coach
+NEW WORD Goal
+CURR PRE-NEW CONTEXT Where Mess omen
+NEW CONTEXT Where Mess omen Goal
+NEW WORD Coach
+CURR PRE-NEW CONTEXT Where Mess omen
+NEW CONTEXT Where Mess omen Coach
+NEW WORD fx
+CURR PRE-NEW CONTEXT Where Mess omen
+NEW CONTEXT Where Mess omen fx
+NEW WORD 613
+CURR PRE-NEW CONTEXT Where Mess omen
+NEW CONTEXT Where Mess omen 613
+highest JS word Coach
+CURR CONTEXT Where Mess omen Coach JS 1.480023205280304
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess omen Coach
+NEW CONTEXT Where Mess omen Coach 774
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess omen Coach
+NEW CONTEXT Where Mess omen Coach 774
+NEW WORD py
+CURR PRE-NEW CONTEXT Where Mess omen Coach
+NEW CONTEXT Where Mess omen Coach py
+NEW WORD ari
+CURR PRE-NEW CONTEXT Where Mess omen Coach
+NEW CONTEXT Where Mess omen Coach ari
+NEW WORD Putin
+CURR PRE-NEW CONTEXT Where Mess omen Coach
+NEW CONTEXT Where Mess omen Coach Putin
+highest JS word 774
+CURR CONTEXT Where Mess omen Coach 774 JS 1.9733642637729645
+NEW WORD north
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774
+NEW CONTEXT Where Mess omen Coach 774 north
+NEW WORD fort
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774
+NEW CONTEXT Where Mess omen Coach 774 fort
+NEW WORD 613
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774
+NEW CONTEXT Where Mess omen Coach 774 613
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774
+NEW CONTEXT Where Mess omen Coach 774 drug
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774
+NEW CONTEXT Where Mess omen Coach 774 143
+highest JS word 613
+CURR CONTEXT Where Mess omen Coach 774 613 JS 2.4667053818702698
+NEW WORD Similarly
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613
+NEW CONTEXT Where Mess omen Coach 774 613 drug
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613
+NEW CONTEXT Where Mess omen Coach 774 613 omen
+NEW WORD older
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613
+NEW CONTEXT Where Mess omen Coach 774 613 older
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613
+NEW CONTEXT Where Mess omen Coach 774 613 drug
+highest JS word Similarly
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly JS 2.9600464701652527
+NEW WORD stress
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW WORD Hope
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly Hope
+NEW WORD Ye
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly Ye
+NEW WORD 573
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly 573
+NEW WORD wn
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly wn
+highest JS word stress
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress JS 3.4533876180648804
+NEW WORD Maximum
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW WORD Shut
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Shut
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress omen
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress 774
+NEW WORD que
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress que
+highest JS word Maximum
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum JS 3.946728676557541
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum drug
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum drug
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW WORD omen
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+highest JS word omen
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen JS 4.440069645643234
+NEW WORD browser
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW WORD PD
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen PD
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen 774
+NEW WORD proven
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen proven
+NEW WORD Trade
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen Trade
+highest JS word browser
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser JS 4.933410733938217
+NEW WORD judicial
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW WORD 012
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser 012
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser 143
+NEW WORD drug
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser drug
+NEW WORD 774
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser 774
+highest JS word judicial
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial JS 5.426751732826233
+NEW WORD Similarly
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW WORD 613
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial 613
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial 143
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial 143
+NEW WORD iki
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial iki
+highest JS word Similarly
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly JS 5.920092761516571
+NEW WORD ita
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW WORD Prop
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly Prop
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly 143
+NEW WORD voice
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly voice
+NEW WORD 143
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly 143
+highest JS word ita
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita JS 6.413433790206909
+NEW WORD 012
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita 012
+NEW WORD level
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita level
+NEW WORD Similarly
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita Similarly
+NEW WORD eros
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita eros
+NEW WORD ryu
+CURR PRE-NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita
+NEW CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita ryu
+highest JS word 012
+CURR CONTEXT Where Mess omen Coach 774 613 Similarly stress Maximum omen browser judicial Similarly ita 012 JS 6.906774818897247
+2020-09-01 00:41:10.787173: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:41:10.787296: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:41:10.787308: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:41:15.516480: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:41:15.674732: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:41:15.677552: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:41:15.677596: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:41:15.677607: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:41:15.677693: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:41:15.677766: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:41:15.677782: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:41:15.678157: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:41:15.688106: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:41:15.688987: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5572d61bd2f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:41:15.689009: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD existence
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When existence
+NEW WORD existence
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When existence
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When workshop
+NEW WORD LOC
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When LOC
+NEW WORD 200000
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When 200000
+highest JS word LOC
+CURR CONTEXT When LOC JS 0.47833719849586487
+NEW WORD PIN
+CURR PRE-NEW CONTEXT When LOC
+NEW CONTEXT When LOC PIN
+NEW WORD Memory
+CURR PRE-NEW CONTEXT When LOC
+NEW CONTEXT When LOC Memory
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC
+NEW CONTEXT When LOC 398
+NEW WORD mate
+CURR PRE-NEW CONTEXT When LOC
+NEW CONTEXT When LOC mate
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC
+NEW CONTEXT When LOC existence
+highest JS word PIN
+CURR CONTEXT When LOC PIN JS 0.956674188375473
+NEW WORD hens
+CURR PRE-NEW CONTEXT When LOC PIN
+NEW CONTEXT When LOC PIN hens
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN
+NEW CONTEXT When LOC PIN existence
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN
+NEW CONTEXT When LOC PIN workshop
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN
+NEW CONTEXT When LOC PIN existence
+NEW WORD Ox
+CURR PRE-NEW CONTEXT When LOC PIN
+NEW CONTEXT When LOC PIN Ox
+highest JS word existence
+CURR CONTEXT When LOC PIN existence JS 1.4350114166736603
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN existence
+NEW CONTEXT When LOC PIN existence workshop
+NEW WORD Round
+CURR PRE-NEW CONTEXT When LOC PIN existence
+NEW CONTEXT When LOC PIN existence Round
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence
+NEW CONTEXT When LOC PIN existence existence
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence
+NEW CONTEXT When LOC PIN existence existence
+NEW WORD Damage
+CURR PRE-NEW CONTEXT When LOC PIN existence
+NEW CONTEXT When LOC PIN existence Damage
+highest JS word workshop
+CURR CONTEXT When LOC PIN existence workshop JS 1.9133485853672028
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop
+NEW CONTEXT When LOC PIN existence workshop workshop
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop
+NEW CONTEXT When LOC PIN existence workshop existence
+NEW WORD 03
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop
+NEW CONTEXT When LOC PIN existence workshop 03
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop
+NEW CONTEXT When LOC PIN existence workshop 398
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop
+NEW CONTEXT When LOC PIN existence workshop existence
+highest JS word workshop
+CURR CONTEXT When LOC PIN existence workshop workshop JS 2.39168581366539
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop
+NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW WORD bike
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop
+NEW CONTEXT When LOC PIN existence workshop workshop bike
+NEW WORD Damage
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop
+NEW CONTEXT When LOC PIN existence workshop workshop Damage
+NEW WORD ready
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop
+NEW CONTEXT When LOC PIN existence workshop workshop ready
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop
+NEW CONTEXT When LOC PIN existence workshop workshop workshop
+highest JS word 398
+CURR CONTEXT When LOC PIN existence workshop workshop 398 JS 2.8700230419635773
+NEW WORD Damage
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 Damage
+NEW WORD Upon
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 Upon
+NEW WORD ben
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW WORD 782
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 782
+NEW WORD base
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 base
+highest JS word ben
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben JS 3.348360061645508
+NEW WORD BBC
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben BBC
+NEW WORD LO
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW WORD Students
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben Students
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben workshop
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben existence
+highest JS word LO
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO JS 3.8266971707344055
+NEW WORD Georg
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO Georg
+NEW WORD 157
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 157
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO existence
+NEW WORD Round
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO Round
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+highest JS word 398
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 JS 4.305034190416336
+NEW WORD Gy
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW WORD vector
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 vector
+NEW WORD rete
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 rete
+NEW WORD workshop
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 workshop
+NEW WORD rete
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 rete
+highest JS word Gy
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy JS 4.783371120691299
+NEW WORD message
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy message
+NEW WORD shots
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy shots
+NEW WORD cy
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy existence
+NEW WORD Baby
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy Baby
+highest JS word cy
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy JS 5.2617084085941315
+NEW WORD Damage
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Damage
+NEW WORD Gy
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW WORD heng
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy heng
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy existence
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy 398
+highest JS word Gy
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy JS 5.740045487880707
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy 398
+NEW WORD Damage
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW WORD Scope
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Scope
+NEW WORD 398
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy 398
+NEW WORD Ox
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Ox
+highest JS word Damage
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage JS 6.218382686376572
+NEW WORD Lost
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage Lost
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage existence
+NEW WORD existence
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage existence
+NEW WORD JM
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage JM
+NEW WORD Students
+CURR PRE-NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage
+NEW CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage Students
+highest JS word Lost
+CURR CONTEXT When LOC PIN existence workshop workshop 398 ben LO 398 Gy cy Gy Damage Lost JS 6.696719706058502
+2020-09-01 00:44:11.422035: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:44:11.422391: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:44:11.422412: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:44:17.417754: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:44:17.569741: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:44:17.572458: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:44:17.572500: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:44:17.572512: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:44:17.572589: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:44:17.572637: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:44:17.572653: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:44:17.573029: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:44:17.582677: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:44:17.583435: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56049088a120 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:44:17.583456: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD https
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why https
+NEW WORD Individual
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why Individual
+NEW WORD android
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why android
+NEW WORD ERS
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why ERS
+NEW WORD ass
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why ass
+highest JS word ERS
+CURR CONTEXT Why ERS JS 0.47763949632644653
+NEW WORD OWN
+CURR PRE-NEW CONTEXT Why ERS
+NEW CONTEXT Why ERS OWN
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS
+NEW CONTEXT Why ERS storms
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS
+NEW CONTEXT Why ERS Magic
+NEW WORD 762
+CURR PRE-NEW CONTEXT Why ERS
+NEW CONTEXT Why ERS 762
+NEW WORD WIN
+CURR PRE-NEW CONTEXT Why ERS
+NEW CONTEXT Why ERS WIN
+highest JS word 762
+CURR CONTEXT Why ERS 762 JS 0.9552790522575378
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762
+NEW CONTEXT Why ERS 762 storms
+NEW WORD Anything
+CURR PRE-NEW CONTEXT Why ERS 762
+NEW CONTEXT Why ERS 762 Anything
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762
+NEW CONTEXT Why ERS 762 Magic
+NEW WORD Many
+CURR PRE-NEW CONTEXT Why ERS 762
+NEW CONTEXT Why ERS 762 Many
+NEW WORD ONE
+CURR PRE-NEW CONTEXT Why ERS 762
+NEW CONTEXT Why ERS 762 ONE
+highest JS word storms
+CURR CONTEXT Why ERS 762 storms JS 1.432918667793274
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms
+NEW CONTEXT Why ERS 762 storms android
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms
+NEW CONTEXT Why ERS 762 storms android
+NEW WORD gun
+CURR PRE-NEW CONTEXT Why ERS 762 storms
+NEW CONTEXT Why ERS 762 storms gun
+NEW WORD deals
+CURR PRE-NEW CONTEXT Why ERS 762 storms
+NEW CONTEXT Why ERS 762 storms deals
+NEW WORD https
+CURR PRE-NEW CONTEXT Why ERS 762 storms
+NEW CONTEXT Why ERS 762 storms https
+highest JS word gun
+CURR CONTEXT Why ERS 762 storms gun JS 1.9105582535266876
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun
+NEW CONTEXT Why ERS 762 storms gun android
+NEW WORD Many
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun
+NEW CONTEXT Why ERS 762 storms gun Many
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun
+NEW CONTEXT Why ERS 762 storms gun storms
+NEW WORD alert
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun
+NEW CONTEXT Why ERS 762 storms gun alert
+NEW WORD Sum
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun
+NEW CONTEXT Why ERS 762 storms gun Sum
+highest JS word android
+CURR CONTEXT Why ERS 762 storms gun android JS 2.3881977796554565
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android
+NEW CONTEXT Why ERS 762 storms gun android Magic
+NEW WORD leading
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android
+NEW CONTEXT Why ERS 762 storms gun android leading
+NEW WORD wiki
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android
+NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android
+NEW CONTEXT Why ERS 762 storms gun android Magic
+NEW WORD edged
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android
+NEW CONTEXT Why ERS 762 storms gun android edged
+highest JS word wiki
+CURR CONTEXT Why ERS 762 storms gun android wiki JS 2.8658373057842255
+NEW WORD 128
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW CONTEXT Why ERS 762 storms gun android wiki Magic
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW CONTEXT Why ERS 762 storms gun android wiki Magic
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW CONTEXT Why ERS 762 storms gun android wiki android
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki
+NEW CONTEXT Why ERS 762 storms gun android wiki android
+highest JS word 128
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 JS 3.343476802110672
+NEW WORD alert
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 storms
+NEW WORD open
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 open
+NEW WORD STATE
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 STATE
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 storms
+highest JS word alert
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert JS 3.8211163878440857
+NEW WORD 559
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW WORD could
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert could
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert android
+NEW WORD pit
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert pit
+NEW WORD alert
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert alert
+highest JS word 559
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 JS 4.298755884170532
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW WORD OWN
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 OWN
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 android
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 storms
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 storms
+highest JS word Magic
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic JS 4.776395380496979
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW WORD OWN
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic OWN
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic Magic
+NEW WORD Both
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic Both
+highest JS word storms
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms JS 5.254034996032715
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW WORD pound
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms pound
+NEW WORD 128
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms 128
+NEW WORD ass
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms ass
+NEW WORD ovation
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms ovation
+highest JS word android
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android JS 5.731674492359161
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW WORD alert
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android alert
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android Magic
+NEW WORD Saint
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android Saint
+NEW WORD ERS
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android ERS
+highest JS word android
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android JS 6.209313988685608
+NEW WORD android
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android android
+NEW WORD She
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android She
+NEW WORD Magic
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android Magic
+NEW WORD hidden
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android hidden
+NEW WORD storms
+CURR PRE-NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android
+NEW CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android storms
+highest JS word android
+CURR CONTEXT Why ERS 762 storms gun android wiki 128 alert 559 Magic storms android android android JS 6.68695330619812
+2020-09-01 00:47:14.354372: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:47:14.354491: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:47:14.354507: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:47:19.310650: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:47:19.463115: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:47:19.465790: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:47:19.465834: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:47:19.465845: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:47:19.465924: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:47:19.465971: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:47:19.465982: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:47:19.466335: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:47:19.476162: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:47:19.476930: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5625bae43cd0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:47:19.476951: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD artist
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How artist
+NEW WORD 147
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How 147
+NEW WORD mAh
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How mAh
+NEW WORD Contents
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Contents
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How EAR
+highest JS word artist
+CURR CONTEXT How artist JS 0.5553672313690186
+NEW WORD stage
+CURR PRE-NEW CONTEXT How artist
+NEW CONTEXT How artist stage
+NEW WORD Further
+CURR PRE-NEW CONTEXT How artist
+NEW CONTEXT How artist Further
+NEW WORD covered
+CURR PRE-NEW CONTEXT How artist
+NEW CONTEXT How artist covered
+NEW WORD ICA
+CURR PRE-NEW CONTEXT How artist
+NEW CONTEXT How artist ICA
+NEW WORD bye
+CURR PRE-NEW CONTEXT How artist
+NEW CONTEXT How artist bye
+highest JS word stage
+CURR CONTEXT How artist stage JS 1.110734462738037
+NEW WORD hook
+CURR PRE-NEW CONTEXT How artist stage
+NEW CONTEXT How artist stage hook
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How artist stage
+NEW CONTEXT How artist stage EAR
+NEW WORD mil
+CURR PRE-NEW CONTEXT How artist stage
+NEW CONTEXT How artist stage mil
+NEW WORD iki
+CURR PRE-NEW CONTEXT How artist stage
+NEW CONTEXT How artist stage iki
+NEW WORD mAh
+CURR PRE-NEW CONTEXT How artist stage
+NEW CONTEXT How artist stage mAh
+highest JS word EAR
+CURR CONTEXT How artist stage EAR JS 1.6661018133163452
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR
+NEW CONTEXT How artist stage EAR lim
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How artist stage EAR
+NEW CONTEXT How artist stage EAR EAR
+NEW WORD FA
+CURR PRE-NEW CONTEXT How artist stage EAR
+NEW CONTEXT How artist stage EAR FA
+NEW WORD BTC
+CURR PRE-NEW CONTEXT How artist stage EAR
+NEW CONTEXT How artist stage EAR BTC
+NEW WORD aggressive
+CURR PRE-NEW CONTEXT How artist stage EAR
+NEW CONTEXT How artist stage EAR aggressive
+highest JS word FA
+CURR CONTEXT How artist stage EAR FA JS 2.221469223499298
+NEW WORD 413
+CURR PRE-NEW CONTEXT How artist stage EAR FA
+NEW CONTEXT How artist stage EAR FA 413
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How artist stage EAR FA
+NEW CONTEXT How artist stage EAR FA EAR
+NEW WORD mAh
+CURR PRE-NEW CONTEXT How artist stage EAR FA
+NEW CONTEXT How artist stage EAR FA mAh
+NEW WORD covered
+CURR PRE-NEW CONTEXT How artist stage EAR FA
+NEW CONTEXT How artist stage EAR FA covered
+NEW WORD waters
+CURR PRE-NEW CONTEXT How artist stage EAR FA
+NEW CONTEXT How artist stage EAR FA waters
+highest JS word 413
+CURR CONTEXT How artist stage EAR FA 413 JS 2.7768366932868958
+NEW WORD Reb
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413
+NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW WORD By
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413
+NEW CONTEXT How artist stage EAR FA 413 By
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413
+NEW CONTEXT How artist stage EAR FA 413 lim
+NEW WORD llan
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413
+NEW CONTEXT How artist stage EAR FA 413 llan
+NEW WORD duty
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413
+NEW CONTEXT How artist stage EAR FA 413 duty
+highest JS word Reb
+CURR CONTEXT How artist stage EAR FA 413 Reb JS 3.3322041630744934
+NEW WORD Marc
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW CONTEXT How artist stage EAR FA 413 Reb Marc
+NEW WORD 147
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW CONTEXT How artist stage EAR FA 413 Reb 147
+NEW WORD LOS
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW CONTEXT How artist stage EAR FA 413 Reb lim
+NEW WORD client
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb
+NEW CONTEXT How artist stage EAR FA 413 Reb client
+highest JS word LOS
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS JS 3.8875715136528015
+NEW WORD ill
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS ill
+NEW WORD covered
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS covered
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS lim
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS lim
+highest JS word EAR
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR JS 4.44293886423111
+NEW WORD empt
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR lim
+NEW WORD Reb
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR Reb
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR lim
+NEW WORD Writ
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR Writ
+highest JS word empt
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt JS 4.998306095600128
+NEW WORD bc
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt lim
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt lim
+NEW WORD Y
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt Y
+NEW WORD mAh
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt mAh
+highest JS word bc
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc JS 5.553673446178436
+NEW WORD upon
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc upon
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW WORD client
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc client
+NEW WORD duty
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc duty
+NEW WORD HC
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc HC
+highest JS word lim
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim JS 6.109040796756744
+NEW WORD brow
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim lim
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim lim
+NEW WORD bye
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim bye
+NEW WORD Roman
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim Roman
+highest JS word brow
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow JS 6.664407908916473
+NEW WORD EAR
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW WORD advert
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow advert
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow lim
+NEW WORD 1972
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow 1972
+NEW WORD ill
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow ill
+highest JS word EAR
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR JS 7.2197752594947815
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR lim
+NEW WORD common
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR common
+NEW WORD lim
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR lim
+NEW WORD ill
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR ill
+NEW WORD client
+CURR PRE-NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR
+NEW CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR client
+highest JS word lim
+CURR CONTEXT How artist stage EAR FA 413 Reb LOS EAR empt bc lim brow EAR lim JS 7.77514261007309
+2020-09-01 00:50:15.563732: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:50:15.564044: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:50:15.564062: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:50:20.509134: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:50:20.646576: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:50:20.649025: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:50:20.649064: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:50:20.649074: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:50:20.649145: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:50:20.649186: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:50:20.649196: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:50:20.649528: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:50:20.658286: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:50:20.658965: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55739b611cd0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:50:20.658983: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD filter
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The filter
+NEW WORD bian
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The bian
+NEW WORD Tax
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The Tax
+NEW WORD uttered
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The uttered
+NEW WORD il
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The il
+highest JS word filter
+CURR CONTEXT The filter JS 0.41750219464302063
+NEW WORD infect
+CURR PRE-NEW CONTEXT The filter
+NEW CONTEXT The filter infect
+NEW WORD colored
+CURR PRE-NEW CONTEXT The filter
+NEW CONTEXT The filter colored
+NEW WORD Synopsis
+CURR PRE-NEW CONTEXT The filter
+NEW CONTEXT The filter Synopsis
+NEW WORD While
+CURR PRE-NEW CONTEXT The filter
+NEW CONTEXT The filter While
+NEW WORD whether
+CURR PRE-NEW CONTEXT The filter
+NEW CONTEXT The filter whether
+highest JS word infect
+CURR CONTEXT The filter infect JS 0.8350042700767517
+NEW WORD handler
+CURR PRE-NEW CONTEXT The filter infect
+NEW CONTEXT The filter infect handler
+NEW WORD could
+CURR PRE-NEW CONTEXT The filter infect
+NEW CONTEXT The filter infect could
+NEW WORD related
+CURR PRE-NEW CONTEXT The filter infect
+NEW CONTEXT The filter infect related
+NEW WORD 517
+CURR PRE-NEW CONTEXT The filter infect
+NEW CONTEXT The filter infect 517
+NEW WORD STATE
+CURR PRE-NEW CONTEXT The filter infect
+NEW CONTEXT The filter infect STATE
+highest JS word could
+CURR CONTEXT The filter infect could JS 1.2525060772895813
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could
+NEW CONTEXT The filter infect could anu
+NEW WORD 026
+CURR PRE-NEW CONTEXT The filter infect could
+NEW CONTEXT The filter infect could 026
+NEW WORD ger
+CURR PRE-NEW CONTEXT The filter infect could
+NEW CONTEXT The filter infect could ger
+NEW WORD By
+CURR PRE-NEW CONTEXT The filter infect could
+NEW CONTEXT The filter infect could By
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could
+NEW CONTEXT The filter infect could anu
+highest JS word anu
+CURR CONTEXT The filter infect could anu JS 1.670007973909378
+NEW WORD THE
+CURR PRE-NEW CONTEXT The filter infect could anu
+NEW CONTEXT The filter infect could anu THE
+NEW WORD nine
+CURR PRE-NEW CONTEXT The filter infect could anu
+NEW CONTEXT The filter infect could anu nine
+NEW WORD creator
+CURR PRE-NEW CONTEXT The filter infect could anu
+NEW CONTEXT The filter infect could anu creator
+NEW WORD Development
+CURR PRE-NEW CONTEXT The filter infect could anu
+NEW CONTEXT The filter infect could anu Development
+NEW WORD rings
+CURR PRE-NEW CONTEXT The filter infect could anu
+NEW CONTEXT The filter infect could anu rings
+highest JS word THE
+CURR CONTEXT The filter infect could anu THE JS 2.0875100791454315
+NEW WORD ii
+CURR PRE-NEW CONTEXT The filter infect could anu THE
+NEW CONTEXT The filter infect could anu THE ii
+NEW WORD lad
+CURR PRE-NEW CONTEXT The filter infect could anu THE
+NEW CONTEXT The filter infect could anu THE lad
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could anu THE
+NEW CONTEXT The filter infect could anu THE anu
+NEW WORD Harris
+CURR PRE-NEW CONTEXT The filter infect could anu THE
+NEW CONTEXT The filter infect could anu THE Harris
+NEW WORD Rober
+CURR PRE-NEW CONTEXT The filter infect could anu THE
+NEW CONTEXT The filter infect could anu THE Rober
+highest JS word Harris
+CURR CONTEXT The filter infect could anu THE Harris JS 2.5050118267536163
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris
+NEW CONTEXT The filter infect could anu THE Harris anu
+NEW WORD /
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris
+NEW CONTEXT The filter infect could anu THE Harris /
+NEW WORD Trump
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris
+NEW CONTEXT The filter infect could anu THE Harris Trump
+NEW WORD ty
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris
+NEW CONTEXT The filter infect could anu THE Harris ty
+NEW WORD anti
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris
+NEW CONTEXT The filter infect could anu THE Harris anti
+highest JS word /
+CURR CONTEXT The filter infect could anu THE Harris / JS 2.9225136935710907
+NEW WORD Austral
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris /
+NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW WORD castle
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris /
+NEW CONTEXT The filter infect could anu THE Harris / castle
+NEW WORD secondary
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris /
+NEW CONTEXT The filter infect could anu THE Harris / secondary
+NEW WORD Push
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris /
+NEW CONTEXT The filter infect could anu THE Harris / Push
+NEW WORD Bang
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris /
+NEW CONTEXT The filter infect could anu THE Harris / Bang
+highest JS word Austral
+CURR CONTEXT The filter infect could anu THE Harris / Austral JS 3.340015411376953
+NEW WORD 49
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW WORD Assad
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW CONTEXT The filter infect could anu THE Harris / Austral Assad
+NEW WORD SEC
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW CONTEXT The filter infect could anu THE Harris / Austral SEC
+NEW WORD Lastly
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW CONTEXT The filter infect could anu THE Harris / Austral Lastly
+NEW WORD Mayor
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral
+NEW CONTEXT The filter infect could anu THE Harris / Austral Mayor
+highest JS word 49
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 JS 3.7575171291828156
+NEW WORD ger
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW WORD Can
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 Can
+NEW WORD ache
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ache
+NEW WORD Av
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 Av
+NEW WORD Men
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 Men
+highest JS word ger
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 ger JS 4.175018936395645
+NEW WORD carb
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW WORD dit
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger dit
+NEW WORD null
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger null
+NEW WORD WASHINGTON
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger WASHINGTON
+NEW WORD rad
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger rad
+highest JS word carb
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb JS 4.592520743608475
+NEW WORD hews
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb anu
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb anu
+NEW WORD Weapon
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb Weapon
+NEW WORD press
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb press
+highest JS word hews
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews JS 5.0100224912166595
+NEW WORD Clinton
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW WORD STE
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews STE
+NEW WORD ads
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews ads
+NEW WORD anu
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews anu
+NEW WORD Harris
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Harris
+highest JS word Clinton
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton JS 5.427524298429489
+NEW WORD ich
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton ich
+NEW WORD Larry
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton Larry
+NEW WORD Tell
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton Tell
+NEW WORD REC
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton REC
+NEW WORD Clinton
+CURR PRE-NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton
+NEW CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton Clinton
+highest JS word ich
+CURR CONTEXT The filter infect could anu THE Harris / Austral 49 ger carb hews Clinton ich JS 5.845026016235352
+2020-09-01 00:53:15.348958: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:53:15.349074: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:53:15.349086: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:53:20.503619: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:53:20.657115: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:53:20.659889: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:53:20.659933: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:53:20.659944: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:53:20.660023: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:53:20.660076: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:53:20.660093: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:53:20.660442: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:53:20.670432: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:53:20.671175: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5596cd5c9cd0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:53:20.671195: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD union
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My union
+NEW WORD ars
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My ars
+NEW WORD Eventually
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My Eventually
+NEW WORD union
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My union
+NEW WORD ars
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My ars
+highest JS word union
+CURR CONTEXT My union JS 0.5166585445404053
+NEW WORD Council
+CURR PRE-NEW CONTEXT My union
+NEW CONTEXT My union Council
+NEW WORD kaya
+CURR PRE-NEW CONTEXT My union
+NEW CONTEXT My union kaya
+NEW WORD ha
+CURR PRE-NEW CONTEXT My union
+NEW CONTEXT My union ha
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union
+NEW CONTEXT My union ars
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union
+NEW CONTEXT My union ars
+highest JS word kaya
+CURR CONTEXT My union kaya JS 1.0333172082901
+NEW WORD catch
+CURR PRE-NEW CONTEXT My union kaya
+NEW CONTEXT My union kaya catch
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya
+NEW CONTEXT My union kaya ars
+NEW WORD ations
+CURR PRE-NEW CONTEXT My union kaya
+NEW CONTEXT My union kaya ations
+NEW WORD torn
+CURR PRE-NEW CONTEXT My union kaya
+NEW CONTEXT My union kaya torn
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya
+NEW CONTEXT My union kaya ars
+highest JS word catch
+CURR CONTEXT My union kaya catch JS 1.5499758124351501
+NEW WORD aux
+CURR PRE-NEW CONTEXT My union kaya catch
+NEW CONTEXT My union kaya catch aux
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch
+NEW CONTEXT My union kaya catch ars
+NEW WORD 608
+CURR PRE-NEW CONTEXT My union kaya catch
+NEW CONTEXT My union kaya catch 608
+NEW WORD 214
+CURR PRE-NEW CONTEXT My union kaya catch
+NEW CONTEXT My union kaya catch 214
+NEW WORD 045
+CURR PRE-NEW CONTEXT My union kaya catch
+NEW CONTEXT My union kaya catch 045
+highest JS word 214
+CURR CONTEXT My union kaya catch 214 JS 2.066634476184845
+NEW WORD ations
+CURR PRE-NEW CONTEXT My union kaya catch 214
+NEW CONTEXT My union kaya catch 214 ations
+NEW WORD 209
+CURR PRE-NEW CONTEXT My union kaya catch 214
+NEW CONTEXT My union kaya catch 214 209
+NEW WORD aux
+CURR PRE-NEW CONTEXT My union kaya catch 214
+NEW CONTEXT My union kaya catch 214 aux
+NEW WORD General
+CURR PRE-NEW CONTEXT My union kaya catch 214
+NEW CONTEXT My union kaya catch 214 General
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214
+NEW CONTEXT My union kaya catch 214 ars
+highest JS word aux
+CURR CONTEXT My union kaya catch 214 aux JS 2.5832931995391846
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux
+NEW CONTEXT My union kaya catch 214 aux ars
+NEW WORD Charge
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux
+NEW CONTEXT My union kaya catch 214 aux Charge
+NEW WORD Ay
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux
+NEW CONTEXT My union kaya catch 214 aux Ay
+NEW WORD Minecraft
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux
+NEW CONTEXT My union kaya catch 214 aux Minecraft
+NEW WORD ations
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux
+NEW CONTEXT My union kaya catch 214 aux ations
+highest JS word ars
+CURR CONTEXT My union kaya catch 214 aux ars JS 3.0999515056610107
+NEW WORD Minimum
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW WORD union
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars
+NEW CONTEXT My union kaya catch 214 aux ars union
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars
+NEW CONTEXT My union kaya catch 214 aux ars ars
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars
+NEW CONTEXT My union kaya catch 214 aux ars ars
+NEW WORD us
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars
+NEW CONTEXT My union kaya catch 214 aux ars us
+highest JS word Minimum
+CURR CONTEXT My union kaya catch 214 aux ars Minimum JS 3.6166099309921265
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW WORD por
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW CONTEXT My union kaya catch 214 aux ars Minimum por
+NEW WORD torn
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW CONTEXT My union kaya catch 214 aux ars Minimum torn
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW WORD otic
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum
+NEW CONTEXT My union kaya catch 214 aux ars Minimum otic
+highest JS word ars
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars JS 4.133268296718597
+NEW WORD ha
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW WORD ARP
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ARP
+NEW WORD series
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars series
+NEW WORD skill
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars skill
+NEW WORD union
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars union
+highest JS word ha
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha JS 4.649926602840424
+NEW WORD skill
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW WORD Express
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha Express
+NEW WORD reader
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha reader
+NEW WORD union
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha union
+NEW WORD 456
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha 456
+highest JS word skill
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill JS 5.166584849357605
+NEW WORD 582
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW WORD Pope
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill Pope
+NEW WORD 590
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 590
+NEW WORD rations
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill rations
+NEW WORD order
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill order
+highest JS word 582
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 JS 5.683242976665497
+NEW WORD 5000
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW WORD bris
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 bris
+NEW WORD Boo
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 Boo
+NEW WORD Favorite
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 Favorite
+NEW WORD Cle
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 Cle
+highest JS word 5000
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 JS 6.199901342391968
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW WORD Play
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 Play
+NEW WORD Tok
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 Tok
+NEW WORD Rank
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 Rank
+NEW WORD union
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 union
+highest JS word ars
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars JS 6.7165597677230835
+NEW WORD Cas
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars Cas
+NEW WORD union
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars union
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars ars
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars ars
+NEW WORD ars
+CURR PRE-NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars
+NEW CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars ars
+highest JS word Cas
+CURR CONTEXT My union kaya catch 214 aux ars Minimum ars ha skill 582 5000 ars Cas JS 7.233218193054199
+2020-09-01 00:56:16.616844: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:56:16.616986: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-01 00:56:16.617000: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-01 00:56:21.751372: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-01 00:56:21.898853: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-01 00:56:21.901327: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-01 00:56:21.901364: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node046
+2020-09-01 00:56:21.901374: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node046
+2020-09-01 00:56:21.901449: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-01 00:56:21.901493: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-01 00:56:21.901502: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-01 00:56:21.901824: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-01 00:56:21.910844: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600155000 Hz
+2020-09-01 00:56:21.911565: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x556af76a9be0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-01 00:56:21.911583: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Susan
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I Susan
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I nothing
+NEW WORD stan
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I stan
+NEW WORD mar
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I mar
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I Yes
+highest JS word mar
+CURR CONTEXT I mar JS 0.5134527087211609
+NEW WORD Sources
+CURR PRE-NEW CONTEXT I mar
+NEW CONTEXT I mar Sources
+NEW WORD venture
+CURR PRE-NEW CONTEXT I mar
+NEW CONTEXT I mar venture
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar
+NEW CONTEXT I mar nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar
+NEW CONTEXT I mar nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar
+NEW CONTEXT I mar nothing
+highest JS word Sources
+CURR CONTEXT I mar Sources JS 1.026905357837677
+NEW WORD ys
+CURR PRE-NEW CONTEXT I mar Sources
+NEW CONTEXT I mar Sources ys
+NEW WORD Push
+CURR PRE-NEW CONTEXT I mar Sources
+NEW CONTEXT I mar Sources Push
+NEW WORD Extreme
+CURR PRE-NEW CONTEXT I mar Sources
+NEW CONTEXT I mar Sources Extreme
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources
+NEW CONTEXT I mar Sources nothing
+NEW WORD Republican
+CURR PRE-NEW CONTEXT I mar Sources
+NEW CONTEXT I mar Sources Republican
+highest JS word ys
+CURR CONTEXT I mar Sources ys JS 1.5403578877449036
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys
+NEW CONTEXT I mar Sources ys nothing
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I mar Sources ys
+NEW CONTEXT I mar Sources ys Yes
+NEW WORD Unique
+CURR PRE-NEW CONTEXT I mar Sources ys
+NEW CONTEXT I mar Sources ys Unique
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys
+NEW CONTEXT I mar Sources ys nothing
+NEW WORD stan
+CURR PRE-NEW CONTEXT I mar Sources ys
+NEW CONTEXT I mar Sources ys stan
+highest JS word stan
+CURR CONTEXT I mar Sources ys stan JS 2.0538105368614197
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I mar Sources ys stan
+NEW CONTEXT I mar Sources ys stan Yes
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan
+NEW CONTEXT I mar Sources ys stan nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan
+NEW CONTEXT I mar Sources ys stan nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan
+NEW CONTEXT I mar Sources ys stan nothing
+NEW WORD articles
+CURR PRE-NEW CONTEXT I mar Sources ys stan
+NEW CONTEXT I mar Sources ys stan articles
+highest JS word Yes
+CURR CONTEXT I mar Sources ys stan Yes JS 2.567262887954712
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes
+NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW WORD Unique
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes
+NEW CONTEXT I mar Sources ys stan Yes Unique
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes
+NEW CONTEXT I mar Sources ys stan Yes Yes
+NEW WORD 48
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes
+NEW CONTEXT I mar Sources ys stan Yes 48
+NEW WORD stan
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes
+NEW CONTEXT I mar Sources ys stan Yes stan
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing JS 3.080715239048004
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing Yes
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW WORD [
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing [
+NEW WORD Member
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing Member
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing JS 3.594167470932007
+NEW WORD stan
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW WORD 496
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing 496
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing nothing
+NEW WORD CBC
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing CBC
+NEW WORD stan
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+highest JS word stan
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan JS 4.107619643211365
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW WORD resents
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan resents
+NEW WORD Moore
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan Moore
+NEW WORD venture
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan venture
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing JS 4.621071815490723
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing JS 5.134523987770081
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW WORD venture
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing venture
+NEW WORD Honestly
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing Honestly
+NEW WORD Push
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing Push
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing JS 5.647976219654083
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW WORD DW
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing DW
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW WORD stan
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing stan
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing JS 6.161428511142731
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW WORD 496
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing 496
+NEW WORD Yes
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing Yes
+NEW WORD that
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing that
+highest JS word nothing
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing JS 6.674880802631378
+NEW WORD Amy
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing Amy
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing nothing
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing nothing
+NEW WORD initial
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing initial
+NEW WORD nothing
+CURR PRE-NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing
+NEW CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing nothing
+highest JS word Amy
+CURR CONTEXT I mar Sources ys stan Yes nothing nothing stan nothing nothing nothing nothing nothing Amy JS 7.188333034515381
