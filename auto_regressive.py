@@ -97,7 +97,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     total_js += js(p,q)
     print("CURR CONTEXT", curr_context, "JS", total_js)
     # then autoregressive again on this new current context
-    return auto_regressive(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab)
+    return auto_regressive(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab, top_k)
 
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
