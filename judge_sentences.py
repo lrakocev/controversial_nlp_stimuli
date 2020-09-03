@@ -7,7 +7,7 @@ from scipy.special import softmax
 import torch
 import random
 import string
-from autoregressive import get_distribution, js
+from auto_regressive import get_distribution, js
 import copy
 import random
 import csv
@@ -80,7 +80,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
     plt.plot(range(0,len(scores)), scores)
 
 
-def sample_sentences(file_name)
+def sample_sentences(file_name):
 
     file = open(file_name)
     reader = csv.reader(file)
