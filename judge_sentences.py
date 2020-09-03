@@ -7,13 +7,10 @@ from scipy.special import softmax
 import torch
 import random
 import string
-<<<<<<< HEAD
-from auto_regressive import get_distribution, js
-=======
->>>>>>> 84b56eca145bccdfd7a49094639f49e1f6c73c31
 import copy
 import random
 import csv
+import matplotlib.pyplot as plt
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
@@ -56,7 +53,7 @@ def js(p, q):
 
 def evaluate_sentence(model_info, sentence, joint_vocab):
 
-  sentence_split = sentence.split(" ")
+  sentence_split = sentence
   len_sentence = len(sentence_split)
 
   curr_context = ""
@@ -74,8 +71,8 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
 
   original_score = evaluate_sentence(model_info, sentence, joint_vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score)
-
-  sentence_split = sentence.split(" ")
+  scores = [original_score]
+  sentence_split = sentence
   modified_sentence = copy.copy(sentence_split)
   len_sentence = len(sentence_split)
   total_replacements = 0
@@ -96,7 +93,6 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
     word_list = [k for k, v in sorted(avg_distr.items())]
 
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
-    scores = [curr_sentence_score]
     js_dict = {}
     for j in range(0,5):
         n = list(np.random.multinomial(1,prob_list))
@@ -119,7 +115,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
 
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", new_sentence_score)
   print(len(scores), total_replacements)
-  plt.plot(range(0,len(scores)), scores)
+  plt.plot(range(0,len(scores)),scores)
 
 
 def sample_sentences(file_name):
@@ -129,7 +125,7 @@ def sample_sentences(file_name):
   num_lines = len(list(reader))
   N = random.randint(0,num_lines-1)
 
-  with open('path', 'r') as file:
+  with open(file_name, 'r') as file:
       reader = csv.reader(file)
 
       line = next((x for i, x in enumerate(reader) if i == N), None)
@@ -149,7 +145,7 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
 for i in range(5):
 
-  sent = sample_sentences(sentences4lara.txt)
+  sent = sample_sentences("sentences4lara.txt")
 
   replace_words(model_info, sent, joint_vocab, 10)
 
