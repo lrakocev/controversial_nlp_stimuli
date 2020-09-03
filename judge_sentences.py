@@ -26,15 +26,17 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
 
     return total_js/len_sentence
 
+
 def replace_words(model_info, sentence, joint_vocab, num_replacements):
 
-    print("Old sentence is: ", sentence, " with JS: ", evaluate_sentence(model_info, sentence, joint_vocab))
+    original_score = evaluate_sentence(model_info, sentence, joint_vocab)
+    print("Old sentence is: ", sentence, " with JS: ", original_score)
 
     sentence_split = sentence.split(" ")
     modified_sentence = copy.copy(sentence_split)
     len_sentence = len(sentence_split)
+    total_replacements = 0
     
-
     for i in range(0, num_replacements):
       replace_i = random.randint(0, len_sentence)
       distrs = {}
@@ -50,8 +52,8 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
       prob_list = [v for k, v in sorted(avg_distr.items())]
       word_list = [k for k, v in sorted(avg_distr.items())]
 
-      prev_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
-      scores = [prev_sentence_score]
+      curr_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
+      scores = [curr_sentence_score]
       js_dict = {}
       for j in range(0,5):
           n = list(np.random.multinomial(1,prob_list))
@@ -65,12 +67,14 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
       modified_sentence[replace_i] = highest_js_word[0]
       new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
       
-      if new_sentence_score > prev_sentence_score:
+      if new_sentence_score >= original_score:
         scores.append(new_sentence_score)
+        total_replacements +=1
         sentence_split = modified_sentence
       
 
     print("New sentence is: ", ' '.join(sentence_split)," with JS:", new_sentence_score)
+    print(len(scores), total_replacements)
     plt.plot(range(0,len(scores)), scores)
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
@@ -83,5 +87,4 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
 replace_words(model_info, "The cat sat in the hat", joint_vocab, 10)
 
-                 
 
