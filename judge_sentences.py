@@ -53,7 +53,7 @@ def js(p, q):
 
 def evaluate_sentence(model_info, sentence, joint_vocab):
 
-  sentence_split = sentence
+  sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
 
   curr_context = ""
@@ -72,7 +72,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
   original_score = evaluate_sentence(model_info, sentence, joint_vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score)
   scores = [original_score]
-  sentence_split = sentence
+  sentence_split = sentence.split(" ")
   modified_sentence = copy.copy(sentence_split)
   len_sentence = len(sentence_split)
   total_replacements = 0
@@ -130,7 +130,7 @@ def sample_sentences(file_name):
 
       line = next((x for i, x in enumerate(reader) if i == N), None)
 
-  return line
+  return " ".join(line)
 
 
 
