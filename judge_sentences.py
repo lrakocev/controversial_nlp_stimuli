@@ -109,7 +109,6 @@ for i in range(5):
 
   sent = sample_sentences(sentences4lara.txt)
 
-
   replace_words(model_info, sent, joint_vocab, 10)
 
 
