@@ -47,7 +47,7 @@ def js(p, q):
   m = (p + q) / 2
   return (entropy(p, m) + entropy(q, m)) / 2
 
-def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_len, total_js, joint_vocab):
+def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_len, total_js, joint_vocab, top_k):
 
     if current_len == max_len:
         return total_js / current_len
@@ -63,6 +63,10 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     B = distrs['TransformerXL']
     # average the two distributions
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
+
+    top_keys = sorted(avg_distr, key=avg_distr.get, reverse=True)[:top_k]
+
+    avg_distr = {k: avg_distr.get(k,0) for k in top_keys}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
@@ -106,5 +110,5 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-auto_regressive(model_info, curr_context, 50, 1, 15, 0, joint_vocab)
+auto_regressive(model_info, curr_context, 50, 1, 15, 0, joint_vocab, 50)
                  

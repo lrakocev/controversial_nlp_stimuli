@@ -67,7 +67,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   return total_js/len_sentence
 
 
-def replace_words(model_info, sentence, joint_vocab, num_replacements):
+def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
 
   original_score = evaluate_sentence(model_info, sentence, joint_vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score)
@@ -88,6 +88,10 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements):
     A = distrs['GPT2']
     B = distrs['TransformerXL']
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
+
+    top_keys = sorted(avg_distr, key=avg_distr.get, reverse=True)[:top_k]
+
+    avg_distr = {k: avg_distr.get(k,0) for k in top_keys}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
@@ -147,6 +151,6 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  replace_words(model_info, sent, joint_vocab, 10)
+  replace_words(model_info, sent, joint_vocab, 10, 50)
 
 
