@@ -93,7 +93,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
 
     total = sum(avg_distr.values())
 
-    avg_distr = {k: v/total for (k,v) in avg_distr.items}
+    avg_distr = {k: v/total for (k,v) in avg_distr.items()}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]

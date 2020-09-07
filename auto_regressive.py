@@ -68,7 +68,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
 
     total = sum(avg_distr.values())
 
-    avg_distr = {k: v/total for (k,v) in avg_distr.items}
+    avg_distr = {k: v/total for (k,v) in avg_distr.items()}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
