@@ -89,9 +89,11 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     B = distrs['TransformerXL']
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
 
-    top_keys = sorted(avg_distr, key=avg_distr.get, reverse=True)[:top_k]
+    avg_distr = {k: v for (k,v) in avg_distr.items if v >= top_k}
 
-    avg_distr = {k: avg_distr.get(k,0) for k in top_keys}
+    total = sum(avg_distr.values())
+
+    avg_distr = {k: v/total for (k,v) in avg_distr.items}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
@@ -151,6 +153,6 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  replace_words(model_info, sent, joint_vocab, 10, 50)
+  replace_words(model_info, sent, joint_vocab, 10, .05)
 
 
