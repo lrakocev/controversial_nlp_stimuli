@@ -63,10 +63,12 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     B = distrs['TransformerXL']
     # average the two distributions
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
+    
+    avg_distr = {k: v for (k,v) in avg_distr.items if v >= top_k}
 
-    top_keys = sorted(avg_distr, key=avg_distr.get, reverse=True)[:top_k]
+    total = sum(avg_distr.values())
 
-    avg_distr = {k: avg_distr.get(k,0) for k in top_keys}
+    avg_distr = {k: v/total for (k,v) in avg_distr.items}
     
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
