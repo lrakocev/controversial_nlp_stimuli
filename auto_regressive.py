@@ -64,7 +64,7 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     # average the two distributions
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
     
-    avg_distr = {k: v for (k,v) in avg_distr.items if v >= top_k}
+    avg_distr = {k: v for (k,v) in avg_distr.items() if v >= top_k}
 
     total = sum(avg_distr.values())
 

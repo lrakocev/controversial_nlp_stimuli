@@ -89,7 +89,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     B = distrs['TransformerXL']
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
 
-    avg_distr = {k: v for (k,v) in avg_distr.items if v >= top_k}
+    avg_distr = {k: v for (k,v) in avg_distr.items() if v >= top_k}
 
     total = sum(avg_distr.values())
 
