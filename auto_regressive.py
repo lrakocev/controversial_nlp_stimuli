@@ -7,6 +7,7 @@ from scipy.special import softmax
 import torch
 import random
 import string
+import functools
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
@@ -120,14 +121,13 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
 
     avg_distr = sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)
-    
-    tot_sum = 0
-    avg_distr = {k: v for (k,v) in avg_distr.items() if tot_sum_ <= top_p else tot_sum += v}
 
-    total = sum(avg_distr.values())
+    avg_distr_vals = [sum(avg_distr.values()[:i+1]) for i in range(len(avg_distr.values()))]
 
-    avg_distr = {k: v/total for (k,v) in avg_distr.items()}
-    
+    avg_distr_summed = zip(avg_distr.key(), avg_distr_vals)
+
+    avg_distr = {k: v for (k, v) in avg_distr_summed.keys() if tot_sum <= top_p}
+
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
 
