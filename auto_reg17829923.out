@@ -1,0 +1,2089 @@
+ModuleCmd_Load.c(213):ERROR:105: Unable to locate a modulefile for 'python'
+2020-09-07 13:03:12.123914: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:03:12.124056: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:03:12.124069: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:03:15.843577: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:03:16.013854: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:03:16.019306: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:03:16.019350: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:03:16.019360: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:03:16.019477: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:03:16.019518: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:03:16.019527: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:03:16.019906: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:03:16.030882: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:03:16.031658: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56363db96790 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:03:16.031690: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Two
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who shall
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Congratulations
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Congratulations
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who Congratulations
+highest JS word Two
+CURR CONTEXT Who Two JS 0.5095123052597046
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two
+NEW CONTEXT Who Two liner
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two
+NEW CONTEXT Who Two Congratulations
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two
+NEW CONTEXT Who Two Congratulations
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two
+NEW CONTEXT Who Two 504
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two
+NEW CONTEXT Who Two shall
+highest JS word liner
+CURR CONTEXT Who Two liner JS 1.01902437210083
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner
+NEW CONTEXT Who Two liner Two
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner
+NEW CONTEXT Who Two liner 504
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner
+NEW CONTEXT Who Two liner Two
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner
+NEW CONTEXT Who Two liner 504
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner
+NEW CONTEXT Who Two liner shall
+highest JS word Two
+CURR CONTEXT Who Two liner Two JS 1.5285364389419556
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two
+NEW CONTEXT Who Two liner Two Two
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two
+NEW CONTEXT Who Two liner Two 504
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two
+NEW CONTEXT Who Two liner Two shall
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two
+NEW CONTEXT Who Two liner Two Congratulations
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two
+NEW CONTEXT Who Two liner Two Two
+highest JS word Two
+CURR CONTEXT Who Two liner Two Two JS 2.03804874420166
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two
+NEW CONTEXT Who Two liner Two Two Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two
+NEW CONTEXT Who Two liner Two Two Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two
+NEW CONTEXT Who Two liner Two Two Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two
+NEW CONTEXT Who Two liner Two Two Two
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two Two
+NEW CONTEXT Who Two liner Two Two Congratulations
+highest JS word Two
+CURR CONTEXT Who Two liner Two Two Two JS 2.5475610494613647
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two
+NEW CONTEXT Who Two liner Two Two Two shall
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two
+NEW CONTEXT Who Two liner Two Two Two 504
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two
+NEW CONTEXT Who Two liner Two Two Two Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two
+NEW CONTEXT Who Two liner Two Two Two Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two
+NEW CONTEXT Who Two liner Two Two Two Two
+highest JS word shall
+CURR CONTEXT Who Two liner Two Two Two shall JS 3.0570731163024902
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall
+NEW CONTEXT Who Two liner Two Two Two shall Two
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall
+NEW CONTEXT Who Two liner Two Two Two shall shall
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall
+NEW CONTEXT Who Two liner Two Two Two shall 504
+highest JS word liner
+CURR CONTEXT Who Two liner Two Two Two shall liner JS 3.56658536195755
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner 504
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner 504
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner 504
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner 504
+highest JS word liner
+CURR CONTEXT Who Two liner Two Two Two shall liner liner JS 4.076097667217255
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner shall
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner liner
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner Two
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner liner
+highest JS word 504
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 JS 4.58560985326767
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 Two
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 Two
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 Congratulations
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 Two
+highest JS word shall
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 shall JS 5.095122158527374
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall shall
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall Two
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall Congratulations
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall 504
+highest JS word liner
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner JS 5.604634404182434
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner liner
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner 504
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Congratulations
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner liner
+highest JS word Two
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two JS 6.114146709442139
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two liner
+NEW WORD Two
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two Two
+NEW WORD shall
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+highest JS word shall
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall JS 6.623658895492554
+NEW WORD 504
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall 504
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall liner
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall liner
+NEW WORD liner
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall liner
+NEW WORD Congratulations
+CURR PRE-NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall
+NEW CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall Congratulations
+highest JS word 504
+CURR CONTEXT Who Two liner Two Two Two shall liner liner 504 shall liner Two shall 504 JS 7.133170962333679
+2020-09-07 13:07:06.116422: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:07:06.116541: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:07:06.116552: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:07:11.377925: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:07:11.557601: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:07:11.563369: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:07:11.563414: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:07:11.563424: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:07:11.563537: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:07:11.563578: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:07:11.563587: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:07:11.563968: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:07:11.575011: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:07:11.575884: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x563e2fdf0a40 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:07:11.575917: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where shop
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where shop
+NEW WORD often
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where shop
+highest JS word shop
+CURR CONTEXT Where shop JS 0.4933411180973053
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop
+NEW CONTEXT Where shop shop
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop
+NEW CONTEXT Where shop shop
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop
+NEW CONTEXT Where shop shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop
+NEW CONTEXT Where shop Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop
+NEW CONTEXT Where shop often
+highest JS word shop
+CURR CONTEXT Where shop shop JS 0.9866822361946106
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop
+NEW CONTEXT Where shop shop often
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop
+NEW CONTEXT Where shop shop shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop
+NEW CONTEXT Where shop shop Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop
+NEW CONTEXT Where shop shop shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop
+NEW CONTEXT Where shop shop Go
+highest JS word often
+CURR CONTEXT Where shop shop often JS 1.4800231456756592
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often
+NEW CONTEXT Where shop shop often shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often
+NEW CONTEXT Where shop shop often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often
+NEW CONTEXT Where shop shop often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often
+NEW CONTEXT Where shop shop often Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often
+NEW CONTEXT Where shop shop often shop
+highest JS word shop
+CURR CONTEXT Where shop shop often shop JS 1.9733641147613525
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop
+NEW CONTEXT Where shop shop often shop Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop
+NEW CONTEXT Where shop shop often shop Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop
+NEW CONTEXT Where shop shop often shop shop
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop
+NEW CONTEXT Where shop shop often shop often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop
+NEW CONTEXT Where shop shop often shop Go
+highest JS word Go
+CURR CONTEXT Where shop shop often shop Go JS 2.466705083847046
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go
+NEW CONTEXT Where shop shop often shop Go shop
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go
+NEW CONTEXT Where shop shop often shop Go shop
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go
+NEW CONTEXT Where shop shop often shop Go shop
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go
+NEW CONTEXT Where shop shop often shop Go often
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go
+NEW CONTEXT Where shop shop often shop Go often
+highest JS word shop
+CURR CONTEXT Where shop shop often shop Go shop JS 2.9600462317466736
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop
+NEW CONTEXT Where shop shop often shop Go shop Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop
+NEW CONTEXT Where shop shop often shop Go shop Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop
+NEW CONTEXT Where shop shop often shop Go shop often
+highest JS word shop
+CURR CONTEXT Where shop shop often shop Go shop shop JS 3.4533873796463013
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop
+NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop
+NEW CONTEXT Where shop shop often shop Go shop shop Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop
+NEW CONTEXT Where shop shop often shop Go shop shop Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop
+NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop
+NEW CONTEXT Where shop shop often shop Go shop shop Go
+highest JS word often
+CURR CONTEXT Where shop shop often shop Go shop shop often JS 3.946728378534317
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often
+NEW CONTEXT Where shop shop often shop Go shop shop often shop
+highest JS word Go
+CURR CONTEXT Where shop shop often shop Go shop shop often Go JS 4.4400694370269775
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go Go
+highest JS word often
+CURR CONTEXT Where shop shop often shop Go shop shop often Go often JS 4.93341064453125
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+highest JS word Go
+CURR CONTEXT Where shop shop often shop Go shop shop often Go often Go JS 5.426751792430878
+NEW WORD shop
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go often
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go Go
+highest JS word shop
+CURR CONTEXT Where shop shop often shop Go shop shop often Go often Go shop JS 5.920092791318893
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+highest JS word Go
+CURR CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go JS 6.413433909416199
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go often
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go often
+NEW WORD often
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go often
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go Go
+NEW WORD Go
+CURR PRE-NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go
+NEW CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go Go
+highest JS word often
+CURR CONTEXT Where shop shop often shop Go shop shop often Go often Go shop Go often JS 6.906775116920471
+2020-09-07 13:11:00.145016: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:11:00.145457: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:11:00.145470: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:11:05.154415: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:11:05.325055: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:11:05.331331: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:11:05.331380: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:11:05.331390: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:11:05.331499: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:11:05.331542: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:11:05.331552: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:11:05.331934: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:11:05.342939: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:11:05.343864: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55c1f8ff2070 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:11:05.343895: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD rust
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When rust
+NEW WORD rust
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When rust
+NEW WORD rust
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When rust
+NEW WORD aware
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When AK
+highest JS word rust
+CURR CONTEXT When rust JS 0.47833698987960815
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust
+NEW CONTEXT When rust aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust
+NEW CONTEXT When rust AK
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust
+NEW CONTEXT When rust aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust
+NEW CONTEXT When rust AK
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust
+NEW CONTEXT When rust aware
+highest JS word AK
+CURR CONTEXT When rust AK JS 0.9566739797592163
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK
+NEW CONTEXT When rust AK aware
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK
+NEW CONTEXT When rust AK rust
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK
+NEW CONTEXT When rust AK aware
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK
+NEW CONTEXT When rust AK rust
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK
+NEW CONTEXT When rust AK aware
+highest JS word aware
+CURR CONTEXT When rust AK aware JS 1.4350112676620483
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware
+NEW CONTEXT When rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware
+NEW CONTEXT When rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware
+NEW CONTEXT When rust AK aware aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware
+NEW CONTEXT When rust AK aware AK
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware
+NEW CONTEXT When rust AK aware rust
+highest JS word aware
+CURR CONTEXT When rust AK aware aware JS 1.9133485555648804
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware
+NEW CONTEXT When rust AK aware aware aware
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware
+NEW CONTEXT When rust AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware
+NEW CONTEXT When rust AK aware aware aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware
+NEW CONTEXT When rust AK aware aware AK
+highest JS word rust
+CURR CONTEXT When rust AK aware aware rust JS 2.391685903072357
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust
+NEW CONTEXT When rust AK aware aware rust AK
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust
+NEW CONTEXT When rust AK aware aware rust rust
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust
+NEW CONTEXT When rust AK aware aware rust AK
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust
+NEW CONTEXT When rust AK aware aware rust AK
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust
+NEW CONTEXT When rust AK aware aware rust AK
+highest JS word AK
+CURR CONTEXT When rust AK aware aware rust AK JS 2.870023012161255
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK
+NEW CONTEXT When rust AK aware aware rust AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK
+NEW CONTEXT When rust AK aware aware rust AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK
+NEW CONTEXT When rust AK aware aware rust AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK
+NEW CONTEXT When rust AK aware aware rust AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK
+NEW CONTEXT When rust AK aware aware rust AK aware
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware JS 3.3483600318431854
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware aware JS 3.8266970813274384
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware rust
+highest JS word AK
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK JS 4.305033981800079
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK rust
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK AK
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK aware JS 4.783370912075043
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware rust
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+highest JS word AK
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK aware AK JS 5.261707812547684
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK AK
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware JS 5.740044742822647
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware rust
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware AK
+NEW WORD AK
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware AK
+NEW WORD rust
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware rust
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware JS 6.218381702899933
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware
+NEW WORD aware
+CURR PRE-NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware
+NEW CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware
+highest JS word aware
+CURR CONTEXT When rust AK aware aware rust AK aware aware AK aware AK aware aware aware JS 6.696718662977219
+2020-09-07 13:15:26.401882: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:15:26.402479: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:15:26.402499: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:15:31.865061: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:15:32.044702: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:15:32.051307: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:15:32.051352: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:15:32.051362: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:15:32.051478: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:15:32.051521: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:15:32.051529: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:15:32.051932: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:15:32.075756: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:15:32.077066: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55f591196660 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:15:32.077117: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why fix
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why runs
+highest JS word mast
+CURR CONTEXT Why mast JS 0.4776395261287689
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast
+NEW CONTEXT Why mast fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast
+NEW CONTEXT Why mast fix
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast
+NEW CONTEXT Why mast mast
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast
+NEW CONTEXT Why mast mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast
+NEW CONTEXT Why mast runs
+highest JS word fix
+CURR CONTEXT Why mast fix JS 0.9552790820598602
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix
+NEW CONTEXT Why mast fix fix
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix
+NEW CONTEXT Why mast fix runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix
+NEW CONTEXT Why mast fix fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix
+NEW CONTEXT Why mast fix fix
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix
+NEW CONTEXT Why mast fix amines
+highest JS word amines
+CURR CONTEXT Why mast fix amines JS 1.4329185783863068
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines
+NEW CONTEXT Why mast fix amines runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines
+NEW CONTEXT Why mast fix amines runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines
+NEW CONTEXT Why mast fix amines mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines
+NEW CONTEXT Why mast fix amines runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines
+NEW CONTEXT Why mast fix amines mast
+highest JS word runs
+CURR CONTEXT Why mast fix amines runs JS 1.9105581939220428
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs
+NEW CONTEXT Why mast fix amines runs runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs
+NEW CONTEXT Why mast fix amines runs mast
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs
+NEW CONTEXT Why mast fix amines runs mast
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs
+NEW CONTEXT Why mast fix amines runs fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs
+NEW CONTEXT Why mast fix amines runs fix
+highest JS word runs
+CURR CONTEXT Why mast fix amines runs runs JS 2.3881976902484894
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs
+NEW CONTEXT Why mast fix amines runs runs mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs
+NEW CONTEXT Why mast fix amines runs runs runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs
+NEW CONTEXT Why mast fix amines runs runs runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs
+NEW CONTEXT Why mast fix amines runs runs runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs
+NEW CONTEXT Why mast fix amines runs runs fix
+highest JS word mast
+CURR CONTEXT Why mast fix amines runs runs mast JS 2.865837126970291
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast
+NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast
+NEW CONTEXT Why mast fix amines runs runs mast fix
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast
+NEW CONTEXT Why mast fix amines runs runs mast amines
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast
+NEW CONTEXT Why mast fix amines runs runs mast fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast
+NEW CONTEXT Why mast fix amines runs runs mast fix
+highest JS word runs
+CURR CONTEXT Why mast fix amines runs runs mast runs JS 3.343476563692093
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW CONTEXT Why mast fix amines runs runs mast runs mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW CONTEXT Why mast fix amines runs runs mast runs runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix
+highest JS word fix
+CURR CONTEXT Why mast fix amines runs runs mast runs fix JS 3.8211161494255066
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix amines
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+highest JS word mast
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast JS 4.298755764961243
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast fix
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast runs
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast amines
+highest JS word mast
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast mast JS 4.776395082473755
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast runs
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast fix
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast runs
+highest JS word amines
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines JS 5.254034519195557
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines mast
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+highest JS word runs
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs JS 5.731674015522003
+NEW WORD fix
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs runs
+NEW WORD amines
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs amines
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs mast
+highest JS word fix
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix JS 6.20931351184845
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix runs
+NEW WORD runs
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix runs
+NEW WORD mast
+CURR PRE-NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix
+NEW CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix mast
+highest JS word runs
+CURR CONTEXT Why mast fix amines runs runs mast runs fix mast mast amines runs fix runs JS 6.686952978372574
+2020-09-07 13:19:40.752993: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:19:40.753446: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:19:40.753458: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:19:45.982786: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:19:46.161158: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:19:46.167378: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:19:46.167423: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:19:46.167433: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:19:46.167547: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:19:46.167590: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:19:46.167599: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:19:46.167977: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:19:46.179091: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:19:46.180018: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55fb55cfa0d0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:19:46.180049: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How raged
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Microsoft
+highest JS word Microsoft
+CURR CONTEXT How Microsoft JS 0.5553673505783081
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft
+NEW CONTEXT How Microsoft raged
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft
+NEW CONTEXT How Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft
+NEW CONTEXT How Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft
+NEW CONTEXT How Microsoft Microsoft
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft
+NEW CONTEXT How Microsoft dig
+highest JS word raged
+CURR CONTEXT How Microsoft raged JS 1.1107346415519714
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged
+NEW CONTEXT How Microsoft raged Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged
+NEW CONTEXT How Microsoft raged Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged
+NEW CONTEXT How Microsoft raged raged
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged
+NEW CONTEXT How Microsoft raged dig
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged
+NEW CONTEXT How Microsoft raged disciplinary
+highest JS word Microsoft
+CURR CONTEXT How Microsoft raged Microsoft JS 1.6661019325256348
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft
+NEW CONTEXT How Microsoft raged Microsoft raged
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft
+NEW CONTEXT How Microsoft raged Microsoft disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft
+highest JS word Microsoft
+CURR CONTEXT How Microsoft raged Microsoft Microsoft JS 2.221469283103943
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft Microsoft
+highest JS word disciplinary
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary JS 2.7768366932868958
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary Microsoft
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary dig
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary Microsoft
+highest JS word disciplinary
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary JS 3.3322038054466248
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary Microsoft
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary Microsoft
+highest JS word dig
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig JS 3.8875710368156433
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig raged
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig dig
+highest JS word disciplinary
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary JS 4.442938148975372
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary Microsoft
+highest JS word disciplinary
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary JS 4.9983052015304565
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary dig
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+highest JS word Microsoft
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft JS 5.5536723136901855
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft raged
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft raged
+highest JS word Microsoft
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft JS 6.109039306640625
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW WORD raged
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft raged
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft disciplinary
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft dig
+highest JS word Microsoft
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft JS 6.6644062995910645
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft Microsoft
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft Microsoft
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft disciplinary
+highest JS word dig
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig JS 7.219773292541504
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig dig
+NEW WORD disciplinary
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig disciplinary
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig Microsoft
+NEW WORD dig
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig dig
+NEW WORD Microsoft
+CURR PRE-NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig
+NEW CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig Microsoft
+highest JS word dig
+CURR CONTEXT How Microsoft raged Microsoft Microsoft disciplinary disciplinary dig disciplinary disciplinary Microsoft Microsoft Microsoft dig dig JS 7.775140404701233
+2020-09-07 13:23:26.728873: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:23:26.728970: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:23:26.728978: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:23:31.750275: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:23:31.927123: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:23:31.933495: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:23:31.933540: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:23:31.933551: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:23:31.933665: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:23:31.933721: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:23:31.933729: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:23:31.934102: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:23:31.945050: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:23:31.945964: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56471d237500 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:23:31.945995: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD NO
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The NO
+highest JS word NO
+CURR CONTEXT The NO JS 0.41750192642211914
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO
+NEW CONTEXT The NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO
+NEW CONTEXT The NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO
+NEW CONTEXT The NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO
+NEW CONTEXT The NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO
+NEW CONTEXT The NO NO
+highest JS word NO
+CURR CONTEXT The NO NO JS 0.8350039124488831
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO
+NEW CONTEXT The NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO
+NEW CONTEXT The NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO
+NEW CONTEXT The NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO
+NEW CONTEXT The NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO
+NEW CONTEXT The NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO JS 1.2525056898593903
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO
+NEW CONTEXT The NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO
+NEW CONTEXT The NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO
+NEW CONTEXT The NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO
+NEW CONTEXT The NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO
+NEW CONTEXT The NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO JS 1.6700075268745422
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO JS 2.0875093936920166
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO JS 2.5050113797187805
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO JS 2.92251318693161
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO JS 3.340014934539795
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO JS 3.7575168013572693
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO NO JS 4.175018727779388
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO NO NO JS 4.592520475387573
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO JS 5.010022282600403
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO JS 5.4275241792202
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW WORD NO
+CURR PRE-NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO
+NEW CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO
+highest JS word NO
+CURR CONTEXT The NO NO NO NO NO NO NO NO NO NO NO NO NO NO JS 5.845026046037674
+2020-09-07 13:27:22.352361: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:27:22.352490: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:27:22.352503: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:27:27.242035: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:27:27.419038: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:27:27.425242: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:27:27.425294: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:27:27.425305: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:27:27.425410: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:27:27.425454: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:27:27.425463: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:27:27.425846: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:27:27.436607: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:27:27.437399: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5565f9928220 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:27:27.437432: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD du
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My du
+NEW WORD du
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My du
+NEW WORD du
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My du
+NEW WORD du
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My du
+NEW WORD du
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My du
+highest JS word du
+CURR CONTEXT My du JS 0.5166585445404053
+NEW WORD du
+CURR PRE-NEW CONTEXT My du
+NEW CONTEXT My du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du
+NEW CONTEXT My du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du
+NEW CONTEXT My du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du
+NEW CONTEXT My du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du
+NEW CONTEXT My du du
+highest JS word du
+CURR CONTEXT My du du JS 1.0333170294761658
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du
+NEW CONTEXT My du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du
+NEW CONTEXT My du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du
+NEW CONTEXT My du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du
+NEW CONTEXT My du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du
+NEW CONTEXT My du du du
+highest JS word du
+CURR CONTEXT My du du du JS 1.5499753952026367
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du
+NEW CONTEXT My du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du
+NEW CONTEXT My du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du
+NEW CONTEXT My du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du
+NEW CONTEXT My du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du
+NEW CONTEXT My du du du du
+highest JS word du
+CURR CONTEXT My du du du du JS 2.066633939743042
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du
+NEW CONTEXT My du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du
+NEW CONTEXT My du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du
+NEW CONTEXT My du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du
+NEW CONTEXT My du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du
+NEW CONTEXT My du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du JS 2.5832924842834473
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du
+NEW CONTEXT My du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du
+NEW CONTEXT My du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du
+NEW CONTEXT My du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du
+NEW CONTEXT My du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du
+NEW CONTEXT My du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du JS 3.099950850009918
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du
+NEW CONTEXT My du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du
+NEW CONTEXT My du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du
+NEW CONTEXT My du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du
+NEW CONTEXT My du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du
+NEW CONTEXT My du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du JS 3.6166090965270996
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du
+NEW CONTEXT My du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du
+NEW CONTEXT My du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du
+NEW CONTEXT My du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du
+NEW CONTEXT My du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du
+NEW CONTEXT My du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du JS 4.133267343044281
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du
+NEW CONTEXT My du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du
+NEW CONTEXT My du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du
+NEW CONTEXT My du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du
+NEW CONTEXT My du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du
+NEW CONTEXT My du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du JS 4.649925649166107
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du du JS 5.166583955287933
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du du du JS 5.683242321014404
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du du du du JS 6.1999006271362305
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du du du du du JS 6.716558873653412
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du du
+NEW WORD du
+CURR PRE-NEW CONTEXT My du du du du du du du du du du du du du
+NEW CONTEXT My du du du du du du du du du du du du du du
+highest JS word du
+CURR CONTEXT My du du du du du du du du du du du du du du JS 7.233217179775238
+2020-09-07 13:31:53.711691: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:31:53.712332: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-07 13:31:53.712367: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-07 13:31:58.635728: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-07 13:31:58.807222: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-07 13:31:58.813359: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-07 13:31:58.813402: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node085
+2020-09-07 13:31:58.813412: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node085
+2020-09-07 13:31:58.813517: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-07 13:31:58.813559: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-07 13:31:58.813568: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-07 13:31:58.813956: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-09-07 13:31:58.824797: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-09-07 13:31:58.825734: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5647f40b2290 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-07 13:31:58.825765: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD char
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I paper
+highest JS word char
+CURR CONTEXT I char JS 0.5134527683258057
+NEW WORD certain
+CURR PRE-NEW CONTEXT I char
+NEW CONTEXT I char certain
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char
+NEW CONTEXT I char paper
+NEW WORD certain
+CURR PRE-NEW CONTEXT I char
+NEW CONTEXT I char certain
+NEW WORD char
+CURR PRE-NEW CONTEXT I char
+NEW CONTEXT I char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char
+NEW CONTEXT I char paper
+highest JS word char
+CURR CONTEXT I char char JS 1.0269054174423218
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char
+NEW CONTEXT I char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char
+NEW CONTEXT I char char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char
+NEW CONTEXT I char char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char
+NEW CONTEXT I char char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char
+NEW CONTEXT I char char char
+highest JS word char
+CURR CONTEXT I char char char JS 1.5403579473495483
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char
+NEW CONTEXT I char char char char
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char
+NEW CONTEXT I char char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char
+NEW CONTEXT I char char char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char
+NEW CONTEXT I char char char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char
+NEW CONTEXT I char char char paper
+highest JS word paper
+CURR CONTEXT I char char char paper JS 2.053810715675354
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper
+NEW CONTEXT I char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper
+NEW CONTEXT I char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper
+NEW CONTEXT I char char char paper paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper
+NEW CONTEXT I char char char paper char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper
+NEW CONTEXT I char char char paper paper
+highest JS word paper
+CURR CONTEXT I char char char paper paper JS 2.5672632455825806
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper
+NEW CONTEXT I char char char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper
+NEW CONTEXT I char char char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper
+NEW CONTEXT I char char char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper
+NEW CONTEXT I char char char paper paper paper
+NEW WORD certain
+CURR PRE-NEW CONTEXT I char char char paper paper
+NEW CONTEXT I char char char paper paper certain
+highest JS word paper
+CURR CONTEXT I char char char paper paper paper JS 3.080715775489807
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper
+NEW CONTEXT I char char char paper paper paper paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper
+NEW CONTEXT I char char char paper paper paper char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper
+NEW CONTEXT I char char char paper paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper
+NEW CONTEXT I char char char paper paper paper paper
+NEW WORD certain
+CURR PRE-NEW CONTEXT I char char char paper paper paper
+NEW CONTEXT I char char char paper paper paper certain
+highest JS word char
+CURR CONTEXT I char char char paper paper paper char JS 3.5941680669784546
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char
+NEW CONTEXT I char char char paper paper paper char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char
+NEW CONTEXT I char char char paper paper paper char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char
+NEW CONTEXT I char char char paper paper paper char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char
+NEW CONTEXT I char char char paper paper paper char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char
+NEW CONTEXT I char char char paper paper paper char paper
+highest JS word paper
+CURR CONTEXT I char char char paper paper paper char paper JS 4.107620358467102
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper
+NEW CONTEXT I char char char paper paper paper char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper
+NEW CONTEXT I char char char paper paper paper char paper paper
+NEW WORD certain
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper
+NEW CONTEXT I char char char paper paper paper char paper certain
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper
+NEW CONTEXT I char char char paper paper paper char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper
+NEW CONTEXT I char char char paper paper paper char paper paper
+highest JS word paper
+CURR CONTEXT I char char char paper paper paper char paper paper JS 4.6210726499557495
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper
+NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper
+NEW CONTEXT I char char char paper paper paper char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper
+NEW CONTEXT I char char char paper paper paper char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper
+NEW CONTEXT I char char char paper paper paper char paper paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper
+NEW CONTEXT I char char char paper paper paper char paper paper paper
+highest JS word char
+CURR CONTEXT I char char char paper paper paper char paper paper char JS 5.134524941444397
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW CONTEXT I char char char paper paper paper char paper paper char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW CONTEXT I char char char paper paper paper char paper paper char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW CONTEXT I char char char paper paper paper char paper paper char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char
+NEW CONTEXT I char char char paper paper paper char paper paper char paper
+highest JS word char
+CURR CONTEXT I char char char paper paper paper char paper paper char char JS 5.647977352142334
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char paper
+highest JS word char
+CURR CONTEXT I char char char paper paper paper char paper paper char char char JS 6.1614296436309814
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW WORD char
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char char
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+highest JS word paper
+CURR CONTEXT I char char char paper paper paper char paper paper char char char paper JS 6.674881815910339
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper paper
+NEW WORD paper
+CURR PRE-NEW CONTEXT I char char char paper paper paper char paper paper char char char paper
+NEW CONTEXT I char char char paper paper paper char paper paper char char char paper paper
+highest JS word paper
+CURR CONTEXT I char char char paper paper paper char paper paper char char char paper paper JS 7.188334345817566

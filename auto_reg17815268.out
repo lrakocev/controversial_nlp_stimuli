@@ -1,0 +1,2089 @@
+ModuleCmd_Load.c(213):ERROR:105: Unable to locate a modulefile for 'python'
+2020-09-03 16:00:16.547261: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:00:16.547675: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:00:16.547689: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:00:21.704760: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:00:21.891268: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:00:21.907693: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:00:21.907737: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:00:21.907748: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:00:21.907828: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:00:21.907876: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:00:21.907886: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:00:21.908243: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:00:21.917867: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:00:21.918553: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x563402b43c00 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:00:21.918573: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who resistant
+NEW WORD western
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who western
+NEW WORD serious
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who serious
+NEW WORD western
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who western
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who
+NEW CONTEXT Who resistant
+highest JS word resistant
+CURR CONTEXT Who resistant JS 0.509512186050415
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant
+NEW CONTEXT Who resistant western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant
+NEW CONTEXT Who resistant western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant
+NEW CONTEXT Who resistant western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant
+NEW CONTEXT Who resistant western
+NEW WORD Cru
+CURR PRE-NEW CONTEXT Who resistant
+NEW CONTEXT Who resistant Cru
+highest JS word western
+CURR CONTEXT Who resistant western JS 1.0190242528915405
+NEW WORD doing
+CURR PRE-NEW CONTEXT Who resistant western
+NEW CONTEXT Who resistant western doing
+NEW WORD Mich
+CURR PRE-NEW CONTEXT Who resistant western
+NEW CONTEXT Who resistant western Mich
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who resistant western
+NEW CONTEXT Who resistant western resistant
+NEW WORD doing
+CURR PRE-NEW CONTEXT Who resistant western
+NEW CONTEXT Who resistant western doing
+NEW WORD TW
+CURR PRE-NEW CONTEXT Who resistant western
+NEW CONTEXT Who resistant western TW
+highest JS word Mich
+CURR CONTEXT Who resistant western Mich JS 1.52853661775589
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich
+NEW CONTEXT Who resistant western Mich clinical
+NEW WORD Insp
+CURR PRE-NEW CONTEXT Who resistant western Mich
+NEW CONTEXT Who resistant western Mich Insp
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich
+NEW CONTEXT Who resistant western Mich western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich
+NEW CONTEXT Who resistant western Mich western
+NEW WORD TW
+CURR PRE-NEW CONTEXT Who resistant western Mich
+NEW CONTEXT Who resistant western Mich TW
+highest JS word clinical
+CURR CONTEXT Who resistant western Mich clinical JS 2.0380489230155945
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical
+NEW CONTEXT Who resistant western Mich clinical western
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical
+NEW CONTEXT Who resistant western Mich clinical clinical
+NEW WORD nin
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical
+NEW CONTEXT Who resistant western Mich clinical nin
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical
+NEW CONTEXT Who resistant western Mich clinical clinical
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical
+NEW CONTEXT Who resistant western Mich clinical clinical
+highest JS word western
+CURR CONTEXT Who resistant western Mich clinical western JS 2.5475611090660095
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western
+NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western
+NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW WORD Was
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western
+NEW CONTEXT Who resistant western Mich clinical western Was
+NEW WORD 323
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western
+NEW CONTEXT Who resistant western Mich clinical western 323
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western
+NEW CONTEXT Who resistant western Mich clinical western WP
+highest JS word clinical
+CURR CONTEXT Who resistant western Mich clinical western clinical JS 3.0570730566978455
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical clinical
+NEW WORD serious
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical serious
+highest JS word WP
+CURR CONTEXT Who resistant western Mich clinical western clinical WP JS 3.56658536195755
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW WORD Interview
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP Interview
+NEW WORD Cru
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP Cru
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP clinical
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP WP
+highest JS word western
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western JS 4.076097548007965
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW WORD mania
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western mania
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western resistant
+NEW WORD TW
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western TW
+highest JS word western
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western JS 4.585609614849091
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western western
+NEW WORD Was
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western Was
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+highest JS word clinical
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western clinical JS 5.095121800899506
+NEW WORD Cru
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical clinical
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical western
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical resistant
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical western
+highest JS word Cru
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru JS 5.604633986949921
+NEW WORD TW
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW WORD Gy
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru Gy
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru western
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru clinical
+highest JS word TW
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW JS 6.114146173000336
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW WORD images
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW images
+NEW WORD clinical
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW clinical
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW western
+NEW WORD Interview
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW Interview
+highest JS word WP
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP JS 6.62365847826004
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP western
+NEW WORD resistant
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP resistant
+NEW WORD WP
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP WP
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP western
+NEW WORD western
+CURR PRE-NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP
+NEW CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP western
+highest JS word western
+CURR CONTEXT Who resistant western Mich clinical western clinical WP western western clinical Cru TW WP western JS 7.133170545101166
+2020-09-03 16:03:23.994901: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:03:23.995391: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:03:23.995413: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:03:29.301977: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:03:29.475908: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:03:29.478705: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:03:29.478747: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:03:29.478766: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:03:29.478844: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:03:29.478891: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:03:29.478901: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:03:29.479255: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:03:29.489171: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:03:29.489891: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5572ca57c890 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:03:29.489911: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Generally
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where Generally
+NEW WORD respect
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where respect
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where Nusra
+NEW WORD 1969
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where 1969
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where
+NEW CONTEXT Where verbal
+highest JS word Generally
+CURR CONTEXT Where Generally JS 0.4933410882949829
+NEW WORD Murray
+CURR PRE-NEW CONTEXT Where Generally
+NEW CONTEXT Where Generally Murray
+NEW WORD AME
+CURR PRE-NEW CONTEXT Where Generally
+NEW CONTEXT Where Generally AME
+NEW WORD sync
+CURR PRE-NEW CONTEXT Where Generally
+NEW CONTEXT Where Generally sync
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally
+NEW CONTEXT Where Generally Nusra
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally
+NEW CONTEXT Where Generally hazard
+highest JS word AME
+CURR CONTEXT Where Generally AME JS 0.9866822361946106
+NEW WORD AME
+CURR PRE-NEW CONTEXT Where Generally AME
+NEW CONTEXT Where Generally AME AME
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME
+NEW CONTEXT Where Generally AME 763
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally AME
+NEW CONTEXT Where Generally AME Nusra
+NEW WORD ust
+CURR PRE-NEW CONTEXT Where Generally AME
+NEW CONTEXT Where Generally AME ust
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME
+NEW CONTEXT Where Generally AME verbal
+highest JS word AME
+CURR CONTEXT Where Generally AME AME JS 1.4800231754779816
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME
+NEW CONTEXT Where Generally AME AME verbal
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME
+NEW CONTEXT Where Generally AME AME hazard
+NEW WORD paces
+CURR PRE-NEW CONTEXT Where Generally AME AME
+NEW CONTEXT Where Generally AME AME paces
+NEW WORD 1969
+CURR PRE-NEW CONTEXT Where Generally AME AME
+NEW CONTEXT Where Generally AME AME 1969
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME
+NEW CONTEXT Where Generally AME AME verbal
+highest JS word verbal
+CURR CONTEXT Where Generally AME AME verbal JS 1.973364144563675
+NEW WORD Murray
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal
+NEW CONTEXT Where Generally AME AME verbal Murray
+NEW WORD dated
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal
+NEW CONTEXT Where Generally AME AME verbal dated
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal
+NEW CONTEXT Where Generally AME AME verbal verbal
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal
+NEW CONTEXT Where Generally AME AME verbal verbal
+NEW WORD 753
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal
+NEW CONTEXT Where Generally AME AME verbal 753
+highest JS word Murray
+CURR CONTEXT Where Generally AME AME verbal Murray JS 2.4667052626609802
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray
+NEW CONTEXT Where Generally AME AME verbal Murray 763
+NEW WORD respect
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray
+NEW CONTEXT Where Generally AME AME verbal Murray respect
+NEW WORD 753
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray
+NEW CONTEXT Where Generally AME AME verbal Murray 753
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray
+NEW CONTEXT Where Generally AME AME verbal Murray verbal
+highest JS word Nusra
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra JS 2.960046261548996
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra verbal
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra hazard
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW WORD 1969
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra 1969
+NEW WORD Moving
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Moving
+highest JS word Nusra
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra JS 3.4533872306346893
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra 763
+NEW WORD Footnote
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra Footnote
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra verbal
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra 763
+highest JS word hazard
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard JS 3.9467282593250275
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard 763
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard verbal
+NEW WORD paces
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard paces
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard verbal
+highest JS word Nusra
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra JS 4.44006934762001
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW WORD Insp
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra Insp
+NEW WORD pad
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra pad
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra hazard
+NEW WORD 1969
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra 1969
+highest JS word verbal
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal JS 4.933410286903381
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal 763
+NEW WORD respect
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal respect
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal hazard
+NEW WORD apa
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal apa
+highest JS word verbal
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal JS 5.4267513155937195
+NEW WORD Class
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW WORD Policy
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Policy
+NEW WORD Footnote
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Footnote
+NEW WORD AME
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal AME
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal 763
+highest JS word Class
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class JS 5.920092403888702
+NEW WORD 753
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class verbal
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class hazard
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 763
+NEW WORD hazard
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class hazard
+highest JS word 753
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 JS 6.413433372974396
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 verbal
+NEW WORD 69
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 69
+NEW WORD Nusra
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 Nusra
+NEW WORD verbal
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 verbal
+NEW WORD 763
+CURR PRE-NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753
+NEW CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 763
+highest JS word verbal
+CURR CONTEXT Where Generally AME AME verbal Murray Nusra Nusra hazard Nusra verbal verbal Class 753 verbal JS 6.906774342060089
+2020-09-03 16:06:25.751283: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:06:25.751784: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:06:25.751810: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:06:30.873679: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:06:31.047875: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:06:31.050597: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:06:31.050640: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:06:31.050651: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:06:31.050730: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:06:31.050778: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:06:31.050789: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:06:31.051151: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:06:31.060779: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:06:31.061529: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5589230ca890 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:06:31.061557: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD factor
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When factor
+NEW WORD 214
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When 214
+NEW WORD liners
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When liners
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When Â¢
+NEW WORD elle
+CURR PRE-NEW CONTEXT When
+NEW CONTEXT When elle
+highest JS word factor
+CURR CONTEXT When factor JS 0.47833719849586487
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor
+NEW CONTEXT When factor 142
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor
+NEW CONTEXT When factor 142
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor
+NEW CONTEXT When factor 142
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor
+NEW CONTEXT When factor 142
+NEW WORD Description
+CURR PRE-NEW CONTEXT When factor
+NEW CONTEXT When factor Description
+highest JS word 142
+CURR CONTEXT When factor 142 JS 0.956674188375473
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142
+NEW CONTEXT When factor 142 142
+NEW WORD factor
+CURR PRE-NEW CONTEXT When factor 142
+NEW CONTEXT When factor 142 factor
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142
+NEW CONTEXT When factor 142 142
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142
+NEW CONTEXT When factor 142 bus
+NEW WORD elle
+CURR PRE-NEW CONTEXT When factor 142
+NEW CONTEXT When factor 142 elle
+highest JS word 142
+CURR CONTEXT When factor 142 142 JS 1.4350112974643707
+NEW WORD SW
+CURR PRE-NEW CONTEXT When factor 142 142
+NEW CONTEXT When factor 142 142 SW
+NEW WORD Links
+CURR PRE-NEW CONTEXT When factor 142 142
+NEW CONTEXT When factor 142 142 Links
+NEW WORD Interested
+CURR PRE-NEW CONTEXT When factor 142 142
+NEW CONTEXT When factor 142 142 Interested
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142
+NEW CONTEXT When factor 142 142 142
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142
+NEW CONTEXT When factor 142 142 bus
+highest JS word SW
+CURR CONTEXT When factor 142 142 SW JS 1.9133483469486237
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW
+NEW CONTEXT When factor 142 142 SW Â¢
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW
+NEW CONTEXT When factor 142 142 SW bus
+NEW WORD Description
+CURR PRE-NEW CONTEXT When factor 142 142 SW
+NEW CONTEXT When factor 142 142 SW Description
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW
+NEW CONTEXT When factor 142 142 SW 142
+NEW WORD elle
+CURR PRE-NEW CONTEXT When factor 142 142 SW
+NEW CONTEXT When factor 142 142 SW elle
+highest JS word bus
+CURR CONTEXT When factor 142 142 SW bus JS 2.3916854858398438
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus
+NEW CONTEXT When factor 142 142 SW bus Â¢
+NEW WORD Description
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus
+NEW CONTEXT When factor 142 142 SW bus Description
+NEW WORD 214
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus
+NEW CONTEXT When factor 142 142 SW bus 214
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus
+NEW CONTEXT When factor 142 142 SW bus Â¢
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus
+NEW CONTEXT When factor 142 142 SW bus Â¢
+highest JS word Description
+CURR CONTEXT When factor 142 142 SW bus Description JS 2.870022773742676
+NEW WORD elle
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description
+NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description
+NEW CONTEXT When factor 142 142 SW bus Description bus
+NEW WORD dra
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description
+NEW CONTEXT When factor 142 142 SW bus Description dra
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description
+NEW CONTEXT When factor 142 142 SW bus Description 142
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description
+NEW CONTEXT When factor 142 142 SW bus Description 142
+highest JS word elle
+CURR CONTEXT When factor 142 142 SW bus Description elle JS 3.3483596742153168
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW WORD SW
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW CONTEXT When factor 142 142 SW bus Description elle SW
+NEW WORD floor
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW CONTEXT When factor 142 142 SW bus Description elle floor
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle
+NEW CONTEXT When factor 142 142 SW bus Description elle Â¢
+highest JS word 142
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 JS 3.8266967236995697
+NEW WORD elle
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 Â¢
+NEW WORD Women
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 Women
+NEW WORD Links
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 Links
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 bus
+highest JS word elle
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle JS 4.305033713579178
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle 142
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle bus
+highest JS word Â¢
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ JS 4.783370554447174
+NEW WORD floor
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ Â¢
+NEW WORD Sarah
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ Sarah
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ 142
+NEW WORD Sh
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ Sh
+highest JS word floor
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor JS 5.2617077231407166
+NEW WORD reg
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW WORD Links
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor Links
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor 142
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor bus
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor Â¢
+highest JS word reg
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg JS 5.74004465341568
+NEW WORD liners
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg Â¢
+NEW WORD bus
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg bus
+NEW WORD PokÃ©mon
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg PokÃ©mon
+NEW WORD 214
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg 214
+highest JS word liners
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners JS 6.218381732702255
+NEW WORD 142
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners 142
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners Â¢
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners Â¢
+NEW WORD Â¢
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners Â¢
+NEW WORD aches
+CURR PRE-NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners
+NEW CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners aches
+highest JS word 142
+CURR CONTEXT When factor 142 142 SW bus Description elle 142 elle Â¢ floor reg liners 142 JS 6.696718841791153
+2020-09-03 16:09:28.440605: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:09:28.441152: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:09:28.441174: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:09:33.565403: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:09:33.738810: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:09:33.764987: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:09:33.765025: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:09:33.765035: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:09:33.765108: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:09:33.765151: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:09:33.765160: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:09:33.765500: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:09:33.774077: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:09:33.774828: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5563d57f4bf0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:09:33.774845: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why Returns
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why Orange
+NEW WORD rail
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why rail
+NEW WORD agate
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why agate
+NEW WORD rail
+CURR PRE-NEW CONTEXT Why
+NEW CONTEXT Why rail
+highest JS word agate
+CURR CONTEXT Why agate JS 0.47763967514038086
+NEW WORD agate
+CURR PRE-NEW CONTEXT Why agate
+NEW CONTEXT Why agate agate
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate
+NEW CONTEXT Why agate Orange
+NEW WORD rail
+CURR PRE-NEW CONTEXT Why agate
+NEW CONTEXT Why agate rail
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate
+NEW CONTEXT Why agate Orange
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate
+NEW CONTEXT Why agate Returns
+highest JS word agate
+CURR CONTEXT Why agate agate JS 0.955279141664505
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate
+NEW CONTEXT Why agate agate safety
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate
+NEW CONTEXT Why agate agate Returns
+NEW WORD 022
+CURR PRE-NEW CONTEXT Why agate agate
+NEW CONTEXT Why agate agate 022
+NEW WORD 2002
+CURR PRE-NEW CONTEXT Why agate agate
+NEW CONTEXT Why agate agate 2002
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate
+NEW CONTEXT Why agate agate votes
+highest JS word 022
+CURR CONTEXT Why agate agate 022 JS 1.4329185783863068
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022
+NEW CONTEXT Why agate agate 022 Terry
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate 022
+NEW CONTEXT Why agate agate 022 safety
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022
+NEW CONTEXT Why agate agate 022 Terry
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022
+NEW CONTEXT Why agate agate 022 Terry
+NEW WORD 280
+CURR PRE-NEW CONTEXT Why agate agate 022
+NEW CONTEXT Why agate agate 022 280
+highest JS word Terry
+CURR CONTEXT Why agate agate 022 Terry JS 1.9105579555034637
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry
+NEW CONTEXT Why agate agate 022 Terry Terry
+NEW WORD 're
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry
+NEW CONTEXT Why agate agate 022 Terry 're
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry
+NEW CONTEXT Why agate agate 022 Terry votes
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry
+NEW CONTEXT Why agate agate 022 Terry safety
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry
+NEW CONTEXT Why agate agate 022 Terry votes
+highest JS word Terry
+CURR CONTEXT Why agate agate 022 Terry Terry JS 2.3881973922252655
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry
+NEW CONTEXT Why agate agate 022 Terry Terry Returns
+NEW WORD sett
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry
+NEW CONTEXT Why agate agate 022 Terry Terry Orange
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry
+NEW CONTEXT Why agate agate 022 Terry Terry safety
+NEW WORD rec
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry
+NEW CONTEXT Why agate agate 022 Terry Terry rec
+highest JS word sett
+CURR CONTEXT Why agate agate 022 Terry Terry sett JS 2.8658369183540344
+NEW WORD rec
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW CONTEXT Why agate agate 022 Terry Terry sett Terry
+NEW WORD Danny
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW CONTEXT Why agate agate 022 Terry Terry sett Danny
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW CONTEXT Why agate agate 022 Terry Terry sett safety
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett
+NEW CONTEXT Why agate agate 022 Terry Terry sett Returns
+highest JS word rec
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec JS 3.343476355075836
+NEW WORD agate
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec agate
+NEW WORD safety
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec Returns
+NEW WORD Available
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec Available
+NEW WORD 're
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec 're
+highest JS word safety
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety JS 3.8211159706115723
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Terry
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Orange
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Terry
+highest JS word Returns
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns JS 4.298755347728729
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns Returns
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns Orange
+NEW WORD pattern
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns pattern
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+highest JS word votes
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes JS 4.776394724845886
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Returns
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Returns
+NEW WORD holm
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes holm
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Returns
+highest JS word Terry
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry JS 5.2540342807769775
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW WORD 85
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry 85
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Terry
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Orange
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Orange
+highest JS word Returns
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns JS 5.7316736578941345
+NEW WORD Returns
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW WORD sett
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns sett
+NEW WORD votes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns votes
+NEW WORD sett
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns sett
+NEW WORD agate
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns agate
+highest JS word Returns
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns JS 6.209313154220581
+NEW WORD agate
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns agate
+NEW WORD Warren
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns Warren
+NEW WORD includes
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns includes
+NEW WORD Orange
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns Orange
+NEW WORD Terry
+CURR PRE-NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns
+NEW CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns Terry
+highest JS word agate
+CURR CONTEXT Why agate agate 022 Terry Terry sett rec safety Returns votes Terry Returns Returns agate JS 6.686952590942383
+2020-09-03 16:12:31.045698: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:12:31.046144: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:12:31.046166: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:12:36.272219: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:12:36.457078: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:12:36.459889: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:12:36.459937: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:12:36.459948: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:12:36.460032: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:12:36.460086: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:12:36.460096: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:12:36.460478: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:12:36.470451: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:12:36.471237: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x561fd65d7020 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:12:36.471259: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD yes
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How yes
+NEW WORD Shadow
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Shadow
+NEW WORD yes
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How yes
+NEW WORD smith
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How smith
+NEW WORD Law
+CURR PRE-NEW CONTEXT How
+NEW CONTEXT How Law
+highest JS word yes
+CURR CONTEXT How yes JS 0.5553673505783081
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes
+NEW CONTEXT How yes Law
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes
+NEW CONTEXT How yes yes
+NEW WORD sort
+CURR PRE-NEW CONTEXT How yes
+NEW CONTEXT How yes sort
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes
+NEW CONTEXT How yes Vill
+NEW WORD sort
+CURR PRE-NEW CONTEXT How yes
+NEW CONTEXT How yes sort
+highest JS word Law
+CURR CONTEXT How yes Law JS 1.1107347011566162
+NEW WORD Introduced
+CURR PRE-NEW CONTEXT How yes Law
+NEW CONTEXT How yes Law Introduced
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law
+NEW CONTEXT How yes Law help
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law
+NEW CONTEXT How yes Law help
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law
+NEW CONTEXT How yes Law yes
+NEW WORD smith
+CURR PRE-NEW CONTEXT How yes Law
+NEW CONTEXT How yes Law smith
+highest JS word smith
+CURR CONTEXT How yes Law smith JS 1.6661020517349243
+NEW WORD amount
+CURR PRE-NEW CONTEXT How yes Law smith
+NEW CONTEXT How yes Law smith amount
+NEW WORD sort
+CURR PRE-NEW CONTEXT How yes Law smith
+NEW CONTEXT How yes Law smith sort
+NEW WORD pound
+CURR PRE-NEW CONTEXT How yes Law smith
+NEW CONTEXT How yes Law smith pound
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes Law smith
+NEW CONTEXT How yes Law smith Law
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes Law smith
+NEW CONTEXT How yes Law smith Law
+highest JS word amount
+CURR CONTEXT How yes Law smith amount JS 2.221469223499298
+NEW WORD mates
+CURR PRE-NEW CONTEXT How yes Law smith amount
+NEW CONTEXT How yes Law smith amount mates
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount
+NEW CONTEXT How yes Law smith amount yes
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes Law smith amount
+NEW CONTEXT How yes Law smith amount Law
+NEW WORD Commercial
+CURR PRE-NEW CONTEXT How yes Law smith amount
+NEW CONTEXT How yes Law smith amount Commercial
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law smith amount
+NEW CONTEXT How yes Law smith amount help
+highest JS word mates
+CURR CONTEXT How yes Law smith amount mates JS 2.7768364548683167
+NEW WORD mates
+CURR PRE-NEW CONTEXT How yes Law smith amount mates
+NEW CONTEXT How yes Law smith amount mates mates
+NEW WORD GOP
+CURR PRE-NEW CONTEXT How yes Law smith amount mates
+NEW CONTEXT How yes Law smith amount mates GOP
+NEW WORD exit
+CURR PRE-NEW CONTEXT How yes Law smith amount mates
+NEW CONTEXT How yes Law smith amount mates exit
+NEW WORD Shadow
+CURR PRE-NEW CONTEXT How yes Law smith amount mates
+NEW CONTEXT How yes Law smith amount mates Shadow
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates
+NEW CONTEXT How yes Law smith amount mates Vill
+highest JS word mates
+CURR CONTEXT How yes Law smith amount mates mates JS 3.332203507423401
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates
+NEW CONTEXT How yes Law smith amount mates mates yes
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates
+NEW CONTEXT How yes Law smith amount mates mates Vill
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates
+NEW CONTEXT How yes Law smith amount mates mates yes
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates
+NEW CONTEXT How yes Law smith amount mates mates yes
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates
+NEW CONTEXT How yes Law smith amount mates mates Vill
+highest JS word yes
+CURR CONTEXT How yes Law smith amount mates mates yes JS 3.88757061958313
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW WORD pound
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes
+NEW CONTEXT How yes Law smith amount mates mates yes pound
+NEW WORD mates
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes
+NEW CONTEXT How yes Law smith amount mates mates yes mates
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes
+NEW CONTEXT How yes Law smith amount mates mates yes Vill
+highest JS word yes
+CURR CONTEXT How yes Law smith amount mates mates yes yes JS 4.442937731742859
+NEW WORD exit
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW WORD RE
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes RE
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes help
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes help
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes yes
+highest JS word exit
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit JS 4.998304843902588
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit Vill
+NEW WORD Todd
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit Todd
+NEW WORD advertisement
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit advertisement
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+highest JS word yes
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit yes JS 5.553672134876251
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Law
+NEW WORD GOP
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes GOP
+NEW WORD Commercial
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Commercial
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes yes
+highest JS word Vill
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill JS 6.10903924703598
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW WORD mates
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill mates
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill yes
+NEW WORD mates
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill mates
+NEW WORD Shadow
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill Shadow
+highest JS word help
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help JS 6.664406359195709
+NEW WORD help
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW WORD Finding
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help Finding
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help Vill
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help yes
+NEW WORD 314
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help 314
+highest JS word help
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help JS 7.2197734117507935
+NEW WORD Todd
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help Todd
+NEW WORD Vill
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help Vill
+NEW WORD Law
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help Law
+NEW WORD GOP
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help GOP
+NEW WORD yes
+CURR PRE-NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help
+NEW CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help yes
+highest JS word Todd
+CURR CONTEXT How yes Law smith amount mates mates yes yes exit yes Vill help help Todd JS 7.7751405239105225
+2020-09-03 16:15:34.570011: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:15:34.570466: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:15:34.570497: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:15:39.603382: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:15:39.748226: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:15:39.750759: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:15:39.750797: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:15:39.750808: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:15:39.750880: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:15:39.750923: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:15:39.750932: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:15:39.751252: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:15:39.759873: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:15:39.760542: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x555e7ac53d00 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:15:39.760559: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD For
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The For
+NEW WORD learn
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The learn
+NEW WORD learn
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The learn
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The Â£
+NEW WORD Do
+CURR PRE-NEW CONTEXT The
+NEW CONTEXT The Do
+highest JS word For
+CURR CONTEXT The For JS 0.41750216484069824
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For
+NEW CONTEXT The For Â£
+NEW WORD Sir
+CURR PRE-NEW CONTEXT The For
+NEW CONTEXT The For Sir
+NEW WORD Post
+CURR PRE-NEW CONTEXT The For
+NEW CONTEXT The For Post
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For
+NEW CONTEXT The For Â£
+NEW WORD Post
+CURR PRE-NEW CONTEXT The For
+NEW CONTEXT The For Post
+highest JS word Sir
+CURR CONTEXT The For Sir JS 0.8350042104721069
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir
+NEW CONTEXT The For Sir Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir
+NEW CONTEXT The For Sir Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir
+NEW CONTEXT The For Sir Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir
+NEW CONTEXT The For Sir Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir
+NEW CONTEXT The For Sir Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ JS 1.252505898475647
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£
+NEW CONTEXT The For Sir Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£
+NEW CONTEXT The For Sir Â£ Â£
+NEW WORD Lear
+CURR PRE-NEW CONTEXT The For Sir Â£
+NEW CONTEXT The For Sir Â£ Lear
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£
+NEW CONTEXT The For Sir Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£
+NEW CONTEXT The For Sir Â£ Â£
+highest JS word Lear
+CURR CONTEXT The For Sir Â£ Lear JS 1.6700077950954437
+NEW WORD Post
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear
+NEW CONTEXT The For Sir Â£ Lear Post
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear
+NEW CONTEXT The For Sir Â£ Lear Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear
+NEW CONTEXT The For Sir Â£ Lear Â£
+NEW WORD Post
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear
+NEW CONTEXT The For Sir Â£ Lear Post
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear
+NEW CONTEXT The For Sir Â£ Lear Â£
+highest JS word Post
+CURR CONTEXT The For Sir Â£ Lear Post JS 2.087509423494339
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post
+NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW WORD Sir
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post
+NEW CONTEXT The For Sir Â£ Lear Post Sir
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post
+NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post
+NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW WORD Status
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post
+NEW CONTEXT The For Sir Â£ Lear Post Status
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ JS 2.5050110518932343
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ JS 2.922513008117676
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW WORD learn
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ learn
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ JS 3.340014636516571
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ JS 3.757516384124756
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW WORD Minor
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Minor
+NEW WORD Sir
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Sir
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ JS 4.17501825094223
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD reasonable
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ reasonable
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ JS 4.59251993894577
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD 95
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ 95
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD learn
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ learn
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ JS 5.01002162694931
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Minor
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Minor
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ JS 5.4275234043598175
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Jewish
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Jewish
+NEW WORD Â£
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW WORD Do
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Do
+NEW WORD Jewish
+CURR PRE-NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£
+NEW CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Jewish
+highest JS word Â£
+CURR CONTEXT The For Sir Â£ Lear Post Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ Â£ JS 5.84502512216568
+2020-09-03 16:18:32.711160: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:18:32.711629: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:18:32.711652: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:18:38.759463: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:18:38.939107: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:18:38.941599: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:18:38.941637: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:18:38.941646: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:18:38.941717: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:18:38.941758: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:18:38.941768: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:18:38.942106: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:18:38.950958: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:18:38.951598: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55ca51f1b1e0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:18:38.951616: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD war
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My war
+NEW WORD war
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My war
+NEW WORD OVA
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My OVA
+NEW WORD 217
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My 217
+NEW WORD war
+CURR PRE-NEW CONTEXT My
+NEW CONTEXT My war
+highest JS word war
+CURR CONTEXT My war JS 0.5166585445404053
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war
+NEW CONTEXT My war facing
+NEW WORD share
+CURR PRE-NEW CONTEXT My war
+NEW CONTEXT My war share
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war
+NEW CONTEXT My war facing
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war
+NEW CONTEXT My war facing
+NEW WORD OVA
+CURR PRE-NEW CONTEXT My war
+NEW CONTEXT My war OVA
+highest JS word facing
+CURR CONTEXT My war facing JS 1.033316969871521
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing
+NEW CONTEXT My war facing war
+NEW WORD doctoral
+CURR PRE-NEW CONTEXT My war facing
+NEW CONTEXT My war facing doctoral
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing
+NEW CONTEXT My war facing facing
+NEW WORD skirts
+CURR PRE-NEW CONTEXT My war facing
+NEW CONTEXT My war facing skirts
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing
+NEW CONTEXT My war facing war
+highest JS word war
+CURR CONTEXT My war facing war JS 1.5499753952026367
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war
+NEW CONTEXT My war facing war facing
+NEW WORD share
+CURR PRE-NEW CONTEXT My war facing war
+NEW CONTEXT My war facing war share
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war
+NEW CONTEXT My war facing war war
+NEW WORD Carter
+CURR PRE-NEW CONTEXT My war facing war
+NEW CONTEXT My war facing war Carter
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war
+NEW CONTEXT My war facing war war
+highest JS word facing
+CURR CONTEXT My war facing war facing JS 2.0666338205337524
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing
+NEW CONTEXT My war facing war facing facing
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing
+NEW CONTEXT My war facing war facing war
+NEW WORD OVA
+CURR PRE-NEW CONTEXT My war facing war facing
+NEW CONTEXT My war facing war facing OVA
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing
+NEW CONTEXT My war facing war facing facing
+NEW WORD once
+CURR PRE-NEW CONTEXT My war facing war facing
+NEW CONTEXT My war facing war facing once
+highest JS word facing
+CURR CONTEXT My war facing war facing facing JS 2.5832923650741577
+NEW WORD 034
+CURR PRE-NEW CONTEXT My war facing war facing facing
+NEW CONTEXT My war facing war facing facing 034
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing
+NEW CONTEXT My war facing war facing facing facing
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing
+NEW CONTEXT My war facing war facing facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing
+NEW CONTEXT My war facing war facing facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing
+NEW CONTEXT My war facing war facing facing war
+highest JS word facing
+CURR CONTEXT My war facing war facing facing facing JS 3.0999507904052734
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing
+NEW CONTEXT My war facing war facing facing facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing
+NEW CONTEXT My war facing war facing facing facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing
+NEW CONTEXT My war facing war facing facing facing war
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing
+NEW CONTEXT My war facing war facing facing facing facing
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing
+NEW CONTEXT My war facing war facing facing facing war
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war JS 3.6166090965270996
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war
+NEW CONTEXT My war facing war facing facing facing war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war
+NEW CONTEXT My war facing war facing facing facing war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war
+NEW CONTEXT My war facing war facing facing facing war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war
+NEW CONTEXT My war facing war facing facing facing war war
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war
+NEW CONTEXT My war facing war facing facing facing war facing
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war JS 4.133267462253571
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war
+NEW CONTEXT My war facing war facing facing facing war war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war
+NEW CONTEXT My war facing war facing facing facing war war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war
+NEW CONTEXT My war facing war facing facing facing war war war
+NEW WORD seen
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war
+NEW CONTEXT My war facing war facing facing facing war war seen
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war
+NEW CONTEXT My war facing war facing facing facing war war facing
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war war JS 4.649925649166107
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war
+NEW CONTEXT My war facing war facing facing facing war war war war
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war
+NEW CONTEXT My war facing war facing facing facing war war war facing
+NEW WORD Tell
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war
+NEW CONTEXT My war facing war facing facing facing war war war Tell
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war
+NEW CONTEXT My war facing war facing facing facing war war war facing
+NEW WORD 954
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war
+NEW CONTEXT My war facing war facing facing facing war war war 954
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war war war JS 5.166583895683289
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW WORD liberal
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war
+NEW CONTEXT My war facing war facing facing facing war war war war liberal
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war
+NEW CONTEXT My war facing war facing facing facing war war war war war
+NEW WORD once
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war
+NEW CONTEXT My war facing war facing facing facing war war war war once
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war
+NEW CONTEXT My war facing war facing facing facing war war war war war
+highest JS word facing
+CURR CONTEXT My war facing war facing facing facing war war war war facing JS 5.68324214220047
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing
+NEW CONTEXT My war facing war facing facing facing war war war war facing war
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war war war facing war JS 6.199900388717651
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW WORD Cow
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war Cow
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war war war facing war war JS 6.7165586948394775
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war war
+NEW WORD facing
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war facing
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war war
+NEW WORD war
+CURR PRE-NEW CONTEXT My war facing war facing facing facing war war war war facing war war
+NEW CONTEXT My war facing war facing facing facing war war war war facing war war war
+highest JS word war
+CURR CONTEXT My war facing war facing facing facing war war war war facing war war war JS 7.233217000961304
+2020-09-03 16:21:39.016533: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:21:39.016990: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /cm/shared/openmind/cudnn/cudnn-8.0-v5.1/lib64:/cm/shared/openmind/cuda/8.0/lib64:/cm/shared/openmind/cuda/8.0/lib
+2020-09-03 16:21:39.017011: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2020-09-03 16:21:44.774314: W tensorflow/python/util/util.cc:319] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+2020-09-03 16:21:44.957316: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-09-03 16:21:44.960049: E tensorflow/stream_executor/cuda/cuda_driver.cc:351] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-03 16:21:44.960091: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: node031
+2020-09-03 16:21:44.960102: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: node031
+2020-09-03 16:21:44.960185: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 440.82.0
+2020-09-03 16:21:44.960240: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+2020-09-03 16:21:44.960250: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 440.82.0
+2020-09-03 16:21:44.960611: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-09-03 16:21:44.970178: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2600205000 Hz
+2020-09-03 16:21:44.970901: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55bead413740 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-03 16:21:44.970921: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+All model checkpoint weights were used when initializing TFGPT2LMHeadModel.
+
+All the weights of TFGPT2LMHeadModel were initialized from the model checkpoint at gpt2.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFGPT2LMHeadModel for predictions without further training.
+All model checkpoint weights were used when initializing TFTransfoXLLMHeadModel.
+
+All the weights of TFTransfoXLLMHeadModel were initialized from the model checkpoint at transfo-xl-wt103.
+If your task is similar to the task the model of the ckeckpoint was trained on, you can already use TFTransfoXLLMHeadModel for predictions without further training.
+NEW WORD fish
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I fish
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I Rev
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I
+NEW CONTEXT I Ã©r
+highest JS word fish
+CURR CONTEXT I fish JS 0.5134527087211609
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish
+NEW CONTEXT I fish Ã©r
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish
+NEW CONTEXT I fish Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish
+NEW CONTEXT I fish games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish
+NEW CONTEXT I fish games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish
+NEW CONTEXT I fish Ã©r
+highest JS word games
+CURR CONTEXT I fish games JS 1.0269054770469666
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games
+NEW CONTEXT I fish games games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games
+NEW CONTEXT I fish games Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games
+NEW CONTEXT I fish games games
+NEW WORD chance
+CURR PRE-NEW CONTEXT I fish games
+NEW CONTEXT I fish games chance
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games
+NEW CONTEXT I fish games games
+highest JS word games
+CURR CONTEXT I fish games games JS 1.5403580069541931
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games
+NEW CONTEXT I fish games games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games
+NEW CONTEXT I fish games games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games
+NEW CONTEXT I fish games games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games
+NEW CONTEXT I fish games games games
+NEW WORD ATA
+CURR PRE-NEW CONTEXT I fish games games
+NEW CONTEXT I fish games games ATA
+highest JS word ATA
+CURR CONTEXT I fish games games ATA JS 2.0538105964660645
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA
+NEW CONTEXT I fish games games ATA Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA
+NEW CONTEXT I fish games games ATA games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA
+NEW CONTEXT I fish games games ATA games
+NEW WORD Mouse
+CURR PRE-NEW CONTEXT I fish games games ATA
+NEW CONTEXT I fish games games ATA Mouse
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA
+NEW CONTEXT I fish games games ATA Ã©r
+highest JS word Ã©r
+CURR CONTEXT I fish games games ATA Ã©r JS 2.5672630071640015
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r
+NEW CONTEXT I fish games games ATA Ã©r games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r
+NEW CONTEXT I fish games games ATA Ã©r games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r
+NEW CONTEXT I fish games games ATA Ã©r games
+NEW WORD Mouse
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r
+NEW CONTEXT I fish games games ATA Ã©r Mouse
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r
+NEW CONTEXT I fish games games ATA Ã©r games
+highest JS word games
+CURR CONTEXT I fish games games ATA Ã©r games JS 3.0807154178619385
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games
+NEW CONTEXT I fish games games ATA Ã©r games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games
+NEW CONTEXT I fish games games ATA Ã©r games games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games
+NEW CONTEXT I fish games games ATA Ã©r games Ã©r
+NEW WORD chance
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games
+NEW CONTEXT I fish games games ATA Ã©r games chance
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games
+NEW CONTEXT I fish games games ATA Ã©r games games
+highest JS word games
+CURR CONTEXT I fish games games ATA Ã©r games games JS 3.594167947769165
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games
+NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games
+NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games
+NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games
+NEW CONTEXT I fish games games ATA Ã©r games games Ã©r
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games
+NEW CONTEXT I fish games games ATA Ã©r games games Rev
+highest JS word games
+CURR CONTEXT I fish games games ATA Ã©r games games games JS 4.107620418071747
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW WORD 5000
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW CONTEXT I fish games games ATA Ã©r games games games 5000
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW CONTEXT I fish games games ATA Ã©r games games games games
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW CONTEXT I fish games games ATA Ã©r games games games Ã©r
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games
+NEW CONTEXT I fish games games ATA Ã©r games games games Ã©r
+highest JS word Rev
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JS 4.621072709560394
+NEW WORD JD
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev Rev
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev Ã©r
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev games
+highest JS word JD
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JD JS 5.1345250606536865
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD Rev
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW WORD Mouse
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD Mouse
+highest JS word games
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JD games JS 5.6479774713516235
+NEW WORD JD
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games games
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games games
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games Rev
+highest JS word JD
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD JS 6.1614298820495605
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW WORD LB
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD LB
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW WORD Rev
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD Rev
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD Ã©r
+highest JS word games
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games JS 6.674882471561432
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games Ã©r
+NEW WORD Mouse
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games Mouse
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games Ã©r
+NEW WORD Ã©r
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games Ã©r
+NEW WORD games
+CURR PRE-NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games
+NEW CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games games
+highest JS word Ã©r
+CURR CONTEXT I fish games games ATA Ã©r games games games Rev JD games JD games Ã©r JS 7.188334941864014

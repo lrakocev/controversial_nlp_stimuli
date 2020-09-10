@@ -10,6 +10,8 @@ import string
 import copy
 import random
 import csv
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 def get_distribution(model_info, model_name, context, joint_vocab):
