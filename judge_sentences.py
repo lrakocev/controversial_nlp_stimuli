@@ -114,7 +114,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     modified_sentence[replace_i] = highest_js_word[0]
     new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
     
-    if new_sentence_score >= original_score:
+    if new_sentence_score > curr_sentence_score:
       scores.append(new_sentence_score)
       total_replacements +=1
       print(modified_sentence)
@@ -124,6 +124,8 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", new_sentence_score)
   print(len(scores), total_replacements)
   plt.plot(range(0,len(scores)),scores)
+  plt.show()
+  plt.savefig(' '.join(sentence_split))
 
 
 def sample_sentences(file_name):
