@@ -154,7 +154,13 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
+evaluate_sentence(model_info, "Where",joint_vocab)
+evaluate_sentence(model_info, "Where there",joint_vocab)
+evaluate_sentence(model_info, "Where there places",joint_vocab)
+evaluate_sentence(model_info, "Where there places resources",joint_vocab)
+evaluate_sentence(model_info, "Where there places resources was",joint_vocab)
 
+'''
 for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
@@ -163,3 +169,4 @@ for i in range(5):
   plot_scores(scores, sentence)
 
 
+'''
