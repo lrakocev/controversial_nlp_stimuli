@@ -83,9 +83,9 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     replace_i = random.randint(0, len_sentence-1)
     distrs = {}
     for model_name in ['GPT2','TransformerXL']:
-        model, tokenizer = model_info[model_name]
-        next_word_distr = get_distribution(model_info, model_name, ' '.join(modified_sentence), joint_vocab)
-        distrs[model_name] = next_word_distr
+      model, tokenizer = model_info[model_name]
+      next_word_distr = get_distribution(model_info, model_name, ' '.join(modified_sentence), joint_vocab)
+      distrs[model_name] = next_word_distr
 
     A = distrs['GPT2']
     B = distrs['TransformerXL']
@@ -102,13 +102,13 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
 
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
     js_dict = {}
-    for j in range(0,5):
-        n = list(np.random.multinomial(1,prob_list))
-        id = n.index(1)
-        new_word = word_list[id]
-        modified_sentence[replace_i] = new_word
-        new_context = ' '.join(modified_sentence)
-        js_dict[new_word] = evaluate_sentence(model_info, new_context, joint_vocab)
+    for j in range(0,10):
+      n = list(np.random.multinomial(1,prob_list))
+      ind = n.index(1)
+      new_word = word_list[ind]
+      modified_sentence[replace_i] = new_word
+      new_context = ' '.join(modified_sentence)
+      js_dict[new_word] = evaluate_sentence(model_info, new_context, joint_vocab)
 
     highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0]
     modified_sentence[replace_i] = highest_js_word[0]
@@ -121,8 +121,12 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
       sentence_split = modified_sentence
     
 
-  print("New sentence is: ", ' '.join(sentence_split)," with JS:", new_sentence_score)
+  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
   print(len(scores), total_replacements)
+  return scores
+
+def plot_scores(scores):
+
   plt.plot(range(0,len(scores)),scores)
   plt.show()
   plt.savefig(' '.join(sentence_split))
@@ -157,6 +161,7 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  replace_words(model_info, sent, joint_vocab, 10, .05)
+  scores = replace_words(model_info, sent, joint_vocab, 10, .005)
+  plot_scores(scores)
 
 
