@@ -154,25 +154,9 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-print(evaluate_sentence(model_info, "Where", joint_vocab))
-print(evaluate_sentence(model_info, "Where there",joint_vocab))
-print(evaluate_sentence(model_info, "Where there places",joint_vocab))
-print(evaluate_sentence(model_info, "Where there places resources",joint_vocab))
-print(evaluate_sentence(model_info, "Where there places resources was",joint_vocab))
-
-print(evaluate_sentence(model_info,"How",joint_vocab))
-print(evaluate_sentence(model_info,"How it",joint_vocab))
-print(evaluate_sentence(model_info,"How it looks",joint_vocab))
-print(evaluate_sentence(model_info,"How it looks was",joint_vocab))
-print(evaluate_sentence(model_info,"How it looks was shown",joint_vocab))
-
-'''
 for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
   scores, sentence = replace_words(model_info, sent, joint_vocab, 10, .005)
   plot_scores(scores, sentence)
-
-
-'''

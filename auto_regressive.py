@@ -51,7 +51,7 @@ def js(p, q):
 def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_len, total_js, joint_vocab, top_k):
 
     if current_len == max_len:
-        return total_js / current_len
+        return total_js / len(curr_context.split(" "))
 
     distrs = {}
     highest = {}
