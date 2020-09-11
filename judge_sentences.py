@@ -123,16 +123,16 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
 
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
   print(len(scores), total_replacements)
-  return scores
+  return scores, ' '.join(sentence_split)
 
-def plot_scores(scores):
+def plot_scores(scores, sentence):
 
   plt.plot(range(0,len(scores)),scores)
   plt.show()
-  plt.savefig(' '.join(sentence_split))
+  plt.savefig(sentence)
 
 
-def sample_sentences(file_name):
+def sample_sentences(file_name, ):
 
   file = open(file_name)
   reader = csv.reader(file)
@@ -161,7 +161,7 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  scores = replace_words(model_info, sent, joint_vocab, 10, .005)
-  plot_scores(scores)
+  scores, sentence = replace_words(model_info, sent, joint_vocab, 10, .005)
+  plot_scores(scores, sentence)
 
 
