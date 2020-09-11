@@ -169,5 +169,5 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-auto_regressive_top_p(model_info, curr_context, 50, 1, 15, 0, joint_vocab, .7)
+#auto_regressive_top_p(model_info, curr_context, 50, 1, 15, 0, joint_vocab, .7)
                  
