@@ -89,14 +89,18 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     B = distrs['TransformerXL']
     avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
 
-    avg_distr = {k: v for (k,v) in avg_distr.items() if v >= top_k}
+    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
 
-    total = sum(avg_distr.values())
+    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
 
-    avg_distr = {k: v/total for (k,v) in avg_distr.items()}
-    
+    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
+
+    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
+
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
+
 
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
     js_dict = {}
@@ -115,8 +119,8 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
     if new_sentence_score > curr_sentence_score:
       scores.append(new_sentence_score)
       total_replacements +=1
-      print(modified_sentence)
       sentence_split = modified_sentence
+      print(' '.join(sentence_split))
     
 
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
@@ -125,7 +129,7 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
 
 def plot_scores(scores, sentence):
 
-  plt.plot(range(0,len(scores)),scores)
+  plt.plot(range(len(scores)),scores)
   plt.show()
   plt.savefig(sentence)
 
