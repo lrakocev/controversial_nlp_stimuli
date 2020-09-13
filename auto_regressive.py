@@ -122,7 +122,7 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
 
     avg_distr_sorted = sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)
 
-    avg_distr_vals = [sum(avg_distr_sorted[1][:i+1]) for i in range(len(avg_distr_sorted))]
+    avg_distr_vals = [sum(avg_distr_sorted[0][:i+1]) for i in range(len(avg_distr_sorted))]
 
     avg_distr_summed = zip(avg_distr.keys(), avg_distr_vals)
 
