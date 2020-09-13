@@ -69,7 +69,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   return total_js/len_sentence
 
 
-def replace_words(model_info, sentence, joint_vocab, num_replacements, top_k):
+def replace_words(model_info, sentence, joint_vocab, num_replacements, top_p):
 
   original_score = evaluate_sentence(model_info, sentence, joint_vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score)
@@ -164,5 +164,5 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  scores, sentence = replace_words(model_info, sent, joint_vocab, 10, .005)
+  scores, sentence = replace_words(model_info, sent, joint_vocab, 10, .7)
   plot_scores(scores, sentence)
