@@ -153,10 +153,10 @@ def delete_words(model_info, sentence, joint_vocab, num_tries):
       sentence_split = modified_sentence
       print(' '.join(sentence_split))
     else:
-      modifie_sentence = sentence_split
+      modified_sentence = sentence_split
     
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
-  print(len(scores), total_swlwri)
+  print(len(scores), total_deletions)
   return scores, ' '.join(sentence_split)
 
 def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
@@ -166,7 +166,7 @@ def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
   scores = [original_score]
   sentence_split = sentence.split(" ")
   modified_sentence = copy.copy(sentence_split)
-  total_replacements = 0
+  total_additions = 0
 
   for i in range(0, num_tries):
     len_sentence = len(sentence_split)
@@ -210,13 +210,13 @@ def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
     
     if new_sentence_score > curr_sentence_score:
       scores.append(new_sentence_score)
-      total_replacements +=1
+      total_additions +=1
       sentence_split = modified_sentence
       print(' '.join(sentence_split))
     
 
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
-  print(len(scores), total_replacements)
+  print(len(scores), total_additions)
   return scores, ' '.join(sentence_split)
 
 
