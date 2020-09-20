@@ -127,6 +127,34 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_p):
   print(len(scores), total_replacements)
   return scores, ' '.join(sentence_split)
 
+
+def delete_words(model_info, sentence, joint_vocab, num_tries):
+
+  original_score = evaluate_sentence(model_info, sentence, joint_vocab)
+  print("Old sentence is: ", sentence, " with JS: ", original_score)
+  scores = [original_score]
+  sentence_split = sentence.split(" ")
+  modified_sentence = copy.copy(sentence_split)
+  total_deletions = 0
+
+  for i in range(0, num_tries):
+    len_sentence = len(sentence_split)
+    replace_i = random.randint(0, len_sentence-1)
+
+    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
+    del modified_sentence[replace_i] 
+    new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
+    
+    if new_sentence_score > curr_sentence_score:
+      scores.append(new_sentence_score)
+      total_deletions +=1
+      sentence_split = modified_sentence
+      print(' '.join(sentence_split))
+    
+  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
+  print(len(scores), total_swlwri)
+  return scores, ' '.join(sentence_split)
+
 def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
@@ -149,7 +177,6 @@ def sample_sentences(file_name, ):
   return " ".join(line)
 
 
-
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
 curr_context = "I"
@@ -162,5 +189,5 @@ for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
 
-  scores, sentence = replace_words(model_info, sent, joint_vocab, 10, .7)
+  scores, sentence = delete_words(model_info, sent, joint_vocab, 5)
   plot_scores(scores, sentence)
