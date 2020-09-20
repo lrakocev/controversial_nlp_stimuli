@@ -194,7 +194,7 @@ def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
 
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
     js_dict = {}
-    for j in range(0,10):
+    for j in range(0,5):
       n = list(np.random.multinomial(1,prob_list))
       ind = n.index(1)
       new_word = word_list[ind]
@@ -250,15 +250,9 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-for i in range(5):
-
-  sent = sample_sentences("sentences4lara.txt")
-
-  scores, sentence = delete_words(model_info, sent, joint_vocab, 5)
-  plot_scores(scores, sentence)
 
 for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
-  scores, sentence = add_words(model_info, sent, joint_vocab, 5, .9)
+  scores, sentence = add_words(model_info, sent, joint_vocab, 2, .8)
   plot_scores(scores, sentence)
