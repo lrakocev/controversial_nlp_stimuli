@@ -144,7 +144,7 @@ def delete_words(model_info, sentence, joint_vocab, num_tries):
     replace_i = random.randint(0, len_sentence-1)
 
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
-    del modified_sentence[replace_i] 
+    modified_sentence.pop(replace_i)
     new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
     
     if new_sentence_score > curr_sentence_score:
@@ -152,10 +152,74 @@ def delete_words(model_info, sentence, joint_vocab, num_tries):
       total_deletions +=1
       sentence_split = modified_sentence
       print(' '.join(sentence_split))
+    else:
+      modifie_sentence = sentence_split
     
   print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
   print(len(scores), total_swlwri)
   return scores, ' '.join(sentence_split)
+
+def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
+
+  original_score = evaluate_sentence(model_info, sentence, joint_vocab)
+  print("Old sentence is: ", sentence, " with JS: ", original_score)
+  scores = [original_score]
+  sentence_split = sentence.split(" ")
+  modified_sentence = copy.copy(sentence_split)
+  total_replacements = 0
+
+  for i in range(0, num_tries):
+    len_sentence = len(sentence_split)
+    replace_i = random.randint(0, len_sentence-1)
+    distrs = {}
+    for model_name in ['GPT2','TransformerXL']:
+      model, tokenizer = model_info[model_name]
+      next_word_distr = get_distribution(model_info, model_name, ' '.join(modified_sentence), joint_vocab)
+      distrs[model_name] = next_word_distr
+
+    A = distrs['GPT2']
+    B = distrs['TransformerXL']
+    avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
+
+    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+
+    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
+
+    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
+
+    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
+
+    prob_list = [v for k, v in sorted(avg_distr.items())]
+    word_list = [k for k, v in sorted(avg_distr.items())]
+
+
+    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
+    js_dict = {}
+    for j in range(0,10):
+      n = list(np.random.multinomial(1,prob_list))
+      ind = n.index(1)
+      new_word = word_list[ind]
+      modified_sentence.insert(replace_i,new_word)
+      new_context = ' '.join(modified_sentence)
+      js_dict[new_word] = evaluate_sentence(model_info, new_context, joint_vocab)
+
+    highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0]
+    modified_sentence.insert(replace_i,highest_js_word[0])
+    new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
+    
+    if new_sentence_score > curr_sentence_score:
+      scores.append(new_sentence_score)
+      total_replacements +=1
+      sentence_split = modified_sentence
+      print(' '.join(sentence_split))
+    
+
+  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
+  print(len(scores), total_replacements)
+  return scores, ' '.join(sentence_split)
+
+
 
 def plot_scores(scores, sentence):
 
@@ -181,6 +245,7 @@ def sample_sentences(file_name, ):
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
+
 curr_context = "I"
 gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
 txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
@@ -192,4 +257,10 @@ for i in range(5):
   sent = sample_sentences("sentences4lara.txt")
 
   scores, sentence = delete_words(model_info, sent, joint_vocab, 5)
+  plot_scores(scores, sentence)
+
+for i in range(5):
+
+  sent = sample_sentences("sentences4lara.txt")
+  scores, sentence = add_words(model_info, sent, joint_vocab, 5, .9)
   plot_scores(scores, sentence)
