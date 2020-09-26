@@ -139,7 +139,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     # additions
     for k in range(0,10):
       cur_context = sentence_split[:change_i]
-      next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_voca, top_p)
+      next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
