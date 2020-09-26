@@ -154,7 +154,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0][0]
       change = "R"
-    else if highest_js_word[1] == "A":
+    elif highest_js_word[1] == "A":
       final_modified_sentence.insert(change_i,highest_js_word[0][0])
       change = "A"
     else: 
