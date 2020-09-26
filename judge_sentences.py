@@ -60,31 +60,23 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
 
   curr_context = ""
   total_js = 0
+  js_positions = []
   for i in range(0, len_sentence):
     curr_context += sentence_split[i]
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    total_js += js(p,q)
+    current_js = js(p,q)
+    total_js += current_js
+    js_positions.append(current_js)
 
-  return total_js/len_sentence
+  return total_js/len_sentence, js_positions
 
+def get_avg_distr(model_info, context_split, joint_vocab, top_p):
 
-def replace_words(model_info, sentence, joint_vocab, num_replacements, top_p):
-
-  original_score = evaluate_sentence(model_info, sentence, joint_vocab)
-  print("Old sentence is: ", sentence, " with JS: ", original_score)
-  scores = [original_score]
-  sentence_split = sentence.split(" ")
-  modified_sentence = copy.copy(sentence_split)
-  len_sentence = len(sentence_split)
-  total_replacements = 0
-
-  for i in range(0, num_replacements):
-    replace_i = random.randint(0, len_sentence-1)
     distrs = {}
     for model_name in ['GPT2','TransformerXL']:
       model, tokenizer = model_info[model_name]
-      next_word_distr = get_distribution(model_info, model_name, ' '.join(modified_sentence), joint_vocab)
+      next_word_distr = get_distribution(model_info, model_name, ' '.join(context_split), joint_vocab)
       distrs[model_name] = next_word_distr
 
     A = distrs['GPT2']
@@ -103,122 +95,88 @@ def replace_words(model_info, sentence, joint_vocab, num_replacements, top_p):
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
 
+    return prob_list, word_list
 
-    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
+def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
+
+  original_score, original_js_positions = evaluate_sentence(model_info, sentence, joint_vocab)
+  print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", js_positions)
+  scores = [original_score]
+  js_positions = [original_js_positions]
+  changes = []
+  sentence_split = sentence.split(" ")
+  modified_sentence_replacements = copy.deepcopy(sentence_split)
+  modified_sentence_deletions = copy.deepcopy(sentence_split)
+  modified_sentence_additions = copy.deepcopy(sentence_split)
+  final_modified_sentence = copy.deepcopy(sentence_split)
+  len_sentence = len(sentence_split)
+
+  for i in range(0, num_changes):
+    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0]
+
+    # deciding which position to change at 
+    exponentiated_scores = softmax(js_positions)
+    n = list(np.random.multinomial(1,exponentiated_scores))
+    change_i = n.index(1)
+
+    # replacements 
     js_dict = {}
     for j in range(0,10):
-      n = list(np.random.multinomial(1,prob_list))
+      cur_context = sentence_split[:change_i-1]
+      cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
+
+      n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
-      new_word = word_list[ind]
-      modified_sentence[replace_i] = new_word
-      new_context = ' '.join(modified_sentence)
-      js_dict[new_word] = evaluate_sentence(model_info, new_context, joint_vocab)
+      new_word = cur_word_list[ind]
+      modified_sentence_replacements[change_i] = new_word
+      new_context = ' '.join(modified_sentence_replacements)
+      js_dict[(new_word,"R")] = (evaluate_sentence(model_info, new_context, joint_vocab)
 
-    highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0]
-    modified_sentence[replace_i] = highest_js_word[0]
-    new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
+    # deletions
+    modified_sentence_deletions.pop(change_i)
+    js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
     
-    if new_sentence_score > curr_sentence_score:
-      scores.append(new_sentence_score)
-      total_replacements +=1
-      sentence_split = modified_sentence
-      print(' '.join(sentence_split))
-    
+    # additions
+    for k in range(0,10):
+      cur_context = sentence_split[:change_i]
+      next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_voca, top_p)
 
-  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
-  print(len(scores), total_replacements)
-  return scores, ' '.join(sentence_split)
-
-
-def delete_words(model_info, sentence, joint_vocab, num_tries):
-
-  original_score = evaluate_sentence(model_info, sentence, joint_vocab)
-  print("Old sentence is: ", sentence, " with JS: ", original_score)
-  scores = [original_score]
-  sentence_split = sentence.split(" ")
-  modified_sentence = copy.copy(sentence_split)
-  total_deletions = 0
-
-  for i in range(0, num_tries):
-    len_sentence = len(sentence_split)
-    replace_i = random.randint(0, len_sentence-1)
-
-    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
-    modified_sentence.pop(replace_i)
-    new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
-    
-    if new_sentence_score > curr_sentence_score:
-      scores.append(new_sentence_score)
-      total_deletions +=1
-      sentence_split = modified_sentence
-      print(' '.join(sentence_split))
-    else:
-      modified_sentence = sentence_split
-    
-  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
-  print(len(scores), total_deletions)
-  return scores, ' '.join(sentence_split)
-
-def add_words(model_info, sentence, joint_vocab, num_tries, top_p):
-
-  original_score = evaluate_sentence(model_info, sentence, joint_vocab)
-  print("Old sentence is: ", sentence, " with JS: ", original_score)
-  scores = [original_score]
-  sentence_split = sentence.split(" ")
-  modified_sentence = copy.copy(sentence_split)
-  total_additions = 0
-
-  for i in range(0, num_tries):
-    len_sentence = len(sentence_split)
-    replace_i = random.randint(0, len_sentence-1)
-    distrs = {}
-    for model_name in ['GPT2','TransformerXL']:
-      model, tokenizer = model_info[model_name]
-      next_word_distr = get_distribution(model_info, model_name, ' '.join(modified_sentence), joint_vocab)
-      distrs[model_name] = next_word_distr
-
-    A = distrs['GPT2']
-    B = distrs['TransformerXL']
-    avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
-
-    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
-    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
-
-    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
-
-    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
-
-    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
-
-    prob_list = [v for k, v in sorted(avg_distr.items())]
-    word_list = [k for k, v in sorted(avg_distr.items())]
-
-
-    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
-    js_dict = {}
-    for j in range(0,5):
-      n = list(np.random.multinomial(1,prob_list))
+      n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
-      new_word = word_list[ind]
-      modified_sentence.insert(replace_i,new_word)
-      new_context = ' '.join(modified_sentence)
-      js_dict[new_word] = evaluate_sentence(model_info, new_context, joint_vocab)
+      new_word = next_word_list[ind]
+      modified_sentence_additions.insert(change_i+1,new_word)
+      new_context = ' '.join(modified_sentence_additions)
+      js_dict[(new_word,"A")] = evaluate_sentence(model_info, new_context, joint_vocab)
+      modified_sentence_additions.pop(change_i+1)
 
-    highest_js_word = sorted(js_dict.items(), key=lambda x: x[1], reverse=True)[0]
-    modified_sentence.insert(replace_i,highest_js_word[0])
-    new_sentence_score = evaluate_sentence(model_info, ' '.join(modified_sentence), joint_vocab)
+    highest_js_word = sorted(js_dict.items(), key=lambda x: x[1][0], reverse=True)[0]
     
+    if highest_js_word[1] == "R":
+      final_modified_sentence[change_i] = highest_js_word[0][0]
+      change = "R"
+    if highest_js_word[1] == "A":
+      final_modified_sentence.insert(change_i,highest_js_word[0])
+      change = "A"
+    else: 
+      final_modified_sentence.pop(change_i)
+      change = "D"
+
+    new_sentence_score, new_js_positions = evaluate_sentence(model_info, ' '.join(final_modified_sentence), joint_vocab)
+
+    if change == "D":
+      new_js_positions.insert(change_i, 0)
+
     if new_sentence_score > curr_sentence_score:
       scores.append(new_sentence_score)
-      total_additions +=1
-      sentence_split = modified_sentence
+      js_positions.append(new_js_positions)
+      changes.append(change)
+      sentence_split = final_modified_sentence
       print(' '.join(sentence_split))
-    
 
-  print("New sentence is: ", ' '.join(sentence_split)," with JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab))
-  print(len(scores), total_additions)
-  return scores, ' '.join(sentence_split)
+  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0])
 
+  print(len(scores), "Changes", changes))
+  return scores, js_positions, ' '.join(sentence_split)
 
 
 def plot_scores(scores, sentence):
@@ -226,9 +184,16 @@ def plot_scores(scores, sentence):
   plt.plot(range(len(scores)),scores)
   plt.show()
   plt.savefig(sentence)
+  plt.close()
 
+def plot_positions(js_positions, sentence):
 
-def sample_sentences(file_name, ):
+  plt.plot(js_positions)
+  plt.show()
+  plt.savefig("positions of: " + sentence)
+  plt.close()
+
+def sample_sentences(file_name):
 
   file = open(file_name)
   reader = csv.reader(file)
@@ -252,9 +217,9 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-
 for i in range(5):
 
   sent = sample_sentences("sentences4lara.txt")
-  scores, sentence = add_words(model_info, sent, joint_vocab, 2, .8)
+  scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
   plot_scores(scores, sentence)
+  plot_positions( )
