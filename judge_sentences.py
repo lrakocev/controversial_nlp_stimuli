@@ -98,7 +98,7 @@ def get_avg_distr(model_info, context_split, joint_vocab, top_p):
 def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
   original_score, original_js_positions = evaluate_sentence(model_info, sentence, joint_vocab)
-  print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", js_positions)
+  print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
   js_positions = [original_js_positions]
   changes = []
@@ -113,7 +113,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0]
 
     # deciding which position to change at 
-    exponentiated_scores = softmax(js_positions)
+    exponentiated_scores = softmax(original_js_positions)
     n = list(np.random.multinomial(1,exponentiated_scores))
     change_i = n.index(1)
 
