@@ -74,6 +74,7 @@ def get_avg_distr(model_info, context_split, joint_vocab, top_p):
     distrs = {}
     for model_name in ['GPT2','TransformerXL']:
       model, tokenizer = model_info[model_name]
+      print("this is the context split", context_split)
       next_word_distr = get_distribution(model_info, model_name, ' '.join(context_split), joint_vocab)
       distrs[model_name] = next_word_distr
 
@@ -138,7 +139,6 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     for k in range(0,10):
       cur_context = sentence_split[:change_i]
 
-      print(cur_context)
       next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,next_prob_list))
@@ -154,8 +154,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0][0]
       change = "R"
-    if highest_js_word[1] == "A":
-      final_modified_sentence.insert(change_i,highest_js_word[0])
+    else if highest_js_word[1] == "A":
+      final_modified_sentence.insert(change_i,highest_js_word[0][0])
       change = "A"
     else: 
       final_modified_sentence.pop(change_i)
@@ -171,7 +171,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       js_positions.append(new_js_positions)
       changes.append(change)
       sentence_split = final_modified_sentence
-      print(' '.join(sentence_split))
+      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0])
 
