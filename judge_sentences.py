@@ -137,6 +137,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     # additions
     for k in range(0,10):
       cur_context = sentence_split[:change_i]
+
+      print(cur_context)
       next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,next_prob_list))
@@ -215,9 +217,9 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-for i in range(5):
+#for i in range(5):
 
-  sent = sample_sentences("sentences4lara.txt")
-  scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
-  plot_scores(scores, sentence)
-  plot_positions(js_positions,sentence)
+sent = sample_sentences("sentences4lara.txt")
+scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
+plot_scores(scores, sentence)
+plot_positions(js_positions,sentence)
