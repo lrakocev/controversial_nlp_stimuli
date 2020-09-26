@@ -104,7 +104,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
   changes = []
   sentence_split = sentence.split(" ")
   modified_sentence_replacements = copy.deepcopy(sentence_split)
-  modified_sentence_deletions = copy.deepcopy(sentence_split)
+  modified_sentence_deletions = copy.copy(sentence_split)
   modified_sentence_additions = copy.deepcopy(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
   len_sentence = len(sentence_split)
@@ -220,4 +220,4 @@ for i in range(5):
   sent = sample_sentences("sentences4lara.txt")
   scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
   plot_scores(scores, sentence)
-  plot_positions(js_positions, sentence)
+  plot_positions(js_positions,sentence)
