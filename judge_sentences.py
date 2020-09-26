@@ -220,4 +220,4 @@ for i in range(5):
   sent = sample_sentences("sentences4lara.txt")
   scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
   plot_scores(scores, sentence)
-  plot_positions( )
+  plot_positions(js_positions, sentence)
