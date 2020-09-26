@@ -130,12 +130,12 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       new_word = cur_word_list[ind]
       modified_sentence_replacements[change_i] = new_word
       new_context = ' '.join(modified_sentence_replacements)
-      js_dict[(new_word,"R")] = (evaluate_sentence(model_info, new_context, joint_vocab)
+      js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
 
     # deletions
     modified_sentence_deletions.pop(change_i)
     js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
-    
+
     # additions
     for k in range(0,10):
       cur_context = sentence_split[:change_i]
@@ -175,7 +175,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0])
 
-  print(len(scores), "Changes", changes))
+  print(len(scores), "Changes", changes)
   return scores, js_positions, ' '.join(sentence_split)
 
 
