@@ -59,23 +59,27 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   curr_context = ""
   total_js = 0
   js_positions = []
+
   for i in range(0, len_sentence):
+    print(curr_context)
     curr_context += sentence_split[i]
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    current_js = js(p,q)
-    total_js += current_js
-    js_positions.append(current_js)
 
+    curr_js = js(p,q)
+    print(curr_js)
+    js_positions.append(curr_js)
+    total_js += curr_js
+    
   return total_js/len_sentence, js_positions
 
-def get_avg_distr(model_info, context_split, joint_vocab, top_p):
+
+def get_avg_distr(model_info, context, joint_vocab, top_p):
 
     distrs = {}
     for model_name in ['GPT2','TransformerXL']:
       model, tokenizer = model_info[model_name]
-      print("this is the context split", context_split)
-      next_word_distr = get_distribution(model_info, model_name, ' '.join(context_split), joint_vocab)
+      next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
       distrs[model_name] = next_word_distr
 
     A = distrs['GPT2']
@@ -96,6 +100,15 @@ def get_avg_distr(model_info, context_split, joint_vocab, top_p):
 
     return prob_list, word_list
 
+def discounting(cur_ind, js_positions, gamma=0.9):
+
+  total = 0
+  for i in range(len(js_positions)-cur_ind):
+    total += js_positions[cur_ind+i]*(gamma**i)
+
+  return total
+
+
 def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
   original_score, original_js_positions = evaluate_sentence(model_info, sentence, joint_vocab)
@@ -103,24 +116,27 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
   scores = [original_score]
   js_positions = [original_js_positions]
   changes = []
+  change = ""
   sentence_split = sentence.split(" ")
-  modified_sentence_replacements = copy.deepcopy(sentence_split)
-  modified_sentence_deletions = copy.copy(sentence_split)
-  modified_sentence_additions = copy.deepcopy(sentence_split)
-  final_modified_sentence = copy.deepcopy(sentence_split)
   len_sentence = len(sentence_split)
+  final_modified_sentence = copy.deepcopy(sentence_split)
 
   for i in range(0, num_changes):
     curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0]
-
+    modified_sentence_replacements = copy.deepcopy(sentence_split)
+    modified_sentence_deletions = copy.deepcopy(sentence_split)
+    modified_sentence_additions = copy.deepcopy(sentence_split)
+  
     # deciding which position to change at 
     exponentiated_scores = softmax(original_js_positions)
     n = list(np.random.multinomial(1,exponentiated_scores))
     change_i = n.index(1)
 
-    # replacements 
     js_dict = {}
+
+    # replacements 
     for j in range(0,10):
+      print("replacement")
       cur_context = sentence_split[:change_i-1]
       cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
@@ -137,6 +153,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
     # additions
     for k in range(0,10):
+      print("addition")
       cur_context = sentence_split[:change_i]
 
       next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
@@ -149,13 +166,13 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       js_dict[(new_word,"A")] = evaluate_sentence(model_info, new_context, joint_vocab)
       modified_sentence_additions.pop(change_i+1)
 
-    highest_js_word = sorted(js_dict.items(), key=lambda x: x[1][0], reverse=True)[0]
+    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
     
     if highest_js_word[1] == "R":
-      final_modified_sentence[change_i] = highest_js_word[0][0]
+      final_modified_sentence[change_i] = highest_js_word[0]
       change = "R"
     elif highest_js_word[1] == "A":
-      final_modified_sentence.insert(change_i,highest_js_word[0][0])
+      final_modified_sentence.insert(change_i,highest_js_word[0])
       change = "A"
     else: 
       final_modified_sentence.pop(change_i)
@@ -220,6 +237,6 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 #for i in range(5):
 
 sent = sample_sentences("sentences4lara.txt")
-scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 2, .8)
+scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 5, .8)
 plot_scores(scores, sentence)
 plot_positions(js_positions,sentence)
