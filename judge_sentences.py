@@ -79,6 +79,8 @@ def get_avg_distr(model_info, context, joint_vocab, top_p):
     distrs = {}
     for model_name in ['GPT2','TransformerXL']:
       model, tokenizer = model_info[model_name]
+
+      print(context)
       next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
       distrs[model_name] = next_word_distr
 
@@ -135,6 +137,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     js_dict = {}
 
     # replacements 
+    
     for j in range(0,10):
       print("replacement")
       cur_context = sentence_split[:change_i-1]
@@ -148,7 +151,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       modified_sentence_replacements[change_i] = new_word
       new_context = ' '.join(modified_sentence_replacements)
       js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
-
+    
     # deletions
     modified_sentence_deletions.pop(change_i)
     js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
