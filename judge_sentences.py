@@ -64,7 +64,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
 
   for i in range(0, len_sentence):
     print(curr_context)
-    curr_context += sentence_split[i]
+    curr_context += sentence_split[i] + " "
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
 
@@ -140,6 +140,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     for j in range(0,10):
       print("replacement")
       cur_context = sentence_split[:change_i-1]
+
+      print(cur_context)
       cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,cur_prob_list))
