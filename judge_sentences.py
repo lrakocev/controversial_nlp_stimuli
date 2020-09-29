@@ -66,7 +66,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
 
     total_js += js(p,q)
-    curr_js = total_js/i
+    curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
