@@ -137,14 +137,14 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     
     for j in range(0,10):
       print("replacement")
-      cur_context = sentence_split[:change_i-1]
+      cur_context = sentence_split[:change_i]
 
       cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
       new_word = cur_word_list[ind]
-      modified_sentence_replacements[change_i-1] = new_word
+      modified_sentence_replacements[change_i] = new_word
       new_context = ' '.join(modified_sentence_replacements)
       js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
     
@@ -170,7 +170,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
     
     if highest_js_word[1] == "R":
-      final_modified_sentence[change_i-1] = highest_js_word[0]
+      final_modified_sentence[change_i] = highest_js_word[0]
       change = "R"
     elif highest_js_word[1] == "A":
       final_modified_sentence.insert(change_i,highest_js_word[0])
