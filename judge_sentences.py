@@ -16,6 +16,8 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
 
+  print("get distribution context", context)
+
   input = tokenizer(context,return_tensors='tf')
   outputs = model(input)
 
@@ -142,6 +144,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     for j in range(0,10):
       print("replacement")
       cur_context = sentence_split[:change_i-1]
+
+      print("replacement current context", cur_context)
 
       cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
 
