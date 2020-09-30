@@ -145,7 +145,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     
     for j in range(0,10):
       print("replacement")
-      cur_context = sentence_split[:change_i-1]
+      cur_context = sentence_split[:change_i]
 
       print("replacement current context", ' '.join(cur_context))
 
@@ -154,7 +154,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
       new_word = cur_word_list[ind]
-      modified_sentence_replacements[change_i-1] = new_word
+      modified_sentence_replacements[change_i] = new_word
       new_context = ' '.join(modified_sentence_replacements)
       js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
     
@@ -185,7 +185,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
     
     if highest_js_word[1] == "R":
-      final_modified_sentence[change_i-1] = highest_js_word[0]
+      final_modified_sentence[change_i] = highest_js_word[0]
       change = "R"
     elif highest_js_word[1] == "A":
       final_modified_sentence.insert(change_i,highest_js_word[0])
@@ -252,7 +252,7 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
 #for i in range(5):
 
-sent = sample_sentences("sentences4lara.txt")
+sent = sample_sentences("sentences4lara.txt").replace(/  +/g, ' ')
 scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 5, .9)
 plot_scores(scores, sentence)
 plot_positions(js_positions,sentence)
