@@ -135,6 +135,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     n = list(np.random.multinomial(1,exponentiated_scores))
     change_i = n.index(1)
 
+    print("change index", change_i)
+
     js_dict = {}
 
     # replacements 
@@ -145,9 +147,9 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       print("replacement")
       cur_context = sentence_split[:change_i-1]
 
-      print("replacement current context", cur_context)
+      print("replacement current context", ' '.join(cur_context))
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
+      cur_prob_list, cur_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -170,7 +172,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       print("addition")
       cur_context = sentence_split[:change_i]
 
-      next_prob_list, next_word_list = get_avg_distr(model_info, cur_context, joint_vocab, top_p)
+      next_prob_list, next_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
