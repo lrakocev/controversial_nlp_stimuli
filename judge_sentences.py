@@ -65,8 +65,9 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
     
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    curr_js = js(p,q)
-    total_js += curr_js
+    
+    total_js += js(p,q)
+    curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
@@ -105,7 +106,7 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  return total/(len(js_positions)-cur_ind)
+  return total
 
 
 def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
