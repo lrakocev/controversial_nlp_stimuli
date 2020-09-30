@@ -16,8 +16,6 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
 
-  print("get distribution context", context)
-
   input = tokenizer(context,return_tensors='tf')
   outputs = model(input)
 
@@ -64,11 +62,11 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
-    print(curr_context)
+    
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    curr_js = js(p,q)
-    total_js += curr_js
+    total_js += js(p,q)
+    curr_js = total_js / (i+1)
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
@@ -124,14 +122,14 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
   for i in range(0, num_changes):
     print("Round ", i, " and the sentence to be changed is ", ' '.join(sentence_split))
-    curr_sentence_score = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0]
+    curr_sentence_score, cur_js_positions = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
 
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)
 
     # deciding which position to change at 
-    exponentiated_scores = softmax(original_js_positions)
+    exponentiated_scores = softmax(cur_js_positions)
     n = list(np.random.multinomial(1,exponentiated_scores))
     change_i = n.index(1)
 
@@ -140,14 +138,8 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
     js_dict = {}
 
     # replacements 
-
-    print("replace sentence", modified_sentence_replacements)
-    
     for j in range(0,10):
-      print("replacement")
       cur_context = sentence_split[:change_i]
-
-      print("replacement current context", ' '.join(cur_context))
 
       cur_prob_list, cur_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
 
@@ -159,17 +151,13 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
       js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
     
 
-    print("delete sentence", modified_sentence_deletions)
-    # deletions
-    print("deletion")
+    #deletions
     modified_sentence_deletions.pop(change_i)
     js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
 
 
-    print("add sentence", modified_sentence_additions)
     # additions
     for k in range(0,10):
-      print("addition")
       cur_context = sentence_split[:change_i]
 
       next_prob_list, next_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
