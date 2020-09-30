@@ -254,7 +254,7 @@ joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
 #for i in range(5):
 
-sent = sample_sentences("sentences4lara.txt").replace(/  +/g, ' ')
+sent = ' '.join(sample_sentences("sentences4lara.txt").split())
 scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 5, .9)
 plot_scores(scores, sentence)
 plot_positions(js_positions,sentence)
