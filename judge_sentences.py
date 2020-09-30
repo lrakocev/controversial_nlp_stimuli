@@ -16,7 +16,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
 
-  input = tokenizer(context,return_tensors='tf')
+  input = tokenizer(context,return_tensors='tf',padding=True, truncation=True)
   outputs = model(input)
 
   ids = range(0,tokenizer.vocab_size)
