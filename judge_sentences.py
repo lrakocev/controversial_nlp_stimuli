@@ -207,14 +207,16 @@ def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
   plt.show()
-  plt.savefig(sentence)
+  name = sentence + ".png"
+  plt.savefig(name)
   plt.close()
 
 def plot_positions(js_positions, sentence):
 
   plt.plot(js_positions)
   plt.show()
-  plt.savefig("positions of: " + sentence)
+  name = "positions of: " + sentence + ".png"
+  plt.savefig(name)
   plt.close()
 
 def sample_sentences(file_name):
@@ -241,9 +243,9 @@ txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
 
-#for i in range(5):
+for i in range(5):
 
-sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 5, .9)
-plot_scores(scores, sentence)
-plot_positions(js_positions,sentence)
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, 5, .9)
+  plot_scores(scores, sentence)
+  plot_positions(js_positions,sentence)
