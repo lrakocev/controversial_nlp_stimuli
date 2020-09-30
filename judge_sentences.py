@@ -65,8 +65,8 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
     
     p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
     q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    total_js += js(p,q)
-    curr_js = total_js / (i+1)
+    curr_js = js(p,q)
+    total_js += curr_js
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
