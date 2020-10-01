@@ -197,7 +197,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0])
 
-  print(len(scores), "Changes", changes)
+  print("Scores", scores, "Changes", changes)
   return scores, js_positions, ' '.join(sentence_split)
 
 
@@ -210,6 +210,8 @@ def plot_scores(scores, sentence):
   plt.close()
 
 def plot_positions(js_positions, sentence):
+
+  print("plot positions", js_positions)
 
   plt.plot(js_positions)
   plt.show()
@@ -240,6 +242,10 @@ gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
 txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
+
+evaluate_sentence(model_info, "I", joint_vocab)
+evaluate_sentence(model_info, "I am", joint_vocab)
+evaluate_sentence(model_info, "I am tired", joint_vocab)
 
 for i in range(5):
 
