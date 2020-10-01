@@ -142,7 +142,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
     # replacements 
     for j in range(0,10):
-      cur_context = sentence_split[:change_i]
+      cur_context = sentence_split[:change_i+1]
 
       cur_prob_list, cur_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
 
@@ -161,7 +161,7 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
     # additions
     for k in range(0,10):
-      cur_context = sentence_split[:change_i]
+      cur_context = sentence_split[:change_i+1]
 
       next_prob_list, next_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
 
