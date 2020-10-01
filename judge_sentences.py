@@ -61,6 +61,24 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   curr_context = ""
   total_js = 0
   js_positions = []
+  for i in range(0, len_sentence):
+    curr_context += sentence_split[i]
+    print(curr_context)
+    p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
+    q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
+    total_js += js(p,q)
+    js_positions.append(js(p,q))
+
+  return total_js/len_sentence, js_positions
+
+  '''
+
+  sentence_split = sentence.split(" ")
+  len_sentence = len(sentence_split)
+
+  curr_context = ""
+  total_js = 0
+  js_positions = []
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
@@ -73,6 +91,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
+  '''
 
 
 def get_avg_distr(model_info, context, joint_vocab, top_p):
