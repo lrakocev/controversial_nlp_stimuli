@@ -154,7 +154,10 @@ def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
 
     #deletions
     modified_sentence_deletions.pop(change_i)
-    js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
+    if len(modified_sentence_deletions) > 0:
+      js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
+    else: 
+      js_dict[("", "D")] = (0,[0])
 
 
     # additions
