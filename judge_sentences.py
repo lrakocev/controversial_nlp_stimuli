@@ -16,8 +16,8 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
 
-  input = tokenizer(context,return_tensors='tf')
-  outputs = model(input)
+  inputs = tokenizer(context,return_tensors='tf')
+  outputs = model(inputs)
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
@@ -247,10 +247,6 @@ gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
 txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
 
 joint_vocab = gpt2_dict.keys() & txl_dict.keys()
-
-print(evaluate_sentence(model_info, "I", joint_vocab))
-print(evaluate_sentence(model_info, "I am", joint_vocab))
-print(evaluate_sentence(model_info, "I am tired", joint_vocab))
 
 for i in range(5):
 
