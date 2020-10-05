@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel
+from transformers import *
+# TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel
 import sys
 from scipy.special import softmax
 import torch
@@ -13,8 +14,8 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
         model, tokenizer = model_info[model_name]
 
-        input = tokenizer(context,return_tensors='tf')
-        outputs = model(input)
+        inputs = tokenizer(context,return_tensors='tf')
+        outputs = model(inputs)
         
         ids = range(0,tokenizer.vocab_size)
         vocab = tokenizer.convert_ids_to_tokens(ids)
@@ -34,19 +35,47 @@ def get_distribution(model_info, model_name, context, joint_vocab):
         return distr_dict
 
 
-def js(p, q):
+def entropy(prob_dist, base=math.e):
+        return -sum([p * math.log(p,base) for p in prob_dist if p != 0])
 
-  p = [v for k, v in sorted(p.items())]
-  q = [v for k, v in sorted(q.items())]
+def jsd(prob_dists, base=math.e):
+    weight = 1/len(prob_dists) #all same weight
+    js_left = [0,0,0]
+    js_right = 0    
+    for pd in prob_dists:
+        js_left[0] += pd[0]*weight
+        js_left[1] += pd[1]*weight
+        js_left[2] += pd[2]*weight
+        js_right += weight*entropy(pd,base)
+    return entropy(js_left)-js_right
 
-  p = np.asarray(p)
-  q = np.asarray(q)
+def get_avg_distr(model_info, context, joint_vocab, top_p):
 
-  # normalize
-  p /= p.sum()
-  q /= q.sum()
-  m = (p + q) / 2
-  return (entropy(p, m) + entropy(q, m)) / 2
+    distrs = {}
+    for model_name in model_info.keys():
+      model, tokenizer = model_info[model_name]
+
+      next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+      distrs[model_name] = next_word_distr
+
+    df = pd.DataFrame(distrs.values())
+    avg_distr = dict(df.mean())
+
+    avg_distr = {x: avg_distr[x] for x in joint_vocab}
+
+    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+
+    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
+
+    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
+
+    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
+
+    prob_list = [v for k, v in sorted(avg_distr.items())]
+    word_list = [k for k, v in sorted(avg_distr.items())]
+
+    return prob_list, word_list
 
 def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_len, total_js, joint_vocab, top_k):
 
@@ -83,10 +112,14 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
         print("CURR PRE-NEW CONTEXT", curr_context)
         new_context =  curr_context + " " + new_word
         print("NEW CONTEXT", new_context)
-        p = get_distribution(model_info, 'GPT2', new_context, joint_vocab)
-        q = get_distribution(model_info,'TransformerXL', new_context, joint_vocab)
-       # print(p,q)
-        js_result = js(p,q)
+        distrs = {}
+        for model_name in model_info.keys():
+            model, tokenizer = model_info[model_name]
+
+            next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+            distrs[model_name] = next_word_distr
+
+        js_result = jsd(distrs.values())
         js_dict[new_word] = js_result
 
 
@@ -94,10 +127,14 @@ def auto_regressive(model_info, curr_context, num_return_seqs, current_len, max_
     print("highest JS word", highest_js_word)
     curr_context = curr_context + " " + highest_js_word
 
-    p = get_distribution(model_info,'GPT2', curr_context, joint_vocab)
-    q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
+    distrs = {}
+    for model_name in model_info.keys():
+        model, tokenizer = model_info[model_name]
 
-    total_js += js(p,q)
+        next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+        distrs[model_name] = next_word_distr
+
+    total_js += jsd(distrs.values())
     print("CURR CONTEXT", curr_context, "JS", total_js)
     # then autoregressive again on this new current context
     return auto_regressive(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab, top_k)
@@ -108,29 +145,9 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
     if current_len == max_len:
         return total_js / len(curr_context.split(" "))
 
-    distrs = {}
     highest = {}
-    for model_name in ['GPT2','TransformerXL']:
-        model, tokenizer = model_info[model_name]
-        next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
-        distrs[model_name] = next_word_distr
-
-    A = distrs['GPT2']
-    B = distrs['TransformerXL']
-    # average the two distributions
-    avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
-
-    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
-    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
-
-    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
-
-    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
-
-    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
-
-    prob_list = [v for k, v in sorted(avg_distr.items())]
-    word_list = [k for k, v in sorted(avg_distr.items())]
+    
+    prob_list, word_list = get_avg_distr(model_info, curr_context, joint_vocab, top_p)
 
     js_dict = {}
     for i in range(0,5):
@@ -141,10 +158,15 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
         print("CURR PRE-NEW CONTEXT", curr_context)
         new_context =  curr_context + " " + new_word
         print("NEW CONTEXT", new_context)
-        p = get_distribution(model_info, 'GPT2', new_context, joint_vocab)
-        q = get_distribution(model_info,'TransformerXL', new_context, joint_vocab)
-       # print(p,q)
-        js_result = js(p,q)
+
+        distrs = {}
+        for model_name in model_info.keys():
+            model, tokenizer = model_info[model_name]
+
+            next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+            distrs[model_name] = next_word_distr
+
+        js_result = jsd(distrs.values())
         js_dict[new_word] = js_result
 
 
@@ -152,23 +174,35 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
     print("highest JS word", highest_js_word)
     curr_context = curr_context + " " + highest_js_word
 
-    p = get_distribution(model_info,'GPT2', curr_context, joint_vocab)
-    q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
+    
+    distrs = {}
+    for model_name in model_info.keys():
+        model, tokenizer = model_info[model_name]
 
-    total_js += js(p,q)
+        next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+        distrs[model_name] = next_word_distr
+
+    total_js += jsd(distrs.values())
     print("CURR CONTEXT", curr_context, "JS", total_js)
     # then autoregressive again on this new current context
     return auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab, top_p)
 
-model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
+model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2-large"),GPT2Tokenizer.from_pretrained("gpt2-large")), 
+              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
+              "T5": (T5Model.from_pretrained('t5-11b'), T5Tokenizer.from_pretrained('t5-11b')),
+              "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
+              "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
+              "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 curr_context = sys.argv[1:]
 curr_context = ' '.join(curr_context)
-gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
-txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
+for model_name in model_info.keys():
+    model, tokenizer = model_info[model_name]
 
-joint_vocab = gpt2_dict.keys() & txl_dict.keys()
+    next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
+    distrs[model_name] = next_word_distr
+
+joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
 
 auto_regressive_top_p(model_info, curr_context, 50, 1, 15, 0, joint_vocab, .7)
                  
