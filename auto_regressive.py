@@ -188,7 +188,7 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
     # then autoregressive again on this new current context
     return auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab, top_p)
 
-model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2-large"),GPT2Tokenizer.from_pretrained("gpt2-large")), 
+model_info = {"GPT2": (AutoModelWithLMHead.from_pretrained("gpt2-large"),AutoTokenizer.from_pretrained("gpt2-large")), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
               "T5": (T5Model.from_pretrained('t5-11b'), T5Tokenizer.from_pretrained('t5-11b')),
               "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
