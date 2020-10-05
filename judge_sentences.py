@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel
+from transformers import *
+#TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel,
 import sys
 from scipy.special import softmax
 import torch
@@ -11,6 +12,7 @@ import copy
 import random
 import csv
 import matplotlib.pyplot as plt
+import pandas as pd
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
@@ -37,19 +39,20 @@ def get_distribution(model_info, model_name, context, joint_vocab):
   return distr_dict
 
 
-def js(p, q):
+def entropy(prob_dist, base=math.e):
+        return -sum([p * math.log(p,base) for p in prob_dist if p != 0])
 
-  p = [v for k, v in sorted(p.items())]
-  q = [v for k, v in sorted(q.items())]
+def jsd(prob_dists, base=math.e):
+    weight = 1/len(prob_dists) #all same weight
+    js_left = [0,0,0]
+    js_right = 0    
+    for pd in prob_dists:
+        js_left[0] += pd[0]*weight
+        js_left[1] += pd[1]*weight
+        js_left[2] += pd[2]*weight
+        js_right += weight*entropy(pd,base)
+    return entropy(js_left)-js_right
 
-  p = np.asarray(p)
-  q = np.asarray(q)
-
-  # normalize
-  p /= p.sum()
-  q /= q.sum()
-  m = (p + q) / 2
-  return (entropy(p, m) + entropy(q, m)) / 2
 
 def evaluate_sentence(model_info, sentence, joint_vocab):
 
@@ -59,14 +62,18 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   curr_context = ""
   total_js = 0
   js_positions = []
+  distrs = {}
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
     
-    p = get_distribution(model_info, 'GPT2', curr_context, joint_vocab)
-    q = get_distribution(model_info,'TransformerXL', curr_context, joint_vocab)
-    
-    total_js += js(p,q)
+    for model_name in model_info.keys():
+      model, tokenizer = model_info[model_name]
+
+      next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
+      distrs[model_name] = next_word_distr
+
+    total_js += jsd(distrs.values())
     curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
@@ -76,15 +83,16 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
 def get_avg_distr(model_info, context, joint_vocab, top_p):
 
     distrs = {}
-    for model_name in ['GPT2','TransformerXL']:
+    for model_name in model_info.keys():
       model, tokenizer = model_info[model_name]
 
       next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
       distrs[model_name] = next_word_distr
 
-    A = distrs['GPT2']
-    B = distrs['TransformerXL']
-    avg_distr = {x: (A.get(x, 0) + B.get(x, 0))/2 for x in set(A).intersection(B)}
+    df = pd.DataFrame(distrs.values())
+    avg_distr = dict(df.mean())
+
+    avg_distr = {x: avg_distr[x] for x in joint_vocab}
 
     avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
@@ -239,14 +247,21 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2"),GPT2Tokenizer.from_pretrained("gpt2")), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'))}
+model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2-large"),GPT2Tokenizer.from_pretrained("gpt2-large")), 
+              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
+              "T5": (T5Model.from_pretrained('t5-11b'), T5Tokenizer.from_pretrained('t5-11b')),
+              "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
+              "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
+              "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 curr_context = "I"
-gpt2_dict = get_distribution(model_info, "GPT2", curr_context, {})
-txl_dict = get_distribution(model_info, "TransformerXL", curr_context, {})
+for model_name in model_info.keys():
+    model, tokenizer = model_info[model_name]
 
-joint_vocab = gpt2_dict.keys() & txl_dict.keys()
+    next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
+    distrs[model_name] = next_word_distr
+
+joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
 
 for i in range(5):
 
