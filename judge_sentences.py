@@ -248,7 +248,7 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained("gpt2-large"),GPT2Tokenizer.from_pretrained("gpt2-large")), 
+model_info = {"GPT2": (AutoModelWithLMHead.from_pretrained("gpt2-large"),AutoTokenizer.from_pretrained("gpt2-large")), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
               "T5": (T5Model.from_pretrained('t5-11b'), T5Tokenizer.from_pretrained('t5-11b')),
               "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
