@@ -190,11 +190,11 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
 
 model_info = {"GPT2": (AutoModelWithLMHead.from_pretrained('gpt2-large'), AutoTokenizer.from_pretrained('gpt2-large')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (AutoModelWithLMHead.from_pretrained("t5-11b",use_cdn = False), AutoTokenizer.from_pretrained("t5-11b")),
               "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
-
+#"T5": (AutoModelWithLMHead.from_pretrained("t5-11b",use_cdn = False), AutoTokenizer.from_pretrained("t5-11b")),
+              
 curr_context = sys.argv[1:]
 curr_context = ' '.join(curr_context)
 for model_name in model_info.keys():
