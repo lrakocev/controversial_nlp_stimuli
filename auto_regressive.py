@@ -188,9 +188,9 @@ def auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len
     # then autoregressive again on this new current context
     return auto_regressive_top_p(model_info, curr_context, num_return_seqs, current_len + 1, max_len , total_js, joint_vocab, top_p)
 
-model_info = {"GPT2": (TFGPT2Model.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
+model_info = {"GPT2": (AutoModelWithLMHead.from_pretrained('gpt2-large',from_tf=True), AutoTokenizer.from_pretrained('gpt2-large')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (TFT5Model.from_pretrained('t5-11b'), T5Tokenizer.from_pretrained('t5-11b')),
+              "T5": (AutoModelWithLMHead.from_pretrained("t5-11b",from_tf=True), AutoTokenizer.from_pretrained("t5-11b")),
               "Roberta": (TFRobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
               "Albert": (TFAlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( TFXLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
