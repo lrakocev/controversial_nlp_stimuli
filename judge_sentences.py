@@ -117,7 +117,7 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  return total
+  return total/(len(js_positions)-cur_ind+1)
 
 
 def change_sentence(model_info, sentence, joint_vocab, num_changes, top_p):
@@ -252,6 +252,7 @@ def sample_sentences(file_name):
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
+              "T5": (T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models'), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
           
               "Roberta": (RobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
