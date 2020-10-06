@@ -1,8 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import T5Tokenizer, TFT5Model
-#TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel,
+from transformers import *
 import sys
 from scipy.special import softmax
 import torch
@@ -248,7 +247,7 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"T5": (TFT5Model.from_pretrained("t5-11b"), T5Tokenizer.from_pretrained("t5-11b")), 
+model_info = {"T5": (TFT5Model.from_pretrained("t5-11b",use_cdn = False), T5Tokenizer.from_pretrained("t5-11b")), 
             "Roberta": (TFRobertaModel.from_pretrained("roberta-base"),RobertaTokenizer.from_pretrained("roberta-base")),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
