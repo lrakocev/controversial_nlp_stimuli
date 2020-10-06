@@ -248,7 +248,7 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"Roberta": (TFRobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
+model_info = {"Roberta": (TFRobertaModel.from_pretrained(RobertaConfig()),RobertaTokenizer.from_pretrained('roberta-base')),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
