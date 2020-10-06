@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import RobertaTokenizer, TFRobertaModel
+from transformers import *
 #TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel,
 import sys
 from scipy.special import softmax
@@ -11,8 +11,6 @@ import string
 import copy
 import random
 import csv
-import matplotlib as mpl
-mpl.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
@@ -250,14 +248,15 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"Roberta": (TFRobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
+model_info = {"T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=T5Config.from_pretrained("t5-11b")), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')), 
+            "Roberta": (TFRobertaModel.from_pretrained("roberta-base"),RobertaTokenizer.from_pretrained("roberta-base")),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 '''
 "GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models'), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
+              
 '''
 
 curr_context = "I"
