@@ -247,16 +247,14 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"T5": (TFT5Model.from_pretrained("t5-11b",use_cdn = False), T5Tokenizer.from_pretrained("t5-11b")), 
-            "Roberta": (TFRobertaModel.from_pretrained("roberta-base"),RobertaTokenizer.from_pretrained("roberta-base")),
+model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
+              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
+              "T5": (AutoModel.from_pretrained("t5-11b",use_cdn = False), T5Tokenizer.from_pretrained("t5-11b")), 
+              "Roberta": (AutoModel.from_pretrained("roberta-base"),RobertaTokenizer.from_pretrained("roberta-base")),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
-'''
-"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              
-'''
+
 
 curr_context = "I"
 for model_name in model_info.keys():
