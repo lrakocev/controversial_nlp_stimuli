@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import *
+from transformers import RobertaTokenizer, TFRobertaModel
 #TFGPT2LMHeadModel, GPT2Tokenizer, TransfoXLTokenizer, TFTransfoXLLMHeadModel,
 import sys
 from scipy.special import softmax
@@ -250,7 +250,7 @@ def sample_sentences(file_name):
   return " ".join(line)
 
 
-model_info = {"Roberta": (AutoModelWithLMHead.from_pretrained("roberta-base"),AutoTokenizer.from_pretrained("roberta-base")),
+model_info = {"Roberta": (TFRobertaModel.from_pretrained('roberta-base'),RobertaTokenizer.from_pretrained('roberta-base')),
               "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
