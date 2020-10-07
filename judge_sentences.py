@@ -271,12 +271,13 @@ model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.
               
 '''
 curr_context = "I"
-joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
 for model_name in model_info.keys():
     model, tokenizer = model_info[model_name]
 
-    next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
+    next_word_distr = get_distribution(model_info, model_name, curr_context, {})
     distrs[model_name] = next_word_distr
+
+joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
 
 for i in range(5):
 
