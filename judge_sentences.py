@@ -271,6 +271,7 @@ model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.
               
 '''
 curr_context = "I"
+distrs = {}
 for model_name in model_info.keys():
     model, tokenizer = model_info[model_name]
 
