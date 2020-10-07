@@ -254,7 +254,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pret
 albert_config = AlbertConfig.from_pretrained("albert-base-v2", cache_dir='./pretrained_models')
 xlm_config = XLMConfig.from_pretrained('xlm-mlm-xnli15-1024', cache_dir='./pretrained_models')
 
-model_info = { "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024',config=xlm_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
+model_info = { "XLM": (XLMModel(xlm_config), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 '''
 "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base"))
