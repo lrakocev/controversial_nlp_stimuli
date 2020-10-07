@@ -254,8 +254,8 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pret
 albert_config = AlbertConfig.from_pretrained("albert-base-v2", cache_dir='./pretrained_models')
 
 model_info = { 
-              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config), AlbertTokenizer.from_pretrained('albert-base-v2')),
-              "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models',use_cdn = False), RobertaTokenizer.from_pretrained("roberta-base")),
+              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2')),
+              "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base")),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 '''
