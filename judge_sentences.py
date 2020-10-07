@@ -252,17 +252,17 @@ cuda = torch.cuda.is_available()
 t5_config = T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models')
 roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pretrained_models')
 albert_config = AlbertConfig.from_pretrained("albert-base-v2", cache_dir='./pretrained_models')
+xlm_config = XLMConfig.from_pretrained('xlm-mlm-xnli15-1024', cache_dir='./pretrained_models')
 
-model_info = { 
-              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2')),
-              
-              "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
+model_info = { "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024',config=xlm_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 '''
 "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base"))
 "GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=t5_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models'))
+              "T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=t5_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
+              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2'))
+              
 '''
 curr_context = "I"
 for model_name in model_info.keys():
