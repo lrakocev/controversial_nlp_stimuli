@@ -19,6 +19,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
   model, tokenizer = model_info[model_name]
 
   inputs = tokenizer(context,return_tensors='tf')
+  print(model_name)
   outputs = model(inputs)
 
   ids = range(0,tokenizer.vocab_size)
@@ -275,7 +276,7 @@ distrs = {}
 for model_name in model_info.keys():
     model, tokenizer = model_info[model_name]
 
-    next_word_distr = get_distribution(model_info, model_name, curr_context, [])
+    next_word_distr = get_distribution(model_info, model_name, curr_context, {})
     distrs[model_name] = next_word_distr
 
 joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
