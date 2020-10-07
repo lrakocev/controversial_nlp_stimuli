@@ -249,7 +249,7 @@ def sample_sentences(file_name):
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
-t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
+t5_config = T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models')
 
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
