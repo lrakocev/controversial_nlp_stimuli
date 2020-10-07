@@ -250,8 +250,8 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
 t5_config = T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models')
-roberta_config = RobertaConfig("roberta-base", cache_dir='./pretrained_models')
-albert_config = AlbertConfig("albert-base-v2")
+roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pretrained_models')
+albert_config = AlbertConfig.from_pretrained("albert-base-v2", cache_dir='./pretrained_models')
 
 model_info = { 
               "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config), AlbertTokenizer.from_pretrained('albert-base-v2')),
