@@ -250,15 +250,14 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
 t5_config = T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models')
-roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pretrained_models')
+roberta_config = RobertaConfig("roberta-base", cache_dir='./pretrained_models')
+albert_config = AlbertConfig("albert-base-v2")
 
 model_info = { 
-              
-              "Albert": (AlbertModel.from_pretrained('albert-base-v2'), AlbertTokenizer.from_pretrained('albert-base-v2')),
+              "Albert": (AlbertModel.from_pretrained(config=albert_config), AlbertTokenizer.from_pretrained('albert-base-v2')),
+              "Roberta": (RobertaModel.from_pretrained(config=roberta_config, cache_dir='./pretrained_models',use_cdn = False), RobertaTokenizer.from_pretrained("roberta-base")),
               "XLM": ( XLMModel.from_pretrained('xlm-mlm-xnli15-1024'), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
-'''
-"Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models',use_cdn = False), RobertaTokenizer.from_pretrained("roberta-base")),
-'''
+
 '''
 "GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
