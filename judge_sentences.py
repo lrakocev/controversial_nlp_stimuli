@@ -259,7 +259,7 @@ xlm_config = XLMConfig.from_pretrained('xlm-mlm-xnli15-1024', cache_dir='./pretr
 model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
               "T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=t5_config, cache_dir='./pretrained_models').to(DEVICE), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
-              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models').to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2'))
+              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models').to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2')),
               "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models').to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base")),
               "XLM": (XLMModel.from_pretrained('xlm-mlm-xnli15-1024',config=xlm_config, cache_dir='./pretrained_models').to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
