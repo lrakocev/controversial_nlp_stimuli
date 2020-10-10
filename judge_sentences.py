@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration
+from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config
 import sys
 from scipy.special import softmax
 import torch
