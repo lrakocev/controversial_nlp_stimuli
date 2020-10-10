@@ -19,13 +19,6 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
 
-  dir_name = model_name
-
-  if os.path.isdir(dir_name) == False:
-      os.mkdir(dir_name)  
-
-  tokenizer.save_pretrained(dir_name)
-
   inputs = tokenizer(context,return_tensors='tf')
   print(model_name)
   outputs = model(inputs)
@@ -275,6 +268,13 @@ curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
     model, tokenizer = model_info[model_name]
+
+    dir_name = model_name
+
+    if os.path.isdir(dir_name) == False:
+        os.mkdir(dir_name)  
+
+    tokenizer.save_pretrained(dir_name)
 
     next_word_distr = get_distribution(model_info, model_name, curr_context, {})
     distrs[model_name] = next_word_distr
