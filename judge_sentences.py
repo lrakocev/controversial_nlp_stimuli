@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer
+from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer
 import sys
 from scipy.special import softmax
 import torch
@@ -262,8 +262,11 @@ for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]
       os.mkdir(dir_name) 
 
   tokenizer = AutoModel.from_pretrained(dir_name)
+  config = AutoConfig.from_pretrained(dir_name)
 
+  
   tokenizer.save_pretrained(dir_name) 
+  config.save_pretrained(dir_name)
 
 
 model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
