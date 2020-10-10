@@ -253,9 +253,17 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-cuda = torch.cuda.is_available()
 
+### actually running stuff now ###
+
+for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]:
+
+  if os.path.isdir(dir_name) == False:
+      os.mkdir(dir_name) 
+
+  tokenizer = AutoModel.from_pretrained(dir_name)
+
+  tokenizer.save_pretrained(dir_name) 
 
 model_info = {"gpt2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
               "transfo-xl-wt103": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
@@ -268,13 +276,6 @@ curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
     model, tokenizer = model_info[model_name]
-
-    dir_name = model_name
-
-    if os.path.isdir(dir_name) == False:
-        os.mkdir(dir_name)  
-
-    tokenizer.save_pretrained(dir_name)
 
     next_word_distr = get_distribution(model_info, model_name, curr_context, {})
     distrs[model_name] = next_word_distr
