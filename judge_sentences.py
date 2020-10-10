@@ -17,7 +17,7 @@ import os
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
-  model, tokenizer = model_info[model_name]
+  tokenizer, model = model_info[model_name]
 
   inputs = tokenizer(context,return_tensors='tf')
   print(model_name)
@@ -70,7 +70,7 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
     curr_context += sentence_split[i] + " "
     
     for model_name in model_info.keys():
-      model, tokenizer = model_info[model_name]
+      tokenizer, model = model_info[model_name]
 
       next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
       distrs[model_name] = next_word_distr
@@ -86,7 +86,7 @@ def get_avg_distr(model_info, context, joint_vocab, top_p):
 
     distrs = {}
     for model_name in model_info.keys():
-      model, tokenizer = model_info[model_name]
+      tokenizer, model = model_info[model_name]
 
       next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
       distrs[model_name] = next_word_distr
@@ -265,17 +265,18 @@ for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]
 
   tokenizer.save_pretrained(dir_name) 
 
-model_info = {"gpt2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
-              "transfo-xl-wt103": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "t5-11b": (AutoModel.from_pretrained('t5-11b'), AutoTokenizer.from_pretrained('t5-11b')),
-              "albert-base-v2": (AutoModel.from_pretrained('albert-base-v2'), AutoTokenizer.from_pretrained('albert-base-v2')),
-              "roberta-base":(AutoModel.from_pretrained('roberta-base'), AutoTokenizer.from_pretrained('roberta-base')),
-              "xlm-mlm-xnli15-1024": (AutoModel.from_pretrained('xlm-mlm-xnli15-1024'), AutoTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
+
+model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
+              "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
+              "t5-11b": (AutoTokenizer.from_pretrained('t5-11b'),AutoModel.from_pretrained('t5-11b')),
+              "albert-base-v2": (AutoTokenizer.from_pretrained('albert-base-v2'),AutoModel.from_pretrained('albert-base-v2')),
+              "roberta-base":(AutoTokenizer.from_pretrained('roberta-base'),AutoModel.from_pretrained('roberta-base')),
+              "xlm-mlm-xnli15-1024": (AutoTokenizer.from_pretrained('xlm-mlm-xnli15-1024'),AutoModel.from_pretrained('xlm-mlm-xnli15-1024'))}
 
 curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
-    model, tokenizer = model_info[model_name]
+    tokenizer, model = model_info[model_name]
 
     next_word_distr = get_distribution(model_info, model_name, curr_context, {})
     distrs[model_name] = next_word_distr
