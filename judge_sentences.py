@@ -264,9 +264,11 @@ for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]
   tokenizer = AutoModel.from_pretrained(dir_name)
   config = AutoConfig.from_pretrained(dir_name)
 
-  
+  new_path = "{}/config.json".format(dir_name)
+  config.save_pretrained(new_path)
+
   tokenizer.save_pretrained(dir_name) 
-  config.save_pretrained(dir_name)
+
 
 
 model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
