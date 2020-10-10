@@ -19,9 +19,9 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   tokenizer, model = model_info[model_name]
 
-  inputs = tokenizer(context,return_tensors='tf')
+  word_inputs = tokenizer(context,return_tensors='tf')
   print(model_name)
-  outputs = model(inputs)
+  outputs = model(inputs = word_inputs)
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
