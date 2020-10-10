@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer
+from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration
 import sys
 from scipy.special import softmax
 import torch
@@ -255,7 +255,7 @@ def sample_sentences(file_name):
 
 
 ### actually running stuff now ###
-
+'''
 for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]:
 
   if os.path.isdir(dir_name) == False:
@@ -268,16 +268,23 @@ for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]
   config.save_pretrained(new_path)
 
   tokenizer.save_pretrained(dir_name) 
+'''
+T5_PATH = "t5-base"
+t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
-
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+cuda = torch.cuda.is_available()
 
 model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
               "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
+              "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models').to(DEVICE))}
+'''
+              {
               "t5-11b": (AutoTokenizer.from_pretrained('t5-11b'),AutoModel.from_pretrained('t5-11b')),
               "albert-base-v2": (AutoTokenizer.from_pretrained('albert-base-v2'),AutoModel.from_pretrained('albert-base-v2')),
               "roberta-base":(AutoTokenizer.from_pretrained('roberta-base'),AutoModel.from_pretrained('roberta-base')),
               "xlm-mlm-xnli15-1024": (AutoTokenizer.from_pretrained('xlm-mlm-xnli15-1024'),AutoModel.from_pretrained('xlm-mlm-xnli15-1024'))}
-
+'''
 curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
