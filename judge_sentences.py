@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import *
+from transformers import AutoModel, AutoTokenizer
 import sys
 from scipy.special import softmax
 import torch
@@ -13,10 +13,18 @@ import csv
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
+import os
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
   model, tokenizer = model_info[model_name]
+
+  dir_name = model_name
+
+  if os.path.isdir(dir_name) == False:
+      os.mkdir(dir_name)  
+
+  tokenizer.save_pretrained(dir_name)
 
   inputs = tokenizer(context,return_tensors='tf')
   print(model_name)
@@ -198,10 +206,14 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
 
       new_sentence_score, new_js_positions = evaluate_sentence(model_info, ' '.join(final_modified_sentence), joint_vocab)
 
+
+      new_discounted_score = discounting(change_i, new_js_positions)
+      curr_discounted_score = discounting(change_i, cur_js_positions)
+
       if change == "D":
         new_js_positions.insert(change_i, 0)
 
-      if new_sentence_score > curr_sentence_score:
+      if new_discounted_score > curr_discounted_score:
         scores.append(new_sentence_score)
         js_positions.append(new_js_positions)
         changes.append(change)
@@ -251,37 +263,14 @@ def sample_sentences(file_name):
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
-t5_config = T5Config.from_pretrained("t5-11b", cache_dir='./pretrained_models')
-roberta_config = RobertaConfig.from_pretrained("roberta-base", cache_dir='./pretrained_models')
-albert_config = AlbertConfig.from_pretrained("albert-base-v2", cache_dir='./pretrained_models')
-xlm_config = XLMConfig.from_pretrained('xlm-mlm-xnli15-1024', cache_dir='./pretrained_models')
 
-model_info = {"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=t5_config, cache_dir='./pretrained_models').to(DEVICE), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
-              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models').to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2')),
-              "Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models').to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base")),
-              "XLM": (XLMModel.from_pretrained('xlm-mlm-xnli15-1024',config=xlm_config, cache_dir='./pretrained_models').to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
+model_info = {"gpt2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
+              "transfo-xl-wt103": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
+              "t5-11b": (AutoModel.from_pretrained('t5-11b'), AutoTokenizer.from_pretrained('t5-11b')),
+              "albert-base-v2": (AutoModel.from_pretrained('albert-base-v2'), AutoTokenizer.from_pretrained('albert-base-v2')),
+              "roberta-base":(AutoModel.from_pretrained('roberta-base'), AutoTokenizer.from_pretrained('roberta-base')),
+              "xlm-mlm-xnli15-1024": (AutoModel.from_pretrained('xlm-mlm-xnli15-1024'), AutoTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))}
 
-'''
-{"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (TFT5Model.from_pretrained('t5-small'), T5Tokenizer.from_pretrained('t5-small')),
-              "Roberta":(TFRobertaModel.from_pretrained('roberta-base'), RobertaTokenizer.from_pretrained('roberta-base')),
-              "XLM": (TFXLMModel.from_pretrained('xlm-mlm-en-2048'), XLMTokenizer.from_pretrained('xlm-mlm-en-2048')),
-              "Albert":(TFAlbertModel.from_pretrained('albert-base-v2'),AlbertTokenizer.from_pretrained('albert-base-v2'))}
-'''
-
-'''
-"Roberta": (RobertaModel.from_pretrained("roberta-base",config=roberta_config, cache_dir='./pretrained_models').to(DEVICE), RobertaTokenizer.from_pretrained("roberta-base")),
-"XLM": (XLMModel.from_pretrained('xlm-mlm-xnli15-1024',config=xlm_config, cache_dir='./pretrained_models').to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'))
-
-"GPT2": (TFGPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2')), 
-              "TransformerXL": (TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103')),
-              "T5": (T5ForConditionalGeneration.from_pretrained("t5-11b", config=t5_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), T5Tokenizer.from_pretrained("t5-11b", cache_dir='./pretrained_models')),
-              "Albert": (AlbertModel.from_pretrained("albert-base-v2",config=albert_config, cache_dir='./pretrained_models',use_cdn = False).to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2'))
-              
-'''
 curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
