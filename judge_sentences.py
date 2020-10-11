@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config
+from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel
 import sys
 from scipy.special import softmax
 import torch
@@ -22,7 +22,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
   inputs = tokenizer(context,return_tensors='tf')
  
   outputs = model(inputs)
-  
+
   if model_name == "t5-11b":
     outputs = model(input_ids = inputs)
 
@@ -280,7 +280,8 @@ cuda = torch.cuda.is_available()
 
 model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
               "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
-              "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'))}
+              "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
+              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
 '''
               {
               "t5-11b": (AutoTokenizer.from_pretrained('t5-11b'),AutoModel.from_pretrained('t5-11b')),
