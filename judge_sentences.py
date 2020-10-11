@@ -275,7 +275,14 @@ t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
+proxies = {
+  "http": "http://10.10.1.10:3128",
+  "https": "https://10.10.1.10:1080",
+}
+
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024",proxies=proxies)),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base',proxies=proxies)),
+
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
 '''
 
