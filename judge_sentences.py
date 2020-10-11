@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel, RobertaTokenizer, TFRobertaModel
+from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel, RobertaTokenizer, TFRobertaModel,  XLMTokenizer, TFXLMModel
 import sys
 from scipy.special import softmax
 import torch
@@ -275,13 +275,14 @@ t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
-model_info = {"roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base')),
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
 '''
 
 "gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
               "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
 "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
+"roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base')),
 
               {
               "t5-11b": (AutoTokenizer.from_pretrained('t5-11b'),AutoModel.from_pretrained('t5-11b')),
