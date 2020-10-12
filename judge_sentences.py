@@ -31,7 +31,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   #outputs = model(input_ids = inputs) if model_name == "t5-11b" else model(inputs)
 
-  outputs = model(tokens_tenso)
+  outputs = model(tokens_tensor)
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
