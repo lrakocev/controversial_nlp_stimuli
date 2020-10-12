@@ -18,20 +18,11 @@ import os
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
-  #tokenizer, model = model_info[model_name]
-  print(model_name)
+  tokenizer, model = model_info[model_name]
 
-  tokenizer = torch.hub.load('huggingface/pytorch-transformers', 'tokenizer', model_name)
+  inputs = tokenizer(context)
 
-  model = torch.hub.load('huggingface/pytorch-transformers', 'model', model_name)
-
-  inputs = tokenizer.encode(context)
-
-  tokens_tensor = torch.tensor(inputs)
-
-  #outputs = model(input_ids = inputs) if model_name == "t5-11b" else model(inputs)
-
-  outputs, _ = model(tokens_tensor)
+  outputs = model(input_ids = inputs) if model_name == "t5-11b" else model(inputs)
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
@@ -267,13 +258,11 @@ T5_PATH = "t5-base"
 t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
 
-model_info = { "xlm-mlm-xnli15-1024": (1,1), "roberta-base":(2,2), "albert-base-v2": (3,3)}
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), XLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaModel.from_pretrained('roberta-base')),
+              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertModel.from_pretrained('albert-base-v2'))}
 
 '''
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base')),
-              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
-
 "gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
 "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
 "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'))
