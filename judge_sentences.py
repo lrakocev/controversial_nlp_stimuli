@@ -19,6 +19,7 @@ import os
 def get_distribution(model_info, model_name, context, joint_vocab):
 
   #tokenizer, model = model_info[model_name]
+  print(model_name)
 
   tokenizer = torch.hub.load('huggingface/pytorch-transformers', 'tokenizer', model_name)
 
