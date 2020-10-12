@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
-from transformers import AutoModel, AutoTokenizer, AutoConfig, TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel, RobertaTokenizer, TFRobertaModel,  XLMTokenizer, TFXLMModel
+import torch
+from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel, RobertaTokenizer, TFRobertaModel,  XLMTokenizer, TFXLMModel
 import sys
 from scipy.special import softmax
 import torch
@@ -17,7 +18,11 @@ import os
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
-  tokenizer, model = model_info[model_name]
+  #tokenizer, model = model_info[model_name]
+
+  tokenizer = torch.hub.load('huggingface/pytorch-transformers', 'tokenizer', model_name)
+
+  model = torch.hub.load('huggingface/pytorch-transformers', 'model', model_name)
 
   inputs = tokenizer(context,return_tensors='tf')
 
@@ -253,49 +258,20 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-
-### actually running stuff now ###
-'''
-for dir_name in ["t5-11b","albert-base-v2","roberta-base","xlm-mlm-xnli15-1024"]:
-
-  if os.path.isdir(dir_name) == False:
-      os.mkdir(dir_name) 
-
-  tokenizer = AutoModel.from_pretrained(dir_name)
-  config = AutoConfig.from_pretrained(dir_name)
-
-  new_path = "{}/config.json".format(dir_name)
-  config.save_pretrained(new_path)
-
-  tokenizer.save_pretrained(dir_name) 
-'''
 T5_PATH = "t5-base"
 t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-cuda = torch.cuda.is_available()
 
-proxies = {
-  "http": "http://10.10.1.10:3128",
-  "https": "https://10.10.1.10:1080",
-}
+model_info = { "xlm-mlm-xnli15-1024": (1,1), "roberta-base":(2,2), "albert-base-v2": (3,3)}
 
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024",proxies=proxies)),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base',proxies=proxies)),
-
-              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
 '''
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), TFXLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base')),
+              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),TFAlbertModel.from_pretrained('albert-base-v2'))}
 
 "gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
-              "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
-"t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
-"roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),TFRobertaModel.from_pretrained('roberta-base')),
-
-              {
-              "t5-11b": (AutoTokenizer.from_pretrained('t5-11b'),AutoModel.from_pretrained('t5-11b')),
-              "albert-base-v2": (AutoTokenizer.from_pretrained('albert-base-v2'),AutoModel.from_pretrained('albert-base-v2')),
-              "roberta-base":(AutoTokenizer.from_pretrained('roberta-base'),AutoModel.from_pretrained('roberta-base')),
-              "xlm-mlm-xnli15-1024": (AutoTokenizer.from_pretrained('xlm-mlm-xnli15-1024'),AutoModel.from_pretrained('xlm-mlm-xnli15-1024'))}
+"transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
+"t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'))
 '''
 curr_context = "I"
 distrs = {}
