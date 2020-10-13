@@ -258,7 +258,7 @@ T5_PATH = "t5-base"
 t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
 
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-en-2048'), XLMModel.from_pretrained('xlm-mlm-en-2048'))
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-en-2048'), XLMModel.from_pretrained('xlm-mlm-en-2048')),
               "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaModel.from_pretrained('roberta-base')),
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertModel.from_pretrained('albert-base-v2'))}
 
