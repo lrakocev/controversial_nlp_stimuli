@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
 import torch
-from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, TFAlbertModel, RobertaTokenizer, TFRobertaModel,  XLMTokenizer, TFXLMModel
+from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, AlbertModel, RobertaTokenizer, RobertaModel,  XLMTokenizer, XLMModel
 import sys
 from scipy.special import softmax
 import torch
