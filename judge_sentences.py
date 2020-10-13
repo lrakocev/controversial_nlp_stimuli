@@ -258,11 +258,12 @@ T5_PATH = "t5-base"
 t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
 
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), XLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
+model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-en-2048'), XLMModel.from_pretrained('xlm-mlm-en-2048'))
               "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaModel.from_pretrained('roberta-base')),
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertModel.from_pretrained('albert-base-v2'))}
 
 '''
+#(XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), XLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
 "gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
 "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
 "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'))
