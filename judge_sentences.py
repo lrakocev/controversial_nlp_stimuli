@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
 import torch
-from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, AlbertModel, RobertaTokenizer, RobertaModel,  XLMTokenizer, XLMModel
+from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, AlbertModel, RobertaTokenizer, RobertaForCausalLM,  XLMTokenizer, XLMModel
 import sys
 from scipy.special import softmax
 import torch
@@ -259,7 +259,7 @@ t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 
 
 model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-en-2048'), XLMModel.from_pretrained('xlm-mlm-en-2048')),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaModel.from_pretrained('roberta-base')),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaForCausalLM.from_pretrained('roberta-base')),
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertModel.from_pretrained('albert-base-v2'))}
 
 '''
