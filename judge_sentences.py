@@ -2,7 +2,9 @@ import numpy as np
 from scipy.stats import entropy
 import tensorflow as tf
 import torch
-from transformers import  TFGPT2LMHeadModel, GPT2Tokenizer, TFTransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, TFT5ForConditionalGeneration, T5Config, AlbertTokenizer, AlbertModel, RobertaTokenizer, RobertaForCausalLM,  XLMTokenizer, XLMModel
+from transformers import  GPT2LMHeadModel, GPT2Tokenizer, TransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, 
+  T5ForConditionalGeneration, T5Config, RobertaTokenizer, RobertaForCausalLM, RobertaConfig, AlbertTokenizer, AlbertForMaskedLM,
+  XLMTokenizer, XLMWithLMHeadModel
 import sys
 from scipy.special import softmax
 import torch
@@ -22,9 +24,18 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   inputs = tokenizer(context)
 
-  outputs = model(input_ids = inputs) if model_name == "t5-11b" else model(inputs)
 
-  ids = range(0,tokenizer.vocab_size)
+  tokens = tokenizer.tokenize(context)
+  tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
+  ids = tokenizer.convert_tokens_to_ids(tokens)
+  x = 1
+  attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
+  attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+
+  input_ids = torch.tensor(ids).unsqueeze(0)
+
+  outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+
   vocab = tokenizer.convert_ids_to_tokens(ids)
 
   final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
@@ -256,18 +267,17 @@ def sample_sentences(file_name):
 
 T5_PATH = "t5-base"
 t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
+roberta_config = RobertaConfig.from_pretrained("roberta-base")
+roberta_config.is_decoder = True
+
+model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
+              "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
+              "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
+              "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'), RobertaForCausalLM.from_pretrained('roberta-base', config=config)),
+              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True))}
 
 
-model_info = {"xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-en-2048'), XLMModel.from_pretrained('xlm-mlm-en-2048')),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'),RobertaForCausalLM.from_pretrained('roberta-base')),
-              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertModel.from_pretrained('albert-base-v2'))}
-
-'''
-#(XLMTokenizer.from_pretrained("xlm-mlm-xnli15-1024"), XLMModel.from_pretrained(" xlm-mlm-xnli15-1024")),
-"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), TFGPT2LMHeadModel.from_pretrained('gpt2')), 
-"transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TFTransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
-"t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),TFT5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'))
-'''
 curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
