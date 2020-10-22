@@ -40,11 +40,8 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   id_list = tokenizer.convert_tokens_to_ids(sorted(final_vocab))
 
-  print(outputs) 
 
-  print(outputs[0].size(),outputs[1].size())
-
-  outputs_array = outputs[1].flatten()
+  outputs_array = np.asarray(outputs[1]).flatten()
 
   final_outputs = [outputs_array[i] for i in id_list] 
 
