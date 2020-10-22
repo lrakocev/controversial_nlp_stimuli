@@ -272,7 +272,7 @@ model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), GPT2LMHeadModel.fr
               "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103')),
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
               "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'), RobertaForCausalLM.from_pretrained('roberta-base', config=config)),
+              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'), RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config)),
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True))}
 
 
