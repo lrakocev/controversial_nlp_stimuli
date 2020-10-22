@@ -42,7 +42,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   print(outputs) 
 
-  print(outpus.size()_
+  print(outputs.size())
 
   outputs_array = outputs.logits.flatten()
 
