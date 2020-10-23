@@ -20,11 +20,11 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   tokenizer, model = model_info[model_name]
 
-  inputs = tokenizer(context)
-
-
   tokens = tokenizer.tokenize(context)
   tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
+
+  print(tokens)
+
   ids = tokenizer.convert_tokens_to_ids(tokens)
   x = 1
   attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
@@ -32,7 +32,7 @@ def get_distribution(model_info, model_name, context, joint_vocab):
 
   input_ids = torch.tensor(ids).unsqueeze(0)
 
-  outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+  outputs = model(input_ids, attention_mask=attention_mask)
 
   vocab = tokenizer.convert_ids_to_tokens(ids)
 
