@@ -312,7 +312,7 @@ filename = "SUBTLEXus74286wordstextversion.txt"
 
 #vocab_list = get_vocab(filename)
 
-print(map_word_to_tokens(model_info, "gpt2", "running fast"))
+print(map_word_to_tokens(model_info, "gpt2", " running fast"))
 
 '''
 curr_context = "I"
