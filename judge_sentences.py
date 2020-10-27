@@ -23,9 +23,13 @@ class ModelInfo():
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
     self.ids = ids
+    self.word_token_dict = {}
 
-  #def map_word_to_tokens(self, vocab):
+  def create_token_to_word_dict(self, vocab):
 
+    for word in vocab:
+      word = " " + word
+      self.word_token_dict[word] = self.tokenizer.tokenize(word)
 
 
 def get_vocab(filename):
@@ -312,7 +316,7 @@ filename = "SUBTLEXus74286wordstextversion.txt"
 
 #vocab_list = get_vocab(filename)
 
-print(map_word_to_tokens(model_info, "gpt2", " running fast"))
+print(map_word_to_tokens(model_info, "gpt2", " it's"))
 
 '''
 curr_context = "I"
