@@ -16,6 +16,18 @@ import pandas as pd
 import math
 import os
 
+class ModelInfo():
+
+  def __init__(self, model, tokenizer, start_token_symbol, ids):
+    self.model = model
+    self.tokenizer = tokenizer
+    self.start_token_symbol = start_token_symbol
+    self.ids = ids
+
+  #def map_word_to_tokens(self, vocab):
+
+
+
 def get_vocab(filename):
 
   data = pd.read_csv(filename, sep="\t")
@@ -25,6 +37,12 @@ def get_vocab(filename):
   vocab_list = vocab.values.tolist()
 
   return vocab_list
+
+def map_word_to_tokens(model_info, model_name, word):
+
+  tokenizer, model = model_info[model_name]
+  tokens = tokenizer.tokenize(word)
+  return tokens
 
 def get_distribution(model_info, model_name, context, joint_vocab):
 
@@ -292,8 +310,11 @@ model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), GPT2LMHeadModel.fr
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 
-vocab_list = get_vocab(filename)
+#vocab_list = get_vocab(filename)
 
+print(map_word_to_tokens(model_info, "gpt2", "running"))
+
+'''
 curr_context = "I"
 distrs = {}
 for model_name in model_info.keys():
@@ -310,3 +331,4 @@ for i in range(5):
   scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, .9)
   plot_scores(scores, sentence)
   #plot_positions(js_positions,sentence)
+'''
