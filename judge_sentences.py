@@ -18,23 +18,33 @@ import os
 
 class ModelInfo():
 
-  def __init__(self, model, tokenizer, start_token_symbol, ids):
+  def __init__(self, model, tokenizer, start_token_symbol):
     self.model = model
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
-    self.ids = ids
     self.word_token_dict = {}
+    self.word_id_dict = {}
 
-  def create_token_to_word_dict(self, vocab):
+  def create_word_to_token_dict(self, vocab):
 
     for word in vocab:
       word = " " + word
       self.word_token_dict[word] = self.tokenizer.tokenize(word)
 
+  def create_word_to_id_dict(self, vocab):
+
+    for word in vocab:
+      tokens = self.word_token_dict[word]
+      self.word_id_dict[word] = [tokenizer.convert_tokens_to_ids(token) for token in tokens]
+
 
 def get_vocab(filename):
 
   data = pd.read_csv(filename, sep="\t")
+
+  contractions = ['m', 't', 's', 're', 'd', 'll', 've']
+
+  data = data[~data['Word'].isin(contractions)]
 
   vocab = data['Word'].head(50000)
 
@@ -48,9 +58,10 @@ def map_word_to_tokens(model_info, model_name, word):
   tokens = tokenizer.tokenize(word)
   return tokens
 
-def get_distribution(model_info, model_name, context, joint_vocab):
+def get_distribution(model_info, context, joint_vocab):
 
-  tokenizer, model = model_info[model_name]
+  tokenizer = model_info.tokenizer 
+  model = model_info.model
 
   tokens = tokenizer.tokenize(context)
   tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
@@ -58,28 +69,19 @@ def get_distribution(model_info, model_name, context, joint_vocab):
   print(tokens)
 
   ids = tokenizer.convert_tokens_to_ids(tokens)
+  '''
   x = 1
   attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
   attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+  '''
 
   input_ids = torch.tensor(ids).unsqueeze(0)
 
-  outputs = model(input_ids, attention_mask=attention_mask)
+  outputs = model(input_ids) #, attention_mask=attention_mask)
 
-  vocab = tokenizer.convert_ids_to_tokens(ids)
+  probabilities = softmax(outputs)
 
-  final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
-
-  id_list = tokenizer.convert_tokens_to_ids(sorted(final_vocab))
-
-
-  outputs_array = np.asarray(outputs[1]).flatten()
-
-  final_outputs = [outputs_array[i] for i in id_list] 
-
-  probabilities = softmax(final_outputs)
-
-  distr_dict = dict(zip(final_vocab, probabilities))
+  distr_dict = dict(zip(joint_vocab, probabilities))
 
   return distr_dict
 
@@ -301,9 +303,11 @@ t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
-model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), GPT2LMHeadModel.from_pretrained('gpt2')), 
-              "transfo-xl-wt103": (TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'),TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'))
-              }
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ")
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_")
+
+model_info = [GPT2, TXL]
+
 '''
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
               "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
