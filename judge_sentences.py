@@ -16,6 +16,16 @@ import pandas as pd
 import math
 import os
 
+def get_vocab(filename):
+
+  data = pd.read_csv(filename, sep="\t")
+
+  vocab = data['Word'].head(50000)
+
+  vocab_list = vocab.values.tolist()
+
+  return vocab_list
+
 def get_distribution(model_info, model_name, context, joint_vocab):
 
   tokenizer, model = model_info[model_name]
@@ -279,6 +289,10 @@ model_info = {"gpt2": (GPT2Tokenizer.from_pretrained('gpt2'), GPT2LMHeadModel.fr
               "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True))}
 '''
 
+
+filename = "SUBTLEXus74286wordstextversion.txt"
+
+vocab_list = get_vocab(filename)
 
 curr_context = "I"
 distrs = {}
