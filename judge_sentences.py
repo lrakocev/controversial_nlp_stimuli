@@ -69,9 +69,11 @@ def get_distribution(model_name, context, next_word, vocab):
 
   outputs = model(input_ids, attention_mask=attention_mask)
 
-  print(next_word)
   next_word_tokens = model_word_token_dict[str(next_word)]
 
+
+  print(outputs)
+  
   probabilities = softmax(outputs)
   if len(next_word_tokens) == 1:
     
