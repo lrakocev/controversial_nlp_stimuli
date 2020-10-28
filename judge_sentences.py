@@ -67,7 +67,7 @@ def get_distribution(model_name, context, next_word, vocab):
   
   input_ids = torch.tensor(ids).unsqueeze(0)
 
-  outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+  outputs = model(input_ids, labels=input_ids) #, attention_mask=attention_mask)
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
