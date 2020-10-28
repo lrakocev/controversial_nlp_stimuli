@@ -74,7 +74,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
   print("output", outputs[1])
   
-  probabilities = torch.nn.functional.softmax(outputs[1])
+  probabilities = torch.nn.softmax(outputs[1])
   if len(next_word_tokens) == 1:
     
     distr_dict = dict(zip(joint_vocab, probabilities))
