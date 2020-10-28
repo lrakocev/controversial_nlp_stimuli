@@ -50,15 +50,11 @@ def get_vocab(filename):
 
 def get_distribution(model_name, context, next_word, vocab):
   
-  print("context", context)
-  print("new word", next_word)
-
+  print("context", model_name)
 
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
-
-  print(model_word_token_dict)
 
   inputs = tokenizer(context, return_tensors="pt")
 
