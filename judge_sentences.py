@@ -138,7 +138,7 @@ def get_avg_distr(model_list, context, next_word, vocab):
 
     avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
 
-    avg_distr_summed = zip(vocab, avg_distr_vals)
+    avg_distr_summed = dict(zip(vocab, avg_distr_vals))
 
     prob_list = [v for k, v in sorted(avg_distr_summed.items())]
     word_list = [k for k, v in sorted(avg_distr_summed.items())]
