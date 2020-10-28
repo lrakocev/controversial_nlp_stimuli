@@ -170,86 +170,84 @@ def change_sentence(model_list, sentence, vocab, top_p):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  for i in range(0, num_changes):
-    print("Round ", i, " and the sentence to be changed is ", ' '.join(sentence_split))
-    curr_sentence_score, cur_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab)
+  curr_sentence_score, cur_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab)
 
-    modified_sentence_replacements = copy.deepcopy(sentence_split)
-    modified_sentence_deletions = copy.deepcopy(sentence_split)
-    modified_sentence_additions = copy.deepcopy(sentence_split)
+  modified_sentence_replacements = copy.deepcopy(sentence_split)
+  modified_sentence_deletions = copy.deepcopy(sentence_split)
+  modified_sentence_additions = copy.deepcopy(sentence_split)
 
-    # deciding which position to change at 
-    #exponentiated_scores = softmax(cur_js_positions)
-    #n = list(np.random.multinomial(1,exponentiated_scores))
-    #change_i = n.index(1)
+  # deciding which position to change at 
+  #exponentiated_scores = softmax(cur_js_positions)
+  #n = list(np.random.multinomial(1,exponentiated_scores))
+  #change_i = n.index(1)
 
-    #print("change index", change_i)
-    for change_i in range(len(cur_js_positions)):
-  
-      js_dict = {}
+  #print("change index", change_i)
+  for change_i in range(len(cur_js_positions)):
 
-      # replacements 
-      for j in range(0,10):
-        cur_context = sentence_split[:change_i+1]
+    js_dict = {}
 
-        cur_prob_list, cur_word_list = get_avg_distr(model_list, context, sentence_split[change_i+1], vocab, top_p)
+    # replacements 
+    for j in range(0,10):
+      cur_context = sentence_split[:change_i+1]
 
-        n = list(np.random.multinomial(1,cur_prob_list))
-        ind = n.index(1)
-        new_word = cur_word_list[ind]
-        modified_sentence_replacements[change_i] = new_word
-        new_context = ' '.join(modified_sentence_replacements)
-        js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
-      
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, context, sentence_split[change_i+1], vocab, top_p)
 
-      #deletions
-      modified_sentence_deletions.pop(change_i)
-      if len(modified_sentence_deletions) > 0:
-        js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab)
-      else: 
-        js_dict[("", "D")] = (0,[0])
+      n = list(np.random.multinomial(1,cur_prob_list))
+      ind = n.index(1)
+      new_word = cur_word_list[ind]
+      modified_sentence_replacements[change_i] = new_word
+      new_context = ' '.join(modified_sentence_replacements)
+      js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
+    
+
+    #deletions
+    modified_sentence_deletions.pop(change_i)
+    if len(modified_sentence_deletions) > 0:
+      js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab)
+    else: 
+      js_dict[("", "D")] = (0,[0])
 
 
-      # additions
-      for k in range(0,10):
-        cur_context = sentence_split[:change_i+1]
+    # additions
+    for k in range(0,10):
+      cur_context = sentence_split[:change_i+1]
 
-        next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
+      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
 
-        n = list(np.random.multinomial(1,next_prob_list))
-        ind = n.index(1)
-        new_word = next_word_list[ind]
-        modified_sentence_additions.insert(change_i+1,new_word)
-        new_context = ' '.join(modified_sentence_additions)
-        js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab)
-        modified_sentence_additions.pop(change_i+1)
+      n = list(np.random.multinomial(1,next_prob_list))
+      ind = n.index(1)
+      new_word = next_word_list[ind]
+      modified_sentence_additions.insert(change_i+1,new_word)
+      new_context = ' '.join(modified_sentence_additions)
+      js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab)
+      modified_sentence_additions.pop(change_i+1)
 
-      highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
-      
-      if highest_js_word[1] == "R":
-        final_modified_sentence[change_i] = highest_js_word[0]
-        change = "R"
-      elif highest_js_word[1] == "A":
-        final_modified_sentence.insert(change_i,highest_js_word[0])
-        change = "A"
-      else: 
-        final_modified_sentence.pop(change_i)
-        change = "D"
+    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
+    
+    if highest_js_word[1] == "R":
+      final_modified_sentence[change_i] = highest_js_word[0]
+      change = "R"
+    elif highest_js_word[1] == "A":
+      final_modified_sentence.insert(change_i,highest_js_word[0])
+      change = "A"
+    else: 
+      final_modified_sentence.pop(change_i)
+      change = "D"
 
-      new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab)
+    new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab)
 
-      new_discounted_score = discounting(change_i, new_js_positions)
-      curr_discounted_score = discounting(change_i, cur_js_positions)
+    new_discounted_score = discounting(change_i, new_js_positions)
+    curr_discounted_score = discounting(change_i, cur_js_positions)
 
-      if change == "D":
-        new_js_positions.insert(change_i, 0)
+    if change == "D":
+      new_js_positions.insert(change_i, 0)
 
-      if new_discounted_score > curr_discounted_score:
-        scores.append(new_sentence_score)
-        js_positions.append(new_js_positions)
-        changes.append(change)
-        sentence_split = final_modified_sentence
-        print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
+    if new_discounted_score > curr_discounted_score:
+      scores.append(new_sentence_score)
+      js_positions.append(new_js_positions)
+      changes.append(change)
+      sentence_split = final_modified_sentence
+      print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab)[0])
 
