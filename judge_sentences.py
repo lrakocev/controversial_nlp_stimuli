@@ -120,7 +120,7 @@ def evaluate_sentence(model_list, sentence, vocab):
   return total_js/len_sentence, js_positions
 
 
-def get_avg_distr(model_list, context, next_word, vocab, top_p):
+def get_avg_distr(model_list, context, next_word, vocab):
 
     distrs = {}
     for model_name in model_list:
@@ -140,8 +140,6 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
 
     avg_distr_summed = zip(vocab, avg_distr_vals)
 
-    avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
-
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
 
@@ -156,7 +154,7 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   return total/(len(js_positions)-cur_ind+1)
 
 
-def change_sentence(model_list, sentence, vocab, top_p):
+def change_sentence(model_list, sentence, vocab):
 
   original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
@@ -188,7 +186,7 @@ def change_sentence(model_list, sentence, vocab, top_p):
     for j in range(0,10):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab)
 
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -213,7 +211,7 @@ def change_sentence(model_list, sentence, vocab, top_p):
     for k in range(0,10):
       cur_context = sentence_split[:change_i+1]
 
-      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
+      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
