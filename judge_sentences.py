@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import math
 import os
-imoprt math
+import math
 
 class ModelInfo():
 
