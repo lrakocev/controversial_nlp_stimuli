@@ -71,13 +71,9 @@ def get_distribution(model_name, context, next_word, vocab):
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
-  outputs_array = np.asarray(outputs[0]).flatten()
-
-
-
-  probabilities = softmax(outputs_array)
+  probabilities = softmax(outputs)
   if len(next_word_tokens) > 1:
-    probabilities = softmax(outputs_array)
+    probabilities = softmax(outputs)
     log_probabilities = math.log(probabilites)
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
