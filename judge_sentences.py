@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import math
 import os
+imoprt math
 
 class ModelInfo():
 
@@ -52,16 +53,12 @@ def get_vocab(filename):
 
   return vocab_list
 
-def map_word_to_tokens(model_info, model_name, word):
 
-  tokenizer, model = model_info[model_name]
-  tokens = tokenizer.tokenize(word)
-  return tokens
+def get_distribution(model_name, context, next_word, vocab):
 
-def get_distribution(model_info, context, joint_vocab):
-
-  tokenizer = model_info.tokenizer 
-  model = model_info.model
+  tokenizer = model_name.tokenizer 
+  model = model_name.model
+  model_word_token_dict = model_name.create_word_to_token_dict(vocab)
 
   tokens = tokenizer.tokenize(context)
   tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
@@ -69,17 +66,25 @@ def get_distribution(model_info, context, joint_vocab):
   print(tokens)
 
   ids = tokenizer.convert_tokens_to_ids(tokens)
-  '''
+
   x = 1
   attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
   attention_mask = torch.tensor(attention_mask).unsqueeze(0)
-  '''
 
   input_ids = torch.tensor(ids).unsqueeze(0)
 
-  outputs = model(input_ids) #, attention_mask=attention_mask)
+  outputs = model(input_ids, attention_mask=attention_mask)
+
+  next_word_tokens = model_word_token_dict[next_word]
 
   probabilities = softmax(outputs)
+  if len(next_word_tokens) == 1:
+    
+    distr_dict = dict(zip(joint_vocab, probabilities))
+  else: 
+    log_probabilities = math.log(probabilites)
+    n = len(next_word_tokens)
+    probabilities = sum(log_probabilities[-n:])
 
   distr_dict = dict(zip(joint_vocab, probabilities))
 
@@ -87,21 +92,21 @@ def get_distribution(model_info, context, joint_vocab):
 
 
 def entropy(prob_dist, base=math.e):
-        return -sum([p * math.log(p,base) for p in prob_dist if p != 0])
+  return -sum([p * math.log(p,base) for p in prob_dist if p != 0])
 
 def jsd(prob_dists, base=math.e):
-    weight = 1/len(prob_dists) #all same weight
-    js_left = [0,0,0]
-    js_right = 0    
-    for pd in prob_dists:
-        js_left[0] += pd[0]*weight
-        js_left[1] += pd[1]*weight
-        js_left[2] += pd[2]*weight
-        js_right += weight*entropy(pd,base)
-    return entropy(js_left)-js_right
+  weight = 1/len(prob_dists) #all same weight
+  js_left = [0,0,0]
+  js_right = 0    
+  for pd in prob_dists:
+      js_left[0] += pd[0]*weight
+      js_left[1] += pd[1]*weight
+      js_left[2] += pd[2]*weight
+      js_right += weight*entropy(pd,base)
+  return entropy(js_left)-js_right
 
 
-def evaluate_sentence(model_info, sentence, joint_vocab):
+def evaluate_sentence(model_list, sentence, vocab):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -114,10 +119,11 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
     
-    for model_name in model_info.keys():
-      tokenizer, model = model_info[model_name]
+    for model_name in model_list:
+      tokenizer = model_name.tokenizer
+      model = model_name.model
 
-      next_word_distr = get_distribution(model_info, model_name, curr_context, joint_vocab)
+      next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
       distrs[model_name] = next_word_distr
 
     total_js += jsd(distrs.values())
@@ -127,19 +133,20 @@ def evaluate_sentence(model_info, sentence, joint_vocab):
   return total_js/len_sentence, js_positions
 
 
-def get_avg_distr(model_info, context, joint_vocab, top_p):
+def get_avg_distr(model_list, context, next_word, vocab, top_p):
 
     distrs = {}
-    for model_name in model_info.keys():
-      tokenizer, model = model_info[model_name]
+    for model_name in model_list:
+      tokenizer = model_name.tokenizer
+      model = model_name.model
 
-      next_word_distr = get_distribution(model_info, model_name, context, joint_vocab)
+      next_word_distr = get_distribution(model_name, context, next_word, vocab)
       distrs[model_name] = next_word_distr
 
     df = pd.DataFrame(distrs.values())
     avg_distr = dict(df.mean())
 
-    avg_distr = {x: avg_distr[x] for x in joint_vocab}
+    avg_distr = {x: avg_distr[x] for x in vocab}
 
     avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
@@ -164,9 +171,9 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   return total/(len(js_positions)-cur_ind+1)
 
 
-def change_sentence(model_info, sentence, joint_vocab, top_p):
+def change_sentence(model_list, sentence, vocab, top_p):
 
-  original_score, original_js_positions = evaluate_sentence(model_info, sentence, joint_vocab)
+  original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
   js_positions = [original_js_positions]
@@ -178,7 +185,7 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
 
   for i in range(0, num_changes):
     print("Round ", i, " and the sentence to be changed is ", ' '.join(sentence_split))
-    curr_sentence_score, cur_js_positions = evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)
+    curr_sentence_score, cur_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab)
 
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
@@ -198,20 +205,20 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
       for j in range(0,10):
         cur_context = sentence_split[:change_i+1]
 
-        cur_prob_list, cur_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
+        cur_prob_list, cur_word_list = get_avg_distr(model_list, context, sentence_split[change_i+1], vocab, top_p)
 
         n = list(np.random.multinomial(1,cur_prob_list))
         ind = n.index(1)
         new_word = cur_word_list[ind]
         modified_sentence_replacements[change_i] = new_word
         new_context = ' '.join(modified_sentence_replacements)
-        js_dict[(new_word,"R")] = evaluate_sentence(model_info, new_context, joint_vocab)
+        js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
       
 
       #deletions
       modified_sentence_deletions.pop(change_i)
       if len(modified_sentence_deletions) > 0:
-        js_dict[("", "D")] = evaluate_sentence(model_info, ' '.join(modified_sentence_deletions), joint_vocab)
+        js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab)
       else: 
         js_dict[("", "D")] = (0,[0])
 
@@ -220,14 +227,14 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
       for k in range(0,10):
         cur_context = sentence_split[:change_i+1]
 
-        next_prob_list, next_word_list = get_avg_distr(model_info, ' '.join(cur_context), joint_vocab, top_p)
+        next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
 
         n = list(np.random.multinomial(1,next_prob_list))
         ind = n.index(1)
         new_word = next_word_list[ind]
         modified_sentence_additions.insert(change_i+1,new_word)
         new_context = ' '.join(modified_sentence_additions)
-        js_dict[(new_word,"A")] = evaluate_sentence(model_info, new_context, joint_vocab)
+        js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab)
         modified_sentence_additions.pop(change_i+1)
 
       highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
@@ -242,7 +249,7 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
         final_modified_sentence.pop(change_i)
         change = "D"
 
-      new_sentence_score, new_js_positions = evaluate_sentence(model_info, ' '.join(final_modified_sentence), joint_vocab)
+      new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab)
 
 
       new_discounted_score = discounting(change_i, new_js_positions)
@@ -258,7 +265,7 @@ def change_sentence(model_info, sentence, joint_vocab, top_p):
         sentence_split = final_modified_sentence
         print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
 
-  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_info, ' '.join(sentence_split), joint_vocab)[0])
+  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab)[0])
 
   print("Scores", scores, "Changes", changes)
   return scores, js_positions, ' '.join(sentence_split)
@@ -272,17 +279,6 @@ def plot_scores(scores, sentence):
   plt.savefig(name)
   plt.close()
 
-'''
-def plot_positions(js_positions, sentence):
-
-  print("plot positions", js_positions)
-
-  plt.plot(js_positions)
-  plt.show()
-  name = "positions of: " + sentence + ".png"
-  plt.savefig(name)
-  plt.close()
-'''
 
 def sample_sentences(file_name):
 
@@ -306,8 +302,6 @@ roberta_config.is_decoder = True
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ")
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_")
 
-model_info = [GPT2, TXL]
-
 '''
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
               "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
@@ -318,25 +312,12 @@ model_info = [GPT2, TXL]
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 
-#vocab_list = get_vocab(filename)
+vocab_list = get_vocab(filename)
+model_list = [GPT2, TXL]
 
-print(map_word_to_tokens(model_info, "gpt2", " it's"))
 
-'''
-curr_context = "I"
-distrs = {}
-for model_name in model_info.keys():
-    tokenizer, model = model_info[model_name]
-
-    next_word_distr = get_distribution(model_info, model_name, curr_context, {})
-    distrs[model_name] = next_word_distr
-
-joint_vocab = set(distrs["GPT2"].keys()).intersection(*distrs.values().keys())
-
-for i in range(5):
+for i in range(1):
 
   sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  scores, js_positions, sentence = change_sentence(model_info, sent, joint_vocab, .9)
-  plot_scores(scores, sentence)
-  #plot_positions(js_positions,sentence)
-'''
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, .9)
+  #plot_scores(scores, sentence)
