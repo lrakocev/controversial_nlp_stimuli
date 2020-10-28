@@ -132,10 +132,7 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
 
     df = pd.DataFrame(distrs.values())
 
-    print(df)
     avg_distr = dict(df.mean())
-
-    print(avg_distr)
 
     avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
@@ -198,6 +195,9 @@ def change_sentence(model_list, sentence, vocab, top_p):
       ind = n.index(1)
       new_word = cur_word_list[ind]
       modified_sentence_replacements[change_i] = new_word
+
+      print(modified_sentence_replacements)
+
       new_context = ' '.join(modified_sentence_replacements)
       js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
     
