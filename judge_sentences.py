@@ -289,6 +289,8 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab)
 
+XLM = (XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab)
+
 '''
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
               "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
@@ -299,7 +301,7 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=ro
 
 
 
-model_list = [GPT2, Roberta]
+model_list = [GPT2, XLM]
 
 for i in range(1):
 
