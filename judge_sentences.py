@@ -81,10 +81,13 @@ def jsd(prob_dists, base=math.e):
   js_left = [0,0,0]
   js_right = 0    
   for pd in prob_dists:
-      js_left[0] += pd[0]*weight
-      js_left[1] += pd[1]*weight
-      js_left[2] += pd[2]*weight
-      js_right += weight*entropy(pd,base)
+
+    print(pd) 
+    
+    js_left[0] += pd[0]*weight
+    js_left[1] += pd[1]*weight
+    js_left[2] += pd[2]*weight
+    js_right += weight*entropy(pd,base)
   return entropy(js_left)-js_right
 
 
@@ -233,7 +236,6 @@ def change_sentence(model_list, sentence, vocab, top_p):
 
       new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab)
 
-
       new_discounted_score = discounting(change_i, new_js_positions)
       curr_discounted_score = discounting(change_i, cur_js_positions)
 
@@ -285,20 +287,16 @@ filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
+
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab)
 
 Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab)
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab)
 
-'''
-              "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
-              "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
-              "roberta-base": (RobertaTokenizer.from_pretrained('roberta-base'), RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config)),
-              "albert-base-v2": (AlbertTokenizer.from_pretrained('albert-base-v2'),AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True))}
-'''
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'), T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'), "_", vocab)
 
-
+Albert = (AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
 
 
 model_list = [GPT2, XLM]
