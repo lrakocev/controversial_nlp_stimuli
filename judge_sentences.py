@@ -49,48 +49,26 @@ def get_vocab(filename):
 
 
 def get_distribution(model_name, context, next_word, vocab):
+  
+  print("context", context)
+  print("new word", next_word)
+
 
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
 
-  tokens = tokenizer.tokenize(context)
-  #tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
-
-  print(tokens)
-
-  ids = tokenizer.convert_tokens_to_ids(tokens)
-  
-  x = 1
-  attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
-  attention_mask = torch.tensor(attention_mask).unsqueeze(0)
-  
-  input_ids = torch.tensor(ids).unsqueeze(0)
-
-  print("input ids", input_ids)
+  print(model_word_token_dict)
 
   inputs = tokenizer(context, return_tensors="pt")
 
-  outputs = model(**inputs, labels=inputs["input_ids"])#, attention_mask=attention_mask)
+  outputs = model(**inputs, labels=inputs["input_ids"])
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
-  print("next word", next_word)
-
-  print("outputs logits", outputs.logits)
-
-
-  print(np.asarray(outputs.logits.detach()).flatten())
-
-
-
   probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
-
-    #outputs[1].detach().numpy())
   if len(next_word_tokens) > 1:
     probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
-
-      #outputs[1].detach().numpy())
     log_probabilities = math.log(probabilites)
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
