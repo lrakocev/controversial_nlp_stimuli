@@ -19,12 +19,11 @@ import math
 
 class ModelInfo():
 
-  def __init__(self, model, tokenizer, start_token_symbol):
+  def __init__(self, model, tokenizer, start_token_symbol, vocab):
     self.model = model
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
-    self.word_token_dict = {}
-    self.word_id_dict = {}
+    self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
 
   def create_word_to_token_dict(self, vocab):
 
@@ -32,12 +31,6 @@ class ModelInfo():
       word = " " + str(word)
       
       self.word_token_dict[word] = self.tokenizer.tokenize(word)
-
-  def create_word_to_id_dict(self, vocab):
-
-    for word in vocab:
-      tokens = self.word_token_dict[word]
-      self.word_id_dict[word] = [tokenizer.convert_tokens_to_ids(token) for token in tokens]
 
 
 def get_vocab(filename):
@@ -301,8 +294,11 @@ t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ")
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_")
+filename = "SUBTLEXus74286wordstextversion.txt"
+vocab = get_vocab(filename)
+
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab)
 
 '''
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
@@ -312,12 +308,9 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 '''
 
 
-filename = "SUBTLEXus74286wordstextversion.txt"
 
-vocab = get_vocab(filename)
 
 model_list = [GPT2, TXL]
-
 
 for i in range(1):
 
