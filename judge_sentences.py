@@ -77,7 +77,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
   print("next word", next_word)
 
-  print("outputs logits", outputs.logits)
+  print("outputs", outputs)
 
   print("outputs 1", outputs[1])
 
@@ -312,7 +312,7 @@ roberta_config.is_decoder = True
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename)
 
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2'), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab)
 
 '''
