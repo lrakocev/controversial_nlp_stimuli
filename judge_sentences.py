@@ -61,7 +61,6 @@ def get_distribution(model_name, context, next_word, vocab):
 
   ids = tokenizer.convert_tokens_to_ids(tokens)
 
-  
   x = 1
   attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
   attention_mask = torch.tensor(attention_mask).unsqueeze(0)
@@ -74,9 +73,11 @@ def get_distribution(model_name, context, next_word, vocab):
 
   outputs_array = np.asarray(outputs[1]).flatten()
 
-  probabilities = softmax(outputs_array)
+ # outputs_array = [outputs_array[i] for i in ids]
+
+  probabilities = softmax(list(outputs_array))
   if len(next_word_tokens) > 1:
-    probabilities = softmax(outputs_array)
+    probabilities = softmax(list(outputs_array))
     log_probabilities = math.log(probabilites)
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
