@@ -71,6 +71,10 @@ def get_distribution(model_name, context, next_word, vocab):
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
+  print("next word", next_word)
+
+  print(outputs[1])
+
   print(np.asarray(outputs[1].detach()).flatten())
 
 
