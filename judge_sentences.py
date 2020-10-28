@@ -143,6 +143,8 @@ def get_avg_distr(model_list, context, next_word, vocab):
     prob_list = [v for k, v in sorted(avg_distr.items())]
     word_list = [k for k, v in sorted(avg_distr.items())]
 
+    print(word_list)
+
     return prob_list, word_list
 
 def discounting(cur_ind, js_positions, gamma=0.9):
