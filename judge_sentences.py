@@ -30,7 +30,8 @@ class ModelInfo():
 
     for word in vocab:
       print(word)
-      word = " " + word
+      word = " " + str(word)
+      
       self.word_token_dict[word] = self.tokenizer.tokenize(word)
 
   def create_word_to_id_dict(self, vocab):
