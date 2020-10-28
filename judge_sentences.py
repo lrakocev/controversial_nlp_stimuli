@@ -105,7 +105,7 @@ def evaluate_sentence(model_list, sentence, vocab):
       tokenizer = model_name.tokenizer
       model = model_name.model
       next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
-      distrs[model_name] = next_word_distr
+      distrs[model_name] = next_word_distr.values()
 
     n = len(model_list)
     weights = np.empty(n)
