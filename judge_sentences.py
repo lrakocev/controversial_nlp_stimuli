@@ -73,7 +73,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
   return distr_dict
 
-def JSD(prob_distributions, weights, logbase=2):
+def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
     wprobs = weights * prob_distributions
     mixture = wprobs.sum(axis=0)
