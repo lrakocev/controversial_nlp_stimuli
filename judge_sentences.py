@@ -131,7 +131,11 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
       distrs[model_name] = list(next_word_distr)
 
     df = pd.DataFrame(distrs.values())
+
+    print(df)
     avg_distr = dict(df.mean())
+
+    print(avg_distr)
 
     avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
