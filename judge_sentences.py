@@ -105,16 +105,14 @@ def evaluate_sentence(model_list, sentence, vocab):
       tokenizer = model_name.tokenizer
       model = model_name.model
       next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
-      distrs[model_name] = next_word_distr.values()
+      distrs[model_name] = list(next_word_distr.values())
 
-      print(distrs[model_name])
-
+      
     n = len(model_list)
     weights = np.empty(n)
     weights.fill(1/n)
 
-    print(distrs.values())
-    total_js += jsd(distrs.values(), weights)
+    total_js += jsd(list(distrs.values()), weights)
     curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
