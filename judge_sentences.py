@@ -134,12 +134,11 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
 
     avg_distr = dict(df.mean())
 
-    avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
 
     avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
 
-    avg_distr_summed = zip(avg_distr_sorted_keys, avg_distr_vals)
+    avg_distr_summed = zip(vocab, avg_distr_vals)
 
     avg_distr = {k: avg_distr[k] for (k, v) in avg_distr_summed if v <= top_p}
 
