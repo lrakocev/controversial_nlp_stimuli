@@ -69,7 +69,9 @@ def get_distribution(model_name, context, next_word, vocab):
 
   print("input ids", input_ids)
 
-  outputs = model(**ids)#, attention_mask=attention_mask)
+  inputs = tokenizer(context, return_tensors="pt")
+
+  outputs = model(**inputs)#, attention_mask=attention_mask)
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
