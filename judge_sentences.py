@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import entropy
+from scipy.stats import entropy as H
 import tensorflow as tf
 import torch
 from transformers import  GPT2LMHeadModel, GPT2Tokenizer, TransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, T5ForConditionalGeneration, T5Config, RobertaTokenizer, RobertaForCausalLM, RobertaConfig, AlbertTokenizer, AlbertForMaskedLM,XLMTokenizer, XLMWithLMHeadModel
@@ -16,6 +16,7 @@ import pandas as pd
 import math
 import os
 import math
+
 
 class ModelInfo():
 
@@ -72,23 +73,19 @@ def get_distribution(model_name, context, next_word, vocab):
 
   return distr_dict
 
+def JSD(prob_distributions, weights, logbase=2):
+    # left term: entropy of misture
+    wprobs = weights * prob_distributions
+    mixture = wprobs.sum(axis=0)
+    entropy_of_mixture = H(mixture, base=logbase)
 
-def entropy(prob_dist, base=math.e):
-  return -sum([p * math.log(p,base) for p in prob_dist if p != 0])
+    # right term: sum of entropies
+    entropies = np.array([H(P_i, base=logbase) for P_i in prob_distributions])
+    wentropies = weights * entropies
+    sum_of_entropies = wentropies.sum()
 
-def jsd(prob_dists, base=math.e):
-  weight = 1/len(prob_dists) #all same weight
-  js_left = [0,0,0]
-  js_right = 0    
-  for pd in prob_dists:
-
-    print(pd) 
-    
-    js_left[0] += pd[0]*weight
-    js_left[1] += pd[1]*weight
-    js_left[2] += pd[2]*weight
-    js_right += weight*entropy(pd,base)
-  return entropy(js_left)-js_right
+    divergence = entropy_of_mixture - sum_of_entropies
+    return(divergence)
 
 
 def evaluate_sentence(model_list, sentence, vocab):
