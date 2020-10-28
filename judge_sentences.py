@@ -312,7 +312,7 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 
-vocab_list = get_vocab(filename)
+vocab = get_vocab(filename)
 model_list = [GPT2, TXL]
 
 
