@@ -82,7 +82,7 @@ def get_distribution(model_name, context, next_word, vocab):
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
 
-  distr_dict = dict(zip(ocab, probabilities))
+  distr_dict = dict(zip(vocab, probabilities))
 
   return distr_dict
 
