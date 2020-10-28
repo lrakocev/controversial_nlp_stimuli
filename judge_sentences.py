@@ -99,7 +99,7 @@ def evaluate_sentence(model_list, sentence, vocab):
   js_positions = []
   distrs = {}
 
-  for i in range(0, len_sentence):
+  for i in range(0, len_sentence-1):
     curr_context += sentence_split[i] + " "
     
     for model_name in model_list:
