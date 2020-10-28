@@ -130,10 +130,8 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
       next_word_distr = get_distribution(model_name, context, next_word, vocab)
       distrs[model_name] = list(next_word_distr)
 
-    df = pd.DataFrame(list(distrs.values()))
+    df = pd.DataFrame(distrs.values())
     avg_distr = dict(df.mean())
-
-    avg_distr = {x: avg_distr[x] for x in vocab}
 
     avg_distr_sorted_keys = [k for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
     avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
