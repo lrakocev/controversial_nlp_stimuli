@@ -72,9 +72,9 @@ def get_distribution(model_name, context, next_word, vocab):
   next_word_tokens = model_word_token_dict[str(next_word)]
 
 
-  print(outputs)
+  print("output", outputs[1])
   
-  probabilities = softmax(outputs)
+  probabilities = softmax(outputs[1])
   if len(next_word_tokens) == 1:
     
     distr_dict = dict(zip(joint_vocab, probabilities))
