@@ -190,7 +190,7 @@ def change_sentence(model_list, sentence, vocab, top_p):
     for j in range(0,10):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, context, sentence_split[change_i+1], vocab, top_p)
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab, top_p)
 
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
