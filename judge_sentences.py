@@ -49,8 +49,7 @@ def get_vocab(filename):
 
 
 def get_distribution(model_name, context, next_word, vocab):
-  
-  print("context", model_name)
+
 
   tokenizer = model_name.tokenizer 
   model = model_name.model
@@ -288,6 +287,8 @@ vocab = get_vocab(filename)
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab)
 
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab)
+
 '''
               "t5-11b": (T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'),T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models')),
               "xlm-mlm-xnli15-1024": (XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True)),
@@ -298,7 +299,7 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 
 
-model_list = [GPT2, TXL]
+model_list = [GPT2, Roberta]
 
 for i in range(1):
 
