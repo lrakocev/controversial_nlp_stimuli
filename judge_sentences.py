@@ -128,7 +128,7 @@ def get_avg_distr(model_list, context, next_word, vocab, top_p):
       model = model_name.model
 
       next_word_distr = get_distribution(model_name, context, next_word, vocab)
-      distrs[model_name] = list(next_word_distr)
+      distrs[model_name] = list(next_word_distr.values())
 
     df = pd.DataFrame(distrs.values())
 
