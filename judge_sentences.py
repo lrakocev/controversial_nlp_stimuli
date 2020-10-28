@@ -29,6 +29,7 @@ class ModelInfo():
   def create_word_to_token_dict(self, vocab):
 
     for word in vocab:
+      print(word)
       word = " " + word
       self.word_token_dict[word] = self.tokenizer.tokenize(word)
 
@@ -313,6 +314,8 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 filename = "SUBTLEXus74286wordstextversion.txt"
 
 vocab = get_vocab(filename)
+
+print(vocab)
 model_list = [GPT2, TXL]
 
 
