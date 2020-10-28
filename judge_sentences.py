@@ -55,7 +55,7 @@ def get_distribution(model_name, context, next_word, vocab):
   model_word_token_dict = model_name.word_token_dict
 
   tokens = tokenizer.tokenize(context)
-  tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
+  #tokens = [tokenizer.bos_token] + tokens + [tokenizer.eos_token]
 
   print(tokens)
 
@@ -71,7 +71,6 @@ def get_distribution(model_name, context, next_word, vocab):
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
-  print(outputs[1])
 
   probabilities = softmax(outputs[1].detach().numpy())
   if len(next_word_tokens) > 1:
@@ -80,8 +79,6 @@ def get_distribution(model_name, context, next_word, vocab):
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
 
-
-  print(probabilities)
   distr_dict = dict(zip(vocab, probabilities))
 
   return distr_dict
