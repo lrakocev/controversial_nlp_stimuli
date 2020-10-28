@@ -194,7 +194,7 @@ def change_sentence(model_list, sentence, vocab, top_p):
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
       new_word = cur_word_list[ind]
-      modified_sentence_replacements[change_i] = new_word
+      modified_sentence_replacements[change_i] = str(new_word)
 
       print(modified_sentence_replacements)
 
@@ -219,7 +219,7 @@ def change_sentence(model_list, sentence, vocab, top_p):
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
       new_word = next_word_list[ind]
-      modified_sentence_additions.insert(change_i+1,new_word)
+      modified_sentence_additions.insert(change_i+1,str(new_word))
       new_context = ' '.join(modified_sentence_additions)
       js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab)
       modified_sentence_additions.pop(change_i+1)
