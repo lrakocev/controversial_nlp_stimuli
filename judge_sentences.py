@@ -69,13 +69,13 @@ def get_distribution(model_name, context, next_word, vocab):
 
   print("input ids", input_ids)
 
-  outputs = model(input_ids, labels=input_ids) #, attention_mask=attention_mask)
+  outputs = model(**input_ids, labels=input_ids) #, attention_mask=attention_mask)
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
   print("next word", next_word)
 
-  print("outputs", outputs)
+  print("outputs logits", outputs.logits)
 
   print("outputs 1", outputs[1])
 
