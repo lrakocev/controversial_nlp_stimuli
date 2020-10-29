@@ -82,11 +82,6 @@ def get_distribution(model_name, context, next_word, vocab):
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
 
-    
-    print("pd", np.asarray(prob_distributions))
-
-    print("weights", list(weights))
-    
     k = zip(list(weights), np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
@@ -125,7 +120,8 @@ def evaluate_sentence(model_list, sentence, vocab):
     weights = np.empty(n)
     weights.fill(1/n)
 
-    total_js += jsd(list(distrs.values()), weights)
+    print(distrs.values())
+    total_js += jsd(distrs.values(), weights)
     curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
