@@ -70,7 +70,7 @@ def get_distribution(model_name, context, next_word, vocab):
   if N > 1: 
     probabilities = vectorize_log(probabilities)
     for i in range(len(next_word_tokens)-1):
-      word = next_word_tokens[i]
+      word_part = next_word_tokens[i]
       new_context = context + word_part
 
       print("new context", new_context)
