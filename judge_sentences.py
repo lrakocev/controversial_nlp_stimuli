@@ -68,6 +68,7 @@ def get_distribution(model_name, context, next_word, vocab):
     print("next word tokens", next_word_tokens)
   else:
     N = 1
+    print("here i am")
 
   vectorize_log = np.vectorize(math.log)
   probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
@@ -80,7 +81,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
       print("new context", new_context)
       print("next word", next_word_tokens[i+1])
-      
+
       next_probabilities, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
 
       print("len probabiltiies", len(probabilities))
