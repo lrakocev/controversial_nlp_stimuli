@@ -77,9 +77,17 @@ def get_distribution(model_name, context, next_word, vocab):
 
     logits_size = list(outputs.logits.size())[1]
 
-    print("output logits 0", outputs.logits[0][0][0])
+    print("output logits siez", outputs.logits.size())
 
-    log_probabilities = [vectorize_log(np.asarray(outputs.logits[0][0][i].detach()).flatten()) for i in range(logits_size)]
+    print("output logits", outputs.logits)
+
+    print("output logits 0", outputs.logits[0])
+
+    print("output logits 0", outputs.logits[0][0])
+
+
+
+    log_probabilities = [vectorize_log(np.asarray(outputs.logits[i].detach()).flatten()) for i in range(logits_size)]
     print("len probs, see if same as number tokens next", log_probabilities.size())
     summed_log_probs = np.sum(log_probabilities, axis=1)
     probailities = softmax(summed_log_probs)
