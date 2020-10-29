@@ -120,8 +120,10 @@ def evaluate_sentence(model_list, sentence, vocab):
     weights = np.empty(n)
     weights.fill(1/n)
 
+    print("current context", curr_context)
+
     print(distrs.values())
-    total_js += jsd(distrs.values(), weights)
+    total_js += jsd(list(distrs.values()), weights)
     curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
