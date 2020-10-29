@@ -52,6 +52,7 @@ def get_vocab(filename):
 def get_distribution(model_name, context, next_word, vocab):
 
   print("current context", context)
+  print("next word OG", next_word)
 
   tokenizer = model_name.tokenizer 
   model = model_name.model
