@@ -64,14 +64,12 @@ def get_distribution(model_name, context, next_word, vocab):
 
   probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
   if len(next_word_tokens) > 1:
-    probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
     log2 = np.vectorize(math.log)
     log_probabilities = log2(probabilities)
+    print(log_probabilities)
     n = len(next_word_tokens)
     probabilities = sum(log_probabilities[-n:])
 
-
-  print(probabilities)
 
   distr_dict = dict(zip(vocab, probabilities))
 
