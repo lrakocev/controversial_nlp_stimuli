@@ -79,7 +79,7 @@ def get_distribution(model_name, context, next_word, vocab):
       print("new context", new_context)
       print("next word", next_word_tokens[i+1])
 
-      next_probabilties, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
+      next_probabilities, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
       probabilities += vectorize_log(next_probabilities)
 
   distr_dict = dict(zip(vocab, probabilities))
