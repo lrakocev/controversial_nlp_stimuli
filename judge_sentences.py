@@ -59,11 +59,14 @@ def get_distribution(model_name, context, next_word, vocab):
 
   outputs = model(**inputs, labels=inputs["input_ids"])
 
-  next_word_tokens = model_word_token_dict[str(next_word)]
+  if next_word is in model_word_token_dict.keys():
+    next_word_tokens = model_word_token_dict[str(next_word)]
+    N = len(next_word_tokens)
+  else:
+    N = 1
 
   print("next word tokens", next_word_tokens)
 
-  N = len(next_word_tokens)
   vectorize_log = np.vectorize(math.log)
   probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
 
