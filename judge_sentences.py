@@ -84,6 +84,13 @@ def jsd(prob_distributions, weights, logbase=math.e):
 
     print("num distrs, should be 2 but is", len(prob_distributions))
 
+    types = [type(i) for i in prob_distributions]
+
+    lens = [len(i) for i in prob_distributions]
+
+    print("types of pds", types)
+    print("lens of pds", lens)
+
     k = zip(weights, np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
@@ -121,7 +128,7 @@ def evaluate_sentence(model_list, sentence, vocab):
     weights = np.empty(n)
     weights.fill(1/n)
 
-    print(curr_context)
+    print("curr context", curr_context)
 
     total_js += jsd(list(distrs.values()), weights)
     curr_js = total_js/(i+1)
