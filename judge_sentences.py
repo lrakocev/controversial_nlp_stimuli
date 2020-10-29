@@ -80,7 +80,7 @@ def get_distribution(model_name, context, next_word, vocab):
       print("next word", next_word_tokens[i+1])
 
       next_probabilities, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
-      probabilities =  np.sum([probabilities, vectorize_log(next_probabilities)], axis=1)
+      probabilities =  np.sum([probabilities, vectorize_log(next_probabilities)], axis=0)
 
   distr_dict = dict(zip(vocab, probabilities))
   return probabilities, distr_dict
