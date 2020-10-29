@@ -78,10 +78,8 @@ def get_distribution(model_name, context, next_word, vocab):
   else: 
 
     print("output logits sizr", outputs.logits.size())
-    print("output logits second dimensions?", len(list(outputs.logits.size())[1]))
 
-    print("range len", range(len(np.asarray(outputs.logits))) )
-    log_probabilities = [vectorize_log(np.asarray(outputs.logits[i].detach()).flatten()) for i in range(len(list(outputs.logits.size())[1]))]
+    log_probabilities = [vectorize_log(np.asarray(outputs.logits[i].detach()).flatten()) for i in range(list(outputs.logits.size())[1])]
     print("len probs, see if same as number tokens next", log_probabilities.size())
     summed_log_probs = np.sum(log_probabilities, axis=1)
     probailities = softmax(summed_log_probs)
