@@ -58,38 +58,26 @@ def get_distribution(model_name, context, next_word, vocab):
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
 
+  print("tokenizer.tokenize", tokenizer.tokenize(context))
+
   inputs = tokenizer(context, return_tensors="pt")
 
   outputs = model(**inputs, labels=inputs["input_ids"])
 
-  if next_word in model_word_token_dict.keys():
-    next_word_tokens = model_word_token_dict[str(next_word)]
-    N = len(next_word_tokens)
+  next_word_tokens = model_word_token_dict[str(next_word)]
+  N = len(next_word_tokens)
 
-    print("next word tokens", next_word_tokens)
-  else:
-    N = 0
-    print("here i am")
+  print("next word tokens", next_word_tokens)
 
   vectorize_log = np.vectorize(math.log)
-  probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
 
-  if N > 1: 
-    probabilities = vectorize_log(probabilities)
-    for i in range(len(next_word_tokens)-1):
-      word_part = next_word_tokens[i]
-      new_context = context + word_part
-
-      print("new context", new_context)
-      print("next word", next_word_tokens[i+1])
-
-      next_probabilities, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
-
-      print("len probabiltiies", len(probabilities))
-      print("len next probabiltiies", len(next_probabilities))
-      probabilities =  np.sum([probabilities, vectorize_log(next_probabilities)])
-
-  print("got here!")
+  if N = 1: 
+    probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
+  else: 
+    log_probabilities = vectorize_log(np.asarray(outputs.logits.detach()).flatten())
+    print("len probs, see if same as number tokens next", size(log_probabilities))
+    summed_log_probs = np.sum(log_probabilities, axis=1)
+    probailities = softmax(summed_log_probs)
 
   distr_dict = dict(zip(vocab, probabilities))
   return probabilities, distr_dict
