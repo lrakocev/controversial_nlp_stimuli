@@ -123,8 +123,6 @@ def evaluate_sentence(model_list, sentence, vocab):
     weights = np.empty(n)
     weights.fill(1/n)
 
-    print("curr context", curr_context)
-
     total_js += jsd(list(distrs.values()), weights)
     curr_js = total_js/(i+1)
     js_positions.append(curr_js)
@@ -166,7 +164,7 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  
+
   return total/(len(js_positions)-cur_ind)+1
 
 
