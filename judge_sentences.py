@@ -58,11 +58,7 @@ def get_distribution(model_name, context, next_word, vocab):
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
 
-  print("tokenizer.tokenize", tokenizer.tokenize(context))
-
   inputs = tokenizer(context, return_tensors="pt")
-
-  print("inputs", inputs)
 
   outputs = model(**inputs, labels=inputs["input_ids"])
 
@@ -81,10 +77,9 @@ def get_distribution(model_name, context, next_word, vocab):
 
     logits_size = list(outputs.logits.size())[1]
 
-    print("output logits 0", outputs.logits[0])
+    print("output logits 0", outputs.logits[0][0][0])
 
-    print("output logits np", np.asarray(outputs.logits.detach()).flatten()[0])
-    log_probabilities = [vectorize_log(np.asarray(outputs.logits[i].detach()).flatten()) for i in range(logits_size)]
+    log_probabilities = [vectorize_log(np.asarray(outputs.logits[0][0][i].detach()).flatten()) for i in range(logits_size)]
     print("len probs, see if same as number tokens next", log_probabilities.size())
     summed_log_probs = np.sum(log_probabilities, axis=1)
     probailities = softmax(summed_log_probs)
