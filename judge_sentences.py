@@ -82,7 +82,7 @@ def get_distribution(model_name, context, next_word, vocab):
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
 
-    k = zip(weights, prob_distributions)
+    k = zip(np.asarray(weights), np.asarray(prob_distributions))
     wprobs = [x*y for x,y in list(k)]
     mixture = wprobs.sum(axis=0)
     entropy_of_mixture = H(mixture, base=logbase)
