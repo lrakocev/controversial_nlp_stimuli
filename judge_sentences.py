@@ -67,22 +67,14 @@ def get_distribution(model_name, context, next_word, vocab):
   if N == 1: 
     probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
   else: 
-    print("here i am, with the weird split")
     logits_size = list(outputs.logits.size())[1]
 
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size)]
 
-    print("log probs", log_probabilities)
-
+    
     log_probabilities = [l.tolist() for l in log_probabilities]
 
-    print("log probs", log_probabilities )
     probabilities = np.sum(log_probabilities, axis=0)
-
-
-
-    print("probabilities", probabilities)
-   
 
   distr_dict = dict(zip(vocab, probabilities))
   return probabilities, distr_dict
@@ -90,16 +82,10 @@ def get_distribution(model_name, context, next_word, vocab):
 
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
-
-    print("num distrs, should be 2 but is", len(prob_distributions))
-
+    
     types = [type(i) for i in prob_distributions]
 
     lens = [len(i) for i in prob_distributions]
-
-    print("types of pds", types)
-    print("lens of pds", lens)
-
     k = zip(weights, np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
