@@ -67,13 +67,16 @@ def get_distribution(model_name, context, next_word, vocab):
   if N == 1: 
     probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
   else: 
-
+    print("here i am, with the weird split")
     logits_size = list(outputs.logits.size())[1]
 
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size)]
 
     summed_log_probs = np.sum(log_probabilities, axis=1)
     probabilities = softmax(summed_log_probs)
+
+
+  print("len probabilities", len(probabilities) )
 
   distr_dict = dict(zip(vocab, probabilities))
   return probabilities, distr_dict
