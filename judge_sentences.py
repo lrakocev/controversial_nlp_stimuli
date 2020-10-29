@@ -59,7 +59,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
   outputs = model(**inputs, labels=inputs["input_ids"])
 
-  if next_word is in model_word_token_dict.keys():
+  if next_word in model_word_token_dict.keys():
     next_word_tokens = model_word_token_dict[str(next_word)]
     N = len(next_word_tokens)
   else:
