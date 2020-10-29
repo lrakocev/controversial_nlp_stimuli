@@ -82,7 +82,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
-    
+
     types = [type(i) for i in prob_distributions]
 
     lens = [len(i) for i in prob_distributions]
@@ -166,7 +166,8 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  return total/(len(js_positions)-cur_ind+1)
+  
+  return total/(len(js_positions)-cur_ind)+1
 
 
 def change_sentence(model_list, sentence, vocab):
