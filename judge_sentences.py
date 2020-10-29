@@ -51,9 +51,6 @@ def get_vocab(filename):
 
 def get_distribution(model_name, context, next_word, vocab):
 
-  print("current context", context)
-  print("next word OG", next_word)
-
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
@@ -64,8 +61,6 @@ def get_distribution(model_name, context, next_word, vocab):
 
   next_word_tokens = model_word_token_dict[str(next_word)]
   N = len(next_word_tokens)
-
-  print("next word tokens", next_word_tokens)
 
   vectorize_log = np.vectorize(math.log)
 
