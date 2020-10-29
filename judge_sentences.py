@@ -51,6 +51,8 @@ def get_vocab(filename):
 
 def get_distribution(model_name, context, next_word, vocab):
 
+  print("current context", context)
+
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
@@ -78,7 +80,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
       print("new context", new_context)
       print("next word", next_word_tokens[i+1])
-
+      
       next_probabilities, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
 
       print("len probabiltiies", len(probabilities))
