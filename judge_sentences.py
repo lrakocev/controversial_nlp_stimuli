@@ -74,7 +74,9 @@ def get_distribution(model_name, context, next_word, vocab):
 
     print("log probs", log_probabilities)
 
-    log_probabilities = np.asarray([l.tolist() for l in log_probabilities])
+    log_probabilities = [l.tolist() for l in log_probabilities]
+
+    print("log probs", log_probablities )
     probabilities = np.sum(log_probabilities)
 
 
