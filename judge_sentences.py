@@ -71,7 +71,7 @@ def get_distribution(model_name, context, next_word, vocab):
 
   vectorize_log = np.vectorize(math.log)
 
-  if N = 1: 
+  if N == 1: 
     probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
   else: 
     log_probabilities = vectorize_log(np.asarray(outputs.logits.detach()).flatten())
