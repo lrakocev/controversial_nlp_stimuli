@@ -82,7 +82,7 @@ def get_distribution(model_name, context, next_word, vocab):
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
 
-    print(len(prob_distributions))
+    print("num distrs, should be 2 but is", len(prob_distributions))
 
     k = zip(weights, np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
