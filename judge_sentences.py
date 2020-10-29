@@ -192,7 +192,7 @@ def change_sentence(model_list, sentence, vocab):
   #change_i = n.index(1)
 
   #print("change index", change_i)
-  for change_i in range(len(cur_js_positions)):
+  for change_i in range(len(cur_js_positions)-1):
 
     js_dict = {}
 
