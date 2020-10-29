@@ -51,7 +51,6 @@ def get_vocab(filename):
 
 def get_distribution(model_name, context, next_word, vocab):
 
-
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
@@ -62,18 +61,23 @@ def get_distribution(model_name, context, next_word, vocab):
 
   next_word_tokens = model_word_token_dict[str(next_word)]
 
+  N = len(next_word_tokens)
+  vectorize_log = np.vectorize(math.log)
   probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
-  if len(next_word_tokens) > 1:
-    log2 = np.vectorize(math.log)
-    log_probabilities = log2(probabilities)
-    print(log_probabilities)
-    n = len(next_word_tokens)
-    probabilities = sum(log_probabilities[-n:])
 
+  if N > 1: 
+    probabilities = vectorize_log(probabilities)
+    for i in range(len(next_word_tokens)):
+      word = next_word_tokens[i]
+      new_context = context + word_part
+      next_probabilties, next_distr_dict = get_distribution(model_name, new_context, next_word_tokens[i+1], vocab)
 
-  distr_dict = dict(zip(vocab, probabilities))
+      probabilities += vectorize_log(next_probabilities)
 
-  return distr_dict
+  
+  distr_dict = dict(zip(vocab, tot_probabilities))
+  return tot_probabilities, distr_dict
+
 
 def jsd(prob_distributions, weights, logbase=math.e):
     # left term: entropy of misture
@@ -107,7 +111,7 @@ def evaluate_sentence(model_list, sentence, vocab):
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
-      next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
+      probabilities, next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
       distrs[model_name] = list(next_word_distr.values())
 
       
@@ -129,7 +133,7 @@ def get_avg_distr(model_list, context, next_word, vocab):
       tokenizer = model_name.tokenizer
       model = model_name.model
 
-      next_word_distr = get_distribution(model_name, context, next_word, vocab)
+      probabilities, next_word_distr = get_distribution(model_name, context, next_word, vocab)
       distrs[model_name] = list(next_word_distr.values())
 
     df = pd.DataFrame(distrs.values())
