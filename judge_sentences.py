@@ -55,7 +55,15 @@ def get_distribution(model_name, context, next_word, vocab):
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
 
+  tokens = tokenizer.tokenize(context)
+  print("tokens context", tokens)
+
+  print("context", context)
+  print("next word",next_word)
+
   inputs = tokenizer(context, return_tensors="pt")
+
+  print("inputs", inputs)
 
   outputs = model(**inputs, labels=inputs["input_ids"])
 
@@ -71,10 +79,11 @@ def get_distribution(model_name, context, next_word, vocab):
 
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size)]
 
-    
     log_probabilities = [l.tolist() for l in log_probabilities]
 
     probabilities = np.sum(log_probabilities, axis=0)
+
+  # map IDs back to the vocab and normalize
 
   distr_dict = dict(zip(vocab, probabilities))
   return probabilities, distr_dict
@@ -206,8 +215,6 @@ def change_sentence(model_list, sentence, vocab):
       ind = n.index(1)
       new_word = cur_word_list[ind]
       modified_sentence_replacements[change_i] = str(new_word)
-
-      print(modified_sentence_replacements)
 
       new_context = ' '.join(modified_sentence_replacements)
       js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
