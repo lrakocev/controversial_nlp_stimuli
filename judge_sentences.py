@@ -68,7 +68,7 @@ def get_distribution(model_name, context, vocab):
   final_probabilities = {}
   for word in vocab:
 
-    sub_word_tokens = model_work_token_dict[word]
+    sub_word_tokens = model_word_token_dict[word]
     total_prob = 0
 
     print("word", word)
