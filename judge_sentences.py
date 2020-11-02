@@ -183,6 +183,8 @@ def discounting(cur_ind, js_positions, gamma=0.9):
 
 def change_sentence(model_list, sentence, vocab):
 
+  print("here")
+
   original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
