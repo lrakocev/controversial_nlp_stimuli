@@ -90,7 +90,7 @@ def get_distribution(model_name, context, vocab):
 
       subword_token_prob = probabilities[id_num]
 
-      print("subword token prob", subwod_token_prob)
+      print("subword token prob", subword_token_prob)
 
       subword_token_log_prob = np.log(subword_token_prob)
 
