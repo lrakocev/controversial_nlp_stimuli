@@ -86,7 +86,7 @@ def get_distribution(model_name, context, vocab):
 
     inputs = tokenizer(new_context, return_tensors="pt")
 
-    outputs = model(**inputs, labels=inputs["input_ids"], attention_mask = attention_mask
+    outputs = model(**inputs, labels=inputs["input_ids"], attention_mask = attention_mask)
 
     print("size logits", outputs.logits.size())
 
