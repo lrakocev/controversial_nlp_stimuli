@@ -81,7 +81,7 @@ def get_distribution(model_name, context, vocab):
     vectorize_log = np.vectorize(math.log)
 
     x = 1
-    attention_mask = [1 for i in range(len(sub_word_tokens)-x)] + [0 for i in range(x)]
+    attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
     attention_mask = torch.tensor(attention_mask).unsqueeze(0)
 
     inputs = tokenizer(new_context, return_tensors="pt")
