@@ -96,7 +96,13 @@ def get_distribution(model_name, context, vocab):
 
     log_probabilities = [l.tolist() for l in log_probabilities]
 
-    log_probabilities_per_tokens = [log_probabilities[i][id_nums[i]] for i in range(len(id_nums))]
+
+    print("len log probs", len(log_probabilities))
+    print("all log probs len", [len(log_probabilities[i]) for i in range(len(id_nums))])
+
+    print("len id nums", len(id_nums))
+
+    log_probabilities_per_tokens = [log_probabilities[i][1][id_nums[i]] for i in range(len(id_nums))]
 
     print("log probabilities per tokens" , log_probabilities_per_tokens)
 
