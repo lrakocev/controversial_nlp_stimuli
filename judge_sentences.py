@@ -16,6 +16,7 @@ import pandas as pd
 import math
 import os
 import math
+from functools import reduce
 
 
 class ModelInfo():
@@ -26,7 +27,9 @@ class ModelInfo():
     self.start_token_symbol = start_token_symbol
     self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
 
-    all_tokens = list(np.asarray(self.word_token_dict.values()).flatten())
+    all_tokens = list(self.word_token_dict.values())
+
+    all_tokens = reduce(lambda x,y: x+y,all_tokens)
 
     print("all_tokens", all_tokens)
     print("example", self.tokenizer.convert_tokens_to_ids(all_tokens[0]))
