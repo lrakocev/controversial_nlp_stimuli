@@ -27,7 +27,10 @@ class ModelInfo():
     self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
 
     all_tokens = list(np.asarray(self.word_token_dict.values()).flatten())
-    self.id_token_dict = {token: tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
+
+    print("all_tokens", all_tokens)
+    print("example", self.tokenizer.convert_tokens_to_ids(all_tokens[0]))
+    self.id_token_dict = {token: self.tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
 
   def create_word_to_token_dict(self, vocab):
 
