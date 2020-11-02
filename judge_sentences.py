@@ -71,16 +71,10 @@ def get_distribution(model_name, context, vocab):
     sub_word_tokens = model_word_token_dict[word]
     total_prob = 0
 
-    print("word", word)
-
     new_context = context
     for token in sub_word_tokens:
 
-      print("token", token)
-
       id_num = model_token_id_dict[token]
-
-      print("id num", id_num)
 
       inputs = tokenizer(new_context, return_tensors="pt")
 
@@ -89,8 +83,6 @@ def get_distribution(model_name, context, vocab):
       probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
 
       subword_token_prob = probabilities[id_num]
-
-      print("subword token prob", subword_token_prob)
 
       subword_token_log_prob = np.log(subword_token_prob)
 
@@ -223,12 +215,16 @@ def change_sentence(model_list, sentence, vocab):
       modified_sentence_replacements[change_i] = str(new_word)
 
       new_context = ' '.join(modified_sentence_replacements)
+
+      print("replacement try", new_context)
       js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab)
     
 
     #deletions
     modified_sentence_deletions.pop(change_i)
     if len(modified_sentence_deletions) > 0:
+
+      print("deletion try", ' '.join(modified_sentence_deletions))
       js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab)
     else: 
       js_dict[("", "D")] = (0,[0])
@@ -245,6 +241,8 @@ def change_sentence(model_list, sentence, vocab):
       new_word = next_word_list[ind]
       modified_sentence_additions.insert(change_i+1,str(new_word))
       new_context = ' '.join(modified_sentence_additions)
+
+      print("additions try", new_context)
       js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab)
       modified_sentence_additions.pop(change_i+1)
 
