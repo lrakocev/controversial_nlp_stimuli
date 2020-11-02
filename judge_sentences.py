@@ -26,6 +26,9 @@ class ModelInfo():
     self.start_token_symbol = start_token_symbol
     self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
 
+    all_tokens = list(np.asarray(vocab.values()).flatten())
+    self.id_token_dict = {token: tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
+
   def create_word_to_token_dict(self, vocab):
 
     for word in vocab:
@@ -34,7 +37,7 @@ class ModelInfo():
       self.word_token_dict[word] = self.tokenizer.tokenize(word)
 
 
-def get_vocab(filename):
+def get_vocab(filename, length):
 
   data = pd.read_csv(filename, sep="\t")
 
@@ -42,51 +45,58 @@ def get_vocab(filename):
 
   data = data[~data['Word'].isin(contractions)]
 
-  vocab = data['Word'].head(50000)
+  vocab = data['Word'].head(length)
 
   vocab_list = vocab.values.tolist()
 
   return vocab_list
 
 
-def get_distribution(model_name, context, next_word, vocab):
+def get_distribution(model_name, context, vocab):
 
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
+  model_token_id_dict = model_name.token_id_dict
 
   tokens = tokenizer.tokenize(context)
-  print("tokens context", tokens)
 
-  print("context", context)
-  print("next word",next_word)
+  final_probabilities = {}
+  for word in vocab:
 
-  inputs = tokenizer(context, return_tensors="pt")
+    sub_word_tokens = model_work_token_dict[word]
+    total_prob = 0
 
-  print("inputs", inputs)
+    print("word", word)
 
-  outputs = model(**inputs, labels=inputs["input_ids"])
+    new_context = context
+    for token in sub_word_tokens:
 
-  next_word_tokens = model_word_token_dict[str(next_word)]
-  N = len(next_word_tokens)
+      print("token", token)
 
-  vectorize_log = np.vectorize(math.log)
+      id_num = model_token_id_dict[token]
 
-  if N == 1: 
-    probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
-  else: 
-    logits_size = list(outputs.logits.size())[1]
+      print("id num", id_num)
 
-    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size)]
+      inputs = tokenizer(new_context, return_tensors="pt")
 
-    log_probabilities = [l.tolist() for l in log_probabilities]
+      outputs = model(**inputs, labels=inputs["input_ids"])
 
-    probabilities = np.sum(log_probabilities, axis=0)
+      probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
 
-  # map IDs back to the vocab and normalize
+      subword_token_prob = probabilities[id_num]
 
-  distr_dict = dict(zip(vocab, probabilities))
-  return probabilities, distr_dict
+      print("subword token prob", subwod_token_prob)
+
+      subword_token_log_prob = np.log(subword_token_prob)
+
+      total_prob += subword_token_log_prob
+
+      new_context += token
+
+    final_probabilities[word] = total_prob
+
+  return final_probabilities
 
 
 def jsd(prob_distributions, weights, logbase=math.e):
@@ -125,7 +135,7 @@ def evaluate_sentence(model_list, sentence, vocab):
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
-      probabilities, next_word_distr = get_distribution(model_name, curr_context, sentence_split[i+1], vocab)
+      next_word_distr = get_distribution(model_name, curr_context, vocab)
       distrs[model_name] = list(next_word_distr.values())
 
     n = len(model_list)
@@ -139,14 +149,14 @@ def evaluate_sentence(model_list, sentence, vocab):
   return total_js/len_sentence, js_positions
 
 
-def get_avg_distr(model_list, context, next_word, vocab):
+def get_avg_distr(model_list, context, vocab):
 
     distrs = {}
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
 
-      probabilities, next_word_distr = get_distribution(model_name, context, next_word, vocab)
+      next_word_distr = get_distribution(model_name, context, vocab)
       distrs[model_name] = list(next_word_distr.values())
 
     df = pd.DataFrame(distrs.values())
@@ -162,8 +172,6 @@ def get_avg_distr(model_list, context, next_word, vocab):
     prob_list_sum = sum(avg_distr_vals)
     prob_list = [v/prob_list_sum for k, v in avg_distr_summed.items()]
     word_list = [k for k, v in avg_distr_summed.items()]
-
-
 
     return prob_list, word_list
 
@@ -195,12 +203,6 @@ def change_sentence(model_list, sentence, vocab):
   modified_sentence_deletions = copy.deepcopy(sentence_split)
   modified_sentence_additions = copy.deepcopy(sentence_split)
 
-  # deciding which position to change at 
-  #exponentiated_scores = softmax(cur_js_positions)
-  #n = list(np.random.multinomial(1,exponentiated_scores))
-  #change_i = n.index(1)
-
-  #print("change index", change_i)
   for change_i in range(len(cur_js_positions)-1):
 
     js_dict = {}
@@ -209,7 +211,7 @@ def change_sentence(model_list, sentence, vocab):
     for j in range(0,10):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab)
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab)
 
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -232,7 +234,7 @@ def change_sentence(model_list, sentence, vocab):
     for k in range(0,10):
       cur_context = sentence_split[:change_i+1]
 
-      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), sentence_split[change_i+1], vocab)
+      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
@@ -304,7 +306,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename)
+vocab = get_vocab(filename, 10000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
