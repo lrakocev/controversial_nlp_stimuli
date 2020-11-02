@@ -92,7 +92,7 @@ def get_distribution(model_name, context, vocab):
 
     print("logits size", logits_size)
 
-    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in reversed(xrange(logits_size))]
+    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size,0,-1)]
 
 
     print("len log probs 1", len(log_probabilities))
