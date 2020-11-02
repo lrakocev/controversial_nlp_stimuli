@@ -79,7 +79,7 @@ def get_distribution(model_name, context, vocab):
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
-    print("size outputs", outputs.size())
+    print("size outputs", size(outputs))
 
     print("size logits", outputs.logits.size())
 
