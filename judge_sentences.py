@@ -71,24 +71,23 @@ def get_distribution(model_name, context, vocab):
     sub_word_tokens = model_word_token_dict[word]
     total_prob = 0
 
-    new_context = context
-    for token in sub_word_tokens:
+    new_context = context + word 
 
-      id_num = model_token_id_dict[token]
+    inputs = tokenizer(new_context, return_tensors="pt")
 
-      inputs = tokenizer(new_context, return_tensors="pt")
+    outputs = model(**inputs, labels=inputs["input_ids"])
 
-      outputs = model(**inputs, labels=inputs["input_ids"])
+    logits_size = len(sub_word_tokens)
 
-      probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
+    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(0,logits_size,-1)]
 
-      subword_token_prob = probabilities[id_num]
+    log_probabilities = [l.tolist() for l in log_probabilities]
 
-      subword_token_log_prob = np.log(subword_token_prob)
+    probabilities = np.sum(log_probabilities)
 
-      total_prob += subword_token_log_prob
+    probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
 
-      new_context += token
+    subword_token_log_prob = np.log(subword_token_prob)
 
     final_probabilities[word] = total_prob
 
