@@ -73,11 +73,19 @@ def get_distribution(model_name, context, vocab):
 
     new_context = context + word 
 
+    vectorize_log = np.vectorize(math.log)
+
     inputs = tokenizer(new_context, return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
+    print("size outputs", outputs.size())
+
+    print("size logits", outputs.logits.size())
+
     logits_size = len(sub_word_tokens)
+
+    print("logits size", logits_size)
 
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(0,logits_size,-1)]
 
