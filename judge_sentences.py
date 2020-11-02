@@ -85,10 +85,6 @@ def get_distribution(model_name, context, vocab):
 
     probabilities = np.sum(log_probabilities)
 
-    probabilities = softmax(np.asarray(outputs.logits.detach()).flatten())
-
-    subword_token_log_prob = np.log(subword_token_prob)
-
     final_probabilities[word] = total_prob
 
   return final_probabilities
