@@ -64,8 +64,9 @@ def get_distribution(model_name, context, vocab, n):
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
+  tokenizer.pad_token = tokenizer.eos_token
 
-  tokens = tokenizer.tokenize(context)
+  context_tokens = tokenizer.tokenize(context)
 
   final_probabilities = {}
 
@@ -80,16 +81,25 @@ def get_distribution(model_name, context, vocab, n):
     
     sub_word_token_groupings = [model_word_token_dict[word] for word in words]
 
-    id_nums = [model_token_id_dict[token] for sub_word_tokens in sub_word_token_groupings for token in sub_word_tokens ]
+    lengths_contexts = [len(context_tokens) + len(sub_word_tokens) for sub_word_tokens in sub_wod_token_groupings]
+
+    max_length = max(lengths_contexts)
+
+    print("length context", length_context)
+    print("max length", max_length)
+
+    id_nums = [[model_token_id_dict[token] for token in sub_word_tokens] for sub_word_tokens in sub_word_token_groupings ]
 
     print("len id nums", len(id_nums))
 
     print("id nums", id_nums)
 
-    print("batch list size", len(batch_list))
+    for batch in batch_list:
+      length = len(batch)
+      while length < max_length: 
+        batch.append(tokenizer.eos_token)
 
-    print([len(x.split(" ")) for x in batch_list])
-
+    print("batch list", batch_list)
 
     inputs = tokenizer(batch_list, return_tensors="pt")
 
@@ -105,9 +115,16 @@ def get_distribution(model_name, context, vocab, n):
 
     print("log probs length - this should be equal to id nums", len(log_probabilities[0]))
 
-    log_probabilities_per_tokens = [[log_probabilities[j][id_nums[i]] for j in range(len(batch_list))] for i in range(len(id_nums)) ]
+    log_probabilities_per_tokens = [[log_probabilities[j][id_nums[j][i]] for i in range(len(id_nums[j]))] for j in range(len(batch_list))]
+
+    print("length log probs per tokens", len(log_probabilities_per_tokens))
+
+    print("length log probs per tokens 0", len(log_probabilities_per_tokens[0]))
+
 
     probabilities = np.sum(log_probabilities_per_tokens, axis = 0)
+
+    print("length probabilities", len(probabilities))
 
     final_probabilities = {words[i]: probabilities[i] for i in range(len(words))}
 
