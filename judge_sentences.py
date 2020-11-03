@@ -88,7 +88,7 @@ def get_distribution(model_name, context, vocab, n):
       length = lengths_contexts[i]
       batch = batch_list[i]
       if length < max_length: 
-        added_string = " ".join([tokenizer.eos_token] * (max_length - length))
+        added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
     inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
