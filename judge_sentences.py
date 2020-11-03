@@ -65,7 +65,6 @@ def get_distribution(model_name, context, vocab, n):
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
 
-  tokenizer.pad_token = tokenizer.eos_token
   tokens = tokenizer.tokenize(context)
 
   final_probabilities = {}
@@ -73,6 +72,9 @@ def get_distribution(model_name, context, vocab, n):
   vocab_splits = [vocab[i:i + n] for i in range(0, len(vocab), n)]
 
   for words in vocab_splits:
+
+
+    print("len ords", len(words))
 
     batch_list = [context + word for word in words]
     
@@ -86,7 +88,7 @@ def get_distribution(model_name, context, vocab, n):
 
     print("batch list size", batch_list)
 
-    inputs = tokenizer(batch_list, padding=True,truncation=True,return_tensors="pt")
+    inputs = tokenizer(batch_list,return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
