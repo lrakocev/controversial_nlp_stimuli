@@ -79,6 +79,8 @@ def get_distribution(model_name, context, vocab, n):
 
     vectorize_log = np.vectorize(math.log)
 
+    print(batch_list)
+
     inputs = tokenizer(batch_list, return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
