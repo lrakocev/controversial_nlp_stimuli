@@ -91,11 +91,12 @@ def get_distribution(model_name, context, vocab, n):
       length = lengths_contexts[i]
       batch = batch_list[i]
       if length < max_length: 
-        print("here")
-        batch += ([tokenizer.eos_token]*(max_length-length))
+        added_string = " ".join([tokenizer.eos_token] * (max_length - length))
+        batch += added_string
+        print(batch)
 
 
-    inputs = tokenizer(batch_list, return_tensors="pt")
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
