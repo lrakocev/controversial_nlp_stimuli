@@ -82,7 +82,6 @@ def get_distribution(model_name, context, vocab, n):
 
     max_length = max(lengths_contexts)
 
-    print("length context", lengths_contexts)
     print("max length", max_length)
 
     id_nums = [[model_token_id_dict[token] for token in sub_word_tokens] for sub_word_tokens in sub_word_token_groupings ]
@@ -100,23 +99,14 @@ def get_distribution(model_name, context, vocab, n):
 
     vectorize_log = np.vectorize(math.log)
 
-    print("outputs logits", outputs.logits.size())
 
     log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for i in range(max_length,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
-    print("log probabilities - should be batch size", len(log_probabilities))
-
-    print("log probabilities - should be vocab size", len(log_probabilities[0]))
-
-    print("id nums", id_nums)
-
     log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j]))] for j in range(len(batch_list))]
-    
-    print(len(log_probabilities_per_tokens))
 
     print(log_probabilities_per_tokens)
 
-    probabilities = np.sum(log_probabilities_per_tokens, axis = 1)
+    probabilities = [sum(log_probabilities_per_tokens[i]) for i in range(len(log_probabilities_per_tokens))]
 
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
 
