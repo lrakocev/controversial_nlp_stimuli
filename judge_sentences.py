@@ -85,7 +85,7 @@ def get_distribution(model_name, context, vocab, n):
 
     max_length = max(lengths_contexts)
 
-    print("length context", lengths_context)
+    print("length context", lengths_contexts)
     print("max length", max_length)
 
     id_nums = [[model_token_id_dict[token] for token in sub_word_tokens] for sub_word_tokens in sub_word_token_groupings ]
