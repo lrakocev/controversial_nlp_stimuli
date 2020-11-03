@@ -74,7 +74,7 @@ def get_distribution(model_name, context, vocab, n):
   for words in vocab_splits:
 
 
-    print("len ords", len(words))
+    print("len words", len(words))
 
     batch_list = [context + word for word in words]
     
@@ -86,7 +86,8 @@ def get_distribution(model_name, context, vocab, n):
 
     print("id nums", id_nums)
 
-    print("batch list size", batch_list)
+    print("batch list size", len(batch_list))
+
 
     inputs = tokenizer(batch_list,return_tensors="pt")
 
