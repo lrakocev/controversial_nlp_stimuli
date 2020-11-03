@@ -81,7 +81,7 @@ def get_distribution(model_name, context, vocab, n):
     
     sub_word_token_groupings = [model_word_token_dict[word] for word in words]
 
-    lengths_contexts = [len(context_tokens) + len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
+    lengths_contexts = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
 
     max_length = max(lengths_contexts)
 
