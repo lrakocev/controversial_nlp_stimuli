@@ -97,7 +97,7 @@ def get_distribution(model_name, context, vocab, n):
     print("log probs per tokens", len(log_probabilities_per_tokens))
     print("log probs per tokens 0", len(log_probabilities_per_tokens[0]))
 
-    probabilities = np.sum(log_probabilities_per_tokens)
+    probabilities = np.sum(log_probabilities_per_tokens, axis = 0)
 
     print("length probs", len(probabilities))
 
