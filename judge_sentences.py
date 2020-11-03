@@ -64,7 +64,7 @@ def get_distribution(model_name, context, vocab, n):
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
-  tokenizer.pad_token = tokenizer.eos_token
+  tokenizer.pad_token = tokenizer.start_token_symbol
 
   context_tokens = tokenizer.tokenize(context)
 
