@@ -79,9 +79,9 @@ def get_distribution(model_name, context, vocab, n):
 
     id_nums = [model_token_id_dict[token] for sub_word_tokens in sub_word_token_groupings for token in sub_word_tokens ]
 
-    inputs = tokenizer(batch_list) #, return_tensors="pt"
+    inputs = tokenizer(batch_list, return_tensors="pt"
 
-    outputs = model(**inputs, labels=inputs["input_ids"])
+    outputs = model(**inputs)
 
     logits_size = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
 
