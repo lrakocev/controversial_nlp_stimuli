@@ -66,32 +66,45 @@ def get_distribution(model_name, context, vocab):
   tokens = tokenizer.tokenize(context)
 
   final_probabilities = {}
-  for word in vocab:
 
-    new_context = context + word 
+  vocab_splits = [vocab[i:i + n] for i in range(0, len(vocab), 100)]
+
+  for words in range(len(vocab_splits)):
+
+    batch_list = []
+    for word in words:
+      batch_list.append(context + word)
 
     
-    sub_word_tokens = model_word_token_dict[word]
+    sub_word_token_groupings = [model_word_token_dict[word] for word in words]
 
-    id_nums = [model_token_id_dict[token] for token in sub_word_tokens]
+    id_nums = [model_token_id_dict[token] for token in sub_word_tokens for sub_word_tokens in sub_word_token_groupings]
 
     vectorize_log = np.vectorize(math.log)
 
-    inputs = tokenizer(new_context, return_tensors="pt")
+    inputs = tokenizer(batch_list, return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
-    logits_size = len(sub_word_tokens)
+    logits_size = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
 
-    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[0][i].detach()).flatten())) for i in range(logits_size,0,-1)]
+    print("size output logits", outputs.logits.size())
+
+    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for i in range(logits_size[j],0,-1) for j in range(len(batch_list))]
+
+    print("log probs", len(log_probabilities))
+    print("log probs 0",len(log_probabilities[0]))
 
     log_probabilities = [l.tolist() for l in log_probabilities]
 
-    log_probabilities_per_tokens = [log_probabilities[i][id_nums[i]] for i in range(len(id_nums))]
+    log_probabilities_per_tokens = [log_probabilities[j][i][id_nums[i]] for i in range(len(id_nums)) for j in range(len(batch_list))]
 
-    probabilities = np.sum(log_probabilities_per_tokens)
+    probabilities = np.sum(log_probabilities_per_tokens, axis=0)
 
-    final_probabilities[word] = probabilities
+
+    for i in range(len(words)):
+      word = words[i]
+      final_probabilities[word] = probabilities[i]
 
   return final_probabilities
 
