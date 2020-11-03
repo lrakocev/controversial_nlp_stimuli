@@ -97,8 +97,9 @@ def get_distribution(model_name, context, vocab, n):
 
 
     for batch in batch_list:
-      length = len(batch)
+      length = len(batch.split(" "))
       if length < max_length: 
+        print("here")
         batch.extend([tokenizer.eos_token]*(max_length-length))
 
     print("batch list", batch_list)
