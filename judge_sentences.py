@@ -91,7 +91,7 @@ def get_distribution(model_name, context, vocab, n):
 
     probabilities = np.sum(log_probabilities_per_tokens, axis = 0)
 
-   final_probabilities = {words[i]: probabilities[i] for i in range(len(words))}
+    final_probabilities = {words[i]: probabilities[i] for i in range(len(words))}
 
   return final_probabilities
 
