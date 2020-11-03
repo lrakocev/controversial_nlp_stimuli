@@ -94,10 +94,12 @@ def get_distribution(model_name, context, vocab, n):
 
     print("id nums", id_nums)
 
+
+
     for batch in batch_list:
       length = len(batch)
-      while length < max_length: 
-        batch.append(tokenizer.eos_token)
+      if length < max_length: 
+        batch.extend([tokenizer.eos_token]*(max_length-length))
 
     print("batch list", batch_list)
 
