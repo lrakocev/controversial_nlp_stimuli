@@ -88,6 +88,8 @@ def get_distribution(model_name, context, vocab, n):
 
     print("batch list size", len(batch_list))
 
+    print([len(x.split(" ")) for x in batch_list])
+
 
     inputs = tokenizer(batch_list, return_tensors="pt")
 
