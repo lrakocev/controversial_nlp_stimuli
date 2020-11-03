@@ -94,15 +94,9 @@ def get_distribution(model_name, context, vocab, n):
 
     log_probabilities_per_tokens = [[log_probabilities[j][id_nums[i]] for j in range(len(batch_list))] for i in range(len(id_nums)) ]
 
-    print("log probs per tokens", len(log_probabilities_per_tokens))
-    print("log probs per tokens 0", len(log_probabilities_per_tokens[0]))
-
     probabilities = np.sum(log_probabilities_per_tokens, axis = 0)
 
-    print("length probs", len(probabilities))
-
-    print("probs 0 ", len(probabilies[0]))
-
+   
     for i in range(len(words)):
       word = words[i]
       final_probabilities[word] = probabilities[i]
