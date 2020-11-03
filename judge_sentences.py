@@ -126,7 +126,7 @@ def get_distribution(model_name, context, vocab, n):
     print("length probabilities", len(probabilities))
 
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
-    print('intermediate len of final probabiltiies', len(final_probailities))
+    print('intermediate len of final probabiltiies', len(final_probabilities))
 
   print("final len of final probabilities", len(final_probabilities))
   return final_probabilities
