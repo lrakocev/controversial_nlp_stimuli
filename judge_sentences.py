@@ -105,29 +105,30 @@ def get_distribution(model_name, context, vocab, n):
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
-    logits_size = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
-
     vectorize_log = np.vectorize(math.log)
 
-    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list)) for i in range(logits_size[j],0,-1) ]
+    print("size output logits", outputs.logits.size())
 
-    print("Log probs",log_probabilities[0])
+    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list)) for i in range(max_length,0,-1)]
 
-    print("log probs length - this should be equal to id nums", len(log_probabilities[0]))
+    print("Log probs- should be equal to batch size ",len(log_probabilities))
+
+    print("log probs length - this should be equal to vocab size", len(log_probabilities[0]))
 
     log_probabilities_per_tokens = [[log_probabilities[j][id_nums[j][i]] for i in range(len(id_nums[j]))] for j in range(len(batch_list))]
 
     print("length log probs per tokens", len(log_probabilities_per_tokens))
 
-    print("length log probs per tokens 0", len(log_probabilities_per_tokens[0]))
+    print("length log probs per tokens total", log_probabilities_per_tokens)
 
-
-    probabilities = np.sum(log_probabilities_per_tokens, axis = 0)
+    probabilities = np.sum(log_probabilities_per_tokens, axis = 1)
 
     print("length probabilities", len(probabilities))
 
-    final_probabilities = {words[i]: probabilities[i] for i in range(len(words))}
+    final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
+    print('intermediate len of final probabiltiies', len(final_probailities))
 
+  print("final len of final probabilities", len(final_probabilities))
   return final_probabilities
 
 
