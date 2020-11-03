@@ -97,7 +97,7 @@ def get_distribution(model_name, context, vocab, n):
     print("log probs", len(log_probabilities))
     print("log probs 0",len(log_probabilities[0]))
 
-    log_probabilities = [j.tolist() for j in l for l in log_probabilities]
+    log_probabilities = [j.tolist() for l in log_probabilities for j in l ]
 
     print("log probabilities", log_probabilities)
 
