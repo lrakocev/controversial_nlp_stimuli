@@ -88,13 +88,10 @@ def get_distribution(model_name, context, vocab, n):
 
     logits_size = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
 
-    log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list)) for i in range(logits_size[j],0,-1) ]
+    log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list))] for i in range(logits_size[j],0,-1) ]
 
-    log_probabilities = [j.tolist() for l in log_probabilities for j in l ]
+    log_probabilities = [[j.tolist() for l in log_probabilities] for j in l ]
 
-
-    print("id nums", id_nums)
-    print("log probabilites", log_probabilities)
     log_probabilities_per_tokens = [log_probabilities[j][i][id_nums[i]] for j in range(len(batch_list)) for i in range(len(id_nums[j])) ]
 
     probabilities = np.sum(log_probabilities_per_tokens, axis=0)
