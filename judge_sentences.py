@@ -58,6 +58,8 @@ def get_vocab(filename, length):
 
 def get_distribution(model_name, context, vocab, n):
 
+  print("context", context)
+
   tokenizer = model_name.tokenizer 
   model = model_name.model
   model_word_token_dict = model_name.word_token_dict
@@ -77,15 +79,13 @@ def get_distribution(model_name, context, vocab, n):
 
     id_nums = [model_token_id_dict[token] for sub_word_tokens in sub_word_token_groupings for token in sub_word_tokens ]
 
-    vectorize_log = np.vectorize(math.log)
-
-    print(len(batch_list))
-    
-    inputs = tokenizer(batch_list, return_tensors="pt")
+    inputs = tokenizer(batch_list) #, return_tensors="pt"
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
     logits_size = [len(sub_word_tokens) for sub_word_tokens in sub_word_token_groupings]
+
+    vectorize_log = np.vectorize(math.log)
 
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list)) for i in range(logits_size[j],0,-1) ]
 
