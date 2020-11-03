@@ -69,7 +69,7 @@ def get_distribution(model_name, context, vocab, n):
 
   vocab_splits = [vocab[i:i + n] for i in range(0, len(vocab), n)]
 
-  for words in range(len(vocab_splits)):
+  for words in vocab_splits:
 
     batch_list = []
     for word in words:
