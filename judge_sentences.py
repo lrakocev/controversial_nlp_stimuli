@@ -104,13 +104,13 @@ def get_distribution(model_name, context, vocab, n):
 
     log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for i in range(max_length,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
-    print("log probabilities", len(log_probabilities))
+    print("log probabilities - should be batch size", len(log_probabilities))
 
-    print("log probabilities", log_probabilities)
+    print("log probabilities - should be vocab size", len(log_probabilities[0]))
 
     print("id nums", id_nums)
 
-    log_probabilities_per_tokens = [[log_probabilities[j][id_nums[j][i]] for i in range(len(id_nums[j])-1)] for j in range(len(batch_list))]
+    log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j]))] for j in range(len(batch_list))]
     
     print(len(log_probabilities_per_tokens))
 
