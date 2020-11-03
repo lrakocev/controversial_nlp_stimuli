@@ -74,9 +74,6 @@ def get_distribution(model_name, context, vocab, n):
 
   for words in vocab_splits:
 
-
-    print("len words", len(words))
-
     batch_list = [context + word for word in words]
     
     sub_word_token_groupings = [model_word_token_dict[word] for word in words]
@@ -90,19 +87,13 @@ def get_distribution(model_name, context, vocab, n):
 
     id_nums = [[model_token_id_dict[token] for token in sub_word_tokens] for sub_word_tokens in sub_word_token_groupings ]
 
-    print("len id nums", len(id_nums))
-
-    print("id nums", id_nums)
-
-
-
-    for batch in batch_list:
-      length = len(batch.split(" "))
+    for i in range(len(batch_list)):
+      length = lengths_contexts[i]
+      batch = batch_list[i]
       if length < max_length: 
         print("here")
         batch.extend([tokenizer.eos_token]*(max_length-length))
 
-    print("batch list", batch_list)
 
     inputs = tokenizer(batch_list, return_tensors="pt")
 
@@ -110,28 +101,15 @@ def get_distribution(model_name, context, vocab, n):
 
     vectorize_log = np.vectorize(math.log)
 
-    print("size output logits", outputs.logits.size())
-
     log_probabilities = [vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for j in range(len(batch_list)) for i in range(max_length,0,-1)]
-
-    print("Log probs- should be equal to batch size ",len(log_probabilities))
-
-    print("log probs length - this should be equal to vocab size", len(log_probabilities[0]))
 
     log_probabilities_per_tokens = [[log_probabilities[j][id_nums[j][i]] for i in range(len(id_nums[j]))] for j in range(len(batch_list))]
 
-    print("length log probs per tokens", len(log_probabilities_per_tokens))
-
-    print("length log probs per tokens total", log_probabilities_per_tokens)
 
     probabilities = np.sum(log_probabilities_per_tokens, axis = 1)
 
-    print("length probabilities", len(probabilities))
-
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
-    print('intermediate len of final probabiltiies', len(final_probabilities))
 
-  print("final len of final probabilities", len(final_probabilities))
   return final_probabilities
 
 
