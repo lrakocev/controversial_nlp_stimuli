@@ -323,7 +323,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 1000)
+vocab = get_vocab(filename, 20000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
@@ -344,5 +344,5 @@ for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   sent  = "I am going to sleep"
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 1000)
   #plot_scores(scores, sentence)
