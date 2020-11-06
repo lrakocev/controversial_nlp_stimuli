@@ -109,7 +109,6 @@ def get_distribution(model_name, context, vocab, n):
 
 
 def jsd(prob_distributions, weights, logbase=math.e):
-    # left term: entropy of misture
 
     types = [type(i) for i in prob_distributions]
 
@@ -172,15 +171,19 @@ def get_avg_distr(model_list, context, vocab, n):
 
     avg_distr = dict(df.mean())
 
-    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    avg_distr_vals = [v for (k,v) in avg_distr.items()]
 
-    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
+   # avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+
+   # avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
+
+   # avg_distr_summed = dict(zip(vocab, avg_distr_vals))
 
     avg_distr_summed = dict(zip(vocab, avg_distr_vals))
 
-    prob_list_sum = sum(avg_distr_vals)
-    prob_list = [v/prob_list_sum for k, v in avg_distr_summed.items()]
-    word_list = [k for k, v in avg_distr_summed.items()]
+    prob_list_sum = sum(avg_distr)
+    prob_list = [v/prob_list_sum for k, v in avg_distr.items()]
+    word_list = [k for k, v in avg_distr.items()]
 
     return prob_list, word_list
 
@@ -196,8 +199,6 @@ def discounting(cur_ind, js_positions, gamma=0.9):
 
 def change_sentence(model_list, sentence, vocab, batch_size):
 
-  print("here")
-
   original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
@@ -208,18 +209,18 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  curr_sentence_score, cur_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
+  for change_i in range(len(original_js_positions)-1):
 
-  modified_sentence_replacements = copy.deepcopy(sentence_split)
-  modified_sentence_deletions = copy.deepcopy(sentence_split)
-  modified_sentence_additions = copy.deepcopy(sentence_split)
+    print("current starting sentence", final_modified_sentence)
 
-  for change_i in range(len(cur_js_positions)-1):
+    modified_sentence_replacements = copy.deepcopy(sentence_split)
+    modified_sentence_deletions = copy.deepcopy(sentence_split)
+    modified_sentence_additions = copy.deepcopy(sentence_split)
 
     js_dict = {}
 
     # replacements 
-    for j in range(0,10):
+    for j in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
       cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -241,12 +242,10 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
       print("deletion try", ' '.join(modified_sentence_deletions))
       js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size)
-    else: 
-      js_dict[("", "D")] = (0,[0])
 
 
     # additions
-    for k in range(0,10):
+    for k in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
       next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -277,9 +276,6 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, cur_js_positions)
-
-    if change == "D":
-      new_js_positions.insert(change_i, 0)
 
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
@@ -323,7 +319,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 20000)
+vocab = get_vocab(filename, 50000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
