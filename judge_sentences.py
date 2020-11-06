@@ -74,7 +74,7 @@ def get_distribution(model_name, context, vocab, n):
 
   for words in vocab_splits:
 
-    batch_list = [context + word for word in words]
+    batch_list = [context + str(word) for word in words]
     
     sub_word_token_groupings = [model_word_token_dict[word] for word in words]
 
