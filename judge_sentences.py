@@ -319,7 +319,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 50000)
+vocab = get_vocab(filename, 20000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
