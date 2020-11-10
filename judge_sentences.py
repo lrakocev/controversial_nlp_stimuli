@@ -329,7 +329,7 @@ XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return
 
 T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'), T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'), "_", vocab)
 
-Albert = (AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
+Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
 
 
 model_list = [GPT2, XLM]
