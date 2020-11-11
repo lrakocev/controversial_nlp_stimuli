@@ -143,9 +143,10 @@ def evaluate_sentence(model_list, sentence, vocab, n):
     weights = np.empty(n)
     weights.fill(1/n)
 
-    total_js += jsd(list(distrs.values()), weights)
-    divide_by = i if i !=0 else 1
-    curr_js = total_js/(divide_by)
+    curr_js = jsd(list(distrs.values()), weights)
+    #total_js += jsd(list(distrs.values()), weights)
+    total_js += curr_js
+    #curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
@@ -186,9 +187,7 @@ def discounting(cur_ind, js_positions, gamma=1):
   for i in range(to_consider):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-
-  print("total discounting", total)
-  length_js_pos = to_consider if to_consider != 0 else 1
+  length_js_pos = 1 if to_consider == 0 else  to_consider
   return total/(len_js_pos)
 
 
