@@ -201,7 +201,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  for change_i in range(0,len(original_js_positions)):
+  for change_i in range(0,len(sentence.split(" "))):
 
     print("current starting sentence", final_modified_sentence)
 
@@ -274,6 +274,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       js_positions.append(new_js_positions)
       changes.append(change)
       sentence_split = final_modified_sentence
+      print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)[0])
@@ -311,7 +312,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 1000)
+vocab = get_vocab(filename, 500)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
