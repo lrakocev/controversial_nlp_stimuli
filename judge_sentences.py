@@ -260,8 +260,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       modified_sentence_additions.pop(change_i+1)
 
 
-    #x[1][1]
-    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
+    highest_js_word = sorted(js_dict.values(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
     
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0]
