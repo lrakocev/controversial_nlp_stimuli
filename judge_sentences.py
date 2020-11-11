@@ -91,6 +91,7 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
 
     if model_name.model_name == "Albert":
       attention_mask = []
@@ -99,11 +100,9 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(length-x)] + [0 for i in range(x)])
 
-      inputs = tokenizer(batch_list, padding='longest', return_tensors ="pt", attention_mask = attention_mask)
+      outputs = model(**inputs, labels=inputs["input_ids"], attention_mask = attention_mask)
     else:
-      inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
-
-    outputs = model(**inputs, labels=inputs["input_ids"])
+      outputs = model(**inputs, labels=inputs["input_ids"])
 
     vectorize_log = np.vectorize(math.log)
 
