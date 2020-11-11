@@ -344,7 +344,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 
 #model_list = [GPT2, XLM]
-model_list = [TXL, Roberta]
+model_list = [TXL, XLM]
 
 for i in range(1):
 
