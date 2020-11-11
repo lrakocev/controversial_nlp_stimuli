@@ -330,6 +330,6 @@ model_list = [GPT2, XLM]
 for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent  = "I am going to sleep"
+  sent  = "I am"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
