@@ -268,15 +268,13 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       modified_sentence_additions.pop(change_i+1)
 
 
-    print(js_dict)
     highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
     
 
-    print(highest_js_word)
     if highest_js_word[0][1] == "R":
-      final_modified_sentence[change_i] = highest_js_word[0]
+      final_modified_sentence[change_i] = highest_js_word[0][0]
     elif highest_js_word[0][1] == "A":
-      final_modified_sentence.insert(change_i,highest_js_word[0])
+      final_modified_sentence.insert(change_i,highest_js_word[0][0])
     else: 
       final_modified_sentence.pop(change_i)
 
