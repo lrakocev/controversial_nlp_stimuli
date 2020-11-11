@@ -136,7 +136,6 @@ def evaluate_sentence(model_list, sentence, vocab, n):
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
-      print("curr context", curr_context)
       next_word_distr = get_distribution(model_name, curr_context, vocab, n)
       distrs[model_name] = list(next_word_distr.values())
 
@@ -179,7 +178,7 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, word_list
 
-def discounting(cur_ind, js_positions, gamma=0.9):
+def discounting(cur_ind, js_positions, gamma=0):
 
   total = 0
   for i in range(len(js_positions)-cur_ind):
@@ -202,6 +201,9 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   final_modified_sentence = copy.deepcopy(sentence_split)
 
   for change_i in range(0,len(sentence.split(" "))):
+
+    change_i = change_i-1 if change == "D" else change-i
+    change = ""
 
     print("current starting sentence", final_modified_sentence)
 
@@ -269,6 +271,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, original_js_positions)
 
+
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
       js_positions.append(new_js_positions)
@@ -276,6 +279,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       sentence_split = final_modified_sentence
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
+
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)[0])
 
