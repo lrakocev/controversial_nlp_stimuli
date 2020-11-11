@@ -359,11 +359,11 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Roberta, Albert, TXL]
+model_list = [Albert, TXL]
 
 for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   sent  = "I am"
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 1)
   #plot_scores(scores, sentence)
