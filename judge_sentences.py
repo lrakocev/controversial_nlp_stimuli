@@ -93,16 +93,6 @@ def get_distribution(model_name, context, vocab, n):
 
 
     if model_name.model_name == "Albert":
-      tokens = tokenizer.tokenize(sent)
-
-      ids = tokenizer.convert_tokens_to_ids(tokens)
-      x = 2
-      attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
-      attention_mask = torch.tensor(attention_mask).unsqueeze(0)
-
-      input_ids = torch.tensor(ids).unsqueeze(0)
-
-    if model_name.model_name == "Albert":
       attention_mask = []
       for i in range(len(batch_list)):
         length = len(batch_list[i].split(" "))
@@ -110,7 +100,7 @@ def get_distribution(model_name, context, vocab, n):
         attention_mask.append([1 for i in range(length-x)] + [0 for i in range(x)])
 
       attention_mask = torch.tensor(attention_mask).unsqueeze(0).unsqueeze(0)
-      
+
       inputs = tokenizer(batch_list, padding='longest', return_tensors ="pt", attention_mask = attention_mask)
     else:
       inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
