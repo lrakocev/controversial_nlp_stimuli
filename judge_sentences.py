@@ -227,7 +227,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     js_dict = {}
 
     # replacements 
-    for j in range(0,5):
+    for j in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
       cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -252,7 +252,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
 
     # additions
-    for k in range(0,5):
+    for k in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
       next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -270,6 +270,8 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
     highest_js_word = sorted(js_dict.values(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
     
+
+    print(highest_js_word)
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0]
     elif highest_js_word[1] == "A":
@@ -327,7 +329,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
+vocab = get_vocab(filename, 500)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
