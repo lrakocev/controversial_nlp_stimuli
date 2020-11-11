@@ -51,7 +51,7 @@ def get_vocab(filename, length):
   return vocab_list
 
 
-def get_distribution(model_name, context, vocab, n, seen_context):
+def get_distribution(model_name, context, vocab, n):
 
   print("context", context)
 
@@ -61,10 +61,8 @@ def get_distribution(model_name, context, vocab, n, seen_context):
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
 
-  if context not in seen_context:
-    seen_context.append(context)
-  else:
-    return model_name.distr_dict_for_context[context], seen_context
+  if context in  model_name.distr_dict_for_context.keys():
+    return model_name.distr_dict_for_context[context]
 
   print("calculating")
   context_tokens = tokenizer.tokenize(context)
@@ -108,7 +106,7 @@ def get_distribution(model_name, context, vocab, n, seen_context):
 
   model_name.distr_dict_for_context[context] = final_probabilities
 
-  return final_probabilities, seen_context
+  return final_probabilities
 
 
 def jsd(prob_distributions, weights, logbase=math.e):
@@ -130,7 +128,7 @@ def jsd(prob_distributions, weights, logbase=math.e):
     return(divergence)
 
 
-def evaluate_sentence(model_list, sentence, vocab, n, seen_context):
+def evaluate_sentence(model_list, sentence, vocab, n):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -146,7 +144,7 @@ def evaluate_sentence(model_list, sentence, vocab, n, seen_context):
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
-      next_word_distr, seen_context = get_distribution(model_name, curr_context, vocab, n, seen_context)
+      next_word_distr = get_distribution(model_name, curr_context, vocab, n)
       distrs[model_name] = list(next_word_distr.values())
 
     n = len(model_list)
@@ -159,17 +157,17 @@ def evaluate_sentence(model_list, sentence, vocab, n, seen_context):
     #curr_js = total_js/(i+1)
     js_positions.append(curr_js)
     
-  return total_js/len_sentence, js_positions, seen_context
+  return total_js/len_sentence, js_positions
 
 
-def get_avg_distr(model_list, context, vocab, n, seen_context):
+def get_avg_distr(model_list, context, vocab, n):
 
     distrs = {}
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
 
-      next_word_distr, seen_context = get_distribution(model_name, context, vocab, n, seen_context)
+      next_word_distr = get_distribution(model_name, context, vocab, n)
       distrs[model_name] = list(next_word_distr.values())
 
     df = pd.DataFrame(distrs.values())
@@ -201,9 +199,9 @@ def discounting(cur_ind, js_positions, gamma=1):
   return total/length_js_pos
 
 
-def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
+def change_sentence(model_list, sentence, vocab, batch_size):
 
-  original_score, original_js_positions, updated_seen_context = evaluate_sentence(model_list, sentence, vocab, batch_size, seen_context)
+  original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
   js_positions = [original_js_positions]
@@ -220,7 +218,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
 
     print("current starting sentence", sentence_split)
 
-    curr_score, curr_js_positions, updated_seen_context = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, updated_seen_context)
+    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
@@ -232,7 +230,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
     for j in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size, updated_seen_context)
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
      
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -242,7 +240,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
       new_context = ' '.join(modified_sentence_replacements)
 
       print("replacement try", new_context)
-      js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab, batch_size, updated_seen_context)
+      js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
     
 
     #deletions
@@ -250,14 +248,14 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
     if len(modified_sentence_deletions) > 0:
 
       print("deletion try", ' '.join(modified_sentence_deletions))
-      js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size, updated_seen_context)
+      js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size)
 
 
     # additions
     for k in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
-      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size, updated_seen_context)
+      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
@@ -266,7 +264,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
       new_context = ' '.join(modified_sentence_additions)
 
       print("additions try", new_context)
-      js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size, updated_seen_context)
+      js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       modified_sentence_additions.pop(change_i+1)
 
 
@@ -274,15 +272,12 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
     
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0]
-      change = "R"
     elif highest_js_word[1] == "A":
       final_modified_sentence.insert(change_i,highest_js_word[0])
-      change = "A"
     else: 
       final_modified_sentence.pop(change_i)
-      change = "D"
 
-    new_sentence_score, new_js_positions, updated_seen_context = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab, batch_size, updated_seen_context)
+    new_sentence_score, new_js_positions= evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab, batch_size)
 
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, curr_js_positions)
@@ -291,12 +286,11 @@ def change_sentence(model_list, sentence, vocab, batch_size, seen_context):
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
       js_positions.append(new_js_positions)
+      change = highest_j_word[1]
       changes.append(change)
       sentence_split = final_modified_sentence
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
-      print("seen context", updated_seen_context)
-
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)[0])
 
