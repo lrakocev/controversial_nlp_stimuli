@@ -100,6 +100,8 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(length-x)] + [0 for i in range(x)])
 
+        attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+
       outputs = model(**inputs, labels=inputs["input_ids"], attention_mask = attention_mask)
     else:
       outputs = model(**inputs, labels=inputs["input_ids"])
