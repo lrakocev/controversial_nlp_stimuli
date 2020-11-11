@@ -200,7 +200,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  for change_i in range(len(original_js_positions)-1):
+  for change_i in range(0,len(original_js_positions)-1):
 
     print("current starting sentence", final_modified_sentence)
 
@@ -330,6 +330,6 @@ model_list = [GPT2, XLM]
 for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent  = "I am"
+  sent  = "I am it"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
