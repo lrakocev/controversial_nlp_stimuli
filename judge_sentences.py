@@ -212,7 +212,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     js_dict = {}
 
     # replacements 
-    for j in range(0,5):
+    for j in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
       cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -237,7 +237,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
 
     # additions
-    for k in range(0,5):
+    for k in range(0,1):
       cur_context = sentence_split[:change_i+1]
 
       next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
@@ -331,6 +331,6 @@ model_list = [GPT2, XLM]
 for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent  = "I am it"
+  sent  = "I am"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
