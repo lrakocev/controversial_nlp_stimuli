@@ -209,7 +209,6 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   change = ""
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
-  final_modified_sentence = copy.deepcopy(sentence_split)
 
   for change_i in range(0,len(sentence_split)):
 
@@ -220,6 +219,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
     curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
+    final_modified_sentence = copy.deepcopy(sentence_split)
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)
