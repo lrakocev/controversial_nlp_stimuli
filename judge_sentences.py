@@ -207,6 +207,8 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
     print("current starting sentence", final_modified_sentence)
 
+    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
+
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)
@@ -254,7 +256,9 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       modified_sentence_additions.pop(change_i+1)
 
-    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
+
+    #x[1][1]
+    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
     
     if highest_js_word[1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0]
@@ -269,7 +273,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab, batch_size)
 
     new_discounted_score = discounting(change_i, new_js_positions)
-    curr_discounted_score = discounting(change_i, original_js_positions)
+    curr_discounted_score = discounting(change_i, curr_js_positions)
 
 
     if new_discounted_score > curr_discounted_score:
