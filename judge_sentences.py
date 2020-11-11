@@ -336,7 +336,7 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=ro
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab)
 
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-11b", return_dict=True), T5Tokenizer.from_pretrained("t5-11b"), "_", vocab)
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab)
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
 
