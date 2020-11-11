@@ -144,7 +144,8 @@ def evaluate_sentence(model_list, sentence, vocab, n):
     weights.fill(1/n)
 
     total_js += jsd(list(distrs.values()), weights)
-    curr_js = total_js/(i+1)
+    divide_by = i if i !=0 else 1
+    curr_js = total_js/(divide_by)
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
