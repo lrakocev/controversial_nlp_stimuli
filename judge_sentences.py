@@ -328,7 +328,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
+vocab = get_vocab(filename, 500)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
@@ -343,7 +343,8 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_con
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
 
 
-model_list = [GPT2, XLM]
+#model_list = [GPT2, XLM]
+model_list = [TXL, Roberta]
 
 for i in range(1):
 
