@@ -268,6 +268,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
       modified_sentence_additions.pop(change_i+1)
 
 
+    print(js_dict)
     highest_js_word = sorted(js_dict.values(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
     
 
