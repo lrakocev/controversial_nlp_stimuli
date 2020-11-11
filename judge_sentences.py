@@ -99,8 +99,6 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(length-x)] + [0 for i in range(x)])
 
-      attention_mask = torch.tensor(attention_mask).unsqueeze(0).unsqueeze(0)
-
       inputs = tokenizer(batch_list, padding='longest', return_tensors ="pt", attention_mask = attention_mask)
     else:
       inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
