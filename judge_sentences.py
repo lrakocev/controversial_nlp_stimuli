@@ -107,7 +107,7 @@ def get_distribution(model_name, context, vocab, n):
       #attention_mask = torch.tensor(attention_mask).unsqueeze(0)
       #input_ids = torch.tensor(ids).unsqueeze(0)
 
-      outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+      outputs = model(ids, labels=ids, attention_mask=attention_mask)
     else:
       outputs = model(**inputs, labels=inputs["input_ids"])
 
