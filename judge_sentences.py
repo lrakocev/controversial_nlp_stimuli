@@ -33,13 +33,6 @@ class ModelInfo():
 
     self.id_token_dict = {token: self.tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
 
-  def create_word_to_token_dict(self, vocab):
-
-    for word in vocab:
-      word = " " + str(word)
-      
-      self.word_token_dict[word] = self.tokenizer.tokenize(word)
-
 
 def get_vocab(filename, length):
 
@@ -317,7 +310,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 20000)
+vocab = get_vocab(filename, 10000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
