@@ -188,7 +188,7 @@ def discounting(cur_ind, js_positions, gamma=1):
 
 
   print("total discounting", total)
-  length_js_pos = len_js_pos if len_js_pos != 0 else 1
+  length_js_pos = to_consider if to_consider != 0 else 1
   return total/(len_js_pos)
 
 
