@@ -322,8 +322,6 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-T5_PATH = "t5-base"
-t5_config = T5Config.from_pretrained(T5_PATH, cache_dir='./pretrained_models')
 roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
@@ -338,13 +336,13 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=ro
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab)
 
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained(T5_PATH, config=t5_config, cache_dir='./pretrained_models'), T5Tokenizer.from_pretrained(T5_PATH, cache_dir='./pretrained_models'), "_", vocab)
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-11b", return_dict=True), T5Tokenizer.from_pretrained("t5-11b"), "_", vocab)
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
 
 
 #model_list = [GPT2, XLM]
-model_list = [TXL, XLM]
+model_list = [GPT2, XLM, Roberta]
 
 for i in range(1):
 
