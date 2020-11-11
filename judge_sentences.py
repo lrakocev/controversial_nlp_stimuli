@@ -202,7 +202,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
   for change_i in range(0,len(sentence.split(" "))):
 
-    change_i = change_i-1 if change == "D" else change-i
+    change_i = change_i-1 if change == "D" else change_i
     change = ""
 
     print("current starting sentence", final_modified_sentence)
