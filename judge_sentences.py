@@ -33,6 +33,8 @@ class ModelInfo():
 
     self.id_token_dict = {token: self.tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
 
+    self.distr_dict_for_context = {}
+
 
 def get_vocab(filename, length):
 
@@ -49,7 +51,7 @@ def get_vocab(filename, length):
   return vocab_list
 
 
-def get_distribution(model_name, context, vocab, n):
+def get_distribution(model_name, context, vocab, n, seen_context):
 
   print("context", context)
 
@@ -59,6 +61,12 @@ def get_distribution(model_name, context, vocab, n):
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
 
+  if context not in seen_context:
+    seen_context.append(context)
+  else:
+    return model_name.distr_dict_for_context[context]
+
+  print("calculating")
   context_tokens = tokenizer.tokenize(context)
 
   final_probabilities = {}
@@ -97,6 +105,8 @@ def get_distribution(model_name, context, vocab, n):
     probabilities = [sum(log_probabilities_per_tokens[i]) for i in range(len(log_probabilities_per_tokens))]
 
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
+
+  model_name.distr_dict_for_context[context] = final_probabilities
 
   return final_probabilities
 
@@ -203,12 +213,12 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  for change_i in range(0,len(sentence.split(" "))):
+  for change_i in range(0,len(sentence_split)):
 
     change_i = change_i-1 if change == "D" else change_i
     change = ""
 
-    print("current starting sentence", final_modified_sentence)
+    print("current starting sentence", sentence_split)
 
     curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
