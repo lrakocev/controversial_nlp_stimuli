@@ -273,9 +273,9 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     
 
     print(highest_js_word)
-    if highest_js_word[1] == "R":
+    if highest_js_word[0][1] == "R":
       final_modified_sentence[change_i] = highest_js_word[0]
-    elif highest_js_word[1] == "A":
+    elif highest_js_word[0][1] == "A":
       final_modified_sentence.insert(change_i,highest_js_word[0])
     else: 
       final_modified_sentence.pop(change_i)
@@ -289,7 +289,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
       js_positions.append(new_js_positions)
-      change = highest_js_word[1]
+      change = highest_js_word[0][1]
       changes.append(change)
       sentence_split = final_modified_sentence
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
