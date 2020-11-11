@@ -269,7 +269,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
 
 
     print(js_dict)
-    highest_js_word = sorted(js_dict.values(), key=lambda x: discounting(change_i,x[1]), reverse=True)[0]
+    highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
     
 
     print(highest_js_word)
@@ -350,6 +350,6 @@ model_list = [GPT2, XLM]
 for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent  = "I lives"
+  sent  = "I am"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
