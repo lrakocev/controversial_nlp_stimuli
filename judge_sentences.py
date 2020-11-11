@@ -102,7 +102,12 @@ def get_distribution(model_name, context, vocab, n):
 
       attention_mask = torch.tensor(attention_mask).unsqueeze(0)
 
-      outputs = model(**inputs, labels=inputs["input_ids"], attention_mask = attention_mask)
+      tokens = tokenizer.tokenize(batch_list)
+      ids = tokenizer.convert_tokens_to_ids(tokens)
+
+      input_ids = torch.tensor(ids).unsqueeze(0)
+
+      outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
       outputs = model(**inputs, labels=inputs["input_ids"])
 
@@ -351,7 +356,6 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-#model_list = [GPT2, XLM]
 model_list = [Roberta, Albert, TXL]
 
 for i in range(1):
