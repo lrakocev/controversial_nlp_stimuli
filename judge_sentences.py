@@ -267,7 +267,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     new_sentence_score, new_js_positions = evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab, batch_size)
 
     new_discounted_score = discounting(change_i, new_js_positions)
-    curr_discounted_score = discounting(change_i, cur_js_positions)
+    curr_discounted_score = discounting(change_i, original_js_positions)
 
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
