@@ -187,8 +187,8 @@ def discounting(cur_ind, js_positions, gamma=1):
   for i in range(to_consider):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  length_js_pos = 1 if to_consider == 0 else  to_consider
-  return total/(to_consider)
+  length_js_pos = 1 if to_consider == 0 else to_consider
+  return total/length_js_pos
 
 
 def change_sentence(model_list, sentence, vocab, batch_size):
