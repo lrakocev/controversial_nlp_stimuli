@@ -21,10 +21,11 @@ from functools import reduce
 
 class ModelInfo():
 
-  def __init__(self, model, tokenizer, start_token_symbol, vocab):
+  def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name):
     self.model = model
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
+    self.model_name = model_name
     self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
 
     all_tokens = list(self.word_token_dict.values())
@@ -90,7 +91,30 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
+
+    if model_name.model_name == "Albert":
+      tokens = tokenizer.tokenize(sent)
+
+      ids = tokenizer.convert_tokens_to_ids(tokens)
+      x = 2
+      attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
+      attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+
+      input_ids = torch.tensor(ids).unsqueeze(0)
+
+
+
+    if model_name.model_name == "Albert":
+      attention_mask = []
+      for i in range(len(batch_list)):
+        length = len(batch_list[i].split(" "))
+        x=1
+        attention_mask.append([1 for i in range(length-x)] + [0 for i in range(x)])
+
+      attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+      inputs = tokenizer(batch_list, padding='longest', return_tensors ="pt", attention_mask = attention_mask)
+    else:
+      inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
 
     outputs = model(**inputs, labels=inputs["input_ids"])
 
@@ -322,23 +346,21 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-roberta_config = RobertaConfig.from_pretrained("roberta-base")
-roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 500)
 
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab)
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base', config=roberta_config), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab)
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
 
-XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab)
+XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab)
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
 
-Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab)
+Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
 #model_list = [GPT2, XLM]
