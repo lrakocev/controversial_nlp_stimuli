@@ -62,9 +62,9 @@ def get_distribution(model_name, context, vocab, n):
   tokenizer.pad_token = model_name.start_token_symbol
 
   if context in  model_name.distr_dict_for_context.keys():
+    print("seen it!")
     return model_name.distr_dict_for_context[context]
 
-  print("calculating")
   context_tokens = tokenizer.tokenize(context)
 
   final_probabilities = {}
@@ -327,7 +327,7 @@ roberta_config = RobertaConfig.from_pretrained("roberta-base")
 roberta_config.is_decoder = True
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 500)
+vocab = get_vocab(filename, 10000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab)
 
