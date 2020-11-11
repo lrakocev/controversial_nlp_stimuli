@@ -184,7 +184,7 @@ def discounting(cur_ind, js_positions, gamma=0):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  length_js_pos = len(js_positions)-cur_ind if len(js_positions)-cur_ind != 0 else 1
+  length_js_pos = 0 if len(js_positions)-cur_ind == 0 else len(js_positions)-cur_ind
   return total/length_js_pos
 
 
