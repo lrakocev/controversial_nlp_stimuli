@@ -130,12 +130,13 @@ def evaluate_sentence(model_list, sentence, vocab, n):
   js_positions = []
   distrs = {}
 
-  for i in range(0, len_sentence-1):
+  for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
     
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
+      print("curr context", curr_context)
       next_word_distr = get_distribution(model_name, curr_context, vocab, n)
       distrs[model_name] = list(next_word_distr.values())
 
@@ -184,8 +185,8 @@ def discounting(cur_ind, js_positions, gamma=0.9):
   for i in range(len(js_positions)-cur_ind):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-
-  return total/(len(js_positions)-cur_ind)+1
+  length_js_pos = len(js_positions)-cur_ind if len(js_positions)-cur_ind != 0 else 1
+  return total/length_js_pos
 
 
 def change_sentence(model_list, sentence, vocab, batch_size):
@@ -200,7 +201,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   len_sentence = len(sentence_split)
   final_modified_sentence = copy.deepcopy(sentence_split)
 
-  for change_i in range(0,len(original_js_positions)-1):
+  for change_i in range(0,len(original_js_positions)):
 
     print("current starting sentence", final_modified_sentence)
 
