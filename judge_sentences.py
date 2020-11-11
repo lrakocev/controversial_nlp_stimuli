@@ -178,14 +178,17 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, word_list
 
-def discounting(cur_ind, js_positions, gamma=0):
+def discounting(cur_ind, js_positions, gamma=1):
 
   total = 0
   to_consider = len(js_positions) - cur_ind
   for i in range(to_consider):
     total += js_positions[cur_ind+i]*(gamma**i)
 
-  return total/(to_consider+1)
+
+  print("total discounting", total)
+  length_js_pos = len_js_pos if len_js_pos != 0 else 1
+  return total/(len_js_pos)
 
 
 def change_sentence(model_list, sentence, vocab, batch_size):
