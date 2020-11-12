@@ -96,13 +96,16 @@ def get_distribution(model_name, context, vocab, n):
     if model_name.model_name == "Albert":
       attention_mask = []
       input_ids = []
+
+      print("batch list", batch_list)
       for i in range(len(batch_list)):
+
         tokens = tokenizer.tokenize(batch_list[i])
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
         attention_mask.append([1 for i in range(len(ids)-x)] + [0 for i in range(x)])
-        
+                
 
       attention_mask = torch.tensor(attention_mask) #.unsqueeze(0)
       input_ids = torch.tensor(input_ids) #.unsqueeze(0)
