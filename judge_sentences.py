@@ -101,10 +101,10 @@ def get_distribution(model_name, context, vocab, n):
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
-        attention_mask = [1 for i in range(len(ids)-x)] + [0 for i in range(x)]
+        attention_mask.append([1 for i in range(len(ids)-x)] + [0 for i in range(x)])
         
 
-      attention_mask = torch.tensor(attention_mask).unsqueeze(0)
+      attention_mask = torch.tensor(attention_mask) #.unsqueeze(0)
       input_ids = torch.tensor(input_ids) #.unsqueeze(0)
 
       print("attn mask",attention_mask)
@@ -365,5 +365,5 @@ for i in range(1):
 
  # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   sent  = "I am"
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 1)
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
