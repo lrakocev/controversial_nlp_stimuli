@@ -97,7 +97,7 @@ def get_distribution(model_name, context, vocab, n):
       attention_mask = []
       input_ids = []
       for i in range(len(batch_list)):
-        length = len(batch_list[i].split(" "))
+        length = lengths_contexts[i]
         x=1
         attention_mask = [1 for i in range(length-x)] + [0 for i in range(x)]
         tokens = tokenizer.tokenize(batch_list[i])
