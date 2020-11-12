@@ -97,7 +97,6 @@ def get_distribution(model_name, context, vocab, n):
       attention_mask = []
       input_ids = []
 
-      print("batch list", batch_list)
       for i in range(len(batch_list)):
         length = lengths_contexts[i]
         tokens = tokenizer.tokenize(batch_list[i])
@@ -108,12 +107,8 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(ids)-x)] + [0 for i in range(x)])
                 
-
-      attention_mask = torch.tensor(attention_mask) #.unsqueeze(0)
-      input_ids = torch.tensor(input_ids) #.unsqueeze(0)
-
-      print("attn mask",attention_mask)
-      print("input ids", input_ids)
+      attention_mask = torch.tensor(attention_mask) 
+      input_ids = torch.tensor(input_ids) 
 
       outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
