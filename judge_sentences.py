@@ -62,7 +62,7 @@ def get_distribution(model_name, context, vocab, n):
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
 
-  if context in  model_name.distr_dict_for_context.keys():
+  if context in model_name.distr_dict_for_context.keys():
     print("seen it!")
     return model_name.distr_dict_for_context[context]
 
@@ -101,7 +101,7 @@ def get_distribution(model_name, context, vocab, n):
         length = lengths_contexts[i]
         tokens = tokenizer.tokenize(batch_list[i])
         if length < max_length:
-          tokens += [tokenizer.eos_token]
+          tokens += [tokenizer.eos_token]*(max_length-length)
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
