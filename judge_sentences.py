@@ -363,7 +363,6 @@ model_list = [Albert, TXL, GPT2, Roberta, XLM, T5]
 
 for i in range(1):
 
- # sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent  = "I am"
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
   #plot_scores(scores, sentence)
