@@ -99,13 +99,10 @@ def get_distribution(model_name, context, vocab, n):
       attention_mask = []
       input_ids = []
 
-      print("max length", max_length)
-
       for i in range(len(batch_list)):
         length = lengths_contexts[i]
         tokens = tokenizer.tokenize(batch_list[i])
         if length < max_length:
-          print("here")
           tokens += [tokenizer.eos_token]*(max_length-length)
 
         ids = tokenizer.convert_tokens_to_ids(tokens)
@@ -166,7 +163,7 @@ def evaluate_sentence(model_list, sentence, vocab, n):
   distrs = {}
 
   for i in range(0, len_sentence):
-    curr_context += sentence_split[i] + " "
+    curr_context = " ".join(curr_context, sentence_split[i])
     
     for model_name in model_list:
       tokenizer = model_name.tokenizer
@@ -351,7 +348,7 @@ def sample_sentences(file_name):
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 1000)
+vocab = get_vocab(filename, 500)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
