@@ -129,7 +129,7 @@ def get_distribution(model_name, context, vocab, n):
   
   #normalizing
   final_probabilities_total = sum(final_probabilities.values())
-  final_probabilities = {k: v / total for k, v in final_probabilties.items()}
+  final_probabilities = {k: v / total for k, v in final_probabilities.items()}
 
   model_name.distr_dict_for_context[context] = final_probabilities
 
