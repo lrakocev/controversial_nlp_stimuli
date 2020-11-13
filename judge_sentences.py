@@ -133,9 +133,6 @@ def get_distribution(model_name, context, vocab, n):
 
 def jsd(prob_distributions, weights, logbase=math.e):
 
-    types = [type(i) for i in prob_distributions]
-
-    lens = [len(i) for i in prob_distributions]
     k = zip(weights, np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
@@ -361,7 +358,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Albert, GPT2, Roberta, XLM, T5] 
+model_list = [Albert, GPT2] #, Roberta, XLM, T5] 
 
 for i in range(1):
 
