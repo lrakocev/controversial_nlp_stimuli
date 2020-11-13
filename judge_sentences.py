@@ -195,7 +195,7 @@ def get_avg_distr(model_list, context, vocab, n):
       next_word_distr = get_distribution(model_name, context, vocab, n)
       distrs[model_name] = [v for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
     
-      sorted_vocab = [k for (k,v) in sorted(distrs.values().items(), key = lambda x: x[0])]
+      sorted_vocab = [k for (k,v) in sorted(distrs[model_name].items(), key = lambda x: x[0])]
 
     df_probabilities = pd.DataFrame(distrs.values())
 
