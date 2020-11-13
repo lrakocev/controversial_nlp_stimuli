@@ -195,7 +195,7 @@ def get_avg_distr(model_list, context, vocab, n):
       next_word_distr = get_distribution(model_name, context, vocab, n)
       distrs[model_name] = [v for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
     
-    sorted_vocab = [k for (k,v) in sorted(distrs.values()[0].items(), key = lambda x: x[0])]
+      sorted_vocab = [k for (k,v) in sorted(distrs.values().items(), key = lambda x: x[0])]
 
     df_probabilities = pd.DataFrame(distrs.values())
 
@@ -385,7 +385,8 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  sent ="I am"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
