@@ -361,7 +361,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Albert, GPT2, Roberta, XLM, T5] #, TXL]
+model_list = [TXL] #[Albert, GPT2, Roberta, XLM, T5] 
 
 for i in range(1):
 
