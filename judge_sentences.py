@@ -62,8 +62,6 @@ def get_distribution(model_name, context, vocab, n):
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
 
-  print("keys", model_name.distr_dict_for_context.keys())
-
   if context in model_name.distr_dict_for_context.keys():
     print("seen it!")
     return model_name.distr_dict_for_context[context]
@@ -348,7 +346,7 @@ def sample_sentences(file_name):
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 500)
+vocab = get_vocab(filename, 10000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -363,7 +361,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Albert] #, GPT2, Roberta, XLM, T5, TXL]
+model_list = [Albert, GPT2, Roberta, XLM, T5] #, TXL]
 
 for i in range(1):
 
