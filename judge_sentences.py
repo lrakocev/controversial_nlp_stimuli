@@ -93,15 +93,13 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    print("batch list", batch_list)
-
-    print("max length", max_length)
-
     inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
 
     if model_name.model_name == "Albert":
       attention_mask = []
       input_ids = []
+
+      print("max length", max_length)
 
       for i in range(len(batch_list)):
         length = lengths_contexts[i]
@@ -113,7 +111,7 @@ def get_distribution(model_name, context, vocab, n):
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
-        attention_mask.append([1 for i in range(max_length-x)] + [0 for i in range(x)])
+        attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
          
       attention_mask = torch.tensor(attention_mask) 
