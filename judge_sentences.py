@@ -346,7 +346,7 @@ def sample_sentences(file_name):
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
+vocab = get_vocab(filename, 1000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -361,7 +361,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [TXL] #[Albert, GPT2, Roberta, XLM, T5] 
+model_list = [Albert, GPT2, Roberta, XLM, T5] 
 
 for i in range(1):
 
