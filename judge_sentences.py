@@ -62,6 +62,8 @@ def get_distribution(model_name, context, vocab, n):
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
 
+  print("keys", model_name.distr_dict_for_context.keys())
+
   if context in model_name.distr_dict_for_context.keys():
     print("seen it!")
     return model_name.distr_dict_for_context[context]
@@ -91,6 +93,10 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
+    print("batch list", batch_list)
+
+    print("max length", max_length)
+
     inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
 
     if model_name.model_name == "Albert":
@@ -104,14 +110,12 @@ def get_distribution(model_name, context, vocab, n):
           print("here")
           tokens += [tokenizer.eos_token]*(max_length-length)
 
-        print("tokens",tokens)
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
-        attention_mask.append([1 for i in range(len(ids)-x)] + [0 for i in range(x)])
+        attention_mask.append([1 for i in range(max_length-x)] + [0 for i in range(x)])
 
-      print('attention-mask',attention_mask)  
-                
+         
       attention_mask = torch.tensor(attention_mask) 
       input_ids = torch.tensor(input_ids) 
 
