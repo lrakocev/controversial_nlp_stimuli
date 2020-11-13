@@ -101,11 +101,16 @@ def get_distribution(model_name, context, vocab, n):
         length = lengths_contexts[i]
         tokens = tokenizer.tokenize(batch_list[i])
         if length < max_length:
+          print("here")
           tokens += [tokenizer.eos_token]*(max_length-length)
+
+        print("tokens",tokens)
         ids = tokenizer.convert_tokens_to_ids(tokens)
         input_ids.append(ids)
         x=1
         attention_mask.append([1 for i in range(len(ids)-x)] + [0 for i in range(x)])
+
+      print('attention-mask',attention_mask)  
                 
       attention_mask = torch.tensor(attention_mask) 
       input_ids = torch.tensor(input_ids) 
@@ -359,7 +364,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Albert, GPT2, Roberta, XLM, T5] # TXL
+model_list = [Albert] #, GPT2, Roberta, XLM, T5, TXL]
 
 for i in range(1):
 
