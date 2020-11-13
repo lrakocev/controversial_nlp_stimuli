@@ -163,7 +163,7 @@ def evaluate_sentence(model_list, sentence, vocab, n):
   distrs = {}
 
   for i in range(0, len_sentence):
-    curr_context = " ".join(curr_context, sentence_split[i])
+    curr_context += sentence_split[i] + " "
     
     for model_name in model_list:
       tokenizer = model_name.tokenizer
@@ -254,7 +254,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     for j in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
+      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
      
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -279,7 +279,7 @@ def change_sentence(model_list, sentence, vocab, batch_size):
     for k in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
-      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context), vocab, batch_size)
+      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
