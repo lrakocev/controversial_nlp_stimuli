@@ -126,7 +126,13 @@ def get_distribution(model_name, context, vocab, n):
 
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
 
+  
+  #normalizing
+  final_probabilities_total = sum(final_probabilities.itervalues(), 0.0)
+  final_probabilities = {k: v / total for k, v in final_probabiltiies.iteritems()}
+
   model_name.distr_dict_for_context[context] = final_probabilities
+
 
   return final_probabilities
 
@@ -187,25 +193,26 @@ def get_avg_distr(model_list, context, vocab, n):
       model = model_name.model
 
       next_word_distr = get_distribution(model_name, context, vocab, n)
-      distrs[model_name] = list(next_word_distr.values())
+      distrs[model_name] = [v for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
+    
+    sorted_vocab = [k for (k,v) in sorted(distrs.values()[0].items(), key = lambda x: x[0])]
 
-    df = pd.DataFrame(distrs.values())
+    df_probabilities = pd.DataFrame(distrs.values())
 
-    avg_distr = dict(df.mean())
+    df_probabilities_mean = df_probabilities.mean()
 
-    avg_distr_vals = [v for (k,v) in avg_distr.items()]
+    avg_distr = dict(zip(sorted_vocab, df_probabilities_mean))
 
-    avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    #avg_distr = dict(df_probabilities.mean())
+    #avg_distr_vals = [v for (k,v) in avg_distr.items()]
+    #avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
+    #avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
+    #avg_distr_summed = dict(zip(vocab, avg_distr_vals))
 
-    avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
-
-    avg_distr_summed = dict(zip(vocab, avg_distr_vals))
-
-    prob_list_sum = sum(avg_distr_vals)
-    prob_list = [v/prob_list_sum for (k, v) in avg_distr_summed.items()]
-    word_list = [k for k, v in avg_distr_summed.items()]
-
-    return prob_list, word_list
+    prob_list_sum = sum(df_probabilities_mean)
+    prob_list = [v/prob_list_sum for (k, v) in avg_distr.items()]
+    
+    return prob_list, sorted_vocab
 
 def discounting(cur_ind, js_positions, gamma=1):
 
@@ -218,7 +225,7 @@ def discounting(cur_ind, js_positions, gamma=1):
   return total/length_js_pos
 
 
-def change_sentence(model_list, sentence, vocab, batch_size):
+def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
@@ -229,10 +236,14 @@ def change_sentence(model_list, sentence, vocab, batch_size):
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
 
-  for change_i in range(0,len(sentence_split)):
+  for change_i in range(0,num_changes):
 
-    change_i = change_i-1 if change == "D" else change_i
-    change = ""
+    exponentiated_scores = softmax(original_js_positions)
+    n = list(np.random.multinomial(1,exponentiated_scores))
+    change_i = n.index(1)
+
+    #change_i = change_i-1 if change == "D" else change_i
+    #change = ""
 
     print("current starting sentence", sentence_split)
 
@@ -326,6 +337,18 @@ def plot_scores(scores, sentence):
   plt.savefig(name)
   plt.close()
 
+def plot_positions(js_positions, sentence):
+
+
+  for pos in js_positions:
+    plt.plot(pos)
+  ticks = sentence.split(" ")
+  plt.xticks(np.arange(len(ticks)), ticks)
+  plt.show()
+  name = sentence + " positions.png"
+  plt.savefig(name)
+  plt.close()
+
 
 def sample_sentences(file_name):
 
@@ -363,5 +386,6 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 for i in range(1):
 
   sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100)
-  #plot_scores(scores, sentence)
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
+  plot_scores(scores, sentence)
+  plot_positions(js_positions, sentence)
