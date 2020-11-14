@@ -219,7 +219,7 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  input_idx = tokenizer(context + {tok.mask_token}, return_tensors="pt")
+  input_idx = tokenizer(context + {tokenizer.mask_token}, return_tensors="pt")
   logits = model(torch.tensor([input_idx]))[0]
 
   logits = logits[0].argmax(dim=1)
