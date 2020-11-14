@@ -219,7 +219,7 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(context + "[MASK]", return_tensors="pt")
+  inputs = tokenizer(context, return_tensors="pt")
   labels = tokenizer(context, return_tensors="pt")["input_ids"]
 
   outputs = model(**inputs, labels=labels)
@@ -404,7 +404,8 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  sent = "I am"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
