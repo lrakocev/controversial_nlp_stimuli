@@ -219,10 +219,9 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(context, return_tensors="pt")
-  labels = tokenizer(context, return_tensors="pt")["input_ids"]
-
-  outputs = model(**inputs, labels=labels)
+  inputs = tokenizer(context + "[MASK]", return_tensors="pt")
+  
+  outputs = model(**inputs)
 
   logits = outputs.logits
 
@@ -230,6 +229,8 @@ def sample_bert(context):
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
+
+  print(prob_list.size())
 
   return prob_list, vocab
 
