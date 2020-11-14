@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import entropy as H
 import tensorflow as tf
 import torch
-from transformers import  GPT2LMHeadModel, GPT2Tokenizer, TransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, T5ForConditionalGeneration, T5Config, RobertaTokenizer, RobertaForCausalLM, RobertaConfig, AlbertTokenizer, AlbertForMaskedLM,XLMTokenizer, XLMWithLMHeadModel
+from transformers import  GPT2LMHeadModel, GPT2Tokenizer, TransfoXLLMHeadModel, TransfoXLTokenizer, T5Tokenizer, T5ForConditionalGeneration, T5Config, RobertaTokenizer, RobertaForCausalLM, RobertaConfig, AlbertTokenizer, AlbertForMaskedLM,XLMTokenizer, XLMWithLMHeadModel, BertTokenizer, BertForMaskedLM
 import sys
 from scipy.special import softmax
 import torch
@@ -211,8 +211,28 @@ def get_avg_distr(model_list, context, vocab, n):
 
     prob_list_sum = sum(df_probabilities_mean)
     prob_list = [v/prob_list_sum for (k, v) in avg_distr.items()]
-    
+
     return prob_list, sorted_vocab
+
+def sample_bert(context):
+
+  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+  model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
+
+  inputs = tokenizer(context + "[MASK]", return_tensors="pt")
+  labels = tokenizer(context, return_tensors="pt")["input_ids"]
+
+  outputs = model(**inputs, labels=labels)
+
+  logits = outputs.logits
+
+  prob_list = list(softmax(logits))
+
+  ids = range(0,tokenizer.vocab_size)
+  vocab = tokenizer.convert_ids_to_tokens(ids)
+
+  return prob_list, vocab
+
 
 def discounting(cur_ind, js_positions, gamma=1):
 
@@ -257,7 +277,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     for j in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
-      cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
+      cur_prob_list, cur_word_list = sample_bert(' '.join(cur_context))
+      #cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
      
       n = list(np.random.multinomial(1,cur_prob_list))
       ind = n.index(1)
@@ -282,7 +303,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     for k in range(0,5):
       cur_context = sentence_split[:change_i+1]
 
-      next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
+      next_prob_list, next_word_list = sample_bert(' '.join(cur_context))
+      #next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
 
       n = list(np.random.multinomial(1,next_prob_list))
       ind = n.index(1)
