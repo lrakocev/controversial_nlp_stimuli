@@ -404,8 +404,7 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent ="I am"
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
