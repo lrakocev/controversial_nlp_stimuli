@@ -224,9 +224,7 @@ def sample_bert(context):
 
   logits = logits[0].argmax(dim=1)
 
-  print(logits)
-
-  prob_list = list(softmax(np.asarray(logits.detach())))
+  prob_list = softmax(np.asarray(logits.detach()))
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
