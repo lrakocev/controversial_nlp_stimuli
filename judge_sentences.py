@@ -238,16 +238,13 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   for change_i in range(0,num_changes):
 
-    exponentiated_scores = softmax(original_js_positions)
+    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
+
+    exponentiated_scores = softmax(curr_js_positions)
     n = list(np.random.multinomial(1,exponentiated_scores))
     change_i = n.index(1)
 
-    #change_i = change_i-1 if change == "D" else change_i
-    #change = ""
-
     print("current starting sentence", sentence_split)
-
-    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
     final_modified_sentence = copy.deepcopy(sentence_split)
     modified_sentence_replacements = copy.deepcopy(sentence_split)
