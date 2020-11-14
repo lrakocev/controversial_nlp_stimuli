@@ -230,8 +230,6 @@ def sample_bert(context):
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
 
-  print(prob_list.size())
-
   return prob_list, vocab
 
 
