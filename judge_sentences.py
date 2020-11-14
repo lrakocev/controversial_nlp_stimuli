@@ -223,7 +223,7 @@ def sample_bert(context):
   
   outputs = model(**inputs)
 
-  logits = outputs.logits
+  logits = outputs.logits[-1]
 
   prob_list = list(softmax(np.asarray(logits.detach())))
 
