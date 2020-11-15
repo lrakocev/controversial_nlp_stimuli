@@ -273,7 +273,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # replacements 
     for j in range(0,5):
-      sentence_split[change_i+1] = '[MASK]'
+      sentence_split[change_i] = '[MASK]'
 
       cur_prob_list, cur_word_list = sample_bert(' '.join(sentence_split))
       #cur_context = sentence_split[:change_i+1]
@@ -300,7 +300,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # additions
     for k in range(0,5):
-      sentence_split[change_i+1] = '[MASK]'
+      sentence_split[change_i] = '[MASK]'
 
       next_prob_list, next_word_list = sample_bert(' '.join(sentence_split))
       #cur_context = sentence_split[:change_i+1]
