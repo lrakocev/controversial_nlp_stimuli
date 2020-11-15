@@ -219,8 +219,8 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  input_idx = tokenizer(context, return_tensors="pt")
-  outputs = model(torch.tensor([input_idx]))
+  inputs = tokenizer(context, return_tensors="pt")
+  outputs = model(**inputs)
 
   logits = outputs.logits
 
