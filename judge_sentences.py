@@ -224,7 +224,7 @@ def sample_bert(context, change_i):
   inputs = tokenizer(context, return_tensors="pt")
   outputs = model(**inputs)
 
-  logits = outputs.logits[change_i]
+  logits = outputs.logits[change_i-1]
 
   prob_list = softmax(np.asarray(logits.detach()))
 
