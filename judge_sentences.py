@@ -219,8 +219,8 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  input_idx = tokenizer.encode(context)
-  outputs = model(torch.tensor([input_idx]))[0]
+  input_idx = tokenizer(context, return_tensors="pt")
+  outputs = model(torch.tensor([input_idx]))
 
   logits = outputs.logits
 
@@ -273,9 +273,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # replacements 
     for j in range(0,5):
-      cur_context = sentence_split[:change_i+1]
+      sentence_split[change_i+1] = '[MASK]'
 
-      cur_prob_list, cur_word_list = sample_bert(' '.join(cur_context))
+      cur_prob_list, cur_word_list = sample_bert(' '.join(sentence_split))
+      #cur_context = sentence_split[:change_i+1]
       #cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
      
       n = list(np.random.multinomial(1,cur_prob_list))
@@ -299,9 +300,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # additions
     for k in range(0,5):
-      cur_context = sentence_split[:change_i+1]
+      sentence_split[change_i+1] = '[MASK]'
 
-      next_prob_list, next_word_list = sample_bert(' '.join(cur_context))
+      next_prob_list, next_word_list = sample_bert(' '.join(sentence_split))
+      #cur_context = sentence_split[:change_i+1]
       #next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
 
       n = list(np.random.multinomial(1,next_prob_list))
@@ -330,15 +332,16 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, curr_js_positions)
 
-
     if new_discounted_score > curr_discounted_score:
       scores.append(new_sentence_score)
       js_positions.append(new_js_positions)
       change = highest_js_word[0][1]
       changes.append(change)
-      sentence_split = final_modified_sentence
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
+    sentence_split = final_modified_sentence
+
+
 
   print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)[0])
 
