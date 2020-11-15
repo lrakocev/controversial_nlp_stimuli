@@ -219,10 +219,10 @@ def sample_bert(context):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  input_idx = tokenizer.encode(context + tokenizer.mask_token)
-  logits = model(torch.tensor([input_idx]))[0]
+  input_idx = tokenizer.encode(context)
+  outputs = model(torch.tensor([input_idx]))[0]
 
-  logits = logits[0].argmax(dim=1)
+  logits = outputs.logits
 
   prob_list = softmax(np.asarray(logits.detach()))
 
