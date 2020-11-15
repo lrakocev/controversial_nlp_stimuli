@@ -214,7 +214,9 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
-def sample_bert(context):
+def sample_bert(context, change_i):
+
+  print("context for bert", context)
 
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
@@ -222,7 +224,7 @@ def sample_bert(context):
   inputs = tokenizer(context, return_tensors="pt")
   outputs = model(**inputs)
 
-  logits = outputs.logits
+  logits = outputs.logits[change_i]
 
   prob_list = softmax(np.asarray(logits.detach()))
 
@@ -275,7 +277,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     for j in range(0,5):
       sentence_split[change_i] = '[MASK]'
 
-      cur_prob_list, cur_word_list = sample_bert(' '.join(sentence_split))
+      cur_prob_list, cur_word_list = sample_bert(' '.join(sentence_split), change_i)
       #cur_context = sentence_split[:change_i+1]
       #cur_prob_list, cur_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
      
@@ -302,7 +304,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     for k in range(0,5):
       sentence_split[change_i] = '[MASK]'
 
-      next_prob_list, next_word_list = sample_bert(' '.join(sentence_split))
+      next_prob_list, next_word_list = sample_bert(' '.join(sentence_split), change_i)
       #cur_context = sentence_split[:change_i+1]
       #next_prob_list, next_word_list = get_avg_distr(model_list, ' '.join(cur_context) + " ", vocab, batch_size)
 
