@@ -343,7 +343,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       changes.append(change)
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
-    sentence_split = final_modified_sentence
+      sentence_split = final_modified_sentence
 
 
 
