@@ -228,7 +228,6 @@ def sample_bert(context, change_i):
 
   prob_list = softmax(np.asarray(logits.detach()))
 
-  print("prob list", prob_list)
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
@@ -409,8 +408,7 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent = "I am not going"
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, len(sent.split(" ")))
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
