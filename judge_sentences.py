@@ -224,10 +224,13 @@ def sample_bert(context, change_i):
   inputs = tokenizer(context, return_tensors="pt")
   outputs = model(**inputs)
 
-  logits = outputs.logits[0][change_i-1]
+  logits = outputs.logits[0][change_i]
 
   prob_list = softmax(np.asarray(logits.detach()))
 
+  prob_list_sum = sum(prob_list)
+
+  prob_list = prob_list/prob_list_sum
 
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
