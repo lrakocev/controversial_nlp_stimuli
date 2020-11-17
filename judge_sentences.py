@@ -227,7 +227,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(context return_tensors='pt')
+  inputs = tokenizer(context, return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
   
