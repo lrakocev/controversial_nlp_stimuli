@@ -237,6 +237,8 @@ def sample_bert(context, change_i, num_masks, top_k):
     predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]
     predicted_tokens.append(predicted_token)
 
+  print("predicted tokens", predicted_tokens)
+
   return predicted_tokens
 
 def discounting(cur_ind, js_positions, gamma=1):
