@@ -217,9 +217,9 @@ def get_avg_distr(model_list, context, vocab, n):
 def sample_bert(context, change_i, num_masks, top_k):
 
   context[change_i] = '[MASK]'
-  if num_masks == 2 and len(context) > change_i:
+  if num_masks == 2 and len(context) > change_i+1:
     context[change_i+1] = '[MASK]'
-  elif num_masks == 2 and len(context) <= change_i:
+  elif num_masks == 2 and len(context) <= change_i+1:
     context.insert(change_i+1,'[MASK]')
 
   print("num masks", num_masks, 'bert context', context)
