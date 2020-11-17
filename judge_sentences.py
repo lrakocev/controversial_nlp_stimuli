@@ -256,10 +256,6 @@ def discounting(cur_ind, js_positions, gamma=1):
   length_js_pos = 1 if to_consider == 0 else to_consider
   return total/length_js_pos
 
-def check_if_complete_word(word, vocab_list, num_masks):
-
-
-
 
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
