@@ -235,6 +235,8 @@ def sample_bert(context, change_i, num_masks, top_k):
     predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
     predicted_tokens = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]
 
+  print("predtokens", predicted_tokens)
+
   return predicted_tokens
 
 def discounting(cur_ind, js_positions, gamma=1):
@@ -308,6 +310,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     for words in new_word_list:
 
+      print("mod sentence additions", modified_sentence_additions)
       modified_sentence_additions.insert(change_i+1,str(words[0]))
       if num_masks == 2:
         modified_sentence_additions.insert(change_i+2,str(words[1]))
