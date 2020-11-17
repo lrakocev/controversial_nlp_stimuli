@@ -322,7 +322,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       modified_sentence_additions.insert(change_i+1,str(new_word))
       if num_masks == 2:
         modified_sentence_additions.insert(change_i+2,str(new_word))
-        
+
       new_context = ' '.join(modified_sentence_additions)
 
       print("additions try", new_context)
@@ -419,7 +419,8 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  sent = "I am fine"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, len(sent.split(" ")))
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
