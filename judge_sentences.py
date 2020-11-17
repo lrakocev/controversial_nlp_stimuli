@@ -293,7 +293,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_replacements)
 
       print("replacement try", new_context)
-      js_dict[(words,"R")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
     
 
     #deletions
@@ -301,7 +301,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     if len(modified_sentence_deletions) > 0:
 
       print("deletion try", ' '.join(modified_sentence_deletions))
-      js_dict[("", "D")] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size)
+      js_dict[' '.join(modified_sentence_deletions)] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size)
 
 
     # additions
@@ -317,21 +317,15 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_additions)
 
       print("additions try", new_context)
-      js_dict[(words,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       modified_sentence_additions.pop(change_i+1)
 
 
     highest_js_word = sorted(js_dict.items(), key=lambda x: discounting(change_i,x[1][1]), reverse=True)[0]
-    
 
-    if highest_js_word[0][1] == "R":
-      final_modified_sentence[change_i] = highest_js_word[0][0]
-    elif highest_js_word[0][1] == "A":
-      final_modified_sentence.insert(change_i,highest_js_word[0][0])
-    else: 
-      final_modified_sentence.pop(change_i)
+    final_modified_sentence = highest_js_word[0]
 
-    new_sentence_score, new_js_positions= evaluate_sentence(model_list, ' '.join(final_modified_sentence), vocab, batch_size)
+    new_sentence_score, new_js_positions= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, curr_js_positions)
@@ -343,7 +337,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       changes.append(change)
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
-      sentence_split = final_modified_sentence
+      sentence_split = final_modified_sentence.split(" ")
 
 
 
