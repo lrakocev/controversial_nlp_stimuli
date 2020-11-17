@@ -273,7 +273,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
     exponentiated_scores = softmax(curr_js_positions)
-    n = list(torch.multinomial(1,exponentiated_scores))
+    n = list(torch.multinomial(exponentiated_scores, 1))
     change_i = n[0]
 
     print("current starting sentence", sentence_split)
