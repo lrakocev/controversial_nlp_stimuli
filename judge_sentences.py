@@ -285,9 +285,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     for words in new_word_list: 
       modified_sentence_replacements[change_i] = str(words[0])
-      if num_masks == 2 and len(modified_sentence_replacements) > change_i + 1:
+      if num_masks == 2 and len(modified_sentence_replacements) > change_i:
         modified_sentence_replacements[change_i+1] = str(words[1])
-      elif num_masks == 2 and len(modified_sentence_replacements) <= change_i + 1:
+      elif num_masks == 2 and len(modified_sentence_replacements) <= change_i:
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
       new_context = ' '.join(modified_sentence_replacements)
