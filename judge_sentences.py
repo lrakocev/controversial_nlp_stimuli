@@ -214,7 +214,7 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
-def sample_bert(context, change_i, num_masks):
+def sample_bert(context, change_i, num_masks, top_k):
 
   context[change_i] = '[MASK]'
   if num_masks == 2 and len(context) > change_i:
@@ -227,24 +227,17 @@ def sample_bert(context, change_i, num_masks):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(context, return_tensors="pt")
+  inputs = tokenizer(context return_tensors='pt')
   outputs = model(**inputs)
+  predictions = outputs[0]
+  
+  sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
 
-  logits = outputs[0]
+  for k in range(top_k):
+    predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
+    predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(1,num_masks)]
 
-  predicted_index_1 = torch.argmax(predictions[0, change_i]).item()
-  predicted_token_1 = tokenizer.convert_ids_to_tokens([predicted_index_1])[0]
-  predicted_token_2 = ''
-  if num_masks == 2:
-    predicted_index_2 = torch.argmax(predictions[0, change_i+1]).item()
-    predicted_token_2 = tokenizer.convert_ids_to_tokens([predicted_index_2])[0]
-
-
-  if predicted_token_1[0] != "#" and predicted_token_2[0] == "#":
-    return predicted_token_1, predicted_token_2
-  else: 
-    return sample_bert(context, change_i, num_masks)
-
+  return predicted_token
 
 def discounting(cur_ind, js_positions, gamma=1):
 
@@ -272,7 +265,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
 
-    exponentiated_scores = softmax(curr_js_positions)
+    exponentiated_scores = torch.tensor(softmax(curr_js_positions))
     n = list(torch.multinomial(exponentiated_scores, 1))
     change_i = n[0]
 
@@ -286,15 +279,14 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     js_dict = {}
 
     # replacements 
-    for j in range(0,5):
+    num_masks = random.randint(1,2)
 
-      num_masks = random.randint(1,2)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
 
-      new_word_1, new_word_2 = sample_bert(sentence_split, change_i, num_masks)
-   
-      modified_sentence_replacements[change_i] = str(new_word_1)
+    for words in new_word_list: 
+      modified_sentence_replacements[change_i] = str(words[0])
       if num_masks == 2:
-        modified_sentence_replacements[change_i+1] = str(new_word_2)
+        modified_sentence_replacements[change_i+1] = str(words[1])
 
       new_context = ' '.join(modified_sentence_replacements)
 
@@ -311,13 +303,13 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
 
     # additions
-    for k in range(0,5):
-      num_masks = random.randint(1,2)
-      new_word_1, new_word_2 = sample_bert(sentence_split, change_i, num_masks)
+    num_masks = random.randint(1,2)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
 
-      modified_sentence_additions.insert(change_i+1,str(new_word))
+    for words in new_word_list:
+      modified_sentence_additions.insert(change_i+1,str(words[0]))
       if num_masks == 2:
-        modified_sentence_additions.insert(change_i+2,str(new_word))
+        modified_sentence_additions.insert(change_i+2,str(words[1]))
 
       new_context = ' '.join(modified_sentence_additions)
 
