@@ -219,7 +219,7 @@ def sample_bert(context, change_i, num_masks):
   context[change_i] = '[MASK]'
   if num_masks == 2 and len(context) > change_i:
     context[change_i+1] = '[MASK]'
-  else if num_masks == 2 and len(context) <= change_i:
+  elif num_masks == 2 and len(context) <= change_i:
     context.insert(change_i+1) = '[MASK]'
 
   print("num masks", num_masks, 'bert context', context)
