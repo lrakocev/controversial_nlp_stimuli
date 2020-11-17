@@ -289,7 +289,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_replacements)
 
       print("replacement try", new_context)
-      js_dict[(new_word,"R")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      js_dict[(words,"R")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
     
 
     #deletions
@@ -312,7 +312,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_additions)
 
       print("additions try", new_context)
-      js_dict[(new_word,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      js_dict[(words,"A")] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       modified_sentence_additions.pop(change_i+1)
 
 
