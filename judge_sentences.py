@@ -229,7 +229,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   if num_masks == 2:
     context.insert(change_i+1,'[MASK]')
 
-  print("num masks", num_masks, 'bert context', context)
+  print('bert context', context)
 
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
@@ -238,11 +238,9 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  print("predictions shape", predictions.shape)
-
   predicted_tokens = []
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices
-  print("predicted indices", predicted_indices)
+  
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
@@ -250,6 +248,7 @@ def sample_bert(context, change_i, num_masks, top_k):
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
+  print("predicted tokens", predicted_tokens)
 
   return predicted_tokens
 
