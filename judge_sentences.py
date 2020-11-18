@@ -239,23 +239,20 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  print("predictions", predictions)
-
-  print("size predictions", len(predictions))
-
-  print("size predictions 0", len(predictions[0]))
-  
   sorted_preds, sorted_idx = predictions[0][change_i].sort(dim=-1, descending=True)
-  #if num_masks == 2:
-  #  sorted_preds_2, sorted_idx_2 = predictions[0][change_i+1].sort(dim=-1, descending=True)
-
+  if num_masks == 2:
+    sorted_preds_2, sorted_idx_2 = predictions[0][change_i+1].sort(dim=-1, descending=True)
 
   predicted_tokens = []
   for k in range(top_k):
-    predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
-    predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
+    predicted_index_1 = sorted_idx[0, k].item()
+    predicted_token_1 = tokenizer.convert_ids_to_tokens(predicted_index_1) 
+    predicted_tokens.append([predicted_token_1])
+    if num_masks == 2:
+      predicted_index_2 = sorted_idx[0, k].item()
+      predicted_token_2 = tokenizer.convert_ids_to_tokens(predicted_index_1) 
     #predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
-    predicted_tokens.append(predicted_token)
+      predicted_tokens.append([predicted_token_1, predicted_token_2])
 
   print(predicted_tokens)
 
