@@ -218,7 +218,7 @@ def punctuation_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks):
 
   predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
   predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
-  if len(predicted_token.intersection(string.punctuation)) != 0:
+  if len(set(predicted_token).intersection(set(string.punctuation))) != 0:
     return punctuation_helper(sorted_preds, sorted_idx, k+1, top_k+1)
 
   return predicted_token, top_k
