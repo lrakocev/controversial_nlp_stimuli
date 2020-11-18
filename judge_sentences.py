@@ -233,6 +233,8 @@ def sample_bert(context, change_i, num_masks, top_k):
   if num_masks == 2:
     context.insert(change_i+1,'[MASK]')
 
+  print("context", context)
+
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
@@ -242,7 +244,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
   print("predictions", predictions)
 
-  punc_ids = tokenizer.convert_tokens_to_ids([x for x in string.punctuation])
+  #punc_ids = tokenizer.convert_tokens_to_ids([x for x in string.punctuation])
 
   print("predictions 0, change i", predictions[0,change_i])
 
@@ -419,10 +421,18 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 model_list = [Albert, GPT2] #, Roberta, XLM, T5] 
 
+context = "The student reads a book in the library."
+change_i = 2
+num_masks = 1
+top_k = 10
+
+sample_bert(context, change_i, num_masks, top_k)
+
+'''
 for i in range(1):
 
-  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent = "I am fine"
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
+'''
