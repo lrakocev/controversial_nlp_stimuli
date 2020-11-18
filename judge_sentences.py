@@ -239,11 +239,9 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
+  '''
   sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
-
-  print("sorted_preds", sorted_preds)
-  print("sorted_idx", sorted_idx)
-
+  
   predicted_tokens = []
   for k in range(top_k):
     predicted_index_1 = sorted_idx[change_i,k].item()
@@ -251,9 +249,23 @@ def sample_bert(context, change_i, num_masks, top_k):
     if num_masks == 1:  
       predicted_tokens.append([predicted_token_1])
     if num_masks == 2:
-      predicted_index_2 = sorted_idx[change_i+1,k].item()
+      predicted_index_2 = sorted_idx[change_i,k].item()
       predicted_token_2 = tokenizer.convert_ids_to_tokens(predicted_index_2) 
       predicted_tokens.append([predicted_token_1, predicted_token_2])
+  '''
+
+  predicted_tokens = []
+
+  for k in range(top_k):
+    predicted_index = torch.argmax(predictions[k, change_i]).item()
+    predicted_token = tokenizer.convert_ids_to_tokens(predicted_index)[0] 
+    if num_masks == 1:  
+      predicted_tokens.append([predicted_token])
+    if num_masks == 2:
+      predicted_index_2 = torch.argmax(predictions[k, change_i+1]).item()
+      predicted_token_2 = tokenizer.convert_ids_to_tokens(predicted_index_2)[0] 
+      predicted_tokens.append([predicted_token, predicted_token_2])
+    
 
   print(predicted_tokens)
 
@@ -425,7 +437,7 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 for i in range(1):
 
   #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent = "I am fine"
+  sent = "I am not fine"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
