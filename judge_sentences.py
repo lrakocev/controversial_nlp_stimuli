@@ -245,7 +245,9 @@ def sample_bert(context, change_i, num_masks, top_k):
 
   print("size predictions 0", len(predictions[0]))
   
-  sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
+  sorted_preds, sorted_idx = predictions[0][change_i].sort(dim=-1, descending=True)
+  #if num_masks == 2:
+  #  sorted_preds_2, sorted_idx_2 = predictions[0][change_i+1].sort(dim=-1, descending=True)
 
 
   predicted_tokens = []
@@ -254,6 +256,8 @@ def sample_bert(context, change_i, num_masks, top_k):
     predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
     #predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
     predicted_tokens.append(predicted_token)
+
+  print(predicted_tokens)
 
   return predicted_tokens
 
