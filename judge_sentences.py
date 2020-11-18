@@ -233,20 +233,12 @@ def sample_bert(context, change_i, num_masks, top_k):
   if num_masks == 2:
     context.insert(change_i+1,'[MASK]')
 
-  print("context", context)
-
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
   inputs = tokenizer(" ".join(context), return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
-
-  print("predictions", predictions)
-
-  #punc_ids = tokenizer.convert_tokens_to_ids([x for x in string.punctuation])
-
-  print("predictions 0, change i", predictions[0,change_i])
 
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
@@ -404,14 +396,7 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-context = "The student reads a book in the library".split(" ")
-change_i = 2
-num_masks = 1
-top_k = 10
 
-sample_bert(context, change_i, num_masks, top_k)
-
-'''
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 1000)
 
@@ -436,4 +421,3 @@ for i in range(1):
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
-'''
