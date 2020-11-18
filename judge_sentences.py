@@ -402,7 +402,14 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
+context = "The student reads a book in the library.".split(" ")
+change_i = 2
+num_masks = 1
+top_k = 10
 
+sample_bert(context, change_i, num_masks, top_k)
+
+'''
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 1000)
 
@@ -421,14 +428,6 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 model_list = [Albert, GPT2] #, Roberta, XLM, T5] 
 
-context = "The student reads a book in the library."
-change_i = 2
-num_masks = 1
-top_k = 10
-
-sample_bert(context, change_i, num_masks, top_k)
-
-'''
 for i in range(1):
 
   sent = ' '.join(sample_sentences("sentences4lara.txt").split())
