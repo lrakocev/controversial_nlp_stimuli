@@ -241,12 +241,12 @@ def sample_bert(context, change_i, num_masks, top_k):
   print("predictions shape", predictions.shape)
 
   predicted_tokens = []
-  predicted_indices = torch.topk(predictions[0, change_i], top_k)
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices
   print("predicted indices", predicted_indices)
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k)
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
