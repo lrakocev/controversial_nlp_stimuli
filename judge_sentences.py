@@ -214,7 +214,7 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
-def punctuation_helper(sorted_preds, sorted_idx, k, top_k):
+def punctuation_helper(sorted_preds, sorted_idx, k, top_k, num_masks):
 
   predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
   predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
@@ -243,7 +243,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
   predicted_tokens = []
   for k in range(top_k):
-    predicted_token, top_k = punctuation_helper(sorted_preds, sorted_idx, k, top_k)
+    predicted_token, top_k = punctuation_helper(sorted_preds, sorted_idx, k, top_k, num_masks)
     predicted_tokens.append(predicted_token)
 
   print("predicted tokens", predicted_tokens)
