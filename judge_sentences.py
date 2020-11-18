@@ -243,15 +243,19 @@ def sample_bert(context, change_i, num_masks, top_k):
   if num_masks == 2:
     sorted_preds_2, sorted_idx_2 = predictions[0][change_i+1].sort(dim=-1, descending=True)
 
+
+  print("sorted_preds", sorted_preds)
+  print("sorted_idx", sorted_idx)
+
   predicted_tokens = []
   for k in range(top_k):
-    predicted_index_1 = sorted_idx[0, k].item()
+    predicted_index_1 = sorted_idx[k].item()
     predicted_token_1 = tokenizer.convert_ids_to_tokens(predicted_index_1) 
     predicted_tokens.append([predicted_token_1])
     if num_masks == 2:
-      predicted_index_2 = sorted_idx[0, k].item()
+      predicted_index_2 = sorted_idx[k].item()
       predicted_token_2 = tokenizer.convert_ids_to_tokens(predicted_index_1) 
-    #predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
+      #predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
       predicted_tokens.append([predicted_token_1, predicted_token_2])
 
   print(predicted_tokens)
