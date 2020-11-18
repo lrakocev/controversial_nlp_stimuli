@@ -238,7 +238,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(context, return_tensors='pt')
+  inputs = tokenizer(" ".join(context), return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
 
@@ -402,7 +402,7 @@ def sample_sentences(file_name):
 
   return " ".join(line)
 
-context = "The student reads a book in the library.".split(" ")
+context = "The student reads a book in the library".split(" ")
 change_i = 2
 num_masks = 1
 top_k = 10
