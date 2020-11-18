@@ -108,7 +108,6 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
-         
       attention_mask = torch.tensor(attention_mask) 
       input_ids = torch.tensor(input_ids) 
 
@@ -239,35 +238,17 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  '''
-  sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
-  
+  print("predictions shape", predictions.shape)
+
   predicted_tokens = []
-  for k in range(top_k):
-    predicted_index_1 = sorted_idx[change_i,k].item()
-    predicted_token_1 = tokenizer.convert_ids_to_tokens(predicted_index_1) 
-    if num_masks == 1:  
-      predicted_tokens.append([predicted_token_1])
-    if num_masks == 2:
-      predicted_index_2 = sorted_idx[change_i,k].item()
-      predicted_token_2 = tokenizer.convert_ids_to_tokens(predicted_index_2) 
-      predicted_tokens.append([predicted_token_1, predicted_token_2])
-  '''
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).item()
+  predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])[0]
 
-  sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
-  predicted_tokens = []
+  if num_masks == 2:
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).item()
+    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])[0]
+    predicted_tokens = zip(predicted_tokens, predicted_tokens_2)
 
-  for k in range(10):
-    predicted_index = sorted_idx[change_i, k].item()
-    predicted_token = tokenizer.convert_ids_to_tokens(predicted_index)[0]
-    if num_masks == 1:
-      predicted_tokens.append([predicted_token])
-    if num_masks == 2:
-      predicted_index_2 = sorted_idx[change_i+1, k].item()
-      predicted_token = tokenizer.convert_ids_to_tokens(predicted_index_2)[0]
-      predicted_tokens.append([predicted_token, predicted_token_2])
-
-  print(predicted_tokens)
 
   return predicted_tokens
 
