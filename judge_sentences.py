@@ -238,15 +238,22 @@ def sample_bert(context, change_i, num_masks, top_k):
   inputs = tokenizer(context, return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
+
+  print("predictions", predictions)
+
+  print("size predictions", len(predictions))
+
+  print("size predictions 0", len(predictions[0]))
   
   sorted_preds, sorted_idx = predictions[0].sort(dim=-1, descending=True)
 
+
   predicted_tokens = []
   for k in range(top_k):
-    predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
+    predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
+    predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
+    #predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
     predicted_tokens.append(predicted_token)
-
-  print("predicted tokens", predicted_tokens)
 
   return predicted_tokens
 
@@ -415,7 +422,8 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+  sent = "I am fine"
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
