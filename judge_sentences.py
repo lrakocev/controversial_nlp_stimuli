@@ -214,11 +214,11 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
-def punctuation_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks):
+def post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks):
 
   predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
   predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
-  if len(set(predicted_token).intersection(set(string.punctuation))) != 0:
+  if len(set(predicted_token).intersection(set(string.punctuation))) != 0 or (num_masks == 1 and "##" in predicted_token[0]):
     return punctuation_helper(tokenizer,sorted_preds, sorted_idx, k+top_k, top_k, num_masks)
 
   return predicted_token, top_k
@@ -243,7 +243,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
   predicted_tokens = []
   for k in range(top_k):
-    predicted_token, top_k = punctuation_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
+    predicted_token, top_k = post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks)
     predicted_tokens.append(predicted_token)
 
   print("predicted tokens", predicted_tokens)
@@ -415,8 +415,7 @@ model_list = [Albert, GPT2] #, Roberta, XLM, T5]
 
 for i in range(1):
 
-  #sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  sent = "I am fine"
+  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
   scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
   plot_scores(scores, sentence)
   plot_positions(js_positions, sentence)
