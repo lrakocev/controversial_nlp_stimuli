@@ -383,20 +383,7 @@ def plot_positions(js_positions, sentence):
 
 
 def sample_sentences(file_name, n):
-  '''
-  file = open(file_name)
-  reader = csv.reader(file)
-  num_lines = len(list(reader))
-  N = random.randint(0,num_lines-1)
 
-  lines = file.readlines()
-  with open(file_name, 'r') as file:
-      reader = csv.reader(file)
-
-      line = next((x for i, x in enumerate(reader) if i == N), None)
-
-  return " ".join(line)
-  '''
   with open("sentences4lara.txt") as f:
     head = [next(f).strip() for x in range(n)]
 
@@ -419,7 +406,9 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-model_list = [Albert, GPT2, Roberta, XLM, T5] 
+
+print("just GPT2 and Roberta")
+model_list = [GPT2, Roberta] #, XLM, T5] 
 sentences = sample_sentences("sentences4lara.txt", 100)
 batch_size = 100
 
