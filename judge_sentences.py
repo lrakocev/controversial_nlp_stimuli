@@ -397,15 +397,15 @@ def sample_sentences(file_name, n):
 
   return " ".join(line)
   '''
-
-  with open(file_name) as f:
-    head = [next(f) for x in range(n)]
+  with open("sentences4lara.txt") as f:
+    head = [next(f).strip() for x in range(n)]
 
   return head 
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 10000)
+
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -419,16 +419,13 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-
 model_list = [Albert, GPT2, Roberta, XLM, T5] 
-n = 100
+sentences = sample_sentences("sentences4lara.txt", 100)
+batch_size = 100
 
-sentences = sample_sentences("sentences4lara.txt", n)
-
-print(sentences)
 for i in range(len(sentences)):
   sent = sentences[i]
-  js, js_positions  = evaluate_sentence(model_list, sentence, vocab, n)
+  js, js_positions  = evaluate_sentence(model_list, sent, vocab, batch_size)
   print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
 
   #scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
