@@ -398,7 +398,7 @@ def sample_sentences(file_name):
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 1000)
+vocab = get_vocab(filename, 10000)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -413,11 +413,14 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
 
-model_list = [Albert, GPT2] #, Roberta, XLM, T5] 
+model_list = [Albert, GPT2, Roberta, XLM, T5] 
 
-for i in range(1):
+for i in range(100):
 
   sent = ' '.join(sample_sentences("sentences4lara.txt").split())
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
-  plot_scores(scores, sentence)
-  plot_positions(js_positions, sentence)
+  js, js_positions  = evaluate_sentence(model_list, sentence, vocab, n)
+  print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
+
+  #scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
+  #plot_scores(scores, sentence)
+  #plot_positions(js_positions, sentence)
