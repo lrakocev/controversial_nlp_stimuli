@@ -382,19 +382,23 @@ def plot_positions(js_positions, sentence):
   plt.close()
 
 
-def sample_sentences(file_name):
+def sample_sentences(file_name, n):
 
   file = open(file_name)
   reader = csv.reader(file)
   num_lines = len(list(reader))
   N = random.randint(0,num_lines-1)
 
+  lines = file.readlines()
+
+  '''
   with open(file_name, 'r') as file:
       reader = csv.reader(file)
 
       line = next((x for i, x in enumerate(reader) if i == N), None)
+  '''
 
-  return " ".join(line)
+  return lines[0:n]
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
@@ -414,10 +418,14 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 
 model_list = [Albert, GPT2, Roberta, XLM, T5] 
+n = 100
 
-for i in range(100):
+sentences = sample_sentences("sentences4lara.txt", n)
 
-  sent = ' '.join(sample_sentences("sentences4lara.txt").split())
+print(sentences)
+for i in range(len(sentences)):
+
+  sent = sentence[i]
   js, js_positions  = evaluate_sentence(model_list, sentence, vocab, n)
   print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
 
