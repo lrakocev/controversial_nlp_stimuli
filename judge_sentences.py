@@ -383,22 +383,25 @@ def plot_positions(js_positions, sentence):
 
 
 def sample_sentences(file_name, n):
-
+  '''
   file = open(file_name)
   reader = csv.reader(file)
   num_lines = len(list(reader))
   N = random.randint(0,num_lines-1)
 
   lines = file.readlines()
-
-  '''
   with open(file_name, 'r') as file:
       reader = csv.reader(file)
 
       line = next((x for i, x in enumerate(reader) if i == N), None)
+
+  return " ".join(line)
   '''
 
-  return lines[0:n]
+  with open(file_name) as f:
+    head = [next(f) for x in range(n)]
+
+  return head 
 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
@@ -424,8 +427,7 @@ sentences = sample_sentences("sentences4lara.txt", n)
 
 print(sentences)
 for i in range(len(sentences)):
-
-  sent = sentence[i]
+  sent = sentences[i]
   js, js_positions  = evaluate_sentence(model_list, sentence, vocab, n)
   print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
 
