@@ -50,7 +50,7 @@ def create_sent_to_score_dict(score_name, tokenizer, model, sentences):
 
 	return sent_dict
 
-sentences = sample_sentences("sentences4lara.txt", 1) 
+sentences = sample_sentences("sentences4lara.txt", 2) 
 
 r_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 r_tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
@@ -70,4 +70,4 @@ r_scores = [v for (k,v) in sorted(r_score_dict.items(), key=lambda x: x[0], reve
 g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
 cosine_distances = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
-print(cosine_distance)
+print(cosine_distances)
