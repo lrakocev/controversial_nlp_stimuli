@@ -14,9 +14,9 @@ d = s['data']
 
 print(d.layer_weights)
 
-roberta_coeffs = regression_weights.d.layer_weights[0][0][-1]
+roberta_coeffs = d.layer_weights[0][0][-1]
 
-roberta_intercept = regression_weights.d.layer_weights[0][0][-1].intercept
+roberta_intercept = d.layer_weights[0][0][-1].intercept
 
 def sample_sentences(file_name, n):
 
