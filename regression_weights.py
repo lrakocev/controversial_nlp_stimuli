@@ -40,5 +40,7 @@ for sent in sentences:
 	hiddenStates = outputs.hidden_states 
 	
 	hiddenStatesLayer = hiddenStates[0][-1].detach().numpy()
+
+	print(hiddenStatesLayer)
 	
 	new_model.predict(hiddenStatesLayer)
