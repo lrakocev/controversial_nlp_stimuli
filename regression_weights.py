@@ -12,8 +12,6 @@ score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pere
 s = pd.read_pickle(score_name1)
 d = s['data']
 
-print(d.layer_weights)
-
 roberta_coeffs = d.layer_weights[0][0][-1].divider
 
 roberta_intercept = d.layer_weights[0][0][-1].intercept
@@ -33,20 +31,20 @@ sentences = sample_sentences("sentences4lara.txt", 100)
 
 for sent in sentences:
 
-	print(sent)
-
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
 
 	inputs = torch.tensor([tokenizer.encode(sent)])
 
 	outputs = model(inputs, output_hidden_states=True)
+
+	print(outputs)
+
 	hiddenStates = outputs[-1]  # number of layers + emb layer
-	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
-	hiddenStatesLayer = hiddenStates[-1].detach().numpy()  # (batch_gsize, sequence_length, hidden_size)
-	#batchSize = np.shape(hiddenStatesLayer)[0]
-	# print('Batch size: ', batchSize)
-	# hiddenStatesLayer2 = hiddenStates[-1] # fetches last layer
-	# np.shape(hiddenStatesLayer)
-	#lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+	
+	hiddenStatesLayer = hiddenStates[-1]
+	
+	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+
+	print(lastWordState)
 	new_model.predict(hiddenStatesLayer)
