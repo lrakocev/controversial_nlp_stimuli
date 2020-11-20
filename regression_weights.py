@@ -7,15 +7,7 @@ from transformers import RobertaTokenizer, RobertaForCausalLM
 import numpy as np
 import pandas as pd
 import xarray as xr
-
-score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
-
-s = pd.read_pickle(score_name1)
-d = s['data']
-
-roberta_coeffs = d.layer_weights[0][-1].values
-
-roberta_intercept = d.layer_weights[0][-1].intercept.values
+from scipy.spatial import distance
 
 def sample_sentences(file_name, n):
 
@@ -24,35 +16,58 @@ def sample_sentences(file_name, n):
 
   return head 
 
-new_model = LinearRegression()
-new_model.intercept_ = roberta_intercept
-new_model.coef_ = roberta_coeffs
 
-tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
+def create_sent_to_score_dict(score_name, tokenizer, model, sentences):
 
+	s = pd.read_pickle(score_name)
+	d = s['data']
+
+	coeffs = d.layer_weights[0][-1].values
+
+	intercept = d.layer_weights[0][-1].intercept.values
+
+	new_model = LinearRegression()
+	new_model.intercept_ = intercept
+	new_model.coef_ = coeffs
+
+	sent_dict = {}
+	for sent in sentences:
+
+		inputs = tokenizer(sent,return_tensors="pt")
+		outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
+
+		hiddenStates = outputs.hidden_states 
+
+		hiddenStatesLayer = hiddenStates[-1]
+
+		lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+
+		lastWordState = lastWordState[-1].reshape(1, -1)
+
+		prediction = new_model.predict(lastWordState)
+		
+		sent_dict[sent] = prediction
+
+	return sent_dict
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
-sent_dict = {}
-for sent in sentences:
+r_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
+r_tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+r_model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
+
+g_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=gpt2,subsample=None.pkl'
+g_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+g_model = GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True)
 
 
-	inputs = tokenizer(sent,return_tensors="pt")
-	outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
+r_score_dict = create_sent_to_score_dict(r_score_name, r_tokenizer, r_model, sentences)
 
-	hiddenStates = outputs.hidden_states 
-
-	hiddenStatesLayer = hiddenStates[-1]
-
-	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
-
-	lastWordState = lastWordState[-1].reshape(1, -1)
-
-	prediction = new_model.predict(lastWordState)
-	print(prediction)
-	sent_dict[sent] = prediction
-
-print(sent_dict)
+g_score_dict = create_sent_to_score_dict(g_score_name, g_tokenizer, g_model, sentences)
 
 
+r_scores = [v for (k,v) in sorted(r_score_dict.items(), key=lambda x: x[0], reverse=True)]
+g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
+
+cosine_distance = distance.cosine(r_scores, g_scores)
+print(cosine_distance)
