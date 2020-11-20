@@ -41,6 +41,6 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[0][-1].detach().numpy()
 
-	print(hiddenStatesLayer)
+	print(hiddenStatesLayer.values)
 	
-	new_model.predict(hiddenStatesLayer)
+	new_model.predict(hiddenStatesLayer.values)
