@@ -51,16 +51,6 @@ def get_vocab(filename, length):
 
   return vocab_list
 
-filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
-
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
-
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
-
-model_list = [GPT2, Roberta] 
-n = 100
-
 def get_distribution(model_name, context, vocab, n):
 
   print("context", context)
@@ -418,8 +408,17 @@ for i in range(len(sentences)):
 
 '''
 
+filename = "SUBTLEXus74286wordstextversion.txt"
+vocab = get_vocab(filename, 10000)
 
-def evaluate_sentence_gpt2_roberta(sentence):
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
+
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
+
+model_list = [GPT2, Roberta] 
+n = 100
+
+def evaluate_sentence_gpt2_roberta(sentence, n):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -458,4 +457,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](sentence)
+  globals()[sys.argv[1]](sentence, 100)
