@@ -13,10 +13,10 @@ s = pd.read_pickle(score_name1)
 d = s['data']
 
 print(d.layer_weights)
-'''
-roberta_coeffs = d.layer_weights
 
-roberta_intercept = d.layer_weights[-1].intercept
+roberta_coeffs = regression_weights.d.layer_weights[0][0][-1]
+
+roberta_intercept = regression_weights.d.layer_weights[0][0][-1].intercept
 
 def sample_sentences(file_name, n):
 
@@ -51,4 +51,3 @@ for sent in sentences:
 	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
 	new_model.predict(lastWordState)
-'''
