@@ -42,6 +42,8 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[-1]
 
-	lastWordState = np.asarray(hiddenStatesLayer[-1, :].detach().numpy())
+	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+
+	print("last word state", lastWordState)
 
 	new_model.predict(lastWordState)
