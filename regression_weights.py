@@ -6,6 +6,7 @@ import torch
 from transformers import RobertaTokenizer, RobertaForCausalLM
 import numpy as np
 import pandas as pd
+import xarray as xr
 
 score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 
@@ -41,6 +42,5 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[0][-1].detach().numpy()
 
-	print(hiddenStatesLayer.values)
-	
-	new_model.predict(hiddenStatesLayer.values)
+
+	new_model.predict(np.asarray(hiddenStatesLayer))
