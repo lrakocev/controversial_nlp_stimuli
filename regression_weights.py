@@ -28,13 +28,15 @@ new_model = LinearRegression()
 new_model.intercept_ = roberta_intercept
 new_model.coef_ = roberta_coeffs
 
+tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
+
+
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
 sent_dict = {}
 for sent in sentences:
 
-	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-	model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
 
 	inputs = tokenizer(sent,return_tensors="pt")
 	outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
