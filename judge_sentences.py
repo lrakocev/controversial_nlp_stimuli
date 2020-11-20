@@ -384,7 +384,7 @@ def plot_positions(js_positions, sentence):
 
 def sample_sentences(file_name, n):
 
-  with open("sentences4lara.txt") as f:
+  with open(file_name) as f:
     head = [next(f).strip() for x in range(n)]
 
   return head 
