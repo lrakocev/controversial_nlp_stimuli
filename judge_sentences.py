@@ -36,7 +36,6 @@ class ModelInfo():
 
     self.distr_dict_for_context = {}
 
-
 def get_vocab(filename, length):
 
   data = pd.read_csv(filename, sep="\t")
@@ -56,7 +55,7 @@ def get_distribution(model_name, context, vocab, n):
   print("context", context)
 
   tokenizer = model_name.tokenizer 
-  model = model_name.model
+  model = model_name.model.to('cuda')
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
@@ -90,7 +89,7 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt").to('cuda')
 
     if model_name.model_name == "Albert":
       attention_mask = []
@@ -107,8 +106,8 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
-      attention_mask = torch.tensor(attention_mask) 
-      input_ids = torch.tensor(input_ids) 
+      attention_mask = torch.tensor(attention_mask).to('cuda')
+      input_ids = torch.tensor(input_ids).to('cuda') 
 
       outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
@@ -134,7 +133,6 @@ def get_distribution(model_name, context, vocab, n):
 
   return final_probabilities
 
-
 def jsd(prob_distributions, weights, logbase=math.e):
 
     k = zip(weights, np.asarray(prob_distributions))
@@ -149,7 +147,6 @@ def jsd(prob_distributions, weights, logbase=math.e):
 
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
-
 
 def evaluate_sentence(model_list, sentence, vocab, n):
 
@@ -182,7 +179,6 @@ def evaluate_sentence(model_list, sentence, vocab, n):
     
   return total_js/len_sentence, js_positions
 
-
 def get_avg_distr(model_list, context, vocab, n):
 
     distrs = {}
@@ -201,30 +197,10 @@ def get_avg_distr(model_list, context, vocab, n):
 
     avg_distr = dict(zip(sorted_vocab, df_probabilities_mean))
 
-    #avg_distr = dict(df_probabilities.mean())
-    #avg_distr_vals = [v for (k,v) in avg_distr.items()]
-    #avg_distr_sorted_vals = [v for (k,v) in sorted(avg_distr.items(), key=lambda x: x[1], reverse=True)]
-    #avg_distr_vals = np.cumsum(np.array(avg_distr_sorted_vals))
-    #avg_distr_summed = dict(zip(vocab, avg_distr_vals))
-
     prob_list_sum = sum(df_probabilities_mean)
     prob_list = [v/prob_list_sum for (k, v) in avg_distr.items()]
 
     return prob_list, sorted_vocab
-
-def post_processing_helper(tokenizer,sorted_preds, sorted_idx, k, top_k, num_masks):
-
-
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices
-  predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
-
-  predicted_index = [sorted_idx[i, k].item() for i in range(0,num_masks)]
-  predicted_token = [tokenizer.convert_ids_to_tokens([predicted_index[x]])[0] for x in range(0,num_masks)]  
-  if len(set(predicted_token).intersection(set(string.punctuation))) != 0 or (num_masks == 1 and "##" in predicted_token[0]):
-    return post_processing_helper(tokenizer,sorted_preds, sorted_idx, k+top_k, top_k, num_masks)
-
-  return predicted_token, top_k
-
 
 def sample_bert(context, change_i, num_masks, top_k):
 
@@ -261,6 +237,25 @@ def discounting(cur_ind, js_positions, gamma=1):
   length_js_pos = 1 if to_consider == 0 else to_consider
   return total/length_js_pos
 
+def plot_scores(scores, sentence):
+
+  plt.plot(range(len(scores)),scores)
+  plt.show()
+  name = sentence + ".png"
+  plt.savefig(name)
+  plt.close()
+
+def plot_positions(js_positions, sentence):
+
+
+  for pos in js_positions:
+    plt.plot(pos)
+  ticks = sentence.split(" ")
+  plt.xticks(np.arange(len(ticks)), ticks)
+  plt.show()
+  name = sentence + " positions.png"
+  plt.savefig(name)
+  plt.close()
 
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
@@ -357,29 +352,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   print("Scores", scores, "Changes", changes, "JS Positions", js_positions)
 
+  plot_scores(scores, ' '.join(sentence_split))
+  plot_positions(js_positions, ' '.join(sentence_split))
+
   return scores, js_positions, ' '.join(sentence_split)
-
-
-def plot_scores(scores, sentence):
-
-  plt.plot(range(len(scores)),scores)
-  plt.show()
-  name = sentence + ".png"
-  plt.savefig(name)
-  plt.close()
-
-def plot_positions(js_positions, sentence):
-
-
-  for pos in js_positions:
-    plt.plot(pos)
-  ticks = sentence.split(" ")
-  plt.xticks(np.arange(len(ticks)), ticks)
-  plt.show()
-  name = sentence + " positions.png"
-  plt.savefig(name)
-  plt.close()
-
 
 def sample_sentences(file_name, n):
 
@@ -388,7 +364,14 @@ def sample_sentences(file_name, n):
 
   return head 
 
-'''
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+cuda = torch.cuda.is_available()
+
+
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
+
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
+
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
 T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
@@ -397,57 +380,10 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-for i in range(len(sentences)):
-  sent = sentences[i]
-  js, js_positions  = evaluate_sentence(model_list, sent, vocab, batch_size)
-  print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
-
-  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
-  plot_scores(scores, sentence)
-  plot_positions(js_positions, sentence)
-
-'''
+model_list = [GPT2, Roberta, XLM, T5, Albert]
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
-
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
-
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
-
-model_list = [GPT2, Roberta] 
-n = 100
-
-def evaluate_sentence_gpt2_roberta(sentence, n):
-
-  sentence_split = sentence.split(" ")
-  len_sentence = len(sentence_split)
-
-  curr_context = ""
-  total_js = 0
-  js_positions = []
-  distrs = {}
-
-  for i in range(0, len_sentence):
-    curr_context += sentence_split[i] + " "
-    
-    for model_name in model_list:
-      tokenizer = model_name.tokenizer
-      model = model_name.model
-      next_word_distr = get_distribution(model_name, curr_context, vocab, n)
-      distrs[model_name] = list(next_word_distr.values())
-
-    n = len(model_list)
-    weights = np.empty(n)
-    weights.fill(1/n)
-
-    curr_js = jsd(list(distrs.values()), weights)
-    total_js += curr_js
-    js_positions.append(curr_js)
-
-  print(total_js/len_sentence)
-  return total_js/len_sentence
-
+vocab = j_s.get_vocab(filename, 10000)
 
 if __name__ == "__main__":
 
@@ -457,4 +393,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](sentence, 100)
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5)
