@@ -38,10 +38,10 @@ for sent in sentences:
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
 
-	inputs = tokenizer(sent, return_tensors="pt")
-	
-	outputs = model(**inputs, output_hidden_states=True)
-	hiddenStates = outputs.hidden_states  # number of layers + emb layer
+	inputs = torch.tensor([tokenizer.encode(sent)])
+
+	outputs = model(inputs, output_hidden_states=True)
+	hiddenStates = outputs[-1]  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
 	hiddenStatesLayer = hiddenStates[-1]  # (batch_size, sequence_length, hidden_size)
 	batchSize = np.shape(hiddenStatesLayer)[0]
