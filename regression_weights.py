@@ -12,6 +12,8 @@ score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pere
 s = pd.read_pickle(score_name1)
 d = s['data']
 
+print(d.layer_weights)
+
 roberta_coeffs = d.layer_weights[-1].divider[1]
 
 roberta_intercept = d.layer_weights[-1].intercept
