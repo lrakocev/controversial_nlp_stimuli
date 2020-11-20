@@ -13,10 +13,11 @@ score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pere
 s = pd.read_pickle(score_name1)
 d = s['data']
 
-roberta_coeffs = d.layer_weights[-1].values
+roberta_coeffs = d.layer_weights[0][-1].values.T
 
-roberta_intercept = d.layer_weights[-1].intercept.values
+roberta_intercept = d.layer_weights[0][-1].intercept.values
 
+print(d.layer_weights[0][-1])
 
 def sample_sentences(file_name, n):
 
