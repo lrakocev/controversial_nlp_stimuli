@@ -389,34 +389,73 @@ def sample_sentences(file_name, n):
 
   return head 
 
-
-filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
-
-
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
-
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
-
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
-
+'''
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
 T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-
-print("just GPT2 and Roberta")
-model_list = [GPT2, Roberta] #, XLM, T5] 
-sentences = sample_sentences("sentences4lara.txt", 100)
-batch_size = 100
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
 for i in range(len(sentences)):
   sent = sentences[i]
   js, js_positions  = evaluate_sentence(model_list, sent, vocab, batch_size)
   print("sentence is: ", sent, " with JS: ", js, " and JS positions: ", js_positions)
 
-  #scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
-  #plot_scores(scores, sentence)
-  #plot_positions(js_positions, sentence)
+  scores, js_positions, sentence = change_sentence(model_list, sent, vocab, 100, 5)
+  plot_scores(scores, sentence)
+  plot_positions(js_positions, sentence)
+
+'''
+
+filename = "SUBTLEXus74286wordstextversion.txt"
+vocab = get_vocab(filename, 10000)
+
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
+
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
+
+model_list = [GPT2, Roberta] 
+n = 100
+
+def evaluate_sentence_gpt2_roberta(sentence):
+
+  sentence_split = sentence.split(" ")
+  len_sentence = len(sentence_split)
+
+  curr_context = ""
+  total_js = 0
+  js_positions = []
+  distrs = {}
+
+  for i in range(0, len_sentence):
+    curr_context += sentence_split[i] + " "
+    
+    for model_name in model_list:
+      tokenizer = model_name.tokenizer
+      model = model_name.model
+      next_word_distr = get_distribution(model_name, curr_context, vocab, n)
+      distrs[model_name] = list(next_word_distr.values())
+
+    n = len(model_list)
+    weights = np.empty(n)
+    weights.fill(1/n)
+
+    curr_js = jsd(list(distrs.values()), weights)
+    total_js += curr_js
+    js_positions.append(curr_js)
+
+  print(total_js/len_sentence)
+  return total_js/len_sentence
+
+
+if __name__ == "__main__":
+
+  sentences = sorted(sample_sentences("sentences4lara.txt", 100))
+
+  sent_dict = dict(zip([str(x) for x in range(1,100)], sentences))
+
+  sentence = sent_dict[sys.argv[2]]
+
+  globals()[sys.argv[1]](sentence)
