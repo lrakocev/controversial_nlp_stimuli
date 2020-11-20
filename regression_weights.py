@@ -13,9 +13,7 @@ score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pere
 s = pd.read_pickle(score_name1)
 d = s['data']
 
-roberta_coeffs = np.transpose(d.layer_weights[0][-1].values)
-
-print(roberta_coeffs.shape)
+roberta_coeffs = d.layer_weights[0][-1].values
 
 roberta_intercept = d.layer_weights[0][-1].intercept.values
 
@@ -27,8 +25,8 @@ def sample_sentences(file_name, n):
   return head 
 
 new_model = LinearRegression()
-new_model.intercept_ = roberta_coeffs
-new_model.coef_ = roberta_intercept
+new_model.intercept_ = roberta_intercept
+new_model.coef_ = rroberta_coeffs
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
@@ -50,5 +48,5 @@ lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 lastWordState = lastWordState[-1].reshape(1, -1)
 
 print(lastWordState.shape)
-#new_model.predict(lastWordState)
+new_model.predict(lastWordState)
 
