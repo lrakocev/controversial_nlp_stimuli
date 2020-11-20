@@ -15,8 +15,9 @@ d = s['data']
 
 roberta_coeffs = d.layer_weights[0][-1].values
 
-roberta_intercept = d.layer_weights[0][-1][-1].intercept.values
+roberta_intercept = d.layer_weights[0][-1].intercept.values
 
+'''
 def sample_sentences(file_name, n):
 
   with open(file_name) as f:
@@ -26,7 +27,7 @@ def sample_sentences(file_name, n):
 
 new_model = LinearRegression()
 new_model.intercept_ = roberta_coeffs
-#new_model.coef_ = roberta_intercept
+new_model.coef_ = roberta_intercept
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
@@ -47,4 +48,4 @@ for sent in sentences:
 
 	new_model.predict(lastWordState)
 
-
+'''
