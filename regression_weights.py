@@ -17,7 +17,6 @@ roberta_coeffs = d.layer_weights[0][-1].values
 
 roberta_intercept = d.layer_weights[0][-1].intercept.values
 
-'''
 def sample_sentences(file_name, n):
 
   with open(file_name) as f:
@@ -31,21 +30,23 @@ new_model.coef_ = roberta_intercept
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
+sent = sentences[0]
+#for sent in sentences:
 
-for sent in sentences:
+tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
 
-	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-	model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
+inputs = tokenizer(sent,return_tensors="pt")
+outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
 
-	inputs = tokenizer(sent,return_tensors="pt")
-	outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
+hiddenStates = outputs.hidden_states 
 
-	hiddenStates = outputs.hidden_states 
-	
-	hiddenStatesLayer = hiddenStates[-1]
+hiddenStatesLayer = hiddenStates[-1]
 
-	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
-	new_model.predict(lastWordState)
+print(lastWordState)
+
+	#new_model.predict(lastWordState)
 
 '''
