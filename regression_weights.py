@@ -40,10 +40,8 @@ for sent in sentences:
 
 	hiddenStates = outputs.hidden_states 
 	
-	hiddenStatesLayer = hiddenStates[0][0][-1].detach().numpy()
+	hiddenStatesLayer = hiddenStates[-1].detach().numpy()
 
-	hiddenStatesFinal = hiddenStatesLayer.reshape(1, -1)
+	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
-	print(hiddenStatesFinal)
-
-	new_model.predict(np.asarray(hiddenStatesFinal))
+	new_model.predict(lastWordState)
