@@ -44,6 +44,6 @@ for sent in sentences:
 
 	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
-	print("last word state", lastWordState)
+	print("last word state", type(lastWordState))
 
 	new_model.predict(lastWordState)
