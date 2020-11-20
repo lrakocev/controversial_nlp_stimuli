@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 import torch
 from transformers import RobertaTokenizer, RobertaForCausalLM
 import numpy as np
+import pandas as pd
 
 score_name1 = '/Users/gt/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 
