@@ -34,7 +34,7 @@ for sent in sentences:
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
 
-	inputs = tokenizer.encode(sent)
+	inputs = tokenizer(sent)
 
 	outputs = model(**inputs, output_hidden_states=True)
 
