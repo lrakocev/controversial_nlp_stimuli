@@ -3,7 +3,7 @@ import numpy as np
 from scipy import stats
 from sklearn.linear_model import LinearRegression
 import torch
-from transformers import RobertaTokenizer, RobertaForCausalLM
+from transformers import RobertaTokenizer, RobertaForCausalLM, GPT2LMHeadModel, GPT2Tokenizer
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -50,7 +50,7 @@ def create_sent_to_score_dict(score_name, tokenizer, model, sentences):
 
 	return sent_dict
 
-sentences = sample_sentences("sentences4lara.txt", 100) 
+sentences = sample_sentences("sentences4lara.txt", 1) 
 
 r_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 r_tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
