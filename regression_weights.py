@@ -34,18 +34,11 @@ for sent in sentences:
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True)
 
-	inputs = tokenizer([sent],return_tensors="pt")
-
+	inputs = tokenizer(sent,return_tensors="pt")
 	outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
 
-	print(outputs.logits)
-	print(outputs.hidden_states)
-
-	hiddenStates = outputs[-1]  # number of layers + emb layer
+	hiddenStates = outputs.hidden_states 
 	
-	hiddenStatesLayer = hiddenStates[-1]
+	hiddenStatesLayer = hiddenStates[0][-1]
 	
-	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
-
-	print(lastWordState)
-	new_model.predict(lastWordState)
+	new_model.predict(hiddenStatesLayer)
