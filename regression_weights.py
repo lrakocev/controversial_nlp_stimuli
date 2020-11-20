@@ -48,5 +48,5 @@ for sent in sentences:
 	# print('Batch size: ', batchSize)
 	# hiddenStatesLayer2 = hiddenStates[-1] # fetches last layer
 	# np.shape(hiddenStatesLayer)
-	lastWordState = hiddenStatesLayer[-1, :]
-	new_model.predict(lastWordState)
+	#lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+	new_model.predict(hiddenStatesLayer)
