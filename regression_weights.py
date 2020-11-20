@@ -22,6 +22,7 @@ print(roberta_coeffs)
 
 roberta_intercept = d.layer_weights[0][0][-1].intercept
 
+'''
 def sample_sentences(file_name, n):
 
   with open(file_name) as f:
@@ -34,6 +35,7 @@ new_model.intercept_ = roberta_coeffs
 new_model.coef_ = roberta_intercept
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
+
 
 for sent in sentences:
 
@@ -50,3 +52,4 @@ for sent in sentences:
 	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
 	new_model.predict(lastWordState)
+'''
