@@ -42,6 +42,8 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[0][0][-1].detach().numpy()
 
-	print(hiddenStatesLayer)
+	hiddenStatesFinal = hiddenStatesLayer.reshape(-1, 1)
+
+	print(hiddenStatesFinal)
 
 	new_model.predict(np.asarray(hiddenStatesLayer))
