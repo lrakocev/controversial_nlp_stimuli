@@ -36,9 +36,8 @@ for sent in sentences:
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
 
-	inputs = tokenizer(sentence, return_tensors="pt")
+	inputs = tokenizer(sent, return_tensors="pt")
 	
-	# Get hidden states
 	resultModel = model(inputs, output_hidden_states=True)
 	hiddenStates = resultModel[2]  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
