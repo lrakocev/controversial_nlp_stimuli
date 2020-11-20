@@ -7,7 +7,7 @@ from transformers import RobertaTokenizer, RobertaForCausalLM
 import numpy as np
 import pandas as pd
 
-score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkls'
+score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 
 s = pd.read_pickle(score_name1)
 d = s['data']
