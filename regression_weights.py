@@ -26,7 +26,7 @@ def sample_sentences(file_name, n):
 
 new_model = LinearRegression()
 new_model.intercept_ = roberta_intercept
-new_model.coef_ = rroberta_coeffs
+new_model.coef_ = roberta_coeffs
 
 sentences = sample_sentences("sentences4lara.txt", 100) 
 
