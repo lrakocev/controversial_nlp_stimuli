@@ -45,6 +45,6 @@ hiddenStatesLayer = hiddenStates[-1]
 
 lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
-print(lastWordState[-1].T)
+print(lastWordState[-1].T.reshape(-1, 1))
 new_model.predict(lastWordState[-1].T)
 
