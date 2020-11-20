@@ -49,4 +49,3 @@ print(lastWordState)
 
 	#new_model.predict(lastWordState)
 
-'''
