@@ -40,10 +40,10 @@ for sent in sentences:
 
 	inputs = tokenizer(sent, return_tensors="pt")
 	
-	resultModel = model(**inputs, output_hidden_states=True)
-	hiddenStates = resultModel[2]  # number of layers + emb layer
+	outputs = model(**inputs, output_hidden_states=True)
+	hiddenStates = outputs.hidden_states  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
-	hiddenStatesLayer = hiddenStates[layer]  # (batch_size, sequence_length, hidden_size)
+	hiddenStatesLayer = hiddenStates[-1]  # (batch_size, sequence_length, hidden_size)
 	batchSize = np.shape(hiddenStatesLayer)[0]
 	# print('Batch size: ', batchSize)
 	# hiddenStatesLayer2 = hiddenStates[-1] # fetches last layer
