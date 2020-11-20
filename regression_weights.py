@@ -43,8 +43,8 @@ for sent in sentences:
 	outputs = model(inputs, output_hidden_states=True)
 	hiddenStates = outputs[-1]  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
-	hiddenStatesLayer = hiddenStates[-1]  # (batch_gsize, sequence_length, hidden_size)
-	batchSize = np.shape(hiddenStatesLayer)[0]
+	hiddenStatesLayer = hiddenStates[-1].detach().numpy()  # (batch_gsize, sequence_length, hidden_size)
+	#batchSize = np.shape(hiddenStatesLayer)[0]
 	# print('Batch size: ', batchSize)
 	# hiddenStatesLayer2 = hiddenStates[-1] # fetches last layer
 	# np.shape(hiddenStatesLayer)
