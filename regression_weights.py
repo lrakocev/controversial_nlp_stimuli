@@ -36,9 +36,10 @@ for sent in sentences:
 
 	inputs = torch.tensor([tokenizer.encode(sent)])
 
-	outputs = model(inputs, output_hidden_states=True)
+	outputs = model(**inputs, output_hidden_states=True)
 
-	print(outputs)
+	print(outputs.logits)
+	print(outputs.hidden_states)
 
 	hiddenStates = outputs[-1]  # number of layers + emb layer
 	
@@ -47,4 +48,4 @@ for sent in sentences:
 	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
 	print(lastWordState)
-	new_model.predict(hiddenStatesLayer)
+	new_model.predict(lastWordState)
