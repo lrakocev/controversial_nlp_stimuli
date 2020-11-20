@@ -14,7 +14,7 @@ d = s['data']
 
 print(d.layer_weights)
 
-roberta_coeffs = d.layer_weights[0][0][-1]
+roberta_coeffs = d.layer_weights[0][0][-1].divider
 
 roberta_intercept = d.layer_weights[0][0][-1].intercept
 
@@ -35,12 +35,11 @@ for sent in sentences:
 
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
-	tokenizedSent = []  # store tokenized stimuli (concatenated in a single list)
-	tokenizedSent.extend(tokenizer(sent)['input_ids'])  # input ids will be fed to model
-	# input_ids = torch.tensor([tokenizer.encode(sent)]) # identical way of fetching inputIDs
 
+	inputs = tokenizer(sentence, return_tensors="pt")
+	
 	# Get hidden states
-	resultModel = model(torch.tensor(tokenizedSent), output_hidden_states=True)
+	resultModel = model(inputs, output_hidden_states=True)
 	hiddenStates = resultModel[2]  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
 	hiddenStatesLayer = hiddenStates[layer]  # (batch_size, sequence_length, hidden_size)
