@@ -43,4 +43,4 @@ for sent in sentences:
 	hiddenStatesLayer = hiddenStates[0][-1].detach().numpy()
 
 
-	new_model.predict(np.asarray(hiddenStatesLayer))
+	new_model.predict(xr.apply_ufunc(hiddenStatesLayer))
