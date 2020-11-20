@@ -33,6 +33,8 @@ sentences = sample_sentences("sentences4lara.txt", 100)
 
 for sent in sentences:
 
+	print(sent)
+
 	tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
 	model = RobertaForCausalLM.from_pretrained('roberta-base')
 
