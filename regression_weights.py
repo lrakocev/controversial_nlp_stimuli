@@ -51,4 +51,6 @@ for sent in sentences:
 	print(prediction)
 	sent_dict[sent] = prediction
 
+print(sent_dict)
+
 
