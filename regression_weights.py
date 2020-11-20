@@ -40,7 +40,7 @@ for sent in sentences:
 
 	hiddenStates = outputs.hidden_states 
 	
-	hiddenStatesLayer = hiddenStates[-1].detach().numpy()
+	hiddenStatesLayer = hiddenStates[0][-1].detach().numpy()
 
 	print(hiddenStatesLayer)
 
