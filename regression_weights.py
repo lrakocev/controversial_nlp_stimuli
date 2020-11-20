@@ -15,6 +15,8 @@ d = s['data']
 
 roberta_coeffs = d.layer_weights[0][0][-1].divider
 
+print(roberta_coeffs)
+
 roberta_intercept = d.layer_weights[0][0][-1].intercept
 
 def sample_sentences(file_name, n):
@@ -42,8 +44,6 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[-1]
 
-	lastWordState = np.array(hiddenStatesLayer[-1, :].detach().numpy())
-
-	print("last word state", type(lastWordState))
+	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 
 	new_model.predict(lastWordState)
