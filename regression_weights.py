@@ -40,7 +40,7 @@ for sent in sentences:
 
 	inputs = tokenizer(sent, return_tensors="pt")
 	
-	resultModel = model(inputs, output_hidden_states=True)
+	resultModel = model(**inputs, output_hidden_states=True)
 	hiddenStates = resultModel[2]  # number of layers + emb layer
 	# print('Number of layers + embedding layer: ', np.shape(hiddenStates))
 	hiddenStatesLayer = hiddenStates[layer]  # (batch_size, sequence_length, hidden_size)
