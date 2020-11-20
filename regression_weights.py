@@ -39,6 +39,6 @@ for sent in sentences:
 
 	hiddenStates = outputs.hidden_states 
 	
-	hiddenStatesLayer = hiddenStates[0][-1]
+	hiddenStatesLayer = hiddenStates[-1]
 	
 	new_model.predict(hiddenStatesLayer)
