@@ -42,7 +42,7 @@ for sent in sentences:
 	
 	hiddenStatesLayer = hiddenStates[-1]
 
-	lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+	lastWordState = np.array(hiddenStatesLayer[-1, :].detach().numpy())
 
 	print("last word state", type(lastWordState))
 
