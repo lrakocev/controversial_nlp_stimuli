@@ -15,6 +15,8 @@ d = s['data']
 
 roberta_coeffs = np.transpose(d.layer_weights[0][-1].values)
 
+print(roberta_coeffs.shape)
+
 roberta_intercept = d.layer_weights[0][-1].intercept.values
 
 def sample_sentences(file_name, n):
