@@ -13,7 +13,7 @@ score_name1 = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pere
 s = pd.read_pickle(score_name1)
 d = s['data']
 
-roberta_coeffs = d.layer_weights[0][-1].values.T
+roberta_coeffs = np.transpose(d.layer_weights[0][-1].values)
 
 print(roberta_coeffs.shape)
 
@@ -50,5 +50,5 @@ lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
 lastWordState = lastWordState[-1].reshape(1, -1)
 
 print(lastWordState.shape)
-new_model.predict(lastWordState)
+#new_model.predict(lastWordState)
 
