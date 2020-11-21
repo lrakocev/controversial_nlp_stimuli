@@ -18,8 +18,8 @@ cosine_dict = {k:v for (k,v) in cosine_dict.items() if k in jsd_score_dict.keys(
 
 #getting vals in order of sorted keys
 
-cosine_scores = [int(v) for (k,v) in sorted(cosine_dict.items(), key=lambda x: x[0], reverse=True)]
-jsd_scores = [int(v) for (k,v) in sorted(jsd_score_dict.items(), key=lambda x: x[0], reverse=True)]
+cosine_scores = [float(v) for (k,v) in sorted(cosine_dict.items(), key=lambda x: x[0], reverse=True)]
+jsd_scores = [float(v) for (k,v) in sorted(jsd_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
 print(cosine_scores)
 print(jsd_scores)
