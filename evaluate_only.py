@@ -1,4 +1,5 @@
 import judge_sentences as j_s
+import sys
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = j_s.get_vocab(filename, 10000)
