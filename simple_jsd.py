@@ -15,19 +15,11 @@ def get_probabilities(nlp, sentence):
 	for i in range(len(sentences)):
 		sentence = sentences[i]
 		target = " " + sentence[i]
+		
 		score = nlp(sentence, targets=[target])[0]['score']
 		scores.append([score, 1-score])
 
 	return scores
-
-def alternative_get_probabilities(sentence, tokenizer, model):
-
-
-    tokenize_input = tokenizer.tokenize(sentence)
-    tensor_input = torch.tensor([tokenizer.convert_tokens_to_ids(tokenize_input)])
-    loss = model(tensor_input, labels=tensor_input)
-    return -loss[0].item()
-
 
 def evaluate_sentence(scores1, scores2):
 
