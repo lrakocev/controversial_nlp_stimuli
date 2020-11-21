@@ -7,15 +7,13 @@ ordered_cosine_distances = rw.cosine_distances
 sentence_list = rw.sentence_list
 cosine_dict = dict(zip(sentence_list, ordered_cosine_distances))
 
-print(cosine_dict)
-
 jsd_score_dict = lle.score_dict
 
 # removing the error lines
 jsd_score_dict = {k:v for (k,v) in jsd_score_dict.items() if k in sentence_list}
 
 # getting rid of extra sentences
-cosine_dict = {k:v for (k,v) in cosine_dict.items() if k in jsd_score_list.keys()}
+cosine_dict = {k:v for (k,v) in cosine_dict.items() if k in jsd_score_dict.keys()}
 
 #getting vals in order of sorted keys
 
