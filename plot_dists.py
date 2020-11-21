@@ -4,7 +4,7 @@ import last_line_evaluate as lle
 from scipy.stats import pearsonr
 
 ordered_cosine_distances = rw.cosine_distances
-sentence_list = rw.sentenece_list
+sentence_list = rw.sentence_list
 cosine_dict = dict(zip(sentence_list, ordered_cosine_distances))
 
 jsd_score_dict = lle.score_dict
