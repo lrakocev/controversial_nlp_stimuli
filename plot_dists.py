@@ -7,6 +7,8 @@ ordered_cosine_distances = rw.cosine_distances
 sentence_list = rw.sentence_list
 cosine_dict = dict(zip(sentence_list, ordered_cosine_distances))
 
+print(cosine_dict)
+
 jsd_score_dict = lle.score_dict
 
 # removing the error lines
@@ -24,7 +26,7 @@ corr, _ = pearsonr(cosine_scores, jsd_scores)
 
 print("corr", corr)
 
-plt.scatter(x=cosine_scores, y=jsd_scores)
+plt.scatter(cosine_scores, jsd_scores)
 plt.show()
 plt.savefig("JSD v Cosine")
 plt.close()
