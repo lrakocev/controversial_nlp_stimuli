@@ -1,5 +1,6 @@
 import judge_sentences as j_s
 import sys
+import numpy as np
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = j_s.get_vocab(filename, 10000)
@@ -28,7 +29,7 @@ def evaluate_sentence(sentence, n):
     weights = np.empty(n)
     weights.fill(1/n)
 
-    curr_js = jsd(list(distrs.values()), weights)
+    curr_js = j_s.jsd(list(distrs.values()), weights)
     total_js += curr_js
     js_positions.append(curr_js)
 
