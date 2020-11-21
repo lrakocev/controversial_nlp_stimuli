@@ -1,6 +1,5 @@
 from transformers import pipeline
 from scipy.spatial import distance
-import judge_sentences as j_s
 
 def get_probabilities(nlp, sentence):
 
@@ -32,7 +31,15 @@ def evaluate_sentence(scores1, scores2):
 	return sum(js_scores)/len(js_scores)
 
 
-sentences = sorted(j_s.sample_sentences("sentences4lara.txt", 100))
+def sample_sentences(file_name, n):
+
+  with open(file_name) as f:
+    head = [next(f).strip() for x in range(n)]
+
+  return head
+
+
+sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
 nlp_roberta = pipeline("fill-mask", model="roberta-base")
 nlp_gpt2 = pipeline("fill-mask", model="gpt2")
