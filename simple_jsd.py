@@ -33,7 +33,7 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	m = nn.LogSoftmax()
 
-	predictions = m(outputs.logits, dim=2)
+	predictions = m(outputs.logits, 2)
 
 	scores = []
 	for i in range(len(ids)):
