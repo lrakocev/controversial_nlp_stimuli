@@ -36,12 +36,10 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	predictions = nn.functional.softmax(outputs.logits, dim=2)
 
-	print(predictions.shape)
 	scores = []
 	for i in range(len(ids)):
 		ind = ids[i]
 		score = float(predictions[0][i][ind])
-		print(score)
 		scores.append([score, 1-score])
 
 	return scores
