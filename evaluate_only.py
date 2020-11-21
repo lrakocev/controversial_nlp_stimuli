@@ -6,7 +6,7 @@ vocab = j_s.get_vocab(filename, 10000)
 model_list = [j_s.GPT2, j_s.Roberta] 
 n = 100
 
-def evaluate_sentence_gpt2_roberta(sentence, n):
+def evaluate_sentence(sentence, n):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
