@@ -10,12 +10,15 @@ def get_probabilities(nlp, sentence):
 		cur_sentence[i] = nlp.tokenizer.mask_token
 		cur_sentence = " ".join(cur_sentence)
 		sentences.append(cur_sentence)
-
+	
 	scores = []
 	for i in range(len(sentences)):
-		sentence = sentences[i]
+		sent = sentences[i]
 		target = " " + sentence[i]
-		score = nlp(sentence, targets=[target])[0]['score']
+		print(sentence)
+		
+		print(nlp(sent,targets=[target]))
+		score = nlp(sent, targets=[target])[0]['score']
 		scores.append([score, 1-score])
 
 	return scores
