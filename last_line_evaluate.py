@@ -11,5 +11,3 @@ for file in file_list:
 	sentence = lines[-2].strip()
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
-
-print("score_dict", score_dict)
