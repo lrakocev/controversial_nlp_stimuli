@@ -33,12 +33,13 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	m = nn.LogSoftmax()
 
-	predictions = m(outputs.logits)
+	predictions = m(outputs.logits, dim=2)
 
 	scores = []
 	for i in range(len(ids)):
 		ind = ids[i]
-		score = float(predictions[0][i][ind])
+		score = predictions[0][i][ind]
+		print(score)
 		scores.append([score, 1-score])
 
 	return scores
@@ -77,8 +78,6 @@ for i in range(len(sentences)):
 	#scores2 = get_probabilities(nlp_xlm, sentence)
 	scores2 = get_probabilities_alternative(GPT2_model, GPT2_tokenizer, sentence)
 
-	print("scores1", scores1)
-	print("scores2", scores2)
 	jsd = evaluate_sentence(scores1, scores2)
 	final_jsd_scores[sentence] = jsd
 
