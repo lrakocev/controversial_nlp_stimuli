@@ -25,12 +25,11 @@ def get_probabilities(nlp, sentence):
 def evaluate_sentence(scores1, scores2):
 
 	js_scores = []
-  	for i in range(len(scores1)):
+	for i in range(len(scores1)):
+		js = distance.jensenshannon(scores1[i], scores2[i])
+		js_scores.append(js)
 
-  		js = distance.jensenshannon(scores1[i], scores2[i])
-  		js_scores.append(js)
-
-  	return sum(js_scores)/len(js_scores)
+	return sum(js_scores)/len(js_scores)
 
 
 sentences = sorted(j_s.sample_sentences("sentences4lara.txt", 100))
