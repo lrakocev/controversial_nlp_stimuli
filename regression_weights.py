@@ -71,4 +71,3 @@ g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reve
 
 cosine_distances = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
 sentence_list = [k for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
-print(cosine_distances)
