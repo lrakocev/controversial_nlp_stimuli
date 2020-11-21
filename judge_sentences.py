@@ -387,8 +387,6 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 model_list = [GPT2, Roberta, XLM, T5, Albert]
 
-filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = j_s.get_vocab(filename, 10000)
 
 if __name__ == "__main__":
 
