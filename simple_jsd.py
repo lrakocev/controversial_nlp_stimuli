@@ -1,6 +1,7 @@
 from transformers import pipeline, GPT2LMHeadModel, GPT2Tokenizer
 from scipy.spatial import distance
 from scipy.special import softmax
+import numpy as np
 
 def get_probabilities(nlp, sentence):
 
