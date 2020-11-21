@@ -33,9 +33,11 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	m = nn.LogSoftmax()
 
+	print("sentence", sentence)
+	print("ids", ids)
 	print('output logits', outputs.logits.shape)
 
-	predictions = m(outputs.logits, dim=1)
+	predictions = m(outputs.logits)
 
 	print('predictions', predictions.shape)
 
