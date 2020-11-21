@@ -33,16 +33,15 @@ def evaluate_sentence(sentence, n):
     total_js += curr_js
     js_positions.append(curr_js)
 
-  print(total_js/len_sentence)
   return total_js/len_sentence
 
 if __name__ == "__main__":
 
-  sentences = sorted(j_s.sample_sentences("sentences4lara.txt", 100))
+  sentences = sorted(j_s.sample_sentences("sentences4lara.txt", 1000))
 
-  sent_dict = dict(zip([str(x) for x in range(1,100)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](sentence, 100)
+  globals()[sys.argv[1]](sentence, 1000)
 
