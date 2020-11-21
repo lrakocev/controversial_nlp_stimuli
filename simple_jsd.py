@@ -7,7 +7,7 @@ def get_probabilities(nlp, sentence):
 	sentences = []
 	for i in range(len(sentence)):
 		cur_sentence = sentence.copy()
-		cur_sentence[i] = "{nlp.tokenizer.mask_token}"
+		cur_sentence[i] = nlp.tokenizer.mask_token
 		cur_sentence = " ".join(cur_sentence)
 		sentences.append(cur_sentence)
 
