@@ -367,6 +367,9 @@ def sample_sentences(file_name, n):
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
+filename = "SUBTLEXus74286wordstextversion.txt"
+vocab = j_s.get_vocab(filename, 10000)
+
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
