@@ -1,7 +1,7 @@
 import os
 
 import glob
-file_list = glob.glob('evaluate*.out')
+file_list = glob.glob('evaluate_11_21_2020/evaluate*.out')
 
 score_dict = {}
 for file in file_list:
@@ -11,3 +11,5 @@ for file in file_list:
 	sentence = lines[-2].strip()
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
+
+print("score_dict", score_dict)
