@@ -15,7 +15,7 @@ def get_probabilities(nlp, sentence):
 	for i in range(len(sentences)):
 		sentence = sentences[i]
 		target = " " + sentence[i]
-		score = nlp(sentence, targets=[target]).score
+		score = nlp(sentence, targets=[target])[0].score
 		scores.append([score, 1-score])
 
 	return scores
