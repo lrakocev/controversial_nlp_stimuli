@@ -2,6 +2,7 @@ from transformers import pipeline, GPT2LMHeadModel, GPT2Tokenizer
 from scipy.spatial import distance
 from scipy.special import softmax
 import numpy as np
+import torch.nn as nn
 
 def get_probabilities(nlp, sentence):
 
@@ -30,7 +31,9 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	inputs = tokenizer(sentence, return_tensors='pt')
 	outputs = model(**inputs)
 
-	predictions = softmax(np.asarray(outputs.logits))
+	m = nn.LogSoftmax()
+
+	predictions = m(outputs.logits)
 
 	scores = []
 	for i in range(len(ids)):
