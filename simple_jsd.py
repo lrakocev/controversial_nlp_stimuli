@@ -3,6 +3,7 @@ from scipy.spatial import distance
 from scipy.special import softmax
 import numpy as np
 import torch.nn as nn
+import math
 
 def get_probabilities(nlp, sentence):
 
@@ -33,7 +34,9 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	m = nn.LogSoftmax()
 
-	predictions = m(outputs.logits, 2)
+	vectorize_log = np.vectorize(math.log)
+
+	predictions = vectorize_log(softmax(np.asarray(outputs.logits.detach()).flatten()))
 
 	scores = []
 	for i in range(len(ids)):
