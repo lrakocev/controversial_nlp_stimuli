@@ -367,6 +367,8 @@ def sample_sentences(file_name, n):
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
+print("is cuda available", cuda)
+
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 10000)
 
