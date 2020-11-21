@@ -44,7 +44,7 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	scores = []
 	for i in range(len(ids)):
 		ind = ids[i]
-		score = predictions[i][ind]
+		score = predictions[0][i][ind]
 		scores.append([score, 1-score])
 
 	return scores
