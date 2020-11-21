@@ -12,7 +12,6 @@ jsd_score_dict = lle.score_dict
 # removing the error lines
 jsd_score_dict = {k:v for (k,v) in jsd_score_dict.items() if k in sentence_list}
 
-
 # getting rid of extra sentences
 cosine_dict = {k:v for (k,v) in cosine_dict.items() if k in jsd_score_dict.keys()}
 

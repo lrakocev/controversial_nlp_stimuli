@@ -1,5 +1,6 @@
-from transformers import pipeline
+from transformers import pipeline, GPT2LMHeadModel, GPT2Tokenizer
 from scipy.spatial import distance
+from scipy.special import softmax
 
 def get_probabilities(nlp, sentence):
 
@@ -16,6 +17,24 @@ def get_probabilities(nlp, sentence):
 		sent = sentences[i]
 		target = " " + sentence[i]
 		score = nlp(sent, targets=[target])[0]['score']
+		scores.append([score, 1-score])
+
+	return scores
+
+def get_probabilities_alternative(model, tokenizer, sentence):
+
+	tokens = tokenizer.tokenize(sentence)
+	ids = tokenizer.convert_tokens_to_ids(tokens)
+
+	inputs = tokenizer(sentence, return_tensors='pt')
+	outputs = model(**inputs)
+
+	predictions = softmax(np.asarray(outputs.logits))
+
+	scores = []
+	for i in range(len(ids)):
+		ind = ids[i]
+		score = predictions[i][ind]
 		scores.append([score, 1-score])
 
 	return scores
@@ -42,6 +61,8 @@ sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
 nlp_roberta = pipeline("fill-mask", model="roberta-base")
 nlp_xlm = pipeline("fill-mask", model="xlm-mlm-xnli15-1024")
+GPT2_model = GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True)
+GPT2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
 
 final_jsd_scores = {}
@@ -49,7 +70,8 @@ final_jsd_scores = {}
 for i in range(len(sentences)):
 	sentence = sentences[i]
 	scores1 = get_probabilities(nlp_roberta, sentence)
-	scores2 = get_probabilities(nlp_xlm, sentence)
+	#scores2 = get_probabilities(nlp_xlm, sentence)
+	scores2 = get_probabilities_alternative(GPT2_model, GPT2_tokenizer, sentence)
 
 	jsd = evaluate_sentence(scores1, scores2)
 	final_jsd_scores[sentence] = jsd
