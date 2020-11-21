@@ -36,10 +36,11 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	predictions = softmax(np.asarray(outputs.logits.detach()).flatten())
 
+	print(predictions.shape)
 	scores = []
 	for i in range(len(ids)):
 		ind = ids[i]
-		score = predictions[0][i][ind]
+		score = predictions[i][ind]
 		print(score)
 		scores.append([score, 1-score])
 
