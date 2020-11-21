@@ -2,7 +2,7 @@ from transformers import pipeline
 from scipy.spatial import distance
 import judge_sentences as j_s
 
-def get_probabilities(nlp, sentence)
+def get_probabilities(nlp, sentence):
 
 	sentence = sentence.split(" ")
 	sentences = []
