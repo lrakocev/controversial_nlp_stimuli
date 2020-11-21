@@ -20,11 +20,11 @@ cosine_dict = {k:v for (k,v) in cosine_dict if k in jsd_score_list.keys()}
 cosine_scores = [v for (k,v) in sorted(cosine_dict.items(), key=lambda x: x[0], reverse=True)]
 jsd_scores = [v for (k,v) in sorted(jsd_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
-corr, _ = pearsonr(data1, data2)
+corr, _ = pearsonr(cosine_scores, jsd_scores)
 
-print(corr)
+print("corr", corr)
 
-plt.scatter(cosine_scores, jsd_scores)
+plt.scatter(x=cosine_scores, y=jsd_scores)
 plt.show()
 plt.savefig("JSD v Cosine")
 plt.close()
