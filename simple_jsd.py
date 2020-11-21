@@ -32,11 +32,9 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	inputs = tokenizer(sentence, return_tensors='pt')
 	outputs = model(**inputs)
 
-	m = nn.LogSoftmax()
-
 	vectorize_log = np.vectorize(math.log)
 
-	predictions = vectorize_log(softmax(np.asarray(outputs.logits.detach()).flatten()))
+	predictions = softmax(np.asarray(outputs.logits.detach()).flatten())
 
 	scores = []
 	for i in range(len(ids)):
