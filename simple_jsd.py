@@ -42,7 +42,7 @@ def sample_sentences(file_name, n):
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
 nlp_roberta = pipeline("fill-mask", model="roberta-base")
-nlp_gpt2 = pipeline("fill-mask", model="gpt2")
+nlp_xlm = pipeline("fill-mask", model="xlm-mlm-xnli15-1024")
 
 
 final_jsd_scores = {}
@@ -50,7 +50,7 @@ final_jsd_scores = {}
 for i in range(len(sentences)):
 	sentence = sentences[i]
 	scores1 = get_probabilities(nlp_roberta, sentence)
-	scores2 = get_probabilities(nlp_gpt2, sentence)
+	scores2 = get_probabilities(nlp_xlm, sentence)
 
 	jsd = evaluate_sentence(scores1, scores2)
 	final_jsd_scores[sentence] = jsd
