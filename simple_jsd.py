@@ -87,7 +87,7 @@ for i in range(len(sentences)):
 	sentence = sentences[i]
 	#scores1 = get_probabilities(nlp_roberta, sentence)
 	#scores2 = get_probabilities(nlp_xlm, sentence)
-	scores1 = get_alternative_probabilities(Roberta_model, Roberta_tokenizer, sentence)
+	scores1 = get_probabilities_alternative(Roberta_model, Roberta_tokenizer, sentence)
 	scores2 = get_probabilities_alternative(GPT2_model, GPT2_tokenizer, sentence)
 
 	#jsd = evaluate_sentence(scores1, scores2)
