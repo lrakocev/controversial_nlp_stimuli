@@ -46,12 +46,11 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	predictions_total = outputs.logits
 
 	scores = []
-	for j in range(len(ids)):
-		word = sentence_split[j]
+	for i in range(len(ids)):
+		word = sentence_split[i]
 		word_ids = word_to_ids[word]
 		score = 0
-		for i in word_ids:
-			ind = ids[i]
+		for ind in word_ids:
 			predictions = m(prediction_total[0][i])
 			score += float(predictions[ind])
 		scores.append([score, 1-score])
