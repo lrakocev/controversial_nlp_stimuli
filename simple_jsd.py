@@ -31,7 +31,8 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	sentence_split = sentence.split(" ")
 	word_to_ids = {}
-	for word in range(len(sentence_split)):
+	for i in range(len(sentence_split)):
+		word = sentence_split[i]
 		word_tokens = tokenizer.tokenize(word)
 		word_ids = tokenizer.convert_tokens_to_ids(word_tokens)
 		word_to_ids[word] = word_ids
