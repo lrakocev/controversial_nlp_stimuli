@@ -29,6 +29,6 @@ print("corr", corr)
 
 plt.scatter(cosine_scores, jsd_scores)
 plt.show()
-plt.savefig("Simple JSD v Cosine")
+plt.savefig("V2 Simple JSD v Cosine")
 plt.close()
 
