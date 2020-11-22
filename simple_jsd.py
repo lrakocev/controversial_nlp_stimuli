@@ -62,7 +62,7 @@ def sample_sentences(file_name, n):
   return head
 
 
-sentences = sorted(sample_sentences("sentences4lara.txt", 100))
+sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
 
 nlp_roberta = pipeline("fill-mask", model="roberta-base")
 nlp_xlm = pipeline("fill-mask", model="xlm-mlm-xnli15-1024")
