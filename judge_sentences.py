@@ -23,7 +23,7 @@ class ModelInfo():
 
   def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name):
     self.model = model.to("cuda")
-    self.tokenizer = tokenizer.to("cuda")
+    self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
     self.model_name = model_name
     self.word_token_dict = {word: self.tokenizer.tokenize(" " + str(word)) for word in vocab}
