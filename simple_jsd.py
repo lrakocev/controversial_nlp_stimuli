@@ -93,7 +93,9 @@ for i in range(len(sentences)):
 	scores1 = get_probabilities_alternative(Roberta_model, Roberta_tokenizer, sentence)
 	scores2 = get_probabilities_alternative(GPT2_model, GPT2_tokenizer, sentence)
 
+	print(scores1)
+	print(scores2)
 	jsd = evaluate_sentence(scores1, scores2)
 	final_jsd_scores[sentence] = jsd
 
-print(final_jsd_scores)
+#print(final_jsd_scores)
