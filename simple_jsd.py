@@ -41,7 +41,9 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	inputs = tokenizer(sentence, return_tensors='pt')
 	outputs = model(**inputs)
 
-	predictions = math.log(nn.functional.softmax(outputs.logits, dim=2))
+	m = nn.LogSoftmax()
+
+	predictions = m(outputs.logits, dim=2)
 
 	scores = []
 	for j in range(len(ids)):
