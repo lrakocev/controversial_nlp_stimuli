@@ -41,7 +41,7 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	inputs = tokenizer(sentence, return_tensors='pt')
 	outputs = model(**inputs)
 
-	m = nn.LogSoftmax(dim=-1)
+	m = nn.LogSoftmax(dim=0)
 
 	predictions_total = outputs.logits
 
@@ -51,8 +51,9 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 		word_ids = word_to_ids[word]
 		score = 0
 		for ind in word_ids:
-			predictions = m(predictions_total[0][i])
-			score += float(predictions[ind])
+
+			predictions = m(predictions_total[0])
+			score += float(predictions[i][ind])
 		scores.append([score, 1-score])
 
 	return scores
