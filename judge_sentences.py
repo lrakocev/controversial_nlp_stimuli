@@ -115,7 +115,7 @@ def get_distribution(model_name, context, vocab, n):
 
     logsoftmax = torch.nn.LogSoftmax(dim=0)
 
-    log_probabilities = [[logsoftmax(np.asarray(outputs.logits[j][i].cpu().detach()).flatten()) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
+    log_probabilities = [[logsoftmax(outputs.logits[j][i].cpu().flatten()) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
     log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j])-1)] for j in range(len(batch_list))]
 
