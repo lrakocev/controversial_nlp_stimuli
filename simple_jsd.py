@@ -43,7 +43,7 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 
 	m = nn.LogSoftmax()
 
-	predictions = m(outputs.logits, dim=2)
+	predictions_total = outputs.logits
 
 	scores = []
 	for j in range(len(ids)):
@@ -52,7 +52,8 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 		score = 0
 		for i in word_ids:
 			ind = ids[i]
-			score += float(predictions[0][i][ind])
+			predictions = m(prediction_total[0][i])
+			score += float(predictions[ind])
 		scores.append([score, 1-score])
 
 	return scores
