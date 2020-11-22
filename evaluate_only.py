@@ -6,7 +6,7 @@ filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = j_s.get_vocab(filename, 10000)
 
 model_list = [j_s.GPT2, j_s.Roberta] 
-n = 10
+n = 100
 
 def evaluate_sentence(sentence, n):
 
@@ -43,5 +43,5 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](sentence, 1000)
+  globals()[sys.argv[1]](sentence, 100)
 
