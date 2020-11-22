@@ -27,7 +27,7 @@ corr, _ = pearsonr(cosine_scores, jsd_scores)
 
 print("corr", corr)
 
-plt.plot(cosine_scores, jsd_scores)
+plt.scatter(cosine_scores, jsd_scores)
 plt.show()
 plt.savefig("Simple JSD v Cosine")
 plt.close()
