@@ -29,10 +29,10 @@ def get_probabilities_alternative(model, tokenizer, sentence):
 	tokens = tokenizer.tokenize(sentence)
 	ids = tokenizer.convert_tokens_to_ids(tokens)
 
+	print(tokens)
+
 	inputs = tokenizer(sentence, return_tensors='pt')
 	outputs = model(**inputs)
-
-	vectorize_log = np.vectorize(math.log)
 
 	predictions = nn.functional.softmax(outputs.logits, dim=2)
 
@@ -62,7 +62,7 @@ def sample_sentences(file_name, n):
   return head
 
 
-sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
+sentences = sorted(sample_sentences("sentences4lara.txt", 10)) #4507
 
 nlp_roberta = pipeline("fill-mask", model="roberta-base")
 nlp_xlm = pipeline("fill-mask", model="xlm-mlm-xnli15-1024")
@@ -74,11 +74,11 @@ final_jsd_scores = {}
 
 for i in range(len(sentences)):
 	sentence = sentences[i]
-	scores1 = get_probabilities(nlp_roberta, sentence)
+	#scores1 = get_probabilities(nlp_roberta, sentence)
 	#scores2 = get_probabilities(nlp_xlm, sentence)
 	scores2 = get_probabilities_alternative(GPT2_model, GPT2_tokenizer, sentence)
 
-	jsd = evaluate_sentence(scores1, scores2)
-	final_jsd_scores[sentence] = jsd
+	#jsd = evaluate_sentence(scores1, scores2)
+	#final_jsd_scores[sentence] = jsd
 
-print(final_jsd_scores)
+#print(final_jsd_scores)
