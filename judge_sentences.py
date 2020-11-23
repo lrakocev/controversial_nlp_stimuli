@@ -89,7 +89,7 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt").to('cuda')
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")#.to('cuda')
 
     if model_name.model_name == "Albert":
       attention_mask = []
@@ -106,8 +106,8 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
-      attention_mask = torch.tensor(attention_mask).to('cuda')
-      input_ids = torch.tensor(input_ids).to('cuda') 
+      attention_mask = torch.tensor(attention_mask)#.to('cuda')
+      input_ids = torch.tensor(input_ids)#.to('cuda') 
 
       outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
