@@ -370,8 +370,6 @@ def sample_sentences(file_name, n):
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 cuda = torch.cuda.is_available()
 
-print("is cuda available", cuda)
-
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
 
@@ -390,7 +388,11 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 model_list = [GPT2, Roberta] #, XLM, T5, Albert]
 
+sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
+change_sentence(model_list, sentences[0], vocab, 100, 3, {})
+
+'''
 if __name__ == "__main__":
 
   sentences = sorted(sample_sentences("sentences4lara.txt", 100))
@@ -400,3 +402,4 @@ if __name__ == "__main__":
   sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {})
+'''
