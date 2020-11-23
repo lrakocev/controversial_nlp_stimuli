@@ -8,7 +8,7 @@ vocab = j_s.get_vocab(filename, 10000)
 model_list = [j_s.GPT2, j_s.Roberta] 
 n = 100
 
-def evaluate_sentence(sentence, n):
+def evaluate_sentence(sentence, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -20,20 +20,26 @@ def evaluate_sentence(sentence, n):
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
-    
-    for model_name in model_list:
-      next_word_distr = j_s.get_distribution(model_name, curr_context, vocab, n)
-      distrs[model_name] = list(next_word_distr.values())
 
-    n = len(model_list)
-    weights = np.empty(n)
-    weights.fill(1/n)
+    if curr_context in js_dict.keys():
+      curr_js = js_dict[curr_context]
 
-    curr_js = j_s.jsd(list(distrs.values()), weights)
+    else:
+      for model_name in model_list:
+        next_word_distr = get_distribution(model_name, curr_context, vocab, n)
+        distrs[model_name] = list(next_word_distr.values())
+
+      n = len(model_list)
+      weights = np.empty(n)
+      weights.fill(1/n)
+
+      curr_js = jsd(list(distrs.values()), weights)
+      js_dict[curr_context] = curr_js
+
     total_js += curr_js
     js_positions.append(curr_js)
-
-  return total_js/len_sentence
+    
+  return total_js/len_sentence, js_positions
 
 if __name__ == "__main__":
 
@@ -43,5 +49,5 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](sentence, 100)
+  globals()[sys.argv[1]](sentence, 100, {})
 
