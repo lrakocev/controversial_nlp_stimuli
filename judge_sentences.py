@@ -89,7 +89,7 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt")#.to('cuda')
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt") #.to('cuda')
 
     if model_name.model_name == "Albert":
       attention_mask = []
@@ -106,16 +106,18 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
-      attention_mask = torch.tensor(attention_mask)#.to('cuda')
-      input_ids = torch.tensor(input_ids)#.to('cuda') 
+      attention_mask = torch.tensor(attention_mask) #.to('cuda')
+      input_ids = torch.tensor(input_ids) #.to('cuda') 
 
       outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
       outputs = model(**inputs, labels=inputs["input_ids"])
 
-    logsoftmax = torch.nn.LogSoftmax(dim=0)
+    #logsoftmax = torch.nn.LogSoftmax(dim=0)
 
-    log_probabilities = [[logsoftmax(outputs.logits[j][i].cpu().flatten()) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
+    vectorize_log = np.vectorize(math.log)
+
+    log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
     log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j])-1)] for j in range(len(batch_list))]
 
@@ -152,31 +154,6 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
-  curr_context = ""
-  total_js = 0
-  js_positions = []
-  distrs = {}
-  for i in range(0, len_sentence):
-    curr_context += sentence_split[i] + " "
-    
-    for model_name in model_list:
-      tokenizer = model_name.tokenizer
-      model = model_name.model
-      next_word_distr = get_distribution(model_name, curr_context, vocab, n)
-      distrs[model_name] = list(next_word_distr.values())
-    n = len(model_list)
-    weights = np.empty(n)
-    weights.fill(1/n)
-    curr_js = jsd(list(distrs.values()), weights)
-    #total_js += jsd(list(distrs.values()), weights)
-    total_js += curr_js
-    #curr_js = total_js/(i+1)
-    js_positions.append(curr_js)
-    
-  return total_js/len_sentence, js_positions
-  '''
-  sentence_split = sentence.split(" ")
-  len_sentence = len(sentence_split)
 
   curr_context = ""
   total_js = 0
@@ -203,8 +180,6 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
     total_js += curr_js
     js_positions.append(curr_js)
-    '''
-
     
   return total_js/len_sentence, js_positions
 
@@ -286,9 +261,9 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dict):
+def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
 
-  original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size, js_dict)
+  original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size, js_prev_dict)
   print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
   scores = [original_score]
   js_positions = [original_js_positions]
@@ -299,10 +274,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
 
   for change_i in range(0,num_changes):
 
-    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_dict)
+    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
 
-    exponentiated_scores = torch.tensor(softmax(curr_js_positions)).to('cuda')
-    n = list(torch.multinomial(exponentiated_scores, 1)).to('cuda')
+    exponentiated_scores = torch.tensor(softmax(curr_js_positions)) #.to('cuda')
+    n = list(torch.multinomial(exponentiated_scores, 1)) #.to('cuda')
     change_i = n[0]
 
     print("current starting sentence", sentence_split)
@@ -329,7 +304,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
       new_context = ' '.join(modified_sentence_replacements)
 
       print("replacement try", new_context)
-      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size, js_dict)
+      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size, js_prev_dict)
     
 
     #deletions
@@ -337,7 +312,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
     if len(modified_sentence_deletions) > 0:
 
       print("deletion try", ' '.join(modified_sentence_deletions))
-      js_dict[' '.join(modified_sentence_deletions)] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size, js_dict)
+      js_dict[' '.join(modified_sentence_deletions)] = evaluate_sentence(model_list, ' '.join(modified_sentence_deletions), vocab, batch_size, js_prev_dict)
 
 
     # additions
@@ -353,7 +328,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
       new_context = ' '.join(modified_sentence_additions)
 
       print("additions try", new_context)
-      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size, js_dict)
+      js_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size, js_prev_dict)
       modified_sentence_additions.pop(change_i+1)
 
 
@@ -361,7 +336,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
 
     final_modified_sentence = highest_js_word[0]
 
-    new_sentence_score, new_js_positions= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_dict)
+    new_sentence_score, new_js_positions= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
 
     new_discounted_score = discounting(change_i, new_js_positions)
     curr_discounted_score = discounting(change_i, curr_js_positions)
@@ -377,7 +352,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
 
 
 
-  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_dict)[0])
+  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)[0])
 
   print("Scores", scores, "Changes", changes, "JS Positions", js_positions)
 
@@ -393,12 +368,8 @@ def sample_sentences(file_name, n):
 
   return head 
 
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-cuda = torch.cuda.is_available()
-
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
-
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -415,6 +386,8 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 model_list = [GPT2, Roberta] #, XLM, T5, Albert]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
+
+print(sentences[0])
 
 change_sentence(model_list, sentences[0], vocab, 100, 3, {})
 
