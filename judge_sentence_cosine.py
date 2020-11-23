@@ -325,7 +325,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
       new_sentence_list.append(new_context)
 
-    sampled_id = random.randint(0, len(new_sentence_list)-1)
+    sampled_id = random.randint(0, len(new_sentence_list))
     final_modified_sentence = new_sentence_list[sampled_id]
 
     new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
