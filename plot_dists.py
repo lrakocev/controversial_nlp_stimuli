@@ -39,7 +39,7 @@ plt.show()
 plt.savefig("V2 Simple JSD v Cosine")
 plt.xlabel("cosine distances")
 plt.ylabel("j-s divergence scores")
-plt.title("R2: " + r_value**2 + " and p-value: " + p_value)
+plt.title("R2: " + str(r_value**2) + " and p-value: " + p_value)
 plt.close()
 
 
