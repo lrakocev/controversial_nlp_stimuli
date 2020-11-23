@@ -22,7 +22,7 @@ from functools import reduce
 class ModelInfo():
 
   def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name):
-    self.model = model.to("cuda")
+    self.model = model #.to("cuda")
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
     self.model_name = model_name
@@ -55,7 +55,7 @@ def get_distribution(model_name, context, vocab, n):
   print("context", context)
 
   tokenizer = model_name.tokenizer 
-  model = model_name.model.to('cuda')
+  model = model_name.model #.to('cuda')
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
@@ -218,11 +218,11 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices.to('cuda')
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices.to('cuda')
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
@@ -376,17 +376,17 @@ filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
 
 
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True).to(DEVICE), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True).to(DEVICE), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
 
-XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True).to(DEVICE), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
+XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True).to(DEVICE), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
 
-Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True).to(DEVICE), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
+Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103').to(DEVICE),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
 model_list = [GPT2, Roberta] #, XLM, T5, Albert]
 
