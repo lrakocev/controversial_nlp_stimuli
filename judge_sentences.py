@@ -152,6 +152,31 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
+  curr_context = ""
+  total_js = 0
+  js_positions = []
+  distrs = {}
+  for i in range(0, len_sentence):
+    curr_context += sentence_split[i] + " "
+    
+    for model_name in model_list:
+      tokenizer = model_name.tokenizer
+      model = model_name.model
+      next_word_distr = get_distribution(model_name, curr_context, vocab, n)
+      distrs[model_name] = list(next_word_distr.values())
+    n = len(model_list)
+    weights = np.empty(n)
+    weights.fill(1/n)
+    curr_js = jsd(list(distrs.values()), weights)
+    #total_js += jsd(list(distrs.values()), weights)
+    total_js += curr_js
+    #curr_js = total_js/(i+1)
+    js_positions.append(curr_js)
+    
+  return total_js/len_sentence, js_positions
+  '''
+  sentence_split = sentence.split(" ")
+  len_sentence = len(sentence_split)
 
   curr_context = ""
   total_js = 0
@@ -178,6 +203,7 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
     total_js += curr_js
     js_positions.append(curr_js)
+    '''
 
     
   return total_js/len_sentence, js_positions
