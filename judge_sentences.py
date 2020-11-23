@@ -291,7 +291,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
     # replacements 
     num_masks = random.randint(1,2)
 
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
 
     for words in new_word_list: 
       modified_sentence_replacements[change_i] = str(words[0])
@@ -316,7 +316,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_dic
 
     # additions
     num_masks = random.randint(1,2)
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
     for words in new_word_list:
       print("change i", change_i)
       print("mod sentence additions", modified_sentence_additions)
@@ -373,7 +373,7 @@ cuda = torch.cuda.is_available()
 print("is cuda available", cuda)
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = get_vocab(filename, 10000)
+vocab = get_vocab(filename, 3000)
 
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True).to(DEVICE), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
