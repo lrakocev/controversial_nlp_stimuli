@@ -1,16 +1,16 @@
-import regression_weights as rw
 import matplotlib.pyplot as plt
 import last_line_evaluate as lle
 from scipy.stats import pearsonr
 #import simple_jsd
 import jsd_output as j_o
+import regression_weights as rw
 
+#simple_jsd_scores = simple_jsd.final_jsd_scores
+simple_jsd_scores = jsd_output.js
 
 ordered_cosine_distances = rw.cosine_distances
 sentence_list = rw.sentence_list
 cosine_dict = dict(zip(sentence_list, ordered_cosine_distances))
-#simple_jsd_scores = simple_jsd.final_jsd_scores
-simple_jsd_scores = jsd_output.js
 
 '''
 jsd_score_dict = lle.score_dict
