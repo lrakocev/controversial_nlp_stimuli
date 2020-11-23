@@ -381,4 +381,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {})
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 3, {})
