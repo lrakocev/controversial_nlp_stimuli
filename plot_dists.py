@@ -31,7 +31,7 @@ jsd_scores = [float(v) for (k,v) in sorted(jsd_score_dict.items(), key=lambda x:
 
 lr_model = LinearRegression()
 
-lr_model.fit(cosine_scores, jsd_scores)
+lr_model.fit([cosine_scores, jsd_scores])
 slope = lr_model.coef_
 intercept = lr_model.intercept_
 
