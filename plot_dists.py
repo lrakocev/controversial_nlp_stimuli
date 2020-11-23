@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import last_line_evaluate as lle
 from scipy.stats import pearsonr
 import regression_weights as rw
+from sklearn.linear_model import LinearRegression
 '''
 import simple_jsd
 import jsd_output
