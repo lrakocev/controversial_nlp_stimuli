@@ -35,11 +35,11 @@ abline_values = [slope * i + intercept for i in cosine_scores]
 
 plt.plot(cosine_scores, abline_values, color='black', linewidth=3)
 plt.scatter(cosine_scores, jsd_scores)
-plt.show()
 plt.savefig("V2 Simple JSD v Cosine")
 plt.xlabel("cosine distances")
 plt.ylabel("j-s divergence scores")
 plt.title("R2: " + str(r_value**2) + " and p-value: " + str(p_value))
+plt.show()
 plt.close()
 
 
