@@ -3,7 +3,7 @@ import sys
 import numpy as np
 
 filename = "SUBTLEXus74286wordstextversion.txt"
-vocab = j_s.get_vocab(filename, 10000)
+vocab = j_s.get_vocab(filename, 3000)
 
 model_list = [j_s.GPT2, j_s.Roberta] 
 n = 100
