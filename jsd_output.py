@@ -1,6 +1,5 @@
 import json 
 
-with open('jsd_output.txt') as f: 
-    data = f.read()
-
-js = json.loads(data)
+file = open("jsd_output.txt", "r")
+contents = file.read()
+js = ast.literal_eval(contents
