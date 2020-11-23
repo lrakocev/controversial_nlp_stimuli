@@ -35,7 +35,7 @@ lr_model = LinearRegression()
 print("cosine scores", cosine_scores)
 print("jsd scores",jsd_scores)
 
-lr_model.fit(cosine_scores, jsd_scores)
+lr_model.fit(cosine_scores.reshape(1, -1) , jsd_scores.reshape(1, -1) )
 slope = lr_model.coef_
 intercept = lr_model.intercept_
 
