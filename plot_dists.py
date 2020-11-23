@@ -29,10 +29,10 @@ cosine_scores = [float(v) for (k,v) in sorted(cosine_dict.items(), key=lambda x:
 #jsd_scores = [float(v) for (k,v) in sorted(simple_jsd_scores.items(), key=lambda x: x[0], reverse=True)]
 jsd_scores = [float(v) for (k,v) in sorted(jsd_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
-'''
+
 lr_model = LinearRegression()
 
-lr_model.fit(cosine_scores, jsd_scores)
+lr_model.fit([cosine_scores], [jsd_scores])
 slope = lr_model.coef_
 intercept = lr_model.intercept_
 
@@ -48,5 +48,5 @@ plt.xlabel("cosine distances")
 plt.ylabel("j-s divergence scores")
 plt.title("R2: " + r2 + " and p-value: " + p_value)
 plt.close()
-'''
+
 
