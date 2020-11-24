@@ -182,6 +182,12 @@ def evaluate_sentence(sentence, n, js_dict):
     
   return total_js/len_sentence, js_positions
 
+def sample_sentences(file_name, n):
+
+  with open(file_name) as f:
+    head = [next(f).strip() for x in range(n)]
+
+  return head 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
@@ -198,7 +204,7 @@ n = 100
 
 if __name__ == "__main__":
 
-  sentences = sorted(j_s.sample_sentences("sentences4lara.txt", 1000))
+  sentences = sorted(sample_sentences("sentences4lara.txt", 1000))
 
   sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
 
