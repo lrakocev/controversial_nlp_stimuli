@@ -286,7 +286,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     curr_score = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
     
-    print("Curr sentence is: ", sentence, " with JS: ", curr_score)
+    print("Curr sentence is: ", sentence, " with cosine distance: ", curr_score)
 
     scores.append(curr_score)
 
@@ -343,9 +343,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     new_sentence_score= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
     if new_sentence_score > curr_score:
-      change = highest_js_word[0][1]
       print("new score", new_sentence_score, "curr_score", curr_score)
-      print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
+      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       sentence_split = final_modified_sentence.split(" ")
 
   print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores)
