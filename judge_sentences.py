@@ -55,7 +55,7 @@ def get_distribution(model_name, context, vocab, n):
   print("context", context)
 
   tokenizer = model_name.tokenizer 
-  model = model_name.model.to('cuda')
+  model = model_name.model #.to('cuda')
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol

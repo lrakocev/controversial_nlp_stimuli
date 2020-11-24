@@ -160,7 +160,7 @@ def cosine_distance(prob_distributions, weights):
   cosine_list = []
   for i in combinations(prob_distributions, 2):
     distr1, distr2 = i
-    cosine_list.append(distance.cosin(distr1, distr2))
+    cosine_list.append(distance.cosine(distr1, distr2))
 
   return sum(cosine_list)/len(cosine_list)
 
