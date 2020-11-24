@@ -295,7 +295,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     #change_i = n[0]
     change_i = random.randint(1, len(sentence_split)-1)
 
-    final_modified_sentence = copy.deepcopy(sentence_split)
+    print("change i ", change_i)
+
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)
@@ -309,6 +310,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
 
     for words in new_word_list: 
+      print("words", words)
       modified_sentence_replacements[change_i] = str(words[0])
       if num_masks == 2 and len(modified_sentence_replacements) > change_i + 1:
         modified_sentence_replacements[change_i+1] = str(words[1])
@@ -316,7 +318,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
       new_context = ' '.join(modified_sentence_replacements)
-      print("mod sentence replacement", modified_sentence_replacements)
+      print("mod sentence replacement", new_context)
       new_sentence_list.append(new_context)
       #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       
@@ -333,16 +335,15 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     num_masks = random.randint(1,2)
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
     for words in new_word_list:
-      print("mod sentence additions", modified_sentence_additions)
+      print("words", words)
       modified_sentence_additions.insert(change_i+1,str(words[0]))
       if num_masks == 2:
         modified_sentence_additions.insert(change_i+2,str(words[1]))
 
       new_context = ' '.join(modified_sentence_additions)
-
+      print("mod sentence additions", new_context)
       new_sentence_list.append(new_context)
       #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
-
 
     sampled_id = random.randint(0, len(new_sentence_list)-1)
     final_modified_sentence = new_sentence_list[sampled_id]
@@ -354,7 +355,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       print("Here is the new version of the sentence: ", final_modified_sentence)
       sentence_split = final_modified_sentence.split(" ")
 
-  print("New sentence is: ", final_modified_sentence," with total scores: ", scores)
+  print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 
   plot_scores(scores, ' '.join(sentence_split))
 
@@ -376,14 +377,18 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_d
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=benchmark=Pereira2018-encoding-weights,model=xlm-mlm-xnli15-1024,subsample=None.pkl')
 
+model_list = [GPT2, Roberta]
+
+sentences = sorted(sample_sentences("sentences4lara.txt", 100))
+
+change_sentence(model_list, sentences[5], vocab, 100, 3)
+'''
 if __name__ == "__main__":
 
-  model_list = [GPT2, Roberta]
-
-  sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
   sent_dict = dict(zip([str(x) for x in range(1,100)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](model_list, sentence, vocab, 100, 10)
+'''
