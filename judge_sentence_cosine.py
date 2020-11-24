@@ -305,7 +305,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     # replacements 
     num_masks = random.randint(1,2)
 
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
 
     for words in new_word_list: 
       if num_masks == 1:
@@ -332,7 +332,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # additions
     num_masks = random.randint(1,2)
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 10)
 
     for words in new_word_list:
       print("words", words)
@@ -389,7 +389,7 @@ model_list = [GPT2, Roberta]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
-change_sentence(model_list, sentences[5], vocab, 100, 10)
+change_sentence(model_list, sentences[5], vocab, 100, 5)
 '''
 if __name__ == "__main__":
 
