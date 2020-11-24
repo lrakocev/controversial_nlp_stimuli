@@ -294,7 +294,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
+def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   scores = []
   changes = []
@@ -357,7 +357,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
       new_sentence_list.append(new_context)
 
-    sampled_id = random.randint(0, len(new_sentence_list))
+    sampled_id = random.randint(0, len(new_sentence_list)-1)
     final_modified_sentence = new_sentence_list[sampled_id]
 
     new_sentence_score= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
@@ -403,4 +403,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 3, {})
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 3)
