@@ -60,7 +60,7 @@ def get_distribution(model_name, context, vocab, n):
   print("context", context)
 
   tokenizer = model_name.tokenizer 
-  model = model_name.model.to('cuda')
+  model = model_name.model #.to('cuda')
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
@@ -94,7 +94,7 @@ def get_distribution(model_name, context, vocab, n):
         added_string = " ".join([model_name.start_token_symbol] * (max_length - length))
         batch = batch + " " + added_string
 
-    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt").to('cuda')
+    inputs = tokenizer(batch_list, padding='longest', return_tensors="pt") #.to('cuda')
 
     if model_name.model_name == "Albert":
       attention_mask = []
@@ -111,8 +111,8 @@ def get_distribution(model_name, context, vocab, n):
         x=1
         attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
 
-      attention_mask = torch.tensor(attention_mask).to('cuda')
-      input_ids = torch.tensor(input_ids).to('cuda') 
+      attention_mask = torch.tensor(attention_mask) #.to('cuda')
+      input_ids = torch.tensor(input_ids) #.to('cuda') 
 
       outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
     else:
@@ -232,11 +232,11 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices.to('cuda')
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices.to('cuda')
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
