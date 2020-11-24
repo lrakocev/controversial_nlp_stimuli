@@ -389,8 +389,7 @@ model_list = [GPT2, Roberta]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
-change_sentence(model_list, sentences[5], vocab, 100, 5)
-'''
+
 if __name__ == "__main__":
 
 
@@ -399,4 +398,3 @@ if __name__ == "__main__":
   sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](model_list, sentence, vocab, 100, 10)
-'''
