@@ -281,7 +281,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
     print("current starting sentence", sentence_split)
 
-    final_modified_sentence = copy.deepcopy(sentence_split)
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)

@@ -282,13 +282,14 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
 
+  curr_score = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
+
+  scores.append(curr_score)
+
   for change_i in range(0,num_changes):
 
-    curr_score = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
     
     print("Curr sentence is: ", sentence, " with cosine distance: ", curr_score)
-
-    scores.append(curr_score)
 
     #exponentiated_scores = torch.tensor(softmax(curr_js_positions))
     #n = list(torch.multinomial(exponentiated_scores, 1))
@@ -320,7 +321,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
       new_sentence_list.append(new_context)
-      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       
 
     #deletions
@@ -329,7 +330,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       print("deletion try", ' '.join(modified_sentence_deletions))
       new_context = ' '.join(modified_sentence_deletions)
       new_sentence_list.append(new_context)
-      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
 
     # additions
     num_masks = random.randint(1,2)
@@ -343,17 +344,21 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_additions)
       print("mod sentence additions", new_context)
       new_sentence_list.append(new_context)
-      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
 
     sampled_id = random.randint(0, len(new_sentence_list)-1)
-    final_modified_sentence = new_sentence_list[sampled_id]
+    #final_modified_sentence = new_sentence_list[sampled_id]
+    final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
 
-    new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
+    #new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
+    new_sentence_score = new_sentence_dict[final_modified_sentence]
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
       print("Here is the new version of the sentence: ", final_modified_sentence)
       sentence_split = final_modified_sentence.split(" ")
+      scores.append(new_sentence_score)
+      curr_score = new_sentence_score
 
   print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 

@@ -263,27 +263,23 @@ def plot_positions(js_positions, sentence):
 
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
 
-  scores = []
-  js_positions = []
+  curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
+    
+  scores = [curr_score]
+  js_positions = [curr_js_positions]
   changes = []
   change = ""
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
 
+  print("OG sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
+
   for change_i in range(0,num_changes):
-
-    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
-    
-    print("Curr sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
-
-    scores.append(curr_score)
-    js_positions.append(curr_js_positions)
 
     exponentiated_scores = torch.tensor(softmax(curr_js_positions))
     n = list(torch.multinomial(exponentiated_scores, 1))
     change_i = n[0]
 
-    final_modified_sentence = copy.deepcopy(sentence_split)
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
     modified_sentence_additions = copy.deepcopy(sentence_split)
@@ -303,26 +299,27 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
       new_context = ' '.join(modified_sentence_replacements)
+      print("mod sentence replacement", new_context)
       new_sentence_list.append(new_context)
       
 
     #deletions
     modified_sentence_deletions.pop(change_i)
     if len(modified_sentence_deletions) > 0:
-      print("deletion try", ' '.join(modified_sentence_deletions))
+      new_context = ' '.join(modified_sentence_deletions)
+      print("deletion try", new_context)
       new_sentence_list.append(' '.join(modified_sentence_deletions))
 
     # additions
     num_masks = random.randint(1,2)
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
     for words in new_word_list:
-      print("mod sentence additions", modified_sentence_additions)
       modified_sentence_additions.insert(change_i+1,str(words[0]))
       if num_masks == 2:
         modified_sentence_additions.insert(change_i+2,str(words[1]))
 
       new_context = ' '.join(modified_sentence_additions)
-
+      print("mod sentence additions", new_context)
       new_sentence_list.append(new_context)
 
     sampled_id = random.randint(0, len(new_sentence_list)-1)
@@ -339,6 +336,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
       sentence_split = final_modified_sentence.split(" ")
+      scores.append(new_discounted_score)
+      js_positions.append(new_js_positions)
+      curr_js_positions = new_js_positions
+
 
   print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions)
 
