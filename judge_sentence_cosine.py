@@ -193,7 +193,7 @@ def get_prediction(score_name, tokenizer, model, sentence):
   return prediction
 
 
-def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
+def evaluate_sentence(model_list, sentence, vocab, n):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
