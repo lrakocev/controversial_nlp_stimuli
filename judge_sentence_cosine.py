@@ -19,11 +19,12 @@ import math
 from functools import reduce
 from scipy.spatial import distance
 from itertools import combinations
+import pickle
 
 
 class ModelInfo():
 
-  def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name):
+  def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name, score_name):
     self.model = model #.to("cuda")
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
@@ -37,6 +38,7 @@ class ModelInfo():
     self.id_token_dict = {token: self.tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
 
     self.distr_dict_for_context = {}
+    self.score_name = score_name
 
 def get_vocab(filename, length):
 
@@ -162,6 +164,35 @@ def cosine_distance(prob_distributions, weights):
   return sum(cosine_list)/len(cosine_list)
 
 
+def get_prediction(score_name, tokenizer, model, sentence):
+
+  s = pd.read_pickle(score_name)
+  d = s['data']
+
+  coeffs = d.layer_weights[0][-1].values
+
+  intercept = d.layer_weights[0][-1].intercept.values
+
+  new_model = LinearRegression()
+  new_model.intercept_ = intercept
+  new_model.coef_ = coeffs
+
+  inputs = tokenizer(sentence, return_tensors="pt")
+  outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
+
+  hiddenStates = outputs.hidden_states 
+
+  hiddenStatesLayer = hiddenStates[-1]
+
+  lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+
+  lastWordState = lastWordState[-1].reshape(1, -1)
+
+  prediction = new_model.predict(lastWordState)
+  
+  return prediction
+
+
 def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
@@ -171,8 +202,11 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
   distrs = {}
 
   for model_name in model_list:
-    next_word_distr = get_distribution(model_name, sentence, vocab, n)
-    distrs[model_name] = list(next_word_distr.values())
+    score_name = model_name.score_name
+    model = model_name.model
+    tokenizer = model_name.tokenizer
+    prediction = get_prediction(score_name, tokenizer, model, sentence)
+    distrs[model_name] = prediction
 
     n = len(model_list)
     weights = np.empty(n)
@@ -263,7 +297,6 @@ def plot_positions(js_positions, sentence):
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
 
   scores = []
-  js_positions = []
   changes = []
   change = ""
   sentence_split = sentence.split(" ")
@@ -271,16 +304,16 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
   for change_i in range(0,num_changes):
 
-    curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
+    curr_score= evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
     
-    print("Curr sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
+    print("Curr sentence is: ", sentence, " with JS: ", curr_score)
 
     scores.append(curr_score)
-    js_positions.append(curr_js_positions)
 
-    exponentiated_scores = torch.tensor(softmax(curr_js_positions))
-    n = list(torch.multinomial(exponentiated_scores, 1))
-    change_i = n[0]
+    #exponentiated_scores = torch.tensor(softmax(curr_js_positions))
+    #n = list(torch.multinomial(exponentiated_scores, 1))
+    #change_i = n[0]
+    change_i = random.randint(1, len(sentence_split)-1)
 
     final_modified_sentence = copy.deepcopy(sentence_split)
     modified_sentence_replacements = copy.deepcopy(sentence_split)
@@ -327,24 +360,19 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     sampled_id = random.randint(0, len(new_sentence_list))
     final_modified_sentence = new_sentence_list[sampled_id]
 
-    new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
+    new_sentence_score= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
-    new_discounted_score = discounting(change_i, new_js_positions)
-    curr_discounted_score = discounting(change_i, curr_js_positions)
-
-    if new_discounted_score > curr_discounted_score:
+    if new_sentence_score > curr_score:
       change = highest_js_word[0][1]
-      changes.append(change)
-      print("new score", new_discounted_score, "curr_score", curr_discounted_score)
+      print("new score", new_sentence_score, "curr_score", curr_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
       sentence_split = final_modified_sentence.split(" ")
 
-  print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions)
+  print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores)
 
   plot_scores(scores, ' '.join(sentence_split))
-  plot_positions(js_positions, ' '.join(sentence_split))
 
-  return scores, js_positions, ' '.join(sentence_split)
+  return scores, ' '.join(sentence_split)
 
 def sample_sentences(file_name, n):
 
@@ -356,17 +384,12 @@ def sample_sentences(file_name, n):
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
 
-GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
+GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=gpt2,subsample=None.pkl')
 
-Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
+Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl')
 
-XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
+XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=benchmark=Pereira2018-encoding-weights,model=xlm-mlm-xnli15-1024,subsample=None.pkl')
 
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
-
-Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
-
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
 model_list = [GPT2, Roberta] #, XLM, T5, Albert]
 
