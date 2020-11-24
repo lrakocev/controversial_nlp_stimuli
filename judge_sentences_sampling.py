@@ -208,14 +208,15 @@ def get_avg_distr(model_list, context, vocab, n):
 
 def sample_bert(context, change_i, num_masks, top_k):
 
-  context[change_i] = '[MASK]'
+  new_context = copy.copy(context)
+  new_context[change_i] = '[MASK]'
   if num_masks == 2:
-    context.insert(change_i+1,'[MASK]')
+    new_context.insert(change_i+1,'[MASK]')
 
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(" ".join(context), return_tensors='pt')
+  inputs = tokenizer(" ".join(new_context), return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
 
@@ -292,11 +293,15 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
 
     for words in new_word_list: 
-      modified_sentence_replacements[change_i] = str(words[0])
+      if num_masks == 1:
+         modified_sentence_replacements[change_i] = str(words)
       if num_masks == 2 and len(modified_sentence_replacements) > change_i + 1:
+        modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements[change_i+1] = str(words[1])
       elif num_masks == 2 and len(modified_sentence_replacements) <= change_i + 1:
+        modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
+
 
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
@@ -314,13 +319,18 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     num_masks = random.randint(1,2)
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
     for words in new_word_list:
-      modified_sentence_additions.insert(change_i+1,str(words[0]))
+      print("words", words)
+      if num_masks == 1:
+        modified_sentence_additions.insert(change_i+1,str(words))
       if num_masks == 2:
+        modified_sentence_additions.insert(change_i+1,str(words[0]))
         modified_sentence_additions.insert(change_i+2,str(words[1]))
+
 
       new_context = ' '.join(modified_sentence_additions)
       print("mod sentence additions", new_context)
       new_sentence_list.append(new_context)
+      modified_sentence_additions = copy.copy(sentence_split)
 
     sampled_id = random.randint(0, len(new_sentence_list)-1)
     final_modified_sentence = new_sentence_list[sampled_id]
