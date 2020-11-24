@@ -389,7 +389,7 @@ model_list = [GPT2, Roberta]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
-change_sentence(model_list, sentences[5], vocab, 100, 3)
+change_sentence(model_list, sentences[5], vocab, 100, 10)
 '''
 if __name__ == "__main__":
 
