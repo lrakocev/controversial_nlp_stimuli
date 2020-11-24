@@ -233,7 +233,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   predictions = outputs[0]
 
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
-  predicted_tokens = list(tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)]))
+  predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
@@ -307,11 +307,13 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
 
     for words in new_word_list: 
-      print("words", words)
-      modified_sentence_replacements[change_i] = str(words[0])
+      if num_masks == 1:
+         modified_sentence_replacements[change_i] = str(words)
       if num_masks == 2 and len(modified_sentence_replacements) > change_i + 1:
+        modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements[change_i+1] = str(words[1])
       elif num_masks == 2 and len(modified_sentence_replacements) <= change_i + 1:
+        modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
       new_context = ' '.join(modified_sentence_replacements)
@@ -333,8 +335,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
     for words in new_word_list:
       print("words", words)
-      modified_sentence_additions.insert(change_i+1,str(words[0]))
+      if num_masks == 1:
+        modified_sentence_additions.insert(change_i+1,str(words))
       if num_masks == 2:
+        modified_sentence_additions.insert(change_i+1,str(words[0]))
         modified_sentence_additions.insert(change_i+2,str(words[1]))
 
       new_context = ' '.join(modified_sentence_additions)
@@ -345,7 +349,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     #sampled_id = random.randint(0, len(new_sentence_list)-1)
     #final_modified_sentence = new_sentence_list[sampled_id]
     #new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
-    
+
     final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
     new_sentence_score = new_sentence_dict[final_modified_sentence]
 
