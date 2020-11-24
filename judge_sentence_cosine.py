@@ -17,6 +17,8 @@ import math
 import os
 import math
 from functools import reduce
+from scipy.spatial import distance
+from itertools import combinations
 
 
 class ModelInfo():
@@ -150,38 +152,35 @@ def jsd(prob_distributions, weights, logbase=math.e):
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
 
+def cosine_distance(prob_distributions, weights):
+
+  cosine_list = []
+  for i in combinations(prob_distributions, 2):
+    distr1, distr2 = i
+    cosine_list.append(distance.cosin(distr1, distr2))
+
+  return sum(cosine_list)/len(cosine_list)
+
+
 def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
 
   curr_context = ""
-  total_js = 0
-  js_positions = []
   distrs = {}
 
-  for i in range(0, len_sentence):
-    curr_context += sentence_split[i] + " "
+  for model_name in model_list:
+    next_word_distr = get_distribution(model_name, sentence, vocab, n)
+    distrs[model_name] = list(next_word_distr.values())
 
-    if curr_context in js_dict.keys():
-      curr_js = js_dict[curr_context]
+    n = len(model_list)
+    weights = np.empty(n)
+    weights.fill(1/n)
 
-    else:
-      for model_name in model_list:
-        next_word_distr = get_distribution(model_name, curr_context, vocab, n)
-        distrs[model_name] = list(next_word_distr.values())
+    curr_cosine = cosine_distance(list(distrs.values()), weights)
 
-      n = len(model_list)
-      weights = np.empty(n)
-      weights.fill(1/n)
-
-      curr_js = jsd(list(distrs.values()), weights)
-      js_dict[curr_context] = curr_js
-
-    total_js += curr_js
-    js_positions.append(curr_js)
-    
-  return total_js/len_sentence, js_positions
+  return curr_cosine
 
 def get_avg_distr(model_list, context, vocab, n):
 
