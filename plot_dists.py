@@ -33,12 +33,14 @@ slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(cosine_scor
 
 abline_values = [slope * i + intercept for i in cosine_scores]
 
+print("R2: ", r_value**2, " and p-val: ", p_value)
+
 plt.plot(cosine_scores, abline_values, color='black', linewidth=3)
 plt.scatter(cosine_scores, jsd_scores)
 plt.savefig("V2 Simple JSD v Cosine")
-plt.xlabel("cosine distances")
-plt.ylabel("j-s divergence scores")
-plt.title("R2: " + str(r_value**2) + " and p-value: " + str(p_value))
+plt.xlabel(["cosine distances"])
+plt.ylabel(["j-s divergence scores"])
+plt.title(["R2: " + str(r_value**2) + " and p-value: " + str(p_value)])
 plt.show()
 plt.close()
 
