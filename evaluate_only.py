@@ -180,6 +180,7 @@ def evaluate_sentence(sentence, n, js_dict):
     total_js += curr_js
     js_positions.append(curr_js)
     
+  print(total_js/len_sentence)
   return total_js/len_sentence, js_positions
 
 def sample_sentences(file_name, n):
