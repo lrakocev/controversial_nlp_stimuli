@@ -263,7 +263,7 @@ def plot_positions(js_positions, sentence):
 
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
 
-  curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
+  curr_score, curr_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size, js_prev_dict)
     
   scores = [curr_score]
   js_positions = [curr_js_positions]

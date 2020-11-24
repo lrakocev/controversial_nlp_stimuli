@@ -233,7 +233,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   predictions = outputs[0]
 
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
-  predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
+  predicted_tokens = list(tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)]))
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
@@ -288,19 +288,15 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   for change_i in range(0,num_changes):
 
-    
-    print("Curr sentence is: ", sentence, " with cosine distance: ", curr_score)
+    print("Curr sentence is: ", ' '.join(sentence_split), " with cosine distance: ", curr_score)
 
-    #exponentiated_scores = torch.tensor(softmax(curr_js_positions))
-    #n = list(torch.multinomial(exponentiated_scores, 1))
-    #change_i = n[0]
     change_i = random.randint(1, len(sentence_split)-1)
 
     print("change i ", change_i)
 
-    modified_sentence_replacements = copy.deepcopy(sentence_split)
-    modified_sentence_deletions = copy.deepcopy(sentence_split)
-    modified_sentence_additions = copy.deepcopy(sentence_split)
+    modified_sentence_replacements = copy.copy(sentence_split)
+    modified_sentence_deletions = copy.copy(sentence_split)
+    modified_sentence_additions = copy.copy(sentence_split)
 
     new_sentence_list = []
     new_sentence_dict = {}
@@ -346,11 +342,11 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_sentence_list.append(new_context)
       new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
 
-    sampled_id = random.randint(0, len(new_sentence_list)-1)
+    #sampled_id = random.randint(0, len(new_sentence_list)-1)
     #final_modified_sentence = new_sentence_list[sampled_id]
-    final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
-
     #new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
+    
+    final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
     new_sentence_score = new_sentence_dict[final_modified_sentence]
 
     if new_sentence_score > curr_score:
