@@ -262,11 +262,9 @@ def plot_positions(js_positions, sentence):
   plt.close()
 
 def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_prev_dict):
-
-  original_score, original_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size, js_prev_dict)
-  print("Old sentence is: ", sentence, " with JS: ", original_score, " and positional JS scores: ", original_js_positions)
-  scores = [original_score]
-  js_positions = [original_js_positions]
+  
+  scores = []
+  js_positions = []
   changes = []
   change = ""
   sentence_split = sentence.split(" ")
@@ -275,7 +273,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
   for change_i in range(0,num_changes):
 
     curr_score, curr_js_positions = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)
-
+    scores.append(curr_score)
+    js_positions.append(curr_js_positions)
     exponentiated_scores = torch.tensor(softmax(curr_js_positions)).to('cuda')
     n = list(torch.multinomial(exponentiated_scores, 1)).to('cuda')
     change_i = n[0]
@@ -342,17 +341,13 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     curr_discounted_score = discounting(change_i, curr_js_positions)
 
     if new_discounted_score > curr_discounted_score:
-      scores.append(new_sentence_score)
-      js_positions.append(new_js_positions)
       change = highest_js_word[0][1]
       changes.append(change)
       print("new score", new_discounted_score, "curr_score", curr_discounted_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
       sentence_split = final_modified_sentence.split(" ")
 
-  print("New sentence is: ", ' '.join(sentence_split)," with total JS:", evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size, js_prev_dict)[0])
-
-  print("Scores", scores, "Changes", changes, "JS Positions", js_positions)
+  print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions)
 
   plot_scores(scores, ' '.join(sentence_split))
   plot_positions(js_positions, ' '.join(sentence_split))
