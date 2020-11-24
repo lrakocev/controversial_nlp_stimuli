@@ -140,22 +140,7 @@ def get_distribution(model_name, context, vocab, n):
 
   return final_probabilities
 
-def jsd(prob_distributions, weights, logbase=math.e):
-
-    k = zip(weights, np.asarray(prob_distributions))
-    wprobs = np.asarray([x*y for x,y in list(k)])
-    mixture = wprobs.sum(axis=0)
-    entropy_of_mixture = H(mixture, base=logbase)
-
-    # right term: sum of entropies
-    entropies = np.array([H(P_i, base=logbase) for P_i in prob_distributions])
-    wentropies = weights * entropies
-    sum_of_entropies = wentropies.sum()
-
-    divergence = entropy_of_mixture - sum_of_entropies
-    return(divergence)
-
-def cosine_distance(prob_distributions, weights):
+def cosine_distance(prob_distributions):
 
   cosine_list = []
   for i in combinations(prob_distributions, 2):
@@ -198,8 +183,6 @@ def evaluate_sentence(model_list, sentence, vocab, n):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
-
-  curr_context = ""
   distrs = {}
 
   for model_name in model_list:
@@ -209,11 +192,7 @@ def evaluate_sentence(model_list, sentence, vocab, n):
     prediction = get_prediction(score_name, tokenizer, model, sentence)
     distrs[model_name] = prediction
 
-    n = len(model_list)
-    weights = np.empty(n)
-    weights.fill(1/n)
-
-    curr_cosine = cosine_distance(list(distrs.values()), weights)
+  curr_cosine = cosine_distance(list(distrs.values()))
 
   return curr_cosine
 
@@ -305,7 +284,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
   for change_i in range(0,num_changes):
 
-    curr_score= evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
+    curr_score = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
     
     print("Curr sentence is: ", sentence, " with JS: ", curr_score)
 
@@ -391,12 +370,9 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_d
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=benchmark=Pereira2018-encoding-weights,model=xlm-mlm-xnli15-1024,subsample=None.pkl')
 
-
-model_list = [GPT2, Roberta] #, XLM, T5, Albert]
-
-sentences = sorted(sample_sentences("sentences4lara.txt", 100))
-
 if __name__ == "__main__":
+
+  model_list = [GPT2, Roberta]
 
   sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
