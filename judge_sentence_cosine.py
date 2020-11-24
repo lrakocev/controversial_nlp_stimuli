@@ -221,14 +221,15 @@ def get_avg_distr(model_list, context, vocab, n):
 
 def sample_bert(context, change_i, num_masks, top_k):
 
-  context[change_i] = '[MASK]'
+  new_context = copy.copy(context)
+  new_context[change_i] = '[MASK]'
   if num_masks == 2:
-    context.insert(change_i+1,'[MASK]')
+    new_context.insert(change_i+1,'[MASK]')
 
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
 
-  inputs = tokenizer(" ".join(context), return_tensors='pt')
+  inputs = tokenizer(" ".join(new_context), return_tensors='pt')
   outputs = model(**inputs)
   predictions = outputs[0]
 
@@ -321,7 +322,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_sentence_list.append(new_context)
       new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       
-
     #deletions
     modified_sentence_deletions.pop(change_i)
     if len(modified_sentence_deletions) > 0:
@@ -333,6 +333,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     # additions
     num_masks = random.randint(1,2)
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 3)
+
     for words in new_word_list:
       print("words", words)
       if num_masks == 1:
