@@ -341,6 +341,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       if num_masks == 2:
         modified_sentence_additions.insert(change_i+1,str(words[0]))
         modified_sentence_additions.insert(change_i+2,str(words[1]))
+      modified_sentence_additions = copy.copy(sentence_split)
 
       new_context = ' '.join(modified_sentence_additions)
       print("mod sentence additions", new_context)
