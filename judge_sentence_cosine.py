@@ -301,6 +301,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     modified_sentence_additions = copy.deepcopy(sentence_split)
 
     new_sentence_list = []
+    new_sentence_dict = {}
 
     # replacements 
     num_masks = random.randint(1,2)
@@ -315,14 +316,18 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
       new_context = ' '.join(modified_sentence_replacements)
+      print("mod sentence replacement", modified_sentence_replacements)
       new_sentence_list.append(new_context)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       
 
     #deletions
     modified_sentence_deletions.pop(change_i)
     if len(modified_sentence_deletions) > 0:
       print("deletion try", ' '.join(modified_sentence_deletions))
-      new_sentence_list.append(' '.join(modified_sentence_deletions))
+      new_context = ' '.join(modified_sentence_deletions)
+      new_sentence_list.append(new_context)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
 
     # additions
     num_masks = random.randint(1,2)
@@ -336,18 +341,20 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_additions)
 
       new_sentence_list.append(new_context)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+
 
     sampled_id = random.randint(0, len(new_sentence_list)-1)
     final_modified_sentence = new_sentence_list[sampled_id]
 
-    new_sentence_score= evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
+    new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
-      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
+      print("Here is the new version of the sentence: ", final_modified_sentence)
       sentence_split = final_modified_sentence.split(" ")
 
-  print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores)
+  print("New sentence is: ", final_modified_sentence," with total scores: ", scores)
 
   plot_scores(scores, ' '.join(sentence_split))
 
@@ -379,4 +386,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 3)
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 10)
