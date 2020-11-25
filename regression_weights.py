@@ -3,7 +3,7 @@ import numpy as np
 from scipy import stats
 from sklearn.linear_model import LinearRegression
 import torch
-from transformers import RobertaTokenizer, RobertaForCausalLM, GPT2LMHeadModel, GPT2Tokenizer
+from transformers import RobertaTokenizer, RobertaForCausalLM, GPT2LMHeadModel, GPT2Tokenizer, AlbertTokenizer, AlbertForMaskedLM
 import numpy as np
 import pandas as pd
 import xarray as xr
