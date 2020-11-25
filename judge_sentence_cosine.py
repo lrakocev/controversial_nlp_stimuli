@@ -385,10 +385,9 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_d
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=benchmark=Pereira2018-encoding-weights,model=xlm-mlm-xnli15-1024,subsample=None.pkl')
 
-
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert", '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=albert-base-v2,subsample=None.pkl')
 
-model_list = [GPT2, Roberta, Albert]
+model_list = [GPT2, Roberta, Albert, XLM]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
