@@ -246,7 +246,7 @@ def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
   plt.show()
-  name = sentence + ".png"
+  name = sentence + "sampling.png"
   plt.savefig(name)
   plt.close()
 
@@ -258,7 +258,7 @@ def plot_positions(js_positions, sentence):
   ticks = sentence.split(" ")
   plt.xticks(np.arange(len(ticks)), ticks)
   plt.show()
-  name = sentence + " positions.png"
+  name = sentence + " positions sampling.png"
   plt.savefig(name)
   plt.close()
 
