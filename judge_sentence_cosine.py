@@ -320,7 +320,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
       new_sentence_list.append(new_context)
-      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       
     #deletions
     modified_sentence_deletions.pop(change_i)
@@ -328,7 +328,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       print("deletion try", ' '.join(modified_sentence_deletions))
       new_context = ' '.join(modified_sentence_deletions)
       new_sentence_list.append(new_context)
-      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
 
     # additions
     num_masks = random.randint(1,2)
@@ -346,15 +346,15 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_additions)
       print("mod sentence additions", new_context)
       new_sentence_list.append(new_context)
-      new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
+      #new_sentence_dict[new_context] = evaluate_sentence(model_list, new_context, vocab, batch_size)
       modified_sentence_additions = copy.copy(sentence_split)
 
-    #sampled_id = random.randint(0, len(new_sentence_list)-1)
-    #final_modified_sentence = new_sentence_list[sampled_id]
-    #new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
+    sampled_id = random.randint(0, len(new_sentence_list)-1)
+    final_modified_sentence = new_sentence_list[sampled_id]
+    new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
-    final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
-    new_sentence_score = new_sentence_dict[final_modified_sentence]
+    #final_modified_sentence = [k for k, v in sorted(new_sentence_dict.items(), key=lambda item: item[1])][0]
+    #new_sentence_score = new_sentence_dict[final_modified_sentence]
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)

@@ -277,7 +277,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     scores.append(curr_score)
     js_positions.append(curr_js_positions)
     exponentiated_scores = torch.tensor(softmax(curr_js_positions)).to('cuda')
-    n = list(torch.multinomial(exponentiated_scores, 1)).to('cuda')
+    n = list(torch.multinomial(exponentiated_scores, 1))
     change_i = n[0]
 
     print("current starting sentence", sentence_split)
