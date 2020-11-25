@@ -60,6 +60,10 @@ g_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Per
 g_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 g_model = GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True)
 
+a_score_name ='/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=albert-base-v2,subsample=None.pkl'
+a_tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
+a_model = AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True)
+
 
 r_score_dict = create_sent_to_score_dict(r_score_name, r_tokenizer, r_model, sentences)
 

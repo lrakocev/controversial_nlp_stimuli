@@ -22,7 +22,7 @@ from functools import reduce
 class ModelInfo():
 
   def __init__(self, model, tokenizer, start_token_symbol, vocab, model_name):
-    self.model = model #.to("cuda")
+    self.model = model.to("cuda")
     self.tokenizer = tokenizer
     self.start_token_symbol = start_token_symbol
     self.model_name = model_name
@@ -55,7 +55,7 @@ def get_distribution(model_name, context, vocab, n):
   print("context", context)
 
   tokenizer = model_name.tokenizer 
-  model = model_name.model #.to('cuda')
+  model = model_name.model
   model_word_token_dict = model_name.word_token_dict
   model_token_id_dict = model_name.id_token_dict
   tokenizer.pad_token = model_name.start_token_symbol
@@ -117,7 +117,7 @@ def get_distribution(model_name, context, vocab, n):
 
     vectorize_log = np.vectorize(math.log)
 
-    log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].detach()).flatten())) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
+    log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].cpu().detach()).flatten())) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
     log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j])-1)] for j in range(len(batch_list))]
 
