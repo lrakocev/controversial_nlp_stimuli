@@ -69,9 +69,17 @@ a_score_dict = create_sent_to_score_dict(a_score_name, a_tokenizer, a_model, sen
 
 g_score_dict = create_sent_to_score_dict(g_score_name, g_tokenizer, g_model, sentences)
 
+r_score_dict = create_sent_to_score_dict(r_score_name, r_tokenizer, r_model, sentences)
+
 
 a_scores = [v for (k,v) in sorted(a_score_dict.items(), key=lambda x: x[0], reverse=True)]
 g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
+r_scores = [v for (k,v) in sorted(r_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
-cosine_distances = [distance.cosine(a_scores[i], g_scores[i]) for i in range(len(g_scores))]
+cosine_distances_a_g = [distance.cosine(a_scores[i], g_scores[i]) for i in range(len(g_scores))]
+cosine_distances_r_g = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
+cosine_distances_a_r = [distance.cosine(a_scores[i], r_scores[i]) for i in range(len(g_scores))]
+
+
 sentence_list = [k for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
+

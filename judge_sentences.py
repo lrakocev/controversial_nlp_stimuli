@@ -381,7 +381,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta] #, XLM, T5, Albert]
+model_list = [GPT2, Roberta, Albert] #, XLM, T5, Albert]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
