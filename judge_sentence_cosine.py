@@ -291,7 +291,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     print("Curr sentence is: ", ' '.join(sentence_split), " with cosine distance: ", curr_score)
 
-    change_i = random.randint(1, len(sentence_split)-1)
+    change_i = random.randint(0, len(sentence_split)-1)
 
     print("change i ", change_i)
 

@@ -268,6 +268,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     
   scores = [curr_score]
   js_positions = [curr_js_positions]
+ 
   changes = []
   change = ""
   sentence_split = sentence.split(" ")
@@ -277,9 +278,12 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
   for change_i in range(0,num_changes):
 
-    exponentiated_scores = torch.tensor(softmax(curr_js_positions))
-    n = list(torch.multinomial(exponentiated_scores, 1))
-    change_i = n[0]
+    #exponentiated_scores = torch.tensor(softmax(curr_js_positions))
+    #n = list(torch.multinomial(exponentiated_scores, 1))
+    #change_i = n[0]
+    change_i = random.randint(0, len(sentence_split)-1)
+
+    print("change i", change_i)
 
     modified_sentence_replacements = copy.deepcopy(sentence_split)
     modified_sentence_deletions = copy.deepcopy(sentence_split)
@@ -302,7 +306,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
         modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
 
-
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
       new_sentence_list.append(new_context)
@@ -313,7 +316,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     if len(modified_sentence_deletions) > 0:
       new_context = ' '.join(modified_sentence_deletions)
       print("deletion try", new_context)
-      new_sentence_list.append(' '.join(modified_sentence_deletions))
+      new_sentence_list.append(new_context)
 
     # additions
     num_masks = random.randint(1,2)
@@ -337,16 +340,17 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
 
     new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
 
-    new_discounted_score = discounting(change_i, new_js_positions)
-    curr_discounted_score = discounting(change_i, curr_js_positions)
+    #new_discounted_score = discounting(change_i, new_js_positions)
+    #curr_discounted_score = discounting(change_i, curr_js_positions)
 
-    if new_discounted_score > curr_discounted_score:
+    if new_sentence_score > curr_score:
       change = highest_js_word[0][1]
       changes.append(change)
-      print("new score", new_discounted_score, "curr_score", curr_discounted_score)
+      print("new score", new_sentence_score, "curr_score", curr_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
       sentence_split = final_modified_sentence.split(" ")
-      scores.append(new_discounted_score)
+      scores.append(new_sentence_score)
+      cur_score = new_sentence_score
       js_positions.append(new_js_positions)
       curr_js_positions = new_js_positions
 
@@ -380,7 +384,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta, Albert] #, XLM, T5, Albert]
+model_list = [GPT2, Roberta, Albert, XLM] #, XLM, T5, Albert]
 
 sentences = sorted(sample_sentences("sentences4lara.txt", 100))
 
