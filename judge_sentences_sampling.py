@@ -344,10 +344,10 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes, js_pre
     #curr_discounted_score = discounting(change_i, curr_js_positions)
 
     if new_sentence_score > curr_score:
-      change = highest_js_word[0][1]
-      changes.append(change)
+      #change = highest_js_word[0][1]
+      #changes.append(change)
       print("new score", new_sentence_score, "curr_score", curr_score)
-      print("Here is the new version of the sentence: ", ' '.join(sentence_split), " and the change made was ", change)
+      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       sentence_split = final_modified_sentence.split(" ")
       scores.append(new_sentence_score)
       cur_score = new_sentence_score
