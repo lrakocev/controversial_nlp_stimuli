@@ -255,7 +255,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
     if len(final_tokens) > len(final_tokens_2):
       final_tokens = final_tokens[0:len(final_tokens_2)]
-    else if len(final_tokens) < len(final_tokens_2):
+    elif len(final_tokens) < len(final_tokens_2):
       final_tokens_2 = final_tokens_2[0:len(final_tokens)]
 
     predicted_tokens = list(zip(final_tokens, final_tokens_2))
