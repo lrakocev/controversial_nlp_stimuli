@@ -219,6 +219,16 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
+def checking_tokens(context, predicted_tokens):
+
+  final_tokens = []
+  for token in predicted_tokens:
+    if token not in string.punctuation and token not in context:
+      final_tokens.append(token)
+
+  return final_tokens
+
+
 def sample_bert(context, change_i, num_masks, top_k):
 
   new_context = copy.copy(context)
@@ -236,12 +246,23 @@ def sample_bert(context, change_i, num_masks, top_k):
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
+  final_tokens = checking_tokens(context, predicted_tokens)
+
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
-    predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
+    final_tokens_2 = checking_tokens(context, predicted_tokens2)
+
+    if len(final_tokens) > len(final_tokens_2):
+      final_tokens = final_tokens[0:len(final_tokens_2)]
+    else if len(final_tokens) < len(final_tokens_2):
+      final_tokens_2 = final_tokens_2[0:len(final_tokens)]
+
+    predicted_tokens = list(zip(final_tokens, final_tokens_2))
 
   print(predicted_tokens)
+
+  # making sure it doesn't include punctuation or repeats
 
   return predicted_tokens
 
@@ -307,9 +328,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     # replacements 
     num_masks = random.randint(1,2)
 
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 25)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
 
-    i = 25
+    i = len(new_word_list)
     for words in new_word_list: 
       i -= 1
       if num_masks == 1:
@@ -334,9 +355,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       
     # additions
     num_masks = random.randint(1,2)
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 25)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
 
-    i = 25
+    i = len(new_word_list)
     for words in new_word_list:
       i -= 1
       print("words", words)
