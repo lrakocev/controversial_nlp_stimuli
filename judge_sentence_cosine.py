@@ -355,7 +355,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
     exponentiated_scores = torch.tensor(softmax([i[0] for i in new_sentence_list]))
     n = list(torch.multinomial(exponentiated_scores, 1))
     sampled_id = n[0]
-    final_modified_sentence = new_sentence_list[sampled_id]
+    final_modified_sentence = new_sentence_list[sampled_id][1]
     new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size)
 
     if new_sentence_score > curr_score:
