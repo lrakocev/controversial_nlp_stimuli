@@ -262,8 +262,7 @@ def discounting(cur_ind, js_positions, gamma=1):
 
 def plot_scores(scores, sentence):
 
-   plt.plot(range(len(scores)),scores)
-  plt.show()
+  plt.plot(range(len(scores)),scores)
   plt.xticks(np.arange(len(ticks)), ticks)
   plt.xlabel("Iterations")
   plt.ylabel("Jensen Shannon Scores")
