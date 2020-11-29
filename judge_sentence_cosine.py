@@ -219,12 +219,13 @@ def get_avg_distr(model_list, context, vocab, n):
 
     return prob_list, sorted_vocab
 
-def checking_tokens(context, predicted_tokens, extras):
+def checking_tokens(context, predicted_tokens, prefix):
 
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
-      final_tokens.append(token)
+      if len(extras)!= 0 and token[0:2] == prefix:
+        final_tokens.append(token)
   return final_tokens
 
 
@@ -245,12 +246,12 @@ def sample_bert(context, change_i, num_masks, top_k):
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  final_tokens = checking_tokens(context, predicted_tokens, [])
+  final_tokens = checking_tokens(context, predicted_tokens, "")
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
-    final_tokens_2 = checking_tokens(context, predicted_tokens_2, ["#"])
+    final_tokens_2 = checking_tokens(context, predicted_tokens_2, "##")
 
     if len(final_tokens) > len(final_tokens_2):
       final_tokens = final_tokens[0:len(final_tokens_2)]
@@ -279,12 +280,16 @@ def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
   plt.show()
+  plt.xticks(np.arange(len(ticks)), ticks)
+  plt.xlabel("Iterations")
+  plt.ylabel("Cosine Distance Scores")
+  plt.title("GPT2-Roberta-Albert-XLM Cosine Distance")
+  plt.show()
   name = sentence + " cosine.png"
   plt.savefig(name)
   plt.close()
 
 def plot_positions(js_positions, sentence):
-
 
   for pos in js_positions:
     plt.plot(pos)
@@ -298,23 +303,25 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
+def change_sentence(model_list, sentence, vocab, batch_size, max_length):
 
   scores = []
   changes = []
-  sentence_split = sentence.split(" ")
+  # exclude final punctuation 
+  sentence_split = sentence.split(" ")[:-1]
   len_sentence = len(sentence_split)
 
   curr_score = evaluate_sentence(model_list, ' '.join(sentence_split), vocab, batch_size)
   changes.append((curr_score, ' '.join(sentence_split)))
   scores.append(curr_score)
 
-  for change_i in range(0,num_changes):
+  max_len = max(max_length, len_sentence + 3)
+
+  while len(sentence_split) <= max_len:
 
     print("Curr sentence is: ", ' '.join(sentence_split), " with cosine distance: ", curr_score)
 
-    # len-2 to avoid changing after ending punctuation
-    change_i = random.randint(0, len(sentence_split)-2)
+    change_i = random.randint(0, len(sentence_split)-1)
 
     print("change i ", change_i)
 
@@ -326,7 +333,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
 
     # replacements 
     num_masks = random.randint(1,2)
-
     new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
 
     i = len(new_word_list)
@@ -334,9 +340,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       i -= 1
       if num_masks == 1:
          modified_sentence_replacements[change_i] = str(words)
-      #if num_masks == 2 and len(modified_sentence_replacements) > change_i + 1:
-      #  modified_sentence_replacements[change_i] = str(words[0])
-      #  modified_sentence_replacements[change_i+1] = str(words[1])
       if num_masks == 2:
         modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
@@ -352,24 +355,26 @@ def change_sentence(model_list, sentence, vocab, batch_size, num_changes):
       new_context = ' '.join(modified_sentence_deletions)
       new_sentence_list.append((1,new_context))
       
-    # additions
-    num_masks = random.randint(1,2)
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
+    # additions - only if length(curr_candidate < max_length)
 
-    i = len(new_word_list)
-    for words in new_word_list:
-      i -= 1
-      print("words", words)
-      if num_masks == 1:
-        modified_sentence_additions.insert(change_i+1,str(words))
-      if num_masks == 2:
-        modified_sentence_additions.insert(change_i+1,str(words[0]))
-        modified_sentence_additions.insert(change_i+2,str(words[1]))
+    if len(sentence_split) < max_len:
+      num_masks = random.randint(1,2)
+      new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
 
-      new_context = ' '.join(modified_sentence_additions)
-      print("mod sentence additions", new_context)
-      new_sentence_list.append((i,new_context))
-      modified_sentence_additions = copy.copy(sentence_split)
+      i = len(new_word_list)
+      for words in new_word_list:
+        i -= 1
+        print("words", words)
+        if num_masks == 1:
+          modified_sentence_additions.insert(change_i+1,str(words))
+        if num_masks == 2:
+          modified_sentence_additions.insert(change_i+1,str(words[0]))
+          modified_sentence_additions.insert(change_i+2,str(words[1]))
+
+        new_context = ' '.join(modified_sentence_additions)
+        print("mod sentence additions", new_context)
+        new_sentence_list.append((i,new_context))
+        modified_sentence_additions = copy.copy(sentence_split)
 
     #sampled_id = random.randint(0, len(new_sentence_list)-1)
     exponentiated_scores = torch.tensor(softmax([i[0] for i in new_sentence_list]))
@@ -425,4 +430,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 25)
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 10)
