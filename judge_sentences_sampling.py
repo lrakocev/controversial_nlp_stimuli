@@ -209,7 +209,7 @@ def checking_tokens(context, predicted_tokens, prefix):
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
-      if len(extras)!= 0 and token[0:2] == prefix:
+      if len(prefix)!= 0 and token[0:2] == prefix:
         final_tokens.append(token)
   return final_tokens    
 
