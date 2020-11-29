@@ -289,16 +289,17 @@ def plot_positions(js_positions, sentence):
 
 def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev_dict):
 
-  curr_score, curr_js_positions = evaluate_sentence(model_list, sentence, vocab, batch_size, js_prev_dict)
-    
-  scores = [curr_score]
-  js_positions = [curr_js_positions]
- 
   changes = []
   change = ""
   # exclude final punctuation
   sentence_split = sentence.split(" ")[:-1]
   len_sentence = len(sentence_split)
+
+  curr_score, curr_js_positions = evaluate_sentence(model_list, " ".join(sentence_split), vocab, batch_size, js_prev_dict)
+    
+  scores = [curr_score]
+  js_positions = [curr_js_positions]
+ 
 
   print("OG sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
 
