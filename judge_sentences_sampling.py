@@ -233,7 +233,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   final_tokens = checking_tokens(context, predicted_tokens, "")
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*2).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     final_tokens_2 = checking_tokens(context, predicted_tokens_2, "##")
 
