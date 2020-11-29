@@ -328,7 +328,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     for words in new_word_list: 
       i -= 1
       if num_masks == 1:
-         modified_sentence_replacements[change_i] = str(words):
+         modified_sentence_replacements[change_i] = str(words)
       if num_masks == 2:
         modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
