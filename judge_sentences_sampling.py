@@ -388,9 +388,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       changes.append((curr_score, final_modified_sentence))
 
     scores.append(curr_score)
-    if len(scores) > 3:
-      last_3_scores = scores[-3:] 
-      if len(set(last_3_scores)) == 1:
+    if len(scores) > 10:
+      last_10_scores = scores[-10:] 
+      if len(set(last_10_scores)) == 1:
 
         print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions)
 
