@@ -390,15 +390,20 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
       curr_score = new_sentence_score
       changes.append((curr_score, final_modified_sentence))
 
+
     scores.append(curr_score)
 
-  print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
+    # stopping criteria
+    last_5_scores = scores[-5:] if len(scores) >= 5 else scores
+    if len(set(last_5_scores)) == 1:
+      
+      print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 
-  plot_scores(scores, ' '.join(sentence_split))
+      plot_scores(scores, ' '.join(sentence_split))
 
-  print("Full list of changes with scores", changes)
+      print("Full list of changes with scores", changes)
 
-  return scores, ' '.join(sentence_split)
+      return scores, ' '.join(sentence_split)
 
 def sample_sentences(file_name, n):
 
