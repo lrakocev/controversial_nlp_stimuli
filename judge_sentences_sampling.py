@@ -280,9 +280,9 @@ def plot_positions(js_positions, sentence):
     plt.plot(pos)
   ticks = sentence.split(" ")
   plt.xticks(np.arange(len(ticks)), ticks)
-  plt.xlabel("Iterations")
+  plt.xlabel("Words in Sentence")
   plt.ylabel("Jensen Shannon Scores")
-  plt.title("GPT2-Roberta-Albert-XLM J-S Scores for " + sentence)
+  plt.title("GPT2-Roberta-Albert-XLM J-S Scores for")
   plt.show()
   name = sentence + " positions sampling.png"
   plt.savefig(name)
@@ -382,9 +382,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       print("new score", new_sentence_score, "curr_score", curr_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       sentence_split = final_modified_sentence.split(" ")
-      cur_score = new_sentence_score
       js_positions.append(new_js_positions)
       curr_js_positions = new_js_positions
+      curr_score = new_sentence_score
       changes.append((curr_score, final_modified_sentence))
 
     scores.append(curr_score)
@@ -392,7 +392,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       last_10_scores = scores[-10:] 
       if len(set(last_10_scores)) == 1:
 
-        print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions)
+        print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions, "and changes", changes)
 
         plot_scores(scores, ' '.join(sentence_split))
         plot_positions(js_positions, ' '.join(sentence_split))
