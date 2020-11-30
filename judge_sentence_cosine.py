@@ -395,9 +395,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
     scores.append(curr_score)
 
     # stopping criteria
-    if len(scores) >= 5:
-      last_5_scores = scores[-5:]
-      if len(set(last_5_scores)) == 1:
+    if len(scores) >= 10:
+      last_10_scores = scores[-10:]
+      if len(set(last_10_scores)) == 1:
 
         print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 
