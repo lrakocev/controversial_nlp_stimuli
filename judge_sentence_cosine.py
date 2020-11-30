@@ -224,7 +224,7 @@ def checking_tokens(context, predicted_tokens, prefix):
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
-      if len(prefix)!= 0 and token[0:2] == prefix:
+      if (len(prefix)!= 0 and token[0:2] == prefix) or len(prefix) == 0:
         final_tokens.append(token)
   return final_tokens
 
@@ -250,7 +250,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   print("final tokens 1", final_tokens)
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     final_tokens_2 = checking_tokens(context, predicted_tokens_2, "##")
 
