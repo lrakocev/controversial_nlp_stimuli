@@ -209,7 +209,7 @@ def checking_tokens(context, predicted_tokens, prefix):
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
-      if len(prefix)!= 0 and token[0:2] == prefix:
+      if (len(prefix)!= 0 and token[0:2] == prefix) or len(prefix) == 0:
         final_tokens.append(token)
   return final_tokens    
 
@@ -237,12 +237,14 @@ def sample_bert(context, change_i, num_masks, top_k):
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     final_tokens_2 = checking_tokens(context, predicted_tokens_2, "##")
 
-    if len(final_tokens) > len(final_tokens_2):
+    if len(final_tokens_2) == 0:
+      final_tokens = final_tokens
+    elif len(final_tokens) > len(final_tokens_2) and len(final_tokens_2) != 0::
       final_tokens = final_tokens[0:len(final_tokens_2)]
+      final_tokens = list(zip(final_tokens, final_tokens_2))
     elif len(final_tokens) < len(final_tokens_2):
       final_tokens_2 = final_tokens_2[0:len(final_tokens)]
-
-    final_tokens = list(zip(final_tokens, final_tokens_2))
+      final_tokens = list(zip(final_tokens, final_tokens_2))
 
   print("final tokens", final_tokens)
 
