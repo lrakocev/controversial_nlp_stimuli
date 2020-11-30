@@ -224,7 +224,7 @@ def checking_tokens(context, predicted_tokens, want_prefix, prefix):
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
-      if (want_prefix and token[0:2] == prefix) or !want_prefix and token[0:2]!= prefix:
+      if (want_prefix and token[0:2] == prefix) or (not want_prefix and token[0:2]!= prefix):
         final_tokens.append(token)
   return final_tokens  
 
@@ -395,16 +395,17 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
     scores.append(curr_score)
 
     # stopping criteria
-    last_5_scores = scores[-5:] if len(scores) >= 5 else scores
-    if len(set(last_5_scores)) == 1:
+    if len(scores) >= 5:
+      last_5_scores = scores[-5:]
+      if len(set(last_5_scores)) == 1:
 
-      print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
+        print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 
-      plot_scores(scores, ' '.join(sentence_split))
+        plot_scores(scores, ' '.join(sentence_split))
 
-      print("Full list of changes with scores", changes)
+        print("Full list of changes with scores", changes)
 
-      return scores, ' '.join(sentence_split)
+        return scores, ' '.join(sentence_split)
 
 def sample_sentences(file_name, n):
 
