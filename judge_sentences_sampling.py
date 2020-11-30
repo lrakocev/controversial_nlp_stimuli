@@ -244,7 +244,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
     final_tokens = list(zip(final_tokens, final_tokens_2))
 
-  print(final_tokens)
+  print("final tokens", final_tokens)
 
   # making sure it doesn't include punctuation or repeats
 
@@ -263,7 +263,6 @@ def discounting(cur_ind, js_positions, gamma=1):
 def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
-  plt.xticks(np.arange(len(ticks)), ticks)
   plt.xlabel("Iterations")
   plt.ylabel("Jensen Shannon Scores")
   plt.title("GPT2-Roberta-Albert-XLM J-S Scores for " + sentence)

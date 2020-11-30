@@ -247,11 +247,14 @@ def sample_bert(context, change_i, num_masks, top_k):
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   final_tokens = checking_tokens(context, predicted_tokens, "")
+  print("final tokens 1", final_tokens)
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k).indices #.to('cuda')
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     final_tokens_2 = checking_tokens(context, predicted_tokens_2, "##")
+
+    print("final tokens 2", final_tokens_2)
 
     if len(final_tokens) > len(final_tokens_2):
       final_tokens = final_tokens[0:len(final_tokens_2)]
@@ -260,7 +263,7 @@ def sample_bert(context, change_i, num_masks, top_k):
 
     final_tokens = list(zip(final_tokens, final_tokens_2))
 
-  print(final_tokens)
+  print("num masks", num_masks, "final tokens", final_tokens)
 
   # making sure it doesn't include punctuation or repeats
 
@@ -280,7 +283,6 @@ def plot_scores(scores, sentence):
 
   plt.plot(range(len(scores)),scores)
   plt.show()
-  plt.xticks(np.arange(len(ticks)), ticks)
   plt.xlabel("Iterations")
   plt.ylabel("Cosine Distance Scores")
   plt.title("GPT2-Roberta-Albert-XLM Cosine Distance")
@@ -396,7 +398,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
     # stopping criteria
     last_5_scores = scores[-5:] if len(scores) >= 5 else scores
     if len(set(last_5_scores)) == 1:
-      
+
       print("New sentence is: ", " ".join(sentence_split) ," with total scores: ", scores)
 
       plot_scores(scores, ' '.join(sentence_split))
