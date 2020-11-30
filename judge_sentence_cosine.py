@@ -246,7 +246,7 @@ def sample_bert(context, change_i, num_masks, top_k):
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  final_tokens = checking_tokens(context, predicted_tokens, False, "")
+  final_tokens = checking_tokens(context, predicted_tokens, False, "##")
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices #.to('cuda')
@@ -339,11 +339,11 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
     i = len(new_word_list)
     for words in new_word_list: 
       i -= 1
-      if num_masks == 1:
-         modified_sentence_replacements[change_i] = str(words)
-      if num_masks == 2:
+      if isinstance(words, tuple):
         modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
+      else:
+         modified_sentence_replacements[change_i] = str(words)
 
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
@@ -366,12 +366,12 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length):
       for words in new_word_list:
         i -= 1
         print("words", words)
-        if num_masks == 1:
-          modified_sentence_additions.insert(change_i+1,str(words))
-        if num_masks == 2:
+        if isinstance(words, tuple):
           modified_sentence_additions.insert(change_i+1,str(words[0]))
           modified_sentence_additions.insert(change_i+2,str(words[1]))
-
+        else:
+          modified_sentence_additions.insert(change_i+1,str(words))
+        
         new_context = ' '.join(modified_sentence_additions)
         print("mod sentence additions", new_context)
         new_sentence_list.append((i,new_context))
