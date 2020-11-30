@@ -329,11 +329,11 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     i = len(new_word_list)
     for words in new_word_list: 
       i -= 1
-      if num_masks == 1:
-         modified_sentence_replacements[change_i] = str(words)
-      if num_masks == 2:
+      if isinstance(words, tuple):
         modified_sentence_replacements[change_i] = str(words[0])
         modified_sentence_replacements.insert(change_i+1,str(words[1]))
+      else:
+         modified_sentence_replacements[change_i] = str(words)
 
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
@@ -351,16 +351,17 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     if len(sentence_split) < max_len:
       num_masks = random.randint(1,2)
       new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
+
       i = len(new_word_list)
       for words in new_word_list:
         i -= 1
         print("words", words)
-        if num_masks == 1:
-          modified_sentence_additions.insert(change_i+1,str(words))
-        if num_masks == 2:
+        if isinstance(words, tuple):
           modified_sentence_additions.insert(change_i+1,str(words[0]))
           modified_sentence_additions.insert(change_i+2,str(words[1]))
-
+        else:
+          modified_sentence_additions.insert(change_i+1,str(words))
+        
 
         new_context = ' '.join(modified_sentence_additions)
         print("mod sentence additions", new_context)
