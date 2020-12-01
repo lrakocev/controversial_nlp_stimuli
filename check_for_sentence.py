@@ -1,6 +1,7 @@
 import os
 import re
 import glob
+import sys
 
 def check_for_sentence(sent):
 	
@@ -11,9 +12,9 @@ def check_for_sentence(sent):
 	    x = f.read()
 	    if sent in x:
 	        print(file)
-	        
+
 
 if __name__ == "__main__":
 
   
-  globals()[sys.argv[1]](sys.argv[2])
+  globals()[sys.argv[1]](sys.argv[2:])
