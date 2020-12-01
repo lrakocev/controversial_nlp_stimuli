@@ -10,7 +10,7 @@ def check_for_sentence(sent):
 	for file in file_list:
 	    f = open(file)
 	    x = f.read()
-	    if sent in x:
+	    if " ".join(sent) in x:
 	        print(file)
 
 
