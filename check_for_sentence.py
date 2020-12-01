@@ -1,14 +1,19 @@
 import os
 import re
-
 import glob
-file_list = glob.glob('sample_judge*.out')
 
-success_id_list = []
-for file in file_list:
-    f = open(file)
-    x = f.read()
-    if "The advice would be greatly great" in x:
-        print(file)
+def check_for_sentence(sent):
+	
+	file_list = glob.glob('sample_judge*.out')
 
-    f.close()
+	for file in file_list:
+	    f = open(file)
+	    x = f.read()
+	    if sent in x:
+	        print(file)
+	        
+
+if __name__ == "__main__":
+
+  
+  globals()[sys.argv[1]](sys.argv[2])
