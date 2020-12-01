@@ -76,9 +76,9 @@ a_scores = [v for (k,v) in sorted(a_score_dict.items(), key=lambda x: x[0], reve
 g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
 r_scores = [v for (k,v) in sorted(r_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
-cosine_distances_a_g = [distance.cosine(a_scores[i], g_scores[i]) for i in range(len(g_scores))]
-cosine_distances_r_g = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
-cosine_distances_a_r = [distance.cosine(a_scores[i], r_scores[i]) for i in range(len(g_scores))]
+#cosine_distances_a_g = [distance.cosine(a_scores[i], g_scores[i]) for i in range(len(g_scores))]
+cosine_distances = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
+#cosine_distances_a_r = [distance.cosine(a_scores[i], r_scores[i]) for i in range(len(g_scores))]
 
 
 sentence_list = [k for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
