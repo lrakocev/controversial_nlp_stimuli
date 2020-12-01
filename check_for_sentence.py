@@ -12,7 +12,3 @@ for file in file_list:
         print(file)
 
     f.close()
-
-csorted(list(set(success_id_list))))
-
-print(len(set(success_id_list)))
