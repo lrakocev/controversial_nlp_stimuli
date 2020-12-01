@@ -1,7 +1,7 @@
 import os
 
 import glob
-file_list = glob.glob('albert_vs_gpt2/*.out')
+file_list = glob.glob('evaluate_11_21_2020/*.out')
 
 score_dict = {}
 for file in file_list:
