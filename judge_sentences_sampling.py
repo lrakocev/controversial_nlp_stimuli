@@ -423,13 +423,11 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 model_list = [GPT2, Roberta, Albert, XLM] #, XLM, T5, Albert]
 
-sentences = sorted(sample_sentences("sentences4lara.txt", 100))
-
 if __name__ == "__main__":
 
-  sentences = sorted(sample_sentences("sentences4lara.txt", 100))
+  sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
 
-  sent_dict = dict(zip([str(x) for x in range(1,100)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,4507)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
