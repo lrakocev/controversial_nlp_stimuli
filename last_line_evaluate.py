@@ -14,6 +14,8 @@ for file in file_list:
 
 vals = [float(v) for (k,v) in score_dict.items()]
 
+sentences = [k for (k,v) in score_dict.items()]
+
 avg = sum(vals)/len(vals)
 
 print("Average score", avg)

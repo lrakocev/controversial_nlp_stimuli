@@ -17,6 +17,7 @@ import math
 import os
 import math
 from functools import reduce
+import last_line_evaluate
 
 
 class ModelInfo():
@@ -397,6 +398,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
         plot_scores(scores, ' '.join(sentence_split))
         plot_positions(js_positions, ' '.join(sentence_split))
 
+        print(curr_score)
+
         return scores, js_positions, ' '.join(sentence_split)
 
 def sample_sentences(file_name, n):
@@ -425,9 +428,10 @@ model_list = [GPT2, Roberta, Albert, XLM] #, XLM, T5, Albert]
 
 if __name__ == "__main__":
 
-  sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
+  #sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
+  sentences = last_line_evaluate.sentences
 
-  sent_dict = dict(zip([str(x) for x in range(1,4507)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,500)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
