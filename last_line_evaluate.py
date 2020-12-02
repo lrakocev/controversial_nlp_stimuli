@@ -12,7 +12,7 @@ for file in file_list:
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
 
-vals = [v for (k,v) in score_dict.items()]
+vals = [int(v) for (k,v) in score_dict.items()]
 
 avg = sum(vals)/len(vals)
 
