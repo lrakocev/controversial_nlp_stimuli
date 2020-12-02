@@ -1,4 +1,5 @@
 import nltk
+nltk.download('punkt')
 nltk.download('gutenberg')
 from nltk.corpus import gutenberg
 
