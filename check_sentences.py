@@ -1,3 +1,5 @@
+import nltk
+nltk.download('gutenberg')
 from nltk.corpus import gutenberg
 
 def sentences_from_corpus(corpus, fileids = None):
