@@ -17,6 +17,22 @@ import math
 import os
 import math
 from functools import reduce
+from nltk.corpus import gutenberg
+
+def sentences_from_corpus(corpus, fileids = None):
+
+    from nltk.corpus.reader.plaintext import read_blankline_block, concat
+
+    def read_sent_block(stream):
+        sents = []
+        for para in corpus._para_block_reader(stream):
+            sents.extend([s.replace('\n', ' ') for s in corpus._sent_tokenizer.tokenize(para)])
+        return sents
+
+    return concat([corpus.CorpusView(path, read_sent_block, encoding=enc)
+                   for (path, enc, fileid)
+                   in corpus.abspaths(fileids, True, True)])
+
 
 class ModelInfo():
 
@@ -183,15 +199,10 @@ def evaluate_sentence(sentence, n, js_dict):
   print(total_js/len_sentence)
   return total_js/len_sentence, js_positions
 
-def sample_sentences(file_name, n):
-
-  with open(file_name) as f:
-    head = [next(f).strip() for x in range(n)]
-
-  return head 
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
+
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -199,19 +210,20 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_d
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
-model_list = [GPT2, Albert, Roberta, XLM] 
+model_list = [GPT2, Albert] 
 n = 100
 
+bible=gutenberg.sents('bible-kjv.txt')
+
+sentences = sentences_from_corpus(bible)
+
+print(sentences)
 
 if __name__ == "__main__":
-
-  sentences = sorted(sample_sentences("sentences4lara.txt", 1000))
 
   sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](sentence, 100, {})
-
