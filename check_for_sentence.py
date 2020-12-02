@@ -5,7 +5,7 @@ import sys
 
 def check_for_sentence(sent):
 	
-	file_list = glob.glob('sample_judge*.out')
+	file_list = glob.glob('sampling_logs_12_01_20/sample_judge*.out')
 
 	for file in file_list:
 	    f = open(file)
