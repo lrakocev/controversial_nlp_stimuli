@@ -3,8 +3,12 @@ nltk.download('punkt')
 nltk.download('gutenberg')
 from nltk.corpus import gutenberg
 
-bible=gutenberg.sents('bible-kjv.txt')
+alice = gutenberg.sents('carroll-alice.txt')
 
-sentences = [" ".join(sent) for sent in bible]
+sentences = [" ".join(sent) for sent in alice]
 
-print(sentences)
+N = 500
+
+for i in range(N):
+
+	print(random.choice(sentences))

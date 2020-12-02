@@ -17,21 +17,10 @@ import math
 import os
 import math
 from functools import reduce
+import nltk
+nltk.download('punkt')
+nltk.download('gutenberg')
 from nltk.corpus import gutenberg
-
-def sentences_from_corpus(corpus, fileids = None):
-
-    from nltk.corpus.reader.plaintext import read_blankline_block, concat
-
-    def read_sent_block(stream):
-        sents = []
-        for para in corpus._para_block_reader(stream):
-            sents.extend([s.replace('\n', ' ') for s in corpus._sent_tokenizer.tokenize(para)])
-        return sents
-
-    return concat([corpus.CorpusView(path, read_sent_block, encoding=enc)
-                   for (path, enc, fileid)
-                   in corpus.abspaths(fileids, True, True)])
 
 
 class ModelInfo():
@@ -210,19 +199,20 @@ Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_d
 
 Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
+XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
-model_list = [GPT2, Albert] 
+model_list = [GPT2, Albert, Roberta, XLM] 
 n = 100
 
-bible=gutenberg.sents('bible-kjv.txt')
+alice = gutenberg.sents('carroll-alice.txt')
 
-sentences = sentences_from_corpus(bible)
+sentences = [" ".join(sent) for sent in alice]
 
-print(sentences)
+random_sentences = [random.choice(sentences) for i in range(500)]
 
 if __name__ == "__main__":
 
-  sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,500)], random_sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
