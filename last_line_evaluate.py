@@ -1,7 +1,7 @@
 import os
 
 import glob
-file_list = glob.glob('6884*.out')
+file_list = glob.glob('6884_evaluate_output/6884*.out')
 
 score_dict = {}
 for file in file_list:
@@ -12,7 +12,7 @@ for file in file_list:
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
 
-vals = [v for (k,v) in score_dict.items]
+vals = [v for (k,v) in score_dict.items()]
 
 avg = sum(vals)/len(vals)
 
