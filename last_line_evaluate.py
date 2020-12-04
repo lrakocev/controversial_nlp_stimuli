@@ -1,10 +1,15 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plot
-
 from scipy import stats
-
 import glob
+import re
+
+_float_regexp = re.compile(r"^[-+]?(?:\b[0-9]+(?:\.[0-9]*)?|\.[0-9]+\b)(?:[eE][-+]?[0-9]+\b)?$").match
+def is_float_re(str):
+    return True if _float_regexp(str) else False
+
+
 file_list = glob.glob('6884_judge*') #6884_evaluate_output/6884*.out
 
 score_dict = {}
@@ -16,7 +21,8 @@ for file in file_list:
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
 
-after_vals = [float(v) for (k,v) in score_dict.items()]
+
+after_vals = [float(v) for (k,v) in score_dict.items() if is_float_re(v)]
 after_std = np.std(after_vals)
 
 sentences = [k for (k,v) in score_dict.items()]
