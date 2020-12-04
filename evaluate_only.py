@@ -114,7 +114,12 @@ def get_distribution(model_name, context, vocab, n):
 
     vectorize_log = np.vectorize(math.log)
 
-    log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].cpu().detach()).flatten())) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
+    if model_name.model_name == "TXL":
+      log_probabilities = [[vectorize_log(np.asarray(outputs.prediction_scores[j][i].cpu().detach()).flatten()) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
+
+    else:
+
+      log_probabilities = [[vectorize_log(softmax(np.asarray(outputs.logits[j][i].cpu().detach()).flatten())) for i in range(max_length-1,max_length - lengths_contexts[j],-1)] for j in range(len(batch_list))]
 
     log_probabilities_per_tokens = [[log_probabilities[j][i][id_nums[j][i]] for i in range(len(id_nums[j])-1)] for j in range(len(batch_list))]
 
@@ -201,7 +206,11 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
 
-model_list = [GPT2, Albert, Roberta, XLM] 
+T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
+
+TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
+
+model_list = [TXL, GPT2, Albert, Roberta, XLM, T5] 
 n = 100
 
 

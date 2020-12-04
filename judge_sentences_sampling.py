@@ -424,7 +424,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta, Albert, XLM] #, XLM, T5, Albert]
+model_list = [GPT2, Roberta, Albert, XLM, T5] #, XLM, T5, Albert]
 
 if __name__ == "__main__":
 
