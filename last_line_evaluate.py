@@ -24,6 +24,8 @@ for file in file_list:
 
 after_vals = [float(v) for (k,v) in after_score_dict.items() if is_float_re(v)]
 
+after_not_vals = [v for (k,v) in after_score_dict.items() if not is_float_re(v)]
+
 after_std = np.std(after_vals)
 
 sentences = [k for (k,v) in after_score_dict.items()]
@@ -48,6 +50,14 @@ before_vals = [float(v) for (k,v) in before_score_dict.items() if is_float_re(v)
 
 sentences = [k for (k,v) in before_score_dict.items()]
 
+'''
+indices = []
+for i in range(len(after_not_vals)):
+	if after_not_vals[i] in sentences:
+		index = sentences.index(after_not_vals[i])
+'''
+
+
 before_avg = sum(before_vals)/len(before_vals)
 before_std = np.std(before_vals)
 
@@ -62,7 +72,7 @@ fig, ax = plt.subplots()
 
 ttest, pval = stats.ttest_rel(before_vals, after_vals)
 
-ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
+ax.bar(x_pos, avgs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
 ax.set_ylabel('Average Jensen Shannon Score')
 ax.set_xticks(x_pos)
 ax.set_xticklabels(materials)
