@@ -210,7 +210,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [TXL, GPT2, Albert, Roberta, XLM, T5] 
+model_list = [GPT2, Albert, Roberta, XLM, T5] 
 n = 100
 
 
