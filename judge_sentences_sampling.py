@@ -131,7 +131,7 @@ def get_distribution(model_name, context, vocab, n):
 
   model_name.distr_dict_for_context[context] = final_probabilities
 
-
+  print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", dict(sorted(mydict.items()[:10])))
   return final_probabilities
 
 def jsd(prob_distributions, weights, logbase=math.e):
@@ -424,7 +424,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta, Albert, XLM, T5] #, XLM, T5, Albert]
+model_list = [GPT2, Roberta, Albert, XLM, T5] 
 
 if __name__ == "__main__":
 
