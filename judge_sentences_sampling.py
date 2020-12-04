@@ -130,7 +130,7 @@ def get_distribution(model_name, context, vocab, n):
 
   model_name.distr_dict_for_context[context] = final_probabilities
 
-  print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", dict(sorted(mydict.items()[:10])))
+  print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", dict(sorted(final_probabilities.items()[:10])))
   return final_probabilities
 
 def jsd(prob_distributions, weights, logbase=math.e):
