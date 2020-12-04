@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plt
 from scipy import stats
 import glob
 import re
@@ -10,7 +10,7 @@ def is_float_re(str):
     return True if _float_regexp(str) else False
 
 
-file_list = glob.glob('6884_judge*') #6884_evaluate_output/6884*.out
+file_list = glob.glob('6884_judge*') 
 
 after_score_dict = {}
 for file in file_list:
@@ -35,7 +35,7 @@ print("Average score", after_avg)
 file_list_2 = glob.glob('6884_evaluate_output/6884*.out') 
 
 before_score_dict = {}
-for file in file_list:
+for file in file_list_2:
 	a_file = open(file, "r")
 	lines = a_file.readlines()
 	score = lines[-1].strip()
