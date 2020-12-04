@@ -17,7 +17,6 @@ import math
 import os
 import math
 from functools import reduce
-import last_line_evaluate
 
 
 class ModelInfo():
@@ -428,8 +427,7 @@ model_list = [GPT2, Roberta, Albert, XLM, T5]
 
 if __name__ == "__main__":
 
-  #sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
-  sentences = last_line_evaluate.sentences
+  sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
 
   sent_dict = dict(zip([str(x) for x in range(1,500)], sentences))
 
