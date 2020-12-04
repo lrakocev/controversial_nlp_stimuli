@@ -75,7 +75,7 @@ ttest, pval = stats.ttest_rel(before_vals, after_vals)
 ax.bar(x_pos, avgs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
 ax.set_ylabel('Average Jensen Shannon Score')
 ax.set_xticks(x_pos)
-ax.set_xticklabels(materials)
+ax.set_xticklabels(positions)
 ax.set_title('T-statistic ' + str(ttest) + " P value " + str(pval))
 ax.yaxis.grid(True)
 
