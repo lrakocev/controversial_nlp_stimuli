@@ -27,9 +27,9 @@ after_std = np.std(after_vals)
 
 sentences = [k for (k,v) in score_dict.items()]
 
-after_avg = sum(vals)/len(vals)
+after_avg = sum(after_vals)/len(after_vals)
 
-print("Average score", avg)
+print("Average score", after_avg)
 
 
 file_list_2 = glob.glob('6884_evaluate_output/6884*.out') 
@@ -47,10 +47,10 @@ before_vals = [float(v) for (k,v) in score_dict.items()]
 
 sentences = [k for (k,v) in score_dict.items()]
 
-before_avg = sum(vals)/len(vals)
+before_avg = sum(before_vals)/len(before_vals)
 before_std = np.std(before_vals)
 
-print("Average score", avg)
+print("Average score", before_avg)
 
 positions = ["Before", "After"]
 x_pos = np.arange(len(positions))
