@@ -23,6 +23,7 @@ for file in file_list:
 
 
 after_vals = [float(v) for (k,v) in after_score_dict.items() if is_float_re(v)]
+
 after_std = np.std(after_vals)
 
 sentences = [k for (k,v) in after_score_dict.items()]
@@ -43,7 +44,7 @@ for file in file_list_2:
 	sentence = " ".join(sentence.split(" ")[1:])
 	before_score_dict[sentence] = score
 
-before_vals = [float(v) for (k,v) in before_score_dict.items() if is_float_re(v)]
+before_vals = [float(v) for (k,v) in before_score_dict.items() if is_float_re(v)][:len(after_vals)]
 
 sentences = [k for (k,v) in before_score_dict.items()]
 
