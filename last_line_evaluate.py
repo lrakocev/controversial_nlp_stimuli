@@ -25,7 +25,7 @@ for file in file_list:
 after_vals = [float(v) for (k,v) in after_score_dict.items() if is_float_re(v)]
 after_std = np.std(after_vals)
 
-sentences = [k for (k,v) in score_dict.items()]
+sentences = [k for (k,v) in after_score_dict.items()]
 
 after_avg = sum(after_vals)/len(after_vals)
 
@@ -45,7 +45,7 @@ for file in file_list:
 
 before_vals = [float(v) for (k,v) in before_score_dict.items() if is_float_re(v)]
 
-sentences = [k for (k,v) in score_dict.items()]
+sentences = [k for (k,v) in before_score_dict.items()]
 
 before_avg = sum(before_vals)/len(before_vals)
 before_std = np.std(before_vals)
