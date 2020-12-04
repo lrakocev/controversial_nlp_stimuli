@@ -1,7 +1,11 @@
 import os
+import numpy as np
+import matplotlib.pyplot as plot
+
+from scipy import stats
 
 import glob
-file_list = glob.glob('6884_evaluate_output/6884*.out')
+file_list = glob.glob('6884_judge*') #6884_evaluate_output/6884*.out
 
 score_dict = {}
 for file in file_list:
@@ -12,10 +16,56 @@ for file in file_list:
 	sentence = " ".join(sentence.split(" ")[1:])
 	score_dict[sentence] = score
 
-vals = [float(v) for (k,v) in score_dict.items()]
+after_vals = [float(v) for (k,v) in score_dict.items()]
+after_std = np.std(after_vals)
 
 sentences = [k for (k,v) in score_dict.items()]
 
-avg = sum(vals)/len(vals)
+after_avg = sum(vals)/len(vals)
 
 print("Average score", avg)
+
+
+file_list_2 = glob.glob('6884_evaluate_output/6884*.out') 
+
+score_dict = {}
+for file in file_list:
+	a_file = open(file, "r")
+	lines = a_file.readlines()
+	score = lines[-1].strip()
+	sentence = lines[-2].strip()
+	sentence = " ".join(sentence.split(" ")[1:])
+	score_dict[sentence] = score
+
+before_vals = [float(v) for (k,v) in score_dict.items()]
+
+sentences = [k for (k,v) in score_dict.items()]
+
+before_avg = sum(vals)/len(vals)
+before_std = np.std(before_vals)
+
+print("Average score", avg)
+
+positions = ["Before", "After"]
+x_pos = np.arange(len(positions))
+error = [before_std, after_std]
+avgs = [before_avg, after_avg]
+
+fig, ax = plt.subplots()
+
+ttest, pval = stats.ttest_rel(before_vals, after_vals)
+
+ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
+ax.set_ylabel('Average Jensen Shannon Score')
+ax.set_xticks(x_pos)
+ax.set_xticklabels(materials)
+ax.set_title('T-statistic ' + str(ttest) + " P value " + str(pval))
+ax.yaxis.grid(True)
+
+plt.tight_layout()
+plt.savefig('bar_plot_with_error_bars.png')
+plt.show()
+
+
+
+
