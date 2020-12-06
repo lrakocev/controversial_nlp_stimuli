@@ -130,7 +130,7 @@ def get_distribution(model_name, context, vocab, n):
 
   model_name.distr_dict_for_context[context] = final_probabilities
 
-  sorted_vals = [(k,v) for (k,v) in sorted(final_probabilities.items(), key = lambda x: x[1])][:20]
+  sorted_vals = [(k,v) for (k,v) in sorted(final_probabilities.items(), key = lambda x: x[1], reverse=True)][:20]
 
   print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", sorted_vals)
 
@@ -391,8 +391,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       changes.append((curr_score, final_modified_sentence))
 
     scores.append(curr_score)
-    if len(scores) > 20:
-      last_20_scores = scores[-20:] 
+    if len(scores) > 10:
+      last_20_scores = scores[-10:] 
       if len(set(last_20_scores)) == 1:
 
         print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions, "and changes", changes)
@@ -434,6 +434,6 @@ if __name__ == "__main__":
 
   sent_dict = dict(zip([str(x) for x in range(1,500)], sentences))
 
-  sentence = sent_dict[sys.argv[2]]
+  sentence = "i am doing fine alone" #sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 10, {})
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {})
