@@ -333,14 +333,14 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     for words in new_word_list: 
       i -= 1
       if isinstance(words, tuple):
-        modified_sentence_replacements[change_i] = str(words[0])
-        modified_sentence_replacements.insert(change_i+1,str(words[1]))
+        modified_sentence_replacements[change_i] = str(words[0]) + str(words[1])[2:]
       else:
          modified_sentence_replacements[change_i] = str(words)
 
       new_context = ' '.join(modified_sentence_replacements)
       print("mod sentence replacement", new_context)
       new_sentence_list.append((i,new_context))
+      modified_sentence_replacements = copy.copy(sentence_split)
       
 
     #deletions
@@ -391,8 +391,8 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       changes.append((curr_score, final_modified_sentence))
 
     scores.append(curr_score)
-    if len(scores) > 10:
-      last_20_scores = scores[-10:] 
+    if len(scores) > 20:
+      last_20_scores = scores[-20:] 
       if len(set(last_20_scores)) == 1:
 
         print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions, "and changes", changes)
@@ -434,6 +434,6 @@ if __name__ == "__main__":
 
   sent_dict = dict(zip([str(x) for x in range(1,500)], sentences))
 
-  sentence = "i am doing fine alone" #sent_dict[sys.argv[2]]
+  sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {})
