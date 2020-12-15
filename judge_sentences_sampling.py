@@ -371,7 +371,7 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
   sentence_split = sentence.split(" ")[:-1]
   len_sentence = len(sentence_split)
 
-  curr_score, curr_js_positions = evaluate_sentence(model_list, " ".join(sentence_split), vocab, batch_size, js_prev_dict)
+  curr_score, curr_js_positions = evaluate_sentence(model_list, " ".join(sentence_split), vocab, batch_size, prev_dict)
     
   scores = [curr_score]
   js_positions = [curr_js_positions]
@@ -444,7 +444,7 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
     sampled_id = n[0]
     final_modified_sentence = new_sentence_list[sampled_id][1]
 
-    new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
+    new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, prev_dict)
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
@@ -503,9 +503,9 @@ if __name__ == "__main__":
   convergence_criterion = 100
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
-  evaluate_sentence = evaluate_sentence_cosine
   top_k = 50
+  evaluate_sentence = evaluate_sentence_jsd
 
-  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "js_prev_dict": {}, "max_length": max_length, "top_k": top_k}
+  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": {}, "max_length": max_length, "top_k": top_k}
 
   globals()[sys.argv[1]](sentence, evaluate_sentence, **kwargs)
