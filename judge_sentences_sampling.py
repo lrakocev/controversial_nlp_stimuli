@@ -504,7 +504,7 @@ if __name__ == "__main__":
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
-  evaluate_sentence = evaluate_sentence_jsd
+  evaluate_sentence = evaluate_sentence_cosine
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": {}, "max_length": max_length, "top_k": top_k}
 
