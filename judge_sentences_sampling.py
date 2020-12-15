@@ -364,7 +364,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, evaluate_sentence, **kwargs):
+def change_sentence(sentence, evaluate_sentence, **kwargs):
 
   changes = []
   # exclude final punctuation
@@ -508,4 +508,4 @@ if __name__ == "__main__":
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "js_prev_dict": {}, "max_length": max_length, "top_k": top_k}
 
-  globals()[sys.argv[1]](model_list, sentence, evaluate_sentence, **kwargs)
+  globals()[sys.argv[1]](sentence, evaluate_sentence, **kwargs)
