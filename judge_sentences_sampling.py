@@ -184,7 +184,7 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
     
   return total_js/len_sentence, js_positions
 
-def get_avg_distr(model_list, context, vocab, n):
+def get_avg_distr(model_list, context, vocab, n, top_k):
 
     distrs = {}
     for model_name in model_list:
@@ -205,7 +205,21 @@ def get_avg_distr(model_list, context, vocab, n):
     prob_list_sum = sum(df_probabilities_mean)
     prob_list = [v/prob_list_sum for (k, v) in avg_distr.items()]
 
-    return prob_list, sorted_vocab
+    exponentiated_scores = torch.tensor(softmax(prob_list))
+    n = list(torch.multinomial(exponentiated_scores, top_k))
+
+    resulting_words = [sorted_vocab[i] for i in n]
+
+    return resulting_words
+
+
+def sample_random_words(vocab, top_k):
+
+  N = len(vocab)
+  resulting_words = [vocab[random.randint(0, N)] for x in range(top_k)]
+
+  return resulting_words
+
 
 def checking_tokens(context, predicted_tokens, want_prefix, prefix):
 
@@ -216,12 +230,17 @@ def checking_tokens(context, predicted_tokens, want_prefix, prefix):
         final_tokens.append(token)
   return final_tokens    
 
-def sample_bert(context, change_i, num_masks, top_k):
+def sample_bert(context, change_i, num_masks, top_k, replacement):
 
   new_context = copy.copy(context)
-  new_context[change_i] = '[MASK]'
-  if num_masks == 2:
+  if replacement:
+    new_context[change_i] = '[MASK]'
+    if num_masks == 2:
+      new_context.insert(change_i+1,'[MASK]')
+  else:
     new_context.insert(change_i+1,'[MASK]')
+    if num_masks == 2:
+      new_context.insert(change_i+2,'[MASK]')
 
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
   model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
@@ -230,13 +249,13 @@ def sample_bert(context, change_i, num_masks, top_k):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices #.to('cuda')
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices 
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   final_tokens = checking_tokens(context, predicted_tokens, False, "##")
 
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices #.to('cuda')
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices 
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
     final_tokens_2 = checking_tokens(context, predicted_tokens_2, True, "##")
 
@@ -291,7 +310,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev_dict):
+def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev_dict, convergence_criterion):
 
   changes = []
   change = ""
@@ -327,7 +346,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     # replacements 
     num_masks = random.randint(1,2)
 
-    new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
+    new_word_list = sample_bert(sentence_split, change_i, num_masks, 50, True)
 
     i = len(new_word_list)
     for words in new_word_list: 
@@ -353,7 +372,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     # additions
     if len(sentence_split) < max_len:
       num_masks = random.randint(1,2)
-      new_word_list = sample_bert(sentence_split, change_i, num_masks, 50)
+      new_word_list = sample_bert(sentence_split, change_i, num_masks, 50, False)
 
       i = len(new_word_list)
       for words in new_word_list:
@@ -391,9 +410,9 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       changes.append((curr_score, final_modified_sentence))
 
     scores.append(curr_score)
-    if len(scores) > 20:
-      last_20_scores = scores[-20:] 
-      if len(set(last_20_scores)) == 1:
+    if len(scores) > convergence_criterion:
+      last_N_scores = scores[-convergence_criterion:] 
+      if len(set(last_N_scores)) == 1:
 
         print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions, "and changes", changes)
 
@@ -436,4 +455,4 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {})
+  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {}, 100)
