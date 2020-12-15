@@ -17,7 +17,10 @@ import math
 import os
 import math
 from functools import reduce
-
+from scipy.spatial import distance
+from itertools import combinations
+import pickle
+from sklearn.linear_model import LinearRegression
 
 class ModelInfo():
 
@@ -35,6 +38,7 @@ class ModelInfo():
     self.id_token_dict = {token: self.tokenizer.convert_tokens_to_ids(token) for token in all_tokens}
 
     self.distr_dict_for_context = {}
+
 
 def get_vocab(filename, length):
 
@@ -122,7 +126,6 @@ def get_distribution(model_name, context, vocab, n):
     probabilities = [sum(log_probabilities_per_tokens[i]) for i in range(len(log_probabilities_per_tokens))]
 
     final_probabilities.update({words[i]: probabilities[i] for i in range(len(words))})
-
   
   #normalizing
   final_probabilities_total = sum(final_probabilities.values())
@@ -136,8 +139,11 @@ def get_distribution(model_name, context, vocab, n):
 
   return final_probabilities
 
-def jsd(prob_distributions, weights, logbase=math.e):
+def jsd(prob_distributions,logbase=math.e):
 
+    n = len(prob_distributions)
+    weights = np.empty(n)
+    weights.fill(1/n)
     k = zip(weights, np.asarray(prob_distributions))
     wprobs = np.asarray([x*y for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
@@ -151,7 +157,7 @@ def jsd(prob_distributions, weights, logbase=math.e):
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
 
-def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
+def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -172,17 +178,67 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
         distrs[model_name] = list(next_word_distr.values())
 
-      n = len(model_list)
-      weights = np.empty(n)
-      weights.fill(1/n)
-
-      curr_js = jsd(list(distrs.values()), weights)
+      curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
 
     total_js += curr_js
     js_positions.append(curr_js)
     
   return total_js/len_sentence, js_positions
+
+def cosine_distance(prob_distributions):
+
+  cosine_list = []
+  for i in combinations(prob_distributions, 2):
+    distr1, distr2 = i
+    cosine_list.append(distance.cosine(distr1, distr2))
+
+  return sum(cosine_list)/len(cosine_list)
+
+
+def get_prediction(score_name, tokenizer, model, sentence):
+
+  s = pd.read_pickle(score_name)
+  d = s['data']
+
+  coeffs = d.layer_weights[0][-1].values
+
+  intercept = d.layer_weights[0][-1].intercept.values
+
+  new_model = LinearRegression()
+  new_model.intercept_ = intercept
+  new_model.coef_ = coeffs
+
+  inputs = tokenizer(sentence, return_tensors="pt")
+  outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
+
+  hiddenStates = outputs.hidden_states 
+
+  hiddenStatesLayer = hiddenStates[-1]
+
+  lastWordState = hiddenStatesLayer[-1, :].detach().numpy()
+
+  lastWordState = lastWordState[-1].reshape(1, -1)
+
+  prediction = new_model.predict(lastWordState)
+  
+  return prediction
+
+
+def evaluate_sentence_cosine(model_list, sentence, vocab, n, prev_dict={}):
+
+  distrs = {}
+
+  for model_name in model_list:
+    score_name = model_name.score_name
+    model = model_name.model
+    tokenizer = model_name.tokenizer
+    prediction = get_prediction(score_name, tokenizer, model, sentence)
+    distrs[model_name] = prediction
+
+  curr_cosine = cosine_distance(list(distrs.values()))
+
+  return curr_cosine 
 
 def get_avg_distr(model_list, context, vocab, n, top_k):
 
@@ -310,10 +366,9 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev_dict, convergence_criterion):
+def change_sentence(model_list, sentence, evaluate_sentence, sampler, **kwargs):
 
   changes = []
-  change = ""
   # exclude final punctuation
   sentence_split = sentence.split(" ")[:-1]
   len_sentence = len(sentence_split)
@@ -322,7 +377,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     
   scores = [curr_score]
   js_positions = [curr_js_positions]
- 
 
   print("OG sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
 
@@ -330,9 +384,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
 
   while len(sentence_split) <= max_len:
 
-    #exponentiated_scores = torch.tensor(softmax(curr_js_positions))
-    #n = list(torch.multinomial(exponentiated_scores, 1))
-    #change_i = n[0]
     change_i = random.randint(0, len(sentence_split)-1)
 
     print("change i", change_i)
@@ -360,7 +411,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
       print("mod sentence replacement", new_context)
       new_sentence_list.append((i,new_context))
       modified_sentence_replacements = copy.copy(sentence_split)
-      
 
     #deletions
     modified_sentence_deletions.pop(change_i)
@@ -382,8 +432,7 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
           modified_sentence_additions.insert(change_i+1,str(words[0]))
           modified_sentence_additions.insert(change_i+2,str(words[1]))
         else:
-          modified_sentence_additions.insert(change_i+1,str(words))
-        
+          modified_sentence_additions.insert(change_i+1,str(words))    
 
         new_context = ' '.join(modified_sentence_additions)
         print("mod sentence additions", new_context)
@@ -396,9 +445,6 @@ def change_sentence(model_list, sentence, vocab, batch_size, max_length, js_prev
     final_modified_sentence = new_sentence_list[sampled_id][1]
 
     new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, js_prev_dict)
-
-    #new_discounted_score = discounting(change_i, new_js_positions)
-    #curr_discounted_score = discounting(change_i, curr_js_positions)
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
@@ -445,8 +491,6 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta, Albert, XLM, T5] 
-
 if __name__ == "__main__":
 
   sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
@@ -455,4 +499,12 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, vocab, 100, 5, {}, 100)
+  batch_size = 100
+  convergence_criterion = 100
+  model_list = [GPT2, Roberta, Albert, XLM, T5] 
+  max_length = 8
+  evaluate_sentence = evaluate_sentence_cosine
+
+  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "js_prev_dict": {}, "max_length": max_length}
+
+  globals()[sys.argv[1]](model_list, sentence, evaluate_sentence, sampler, **kwargs)
