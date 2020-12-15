@@ -184,7 +184,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     total_js += curr_js
     js_positions.append(curr_js)
     
-  return total_js/len_sentence, js_positions
+  return total_js/len_sentence
 
 def cosine_distance(prob_distributions):
 
@@ -371,12 +371,11 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
   sentence_split = sentence.split(" ")[:-1]
   len_sentence = len(sentence_split)
 
-  curr_score, curr_js_positions = evaluate_sentence(model_list, " ".join(sentence_split), vocab, batch_size, prev_dict)
+  curr_score = evaluate_sentence(model_list, " ".join(sentence_split), vocab, batch_size, prev_dict)
     
   scores = [curr_score]
-  js_positions = [curr_js_positions]
 
-  print("OG sentence is: ", sentence, " with JS: ", curr_score, " and positional JS scores: ", curr_js_positions)
+  print("OG sentence is: ", sentence, " with JS: ", curr_score)
 
   max_len = max(max_length, len_sentence + 3)
 
@@ -444,14 +443,12 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
     sampled_id = n[0]
     final_modified_sentence = new_sentence_list[sampled_id][1]
 
-    new_sentence_score, new_js_positions = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, prev_dict)
+    new_sentence_score = evaluate_sentence(model_list, final_modified_sentence, vocab, batch_size, prev_dict)
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
       print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       sentence_split = final_modified_sentence.split(" ")
-      js_positions.append(new_js_positions)
-      curr_js_positions = new_js_positions
       curr_score = new_sentence_score
       changes.append((curr_score, final_modified_sentence))
 
@@ -460,14 +457,13 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
       last_N_scores = scores[-convergence_criterion:] 
       if len(set(last_N_scores)) == 1:
 
-        print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, " and js positions ", js_positions, "and changes", changes)
+        print("New sentence is: ", ' '.join(sentence_split)," with total scores: ", scores, "and changes", changes)
 
         plot_scores(scores, ' '.join(sentence_split))
-        plot_positions(js_positions, ' '.join(sentence_split))
 
         print(curr_score)
 
-        return scores, js_positions, ' '.join(sentence_split)
+        return scores, ' '.join(sentence_split)
 
 def sample_sentences(file_name, n):
 
@@ -504,8 +500,9 @@ if __name__ == "__main__":
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
-  evaluate_sentence = evaluate_sentence_cosine
+  prev_dict = {}
+  evaluate_sentence = evaluate_sentence_jsd
 
-  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": {}, "max_length": max_length, "top_k": top_k}
+  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
   globals()[sys.argv[1]](sentence, evaluate_sentence, **kwargs)
