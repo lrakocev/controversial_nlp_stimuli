@@ -271,7 +271,7 @@ def sample_avg_distr(model_list, context, vocab, n, top_k):
 def sample_random_words(vocab, top_k):
 
   N = len(vocab)
-  resulting_words = [vocab[random.randint(0, N)] for x in range(top_k)]
+  resulting_words = [vocab[random.randint(1, N-1)] for x in range(top_k)]
 
   return resulting_words
 
