@@ -240,14 +240,14 @@ def evaluate_sentence_cosine(model_list, sentence, vocab, n, prev_dict={}):
 
   return curr_cosine 
 
-def sample_avg_distr(model_list, context, vocab, n, top_k):
+def sample_avg_distr(model_list, context, vocab, batch_size, top_k):
 
     distrs = {}
     for model_name in model_list:
       tokenizer = model_name.tokenizer
       model = model_name.model
 
-      next_word_distr = get_distribution(model_name, context, vocab, n)
+      next_word_distr = get_distribution(model_name, context, vocab, batch_size)
       distrs[model_name] = [v for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
     
       sorted_vocab = [k for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
@@ -364,7 +364,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(sentence, evaluate_sentence, **kwargs):
+def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
   changes = []
   # exclude final punctuation
@@ -393,8 +393,10 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
 
     # replacements 
     num_masks = random.randint(1,2)
-
-    new_word_list = sample_random_words(vocab, top_k)
+    replacement = True
+    context = sentence_split
+    new_word_list = sampler(**kwargs)
+    #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
 
     i = len(new_word_list)
@@ -420,7 +422,10 @@ def change_sentence(sentence, evaluate_sentence, **kwargs):
     # additions
     if len(sentence_split) < max_len:
       num_masks = random.randint(1,2)
-      new_word_list = sample_random_words(vocab, top_k)
+      replacement = False
+      context = sentence_split
+      new_word_list = sampler(**kwargs)
+      #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
 
       i = len(new_word_list)
@@ -502,7 +507,8 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
+  sampler = sample_bert
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
-  globals()[sys.argv[1]](sentence, evaluate_sentence, **kwargs)
+  globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **kwargs)
