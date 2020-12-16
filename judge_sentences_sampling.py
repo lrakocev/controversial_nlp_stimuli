@@ -247,7 +247,7 @@ def sample_avg_distr(model_list, context, vocab, batch_size, top_k):
       tokenizer = model_name.tokenizer
       model = model_name.model
 
-      next_word_distr = get_distribution(model_name, context, vocab, batch_size)
+      next_word_distr = get_distribution(model_name, " ".join(context), vocab, batch_size)
       distrs[model_name] = [v for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
     
       sorted_vocab = [k for (k,v) in sorted(next_word_distr.items(), key = lambda x: x[0])]
@@ -364,7 +364,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(vocab, batch_size, convergence_criterion, model_list, max_length, top_k, sentence, evaluate_sentence, sampler, **sampler_args):
+def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
   changes = []
   # exclude final punctuation
@@ -396,7 +396,7 @@ def change_sentence(vocab, batch_size, convergence_criterion, model_list, max_le
     replacement = True
     context = sentence_split
 
-    '''
+
     bert_args = (sentence_split,change_i, num_masks, top_k, replacement)
     rw_args = (vocab, top_k)
     ad_args = (model_list, context, vocab, batch_size, top_k)
@@ -404,10 +404,10 @@ def change_sentence(vocab, batch_size, convergence_criterion, model_list, max_le
     sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args}
 
     sampler_args = sampler_dict[sampler]
-    '''
-    new_word_list = sampler(**sampler_args)
+    new_word_list = sampler(*sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
+    #sample_avg_distr(model_list, sentence_split, vocab, batch_size, top_k)
 
     i = len(new_word_list)
     for words in new_word_list: 
@@ -434,9 +434,10 @@ def change_sentence(vocab, batch_size, convergence_criterion, model_list, max_le
       num_masks = random.randint(1,2)
       replacement = False
       context = sentence_split
-      new_word_list = sampler(**sampler_args)
+      new_word_list = sampler(*sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
+      #sample_avg_distr(model_list, sentence_split, vocab, batch_size, top_k)
 
       i = len(new_word_list)
       for words in new_word_list:
@@ -517,10 +518,8 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-
   sampler = sample_bert
 
-  sampler_args = {"context":"sentence_split","change_i": "change_i", "num_masks": "num_masks", "top_k": "top_k", "replacement": "replacement"}
+  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
-
-  globals()[sys.argv[1]](vocab, batch_size, convergence_criterion, model_list, max_length, top_k, sentence, evaluate_sentence, sampler, **sampler_args)
+  globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **kwargs)
