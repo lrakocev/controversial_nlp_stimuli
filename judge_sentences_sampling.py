@@ -518,7 +518,7 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler = sample_bert
+  sampler = sample_random_words
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
