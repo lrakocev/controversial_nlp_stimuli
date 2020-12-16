@@ -364,7 +364,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(sentence, evaluate_sentence, sampler, **sampler_args, **kwargs):
+def change_sentence(vocab, batch_size, convergence_criterion, model_list, max_lenth, top_k, sentence, evaluate_sentence, sampler, **sampler_args):
 
   changes = []
   # exclude final punctuation
@@ -522,6 +522,5 @@ if __name__ == "__main__":
 
   sampler_args = {"context":"sentence_split","change_i": "change_i", "num_masks": "num_masks", "top_k": "top_k", "replacement": "replacement"}
 
-  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
-  globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **sampler_args, **kwargs)
+  globals()[sys.argv[1]](vocab, batch_size, convergence_criterion, model_list, max_lenth, top_k, sentence, evaluate_sentence, sampler, **sampler_args)
