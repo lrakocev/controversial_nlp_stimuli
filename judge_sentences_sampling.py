@@ -364,7 +364,7 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
+def change_sentence(sentence, evaluate_sentence, sampler, **sampler_args, **kwargs):
 
   changes = []
   # exclude final punctuation
@@ -396,7 +396,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     replacement = True
     context = sentence_split
 
-
+    '''
     bert_args = (sentence_split,change_i, num_masks, top_k, replacement)
     rw_args = (vocab, top_k)
     ad_args = (model_list, context, vocab, batch_size, top_k)
@@ -404,7 +404,8 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args}
 
     sampler_args = sampler_dict[sampler]
-    new_word_list = sampler(*sampler_args)
+    '''
+    new_word_list = sampler(**sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
 
@@ -433,7 +434,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
       num_masks = random.randint(1,2)
       replacement = False
       context = sentence_split
-      new_word_list = sampler(*sampler_args)
+      new_word_list = sampler(**sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
 
@@ -519,6 +520,8 @@ if __name__ == "__main__":
 
   sampler = sample_bert
 
+  sampler_args = {"context":"sentence_split","change_i": "change_i", "num_masks": "num_masks", "top_k": "top_k", "replacement": "replacement"}
+
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
-  globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **kwargs)
+  globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **sampler_args, **kwargs)
