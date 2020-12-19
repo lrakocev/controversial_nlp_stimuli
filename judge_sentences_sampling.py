@@ -523,13 +523,13 @@ if __name__ == "__main__":
   sentence = sent_dict[sys.argv[2]]
 
   batch_size = 100
-  convergence_criterion = 1000
+  convergence_criterion = 100
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler = sample_bert
+  sampler = sample_random_words
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
