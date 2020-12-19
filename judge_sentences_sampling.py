@@ -315,7 +315,7 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
   predictions = outputs[0]
 
   total_unfiltered = range(0, len(predictions[0,change_i]))
-  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_predictions)
+  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_unfiltered)
   filtered_tokens = checking_tokens(context, predicted_tokens, False, "##")
   filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
 
@@ -375,7 +375,7 @@ def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
   predictions = outputs[0]
 
   total_unfiltered = range(0, len(predictions[0,change_i]))
-  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_predictions)
+  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_unfiltered)
   filtered_tokens = checking_tokens_pos(context, predicted_tokens, False, "##", og_word, pos_dict, replacement)
   filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
 
