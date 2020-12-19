@@ -58,6 +58,11 @@ def get_pos_dict(filename):
 
   data = pd.read_csv(filename, sep="\t")
 
+  data = data[['Word', 'Dom_PoS_SUBTLEX']]
+
+  pos_dict = dict(zip(df.Word, df.Dom_PoS_SUBTLEX))
+
+  return pos_dict
 
 
 def get_distribution(model_name, context, vocab, n):
@@ -589,7 +594,7 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler_dict = {"sampler_bert": samplert_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
+  sampler_dict = {"sampler_bert": sampler_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
 
   sampler = sampler_dict[sys.argv[3]]
 
