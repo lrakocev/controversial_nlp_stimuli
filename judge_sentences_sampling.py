@@ -60,7 +60,7 @@ def get_pos_dict(filename):
 
   data = data[['Word', 'Dom_PoS_SUBTLEX']]
 
-  pos_dict = dict(zip(df.Word, df.Dom_PoS_SUBTLEX))
+  pos_dict = dict(zip(data.Word, data.Dom_PoS_SUBTLEX))
 
   return pos_dict
 
