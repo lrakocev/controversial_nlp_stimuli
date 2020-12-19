@@ -314,51 +314,50 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices 
+  total_unfiltered = range(0, len(predictions[0,change_i]))
+  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_predictions)
+  filtered_tokens = checking_tokens(context, predicted_tokens, False, "##")
+  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+
+  # remove all but filtered ids
+  filtered_predictions = [predictions[0, change_i][i] for i in filtered_ids]
+  predicted_indices = torch.topk(filtered_predictions, top_k).indices 
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  final_tokens = checking_tokens(context, predicted_tokens, False, "##")
-
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices 
-    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
-    final_tokens_2 = checking_tokens(context, predicted_tokens_2, True, "##")
+    filtered_tokens = checking_tokens(context, unfiltered_tokens, True, "##")
+    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
 
-    if len(final_tokens_2) == 0:
-      final_tokens = final_tokens
-    elif len(final_tokens) > len(final_tokens_2) and len(final_tokens_2) != 0:
-      final_tokens = final_tokens[0:len(final_tokens_2)]
-      final_tokens = list(zip(final_tokens, final_tokens_2))
-    elif len(final_tokens) < len(final_tokens_2):
-      final_tokens_2 = final_tokens_2[0:len(final_tokens)]
-      final_tokens = list(zip(final_tokens, final_tokens_2))
+    filtered_predictions = [predictions[0, change_i+1][i] for i in filtered_ids]
+    predicted_indices = torch.topk(filtered_predictions, top_k).indices 
+    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  print("final tokens", final_tokens)
+    predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
-  # making sure it doesn't include punctuation or repeats
+  print("final tokens", predicted_tokens)
 
-  return final_tokens
+  return predicted_tokens
 
 
-def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word, pos_dict):
+def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word, pos_dict, replacement):
 
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
       if (want_prefix and token[0:2] == prefix) or (not want_prefix and token[0:2]!= prefix):
-        
-
-        og_word_pos = pos_dict[og_word] if og_word in pos_dict.keys() else "Unclassified"
-        token_pos = pos_dict[token] if token in pos_dict.keys() else "Unclassified"
-        if token_pos == og_word_pos:
+        if replacement:
+          og_word_pos = pos_dict[og_word] if og_word in pos_dict.keys() else "Unclassified"
+          token_pos = pos_dict[token] if token in pos_dict.keys() else "Unclassified"
+          if token_pos == og_word_pos:
+            final_tokens.append(token)
+        else:
           final_tokens.append(token)
   return final_tokens   
 
-def sample_bert_pos(context, change_i, num_masks, top_k, replacement, pos_dict):
+
+def sample_bert_pos(context, change_i, num_masks, top_k, replacement):
 
   new_context = copy.copy(context)
-
-  og_word = new_context[change_i]
   if replacement:
     new_context[change_i] = '[MASK]'
     if num_masks == 2:
@@ -375,30 +374,29 @@ def sample_bert_pos(context, change_i, num_masks, top_k, replacement, pos_dict):
   outputs = model(**inputs)
   predictions = outputs[0]
 
-  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices 
+  total_unfiltered = range(0, len(predictions[0,change_i]))
+  unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_predictions)
+  filtered_tokens = checking_tokens_pos(context, predicted_tokens, False, "##", og_word, pos_dict, replacement)
+  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+
+  # remove all but filtered ids
+  filtered_predictions = [predictions[0, change_i][i] for i in filtered_ids]
+  predicted_indices = torch.topk(filtered_predictions, top_k).indices 
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  final_tokens = checking_tokens_pos(context, predicted_tokens, False, "##", og_word, pos_dict)
-
   if num_masks == 2:
-    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices 
-    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
-    final_tokens_2 = checking_tokens_pos(context, predicted_tokens_2, True, "##", og_word, pos_dict)
+    filtered_tokens = checking_tokens_pos(context, unfiltered_tokens, True, "##", og_word, pos_dict, replacement)
+    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
 
-    if len(final_tokens_2) == 0:
-      final_tokens = final_tokens
-    elif len(final_tokens) > len(final_tokens_2) and len(final_tokens_2) != 0:
-      final_tokens = final_tokens[0:len(final_tokens_2)]
-      final_tokens = list(zip(final_tokens, final_tokens_2))
-    elif len(final_tokens) < len(final_tokens_2):
-      final_tokens_2 = final_tokens_2[0:len(final_tokens)]
-      final_tokens = list(zip(final_tokens, final_tokens_2))
+    filtered_predictions = [predictions[0, change_i+1][i] for i in filtered_ids]
+    predicted_indices = torch.topk(filtered_predictions, top_k).indices 
+    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  print("final tokens", final_tokens)
+    predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
 
-  # making sure it doesn't include punctuation or repeats or mismatched POS
+  print("final tokens", predicted_tokens)
 
-  return final_tokens
+  return predicted_tokens
 
 def discounting(cur_ind, js_positions, gamma=1):
 
