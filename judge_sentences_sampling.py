@@ -602,7 +602,7 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler_dict = {"sampler_bert": sample_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
+  sampler_dict = {"sample_bert": sample_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
 
   sampler = sampler_dict[sys.argv[3]]
 
