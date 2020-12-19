@@ -474,7 +474,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
 
     sampler_args = sampler_dict[sampler]
-
+    print("replacement should be True and is: ", replacement)
     new_word_list = sampler(*sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
@@ -506,6 +506,15 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
       replacement = False
       context = sentence_split
 
+      bert_args = (context,change_i, num_masks, top_k, replacement)
+      bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
+      rw_args = (vocab, top_k)
+      ad_args = (model_list, context, vocab, batch_size, top_k)
+
+      sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
+
+
+      print("replacement should be False and is: ", replacement)
       sampler_args = sampler_dict[sampler]
 
       new_word_list = sampler(*sampler_args)
