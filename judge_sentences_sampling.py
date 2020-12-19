@@ -376,12 +376,12 @@ def sample_bert_pos(context, change_i, num_masks, top_k, replacement, pos_dict):
   predicted_indices = torch.topk(predictions[0, change_i], top_k).indices 
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
-  final_tokens = checking_tokens_pos(context, predicted_tokens, False, "##")
+  final_tokens = checking_tokens_pos(context, predicted_tokens, False, "##", og_word, pos_dict)
 
   if num_masks == 2:
     predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices 
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
-    final_tokens_2 = checking_tokens_pos(context, predicted_tokens_2, True, "##")
+    final_tokens_2 = checking_tokens_pos(context, predicted_tokens_2, True, "##", og_word, pos_dict)
 
     if len(final_tokens_2) == 0:
       final_tokens = final_tokens
