@@ -396,14 +396,14 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     replacement = True
     context = sentence_split
 
-
-    bert_args = (sentence_split,change_i, num_masks, top_k, replacement)
+    bert_args = (context,change_i, num_masks, top_k, replacement)
     rw_args = (vocab, top_k)
     ad_args = (model_list, context, vocab, batch_size, top_k)
 
     sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args}
 
     sampler_args = sampler_dict[sampler]
+
     new_word_list = sampler(*sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
@@ -434,6 +434,9 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
       num_masks = random.randint(1,2)
       replacement = False
       context = sentence_split
+
+      sampler_args = sampler_dict[sampler]
+      
       new_word_list = sampler(*sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
@@ -484,9 +487,9 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 def sample_sentences(file_name, n):
 
   with open(file_name) as f:
-    head = [next(f).strip() for x in range(n)]
 
-  return head 
+
+     
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
