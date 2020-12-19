@@ -358,6 +358,7 @@ def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word,
 def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
 
   new_context = copy.copy(context)
+  og_word = new_context[change_i]
   if replacement:
     new_context[change_i] = '[MASK]'
     if num_masks == 2:
