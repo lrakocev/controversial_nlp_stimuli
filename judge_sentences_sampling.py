@@ -316,8 +316,8 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
 
   total_unfiltered = range(0, len(predictions[0,change_i]))
   unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_unfiltered)
-  filtered_tokens = checking_tokens(context, predicted_tokens, False, "##")
-  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+  filtered_tokens = checking_tokens(context, unfiltered_tokens, False, "##")
+  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_tokens)
 
   # remove all but filtered ids
   filtered_predictions = [predictions[0, change_i][i] for i in filtered_ids]
@@ -326,7 +326,7 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
 
   if num_masks == 2:
     filtered_tokens = checking_tokens(context, unfiltered_tokens, True, "##")
-    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_tokens)
 
     filtered_predictions = [predictions[0, change_i+1][i] for i in filtered_ids]
     predicted_indices = torch.topk(filtered_predictions, top_k).indices 
@@ -376,8 +376,8 @@ def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
 
   total_unfiltered = range(0, len(predictions[0,change_i]))
   unfiltered_tokens = tokenizer.convert_ids_to_tokens(total_unfiltered)
-  filtered_tokens = checking_tokens_pos(context, predicted_tokens, False, "##", og_word, pos_dict, replacement)
-  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+  filtered_tokens = checking_tokens_pos(context, unfiltered_tokens, False, "##", og_word, pos_dict, replacement)
+  filtered_ids = tokenizer.convert_tokens_to_ids(filtered_tokens)
 
   # remove all but filtered ids
   filtered_predictions = [predictions[0, change_i][i] for i in filtered_ids]
@@ -386,7 +386,7 @@ def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
 
   if num_masks == 2:
     filtered_tokens = checking_tokens_pos(context, unfiltered_tokens, True, "##", og_word, pos_dict, replacement)
-    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_prediction_tokens_1)
+    filtered_ids = tokenizer.convert_tokens_to_ids(filtered_tokens)
 
     filtered_predictions = [predictions[0, change_i+1][i] for i in filtered_ids]
     predicted_indices = torch.topk(filtered_predictions, top_k).indices 
