@@ -493,7 +493,7 @@ def sample_sentences(file_name):
   with open(file_name, 'r') as file:
       reader = csv.reader(file)
       line = next((x for i, x in enumerate(reader) if i == N), None)
-      line = (" ".join(line)).translate(None, string.punctuation)
+      line = (" ".join(line)).translate(str.maketrans('', '', string.punctuation))
 
   return line
 
