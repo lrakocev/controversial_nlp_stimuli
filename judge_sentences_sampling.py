@@ -340,18 +340,23 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
   return final_tokens
 
 
-def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix):
+def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word, pos_dict):
 
   final_tokens = []
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
       if (want_prefix and token[0:2] == prefix) or (not want_prefix and token[0:2]!= prefix):
-        final_tokens.append(token)
+        og_word_pos = pos_dict[og_word]
+        token_pos = pos_dict[token]
+        if token_pos == og_word_pos:
+          final_tokens.append(token)
   return final_tokens   
 
-def sample_bert_pos(context, change_i, num_masks, top_k, replacement):
+def sample_bert_pos(context, change_i, num_masks, top_k, replacement, pos_dict):
 
   new_context = copy.copy(context)
+
+  og_word = new_context[change_i]
   if replacement:
     new_context[change_i] = '[MASK]'
     if num_masks == 2:
@@ -389,7 +394,7 @@ def sample_bert_pos(context, change_i, num_masks, top_k, replacement):
 
   print("final tokens", final_tokens)
 
-  # making sure it doesn't include punctuation or repeats
+  # making sure it doesn't include punctuation or repeats or mismatched POS
 
   return final_tokens
 
@@ -462,10 +467,11 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     context = sentence_split
 
     bert_args = (context,change_i, num_masks, top_k, replacement)
+    bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
     rw_args = (vocab, top_k)
     ad_args = (model_list, context, vocab, batch_size, top_k)
 
-    sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args}
+    sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
 
     sampler_args = sampler_dict[sampler]
 
@@ -562,10 +568,12 @@ def sample_sentences(file_name):
 
   return line
 
-     
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
+
+filename2 = "SUBTLEX-US frequency list with PoS information text version.txt"
+pos_dict = get_pos_dict(filename2)
 
 GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT2Tokenizer.from_pretrained('gpt2'), "Ġ", vocab, "GTP2")
 
@@ -594,10 +602,10 @@ if __name__ == "__main__":
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler_dict = {"sampler_bert": sampler_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
+  sampler_dict = {"sampler_bert": sample_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
 
   sampler = sampler_dict[sys.argv[3]]
 
-  kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
+  kwargs = {"vocab": vocab, "pos_dict": pos_dict, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
   globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **kwargs)
