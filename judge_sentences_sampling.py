@@ -523,7 +523,7 @@ if __name__ == "__main__":
   sentence = sent_dict[sys.argv[2]]
 
   batch_size = 100
-  convergence_criterion = 100
+  convergence_criterion = sys.argv[3]
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
