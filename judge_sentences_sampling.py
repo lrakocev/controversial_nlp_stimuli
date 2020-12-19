@@ -436,7 +436,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
       context = sentence_split
 
       sampler_args = sampler_dict[sampler]
-      
+
       new_word_list = sampler(*sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
@@ -484,10 +484,18 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
         return scores, ' '.join(sentence_split)
 
-def sample_sentences(file_name, n):
+def sample_sentences(file_name):
 
-  with open(file_name) as f:
+  file = open(file_name)
+  reader = csv.reader(file)
+  num_lines = len(list(reader))
+  N = random.randint(0,num_lines-1)
+  with open(file_name, 'r') as file:
+      reader = csv.reader(file)
+      line = next((x for i, x in enumerate(reader) if i == N), None)
+      line = line.translate(None, string.punctuation)
 
+  return " ".join(line)
 
      
 
@@ -508,9 +516,9 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 if __name__ == "__main__":
 
-  sentences = sorted(sample_sentences("sentences4lara.txt", 4507))
+  sentences = [sample_sentences("sentences4lara.txt") for i in range(5)]
 
-  sent_dict = dict(zip([str(x) for x in range(1,500)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,5)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
