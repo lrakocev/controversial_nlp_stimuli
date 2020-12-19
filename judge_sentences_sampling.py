@@ -346,8 +346,10 @@ def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word,
   for token in predicted_tokens:
     if token not in string.punctuation and token not in context:
       if (want_prefix and token[0:2] == prefix) or (not want_prefix and token[0:2]!= prefix):
-        og_word_pos = pos_dict[og_word]
-        token_pos = pos_dict[token]
+        
+
+        og_word_pos = pos_dict[og_word] if og_word in pos_dict.keys() else "Unclassified"
+        token_pos = pos_dict[token] if token in pos_dict.keys() else "Unclassified"
         if token_pos == og_word_pos:
           final_tokens.append(token)
   return final_tokens   
