@@ -54,6 +54,12 @@ def get_vocab(filename, length):
 
   return vocab_list
 
+def get_pos_dict(filename):
+
+  data = pd.read_csv(filename, sep="\t")
+
+
+
 def get_distribution(model_name, context, vocab, n):
 
   print("context", context)
@@ -328,6 +334,60 @@ def sample_bert(context, change_i, num_masks, top_k, replacement):
 
   return final_tokens
 
+
+def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix):
+
+  final_tokens = []
+  for token in predicted_tokens:
+    if token not in string.punctuation and token not in context:
+      if (want_prefix and token[0:2] == prefix) or (not want_prefix and token[0:2]!= prefix):
+        final_tokens.append(token)
+  return final_tokens   
+
+def sample_bert_pos(context, change_i, num_masks, top_k, replacement):
+
+  new_context = copy.copy(context)
+  if replacement:
+    new_context[change_i] = '[MASK]'
+    if num_masks == 2:
+      new_context.insert(change_i+1,'[MASK]')
+  else:
+    new_context.insert(change_i+1,'[MASK]')
+    if num_masks == 2:
+      new_context.insert(change_i+2,'[MASK]')
+
+  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+  model = BertForMaskedLM.from_pretrained('bert-base-uncased', return_dict=True)
+
+  inputs = tokenizer(" ".join(new_context), return_tensors='pt')
+  outputs = model(**inputs)
+  predictions = outputs[0]
+
+  predicted_indices = torch.topk(predictions[0, change_i], top_k).indices 
+  predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
+
+  final_tokens = checking_tokens_pos(context, predicted_tokens, False, "##")
+
+  if num_masks == 2:
+    predicted_indices_2 = torch.topk(predictions[0, change_i+1], top_k*10).indices 
+    predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices_2[x] for x in range(top_k)])
+    final_tokens_2 = checking_tokens_pos(context, predicted_tokens_2, True, "##")
+
+    if len(final_tokens_2) == 0:
+      final_tokens = final_tokens
+    elif len(final_tokens) > len(final_tokens_2) and len(final_tokens_2) != 0:
+      final_tokens = final_tokens[0:len(final_tokens_2)]
+      final_tokens = list(zip(final_tokens, final_tokens_2))
+    elif len(final_tokens) < len(final_tokens_2):
+      final_tokens_2 = final_tokens_2[0:len(final_tokens)]
+      final_tokens = list(zip(final_tokens, final_tokens_2))
+
+  print("final tokens", final_tokens)
+
+  # making sure it doesn't include punctuation or repeats
+
+  return final_tokens
+
 def discounting(cur_ind, js_positions, gamma=1):
 
   total = 0
@@ -523,13 +583,15 @@ if __name__ == "__main__":
   sentence = sent_dict[sys.argv[2]]
 
   batch_size = 100
-  convergence_criterion = sys.argv[4]
+  convergence_criterion = int(sys.argv[4])
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
   prev_dict = {}
   evaluate_sentence = evaluate_sentence_jsd
-  sampler = sys.argv[3]
+  sampler_dict = {"sampler_bert": samplert_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
+
+  sampler = sampler_dict[sys.argv[3]]
 
   kwargs = {"vocab": vocab, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
 
