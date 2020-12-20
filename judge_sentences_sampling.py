@@ -382,7 +382,7 @@ def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
 
   # remove all but filtered ids
   filtered_predictions = [predictions[0, change_i][i] for i in filtered_ids]
-  predicted_indices = torch.topk(torch.tensor(filtered_predictions), top_k).indices 
+  predicted_indices = torch.topk(torch.tensor(filtered_predictions), top_k).indices if len(filtered_predictions) > top_k else filtered_predictions
   predicted_tokens = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
   if num_masks == 2:
@@ -390,7 +390,7 @@ def sample_bert_pos(context,change_i, num_masks, top_k, replacement, pos_dict):
     filtered_ids = tokenizer.convert_tokens_to_ids(filtered_tokens)
 
     filtered_predictions = [predictions[0, change_i+1][i] for i in filtered_ids]
-    predicted_indices = torch.topk(torch.tensor(filtered_predictions), top_k).indices 
+    predicted_indices = torch.topk(torch.tensor(filtered_predictions), top_k).indices if len(filtered_predictions) > top_k else filtered_predictions
     predicted_tokens_2 = tokenizer.convert_ids_to_tokens([predicted_indices[x] for x in range(top_k)])
 
     predicted_tokens = list(zip(predicted_tokens, predicted_tokens_2))
