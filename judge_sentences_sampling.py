@@ -348,7 +348,7 @@ def checking_tokens_pos(context, predicted_tokens, want_prefix, prefix, og_word,
         if replacement:
           og_word_pos = pos_dict[og_word] if og_word in pos_dict.keys() else "Unclassified"
           token_pos = pos_dict[token] if token in pos_dict.keys() else "Unclassified"
-          if token_pos == og_word_pos:
+          if token_pos == og_word_pos and "Unclassified" not in og_word_pos:
             final_tokens.append(token)
         else:
           final_tokens.append(token)
