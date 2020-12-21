@@ -134,14 +134,3 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 model_list = [GPT2, Albert, Roberta, XLM, T5] 
 n = 100
 
-
-if __name__ == "__main__":
-
-  #entences = sorted(sample_sentences("sentences4lara.txt", 1000))
-
-  #sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
-
-  sentence = "word word word word word word word word word word" #sent_dict[sys.argv[2]]
-
-  globals()[sys.argv[1]](model_list, sentence, {})
-
