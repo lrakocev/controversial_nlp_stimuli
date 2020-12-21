@@ -168,7 +168,27 @@ def jsd(prob_distributions,logbase=math.e):
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
 
-def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
+def sorted_avg_dict_top_k(distrs, k):
+
+  #have list of dicts, words: probabilities
+  #first want to average them
+
+  sorted_distrs = []
+  for d in distrs:
+    sorted_distrs.append([v for (k,v) in sorted(d.items(), key = lambda x: x[0])])
+    vocab = [k for (k,v) in sorted(d.items(), key = lambda x: x[0])]
+
+  df_probabilities = pd.DataFrame(sorted_distrs)
+
+  df_probabilities_mean = df_probabilities.mean()
+
+  final_avg_distr = zip(vocab, df_probabilities_mean)
+
+  sorted_dict_top_k = sorted(final_avg_dict, key=dictionary.get, reverse=True)[:k]
+
+  return sorted_dict_top_k
+
+def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict, plotting_purposes):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
@@ -177,6 +197,9 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   total_js = 0
   js_positions = []
   distrs = {}
+  plotting_purposes = {}
+  for model_name in model_list:
+    plotting_purposes[model_name] = []
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
@@ -189,12 +212,34 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
         distrs[model_name] = list(next_word_distr.values())
 
+        plotting_purposes[model_name].append(next_word_distr)
+    
       curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
 
     total_js += curr_js
     js_positions.append(curr_js)
     
+
+  # plotting purposes
+  top_avg_distr = {}
+  for model_name, distrs in plotting_purposes:
+    # get top K avg distr for sentence per model name
+    # gives us top 5 per model_name in form: {vocab: probabilities}
+    top_avg_distr[model_name] = sorted_avg_dict_top_k(distrs, 5)
+
+
+  # now overlap these
+
+  for D in top_avg_distr:
+
+    plt.bar(*zip(*D.items()), alpha=.1)
+    legend()
+
+  name = sentence + " controversy graph.png"
+  plt.savefig(name)
+  plt.close()
+
   return total_js/len_sentence
 
 def cosine_distance(prob_distributions):
@@ -442,6 +487,20 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
+def get_args(sampler, context, change_i, num_masks, top_k, replacement, pos_dict, vocab, model_list, batch_size):
+
+  bert_args = (context,change_i, num_masks, top_k, replacement)
+  bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
+  rw_args = (vocab, top_k)
+  ad_args = (model_list, context, vocab, batch_size, top_k)
+
+  sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
+
+  sampler_args = sampler_dict[sampler]
+
+  return sampler_args
+  
+
 def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
   changes = []
@@ -471,18 +530,8 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
     # replacements 
     num_masks = random.randint(1,2)
-    replacement = True
-    context = sentence_split
-
-    bert_args = (context,change_i, num_masks, top_k, replacement)
-    bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
-    rw_args = (vocab, top_k)
-    ad_args = (model_list, context, vocab, batch_size, top_k)
-
-    sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
-
-    sampler_args = sampler_dict[sampler]
-    print("replacement should be True and is: ", replacement)
+    
+    sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, True, pos_dict, vocab, model_list, batch_size) 
     new_word_list = sampler(*sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
@@ -511,20 +560,8 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     # additions
     if len(sentence_split) < max_len:
       num_masks = random.randint(1,2)
-      replacement = False
-      context = sentence_split
 
-      bert_args = (context,change_i, num_masks, top_k, replacement)
-      bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
-      rw_args = (vocab, top_k)
-      ad_args = (model_list, context, vocab, batch_size, top_k)
-
-      sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
-
-
-      print("replacement should be False and is: ", replacement)
-      sampler_args = sampler_dict[sampler]
-
+      sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, False, pos_dict, vocab, model_list, batch_size)
       new_word_list = sampler(*sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
@@ -554,8 +591,8 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
 
     if new_sentence_score > curr_score:
       print("new score", new_sentence_score, "curr_score", curr_score)
-      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       sentence_split = final_modified_sentence.split(" ")
+      print("Here is the new version of the sentence: ", ' '.join(sentence_split))
       curr_score = new_sentence_score
       changes.append((curr_score, final_modified_sentence))
 
@@ -617,7 +654,7 @@ if __name__ == "__main__":
   model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
   top_k = 50
-  prev_dict = {}
+  prev_dict = {} 
   evaluate_sentence = evaluate_sentence_jsd
   sampler_dict = {"sample_bert": sample_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
 
