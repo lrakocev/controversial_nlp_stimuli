@@ -64,7 +64,7 @@ def get_distribution(model_name, context, joint_vocab):
   vocab = tokenizer.convert_ids_to_tokens(ids)
   final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
   id_list = tokenizer.convert_tokens_to_ids(sorted(final_vocab))
-  outputs_array = np.asarray(outputs[0]).flatten()
+  outputs_array = np.asarray(outputs[0]).cpu().flatten()
   final_outputs = [outputs_array[i] for i in id_list] 
   probabilities = softmax(final_outputs)
   distr_dict = dict(zip(final_vocab, probabilities))
