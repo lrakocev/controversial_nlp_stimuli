@@ -51,14 +51,15 @@ def get_vocab(filename, length):
 
 def get_distribution(model_name, context, joint_vocab):
   tokenizer, model = model_name.tokenizer, model_name.model
-  inputs = tokenizer(context,return_tensors='pt')
+  inputs = tokenizer(context,return_tensors='pt').to("cuda")
   if model_name.model_name == "Albert":
     tokens = tokenizer.tokenize(context)
     x=1
-    attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
-    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+    attention_mask= [1 for i in range(len(tokens)-x)] + [0 for i in range(x)]
+    attention_mask = torch.tensor(attention_mask).to('cuda')
+    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask).to("cuda")
   else:
-    outputs = model(**inputs, labels=inputs["input_ids"])
+    outputs = model(**inputs, labels=inputs["input_ids"]).to("cuda")
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
   final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
@@ -133,4 +134,15 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 model_list = [GPT2, Albert, Roberta, XLM, T5] 
 n = 100
+
+
+if __name__ == "__main__":
+
+  #entences = sorted(sample_sentences("sentences4lara.txt", 1000))
+
+  #sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
+
+  sentence = "word word word word word word word word word word" #sent_dict[sys.argv[2]]
+
+  globals()[sys.argv[1]](model_list, sentence, {})
 
