@@ -216,11 +216,11 @@ n = 100
 
 if __name__ == "__main__":
 
-  sentences = sorted(sample_sentences("sentences4lara.txt", 1000))
+  #entences = sorted(sample_sentences("sentences4lara.txt", 1000))
 
-  sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
+  #sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
 
-  sentence = sent_dict[sys.argv[2]]
+  sentence = "word word word word word word word word word word" #sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](sentence, 100, {})
 
