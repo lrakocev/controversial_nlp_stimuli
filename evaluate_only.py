@@ -51,7 +51,7 @@ def get_vocab(filename, length):
 
 def get_distribution(model_name, context, joint_vocab):
   tokenizer, model = model_name.tokenizer, model_name.model
-  inputs = tokenizer(context,return_tensors='tf')
+  inputs = tokenizer(context,return_tensors='pt')
   if model_name.model_name == "Albert":
     tokens = tokenizer.tokenize(context)
     x=1
