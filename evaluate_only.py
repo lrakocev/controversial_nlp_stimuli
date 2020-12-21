@@ -52,7 +52,13 @@ def get_vocab(filename, length):
 def get_distribution(model_name, context, joint_vocab):
   tokenizer, model = model_name.tokenizer, model_name.model
   inputs = tokenizer(context,return_tensors='tf')
-  outputs = model(input_ids = inputs) if model_name == "t5-11b" else model(inputs)
+  if model_name.model_name == "Albert":
+    tokens = tokenizer.tokenize(context)
+    x=1
+    attention_mask.append([1 for i in range(len(tokens)-x)] + [0 for i in range(x)])
+    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+  else:
+    outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
   final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
