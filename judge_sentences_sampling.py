@@ -188,7 +188,7 @@ def sorted_avg_dict_top_k(distrs, k):
 
   return sorted_dict_top_k
 
-def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict, plotting_purposes):
+def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
