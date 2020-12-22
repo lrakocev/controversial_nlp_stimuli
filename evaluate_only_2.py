@@ -148,8 +148,7 @@ def get_distribution(model_name, context, vocab, n):
 
   print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", sorted_vals)
 
-  final_probabilities_sorted = {k: v for k, v in sorted(final_probabilities.items(), key=lambda item: item[0])}
-  return final_probabilities_sorted
+  return final_probabilities
 
 def jsd(prob_distributions,logbase=math.e):
 
@@ -211,7 +210,9 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     else:
       for model_name in model_list:
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
-        distrs[model_name] = list(next_word_distr.values())
+        next_word_distr_sorted = {k: v for k, v in sorted(next_word_distr.items(), key=lambda item: item[0])}
+  
+        distrs[model_name] = list(next_word_distr_sorted.values())
 
         plotting_purposes[model_name.model_name].append(next_word_distr)
     
