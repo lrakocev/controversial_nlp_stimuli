@@ -182,7 +182,7 @@ def sorted_avg_dict_top_k(distrs, k):
 
   df_probabilities_mean = df_probabilities.mean()
 
-  final_avg_distr = zip(vocab, df_probabilities_mean)
+  final_avg_distr = dict(zip(vocab, df_probabilities_mean))
 
   sorted_dict_top_k = sorted(final_avg_distr, key=final_avg_distr.get, reverse=True)[:k]
 
