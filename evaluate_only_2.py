@@ -254,7 +254,7 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Roberta, XLM, T5, Albert] 
-sentence = "word word word word word word word word word word"
+model_list = [GPT2, Roberta, XLM, T5] 
+sentence = "Now how about this sentence"
 evaluate_sentence_jsd(model_list, sentence, vocab, 100, {})
 
