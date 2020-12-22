@@ -232,6 +232,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   plt.savefig(name)
   plt.close()
 
+  print(total_js/len_sentence)
   return total_js/len_sentence
 
 filename = "SUBTLEXus74286wordstextversion.txt"

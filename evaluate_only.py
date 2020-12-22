@@ -117,6 +117,8 @@ def evaluate_sentence(model_list, sentence, joint_vocab):
     total_js += curr_js
     
     js_positions.append(curr_js)
+
+  print( total_js/len_sentence)
     
   return total_js/len_sentence, js_positions
 
