@@ -54,10 +54,13 @@ def get_distribution(model_name, context, joint_vocab):
   inputs = tokenizer(context,return_tensors='pt').to("cuda")
   if model_name.model_name == "Albert":
     tokens = tokenizer.tokenize(context)
+    ids = tokenizer.convert_tokens_to_ids(tokens)
+    input_ids = torch.tensor(ids).to('cuda') 
+
     x=1
     attention_mask= [1 for i in range(len(tokens)-x)] + [0 for i in range(x)]
     attention_mask = torch.tensor(attention_mask).to('cuda')
-    outputs = model(inputs, attention_mask=attention_mask)
+    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
   else:
     outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
