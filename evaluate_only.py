@@ -50,7 +50,7 @@ def get_vocab(filename, length):
   return vocab_list
 
 def get_distribution(model_name, context, joint_vocab):
-  tokenizer, model = model_name.tokenizer, model_name.model
+  tokenizer, model = model_name.tokenizer, model_name.model.to("cuda")
   inputs = tokenizer(context,return_tensors='pt').to("cuda")
   if model_name.model_name == "Albert":
     tokens = tokenizer.tokenize(context)
@@ -63,7 +63,7 @@ def get_distribution(model_name, context, joint_vocab):
 
     print("input ids", input_ids)
     print("attention_mask", attention_mask)
-    outputs = model(input_ids, attention_mask=attention_mask)
+    outputs = model(inputs, attention_mask=attention_mask)
   else:
     outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
