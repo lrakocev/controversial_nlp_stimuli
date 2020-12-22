@@ -57,14 +57,14 @@ def get_distribution(model_name, context, joint_vocab):
     x=1
     attention_mask= [1 for i in range(len(tokens)-x)] + [0 for i in range(x)]
     attention_mask = torch.tensor(attention_mask).to('cuda')
-    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+    outputs = model(inputs, attention_mask=attention_mask)
   else:
     outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
   vocab = tokenizer.convert_ids_to_tokens(ids)
   final_vocab = set(vocab) & joint_vocab if len(joint_vocab) != 0 else set(vocab)
   id_list = tokenizer.convert_tokens_to_ids(sorted(final_vocab))
-  outputs_array = np.asarray(outputs[0].cpu().detach()).flatten()
+  outputs_array = np.asarray(outputs.logits.cpu().detach()).flatten()
   print(outputs_array)
   print("len", len(outputs_array))
   final_outputs = [outputs_array[i] for i in id_list] 
