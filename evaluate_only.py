@@ -63,7 +63,7 @@ def get_distribution(model_name, context, joint_vocab):
 
     print("input ids", input_ids)
     print("attention_mask", attention_mask)
-    outputs = model(inputs, attention_mask=attention_mask)
+    outputs = model(input_ids, attention_mask=attention_mask)
   else:
     outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
@@ -140,7 +140,7 @@ T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-model_list = [GPT2, Albert, Roberta, XLM, T5] 
+model_list = [GPT2, Roberta, XLM, T5] 
 n = 100
 
 
