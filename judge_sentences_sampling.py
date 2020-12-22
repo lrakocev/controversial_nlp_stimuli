@@ -220,9 +220,8 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     total_js += curr_js
     js_positions.append(curr_js)
     
-
   # plotting purposes
-  top_avg_distr = {name: sorted_avg_dict_top_k(distrs, 5) for name, distrs in plotting_purposes}
+  top_avg_distr = {name: sorted_avg_dict_top_k(distrs, 5) for (name, distrs) in plotting_purposes.items()}
 
   # now overlap these
 
