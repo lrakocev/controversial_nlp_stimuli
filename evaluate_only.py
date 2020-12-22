@@ -63,7 +63,7 @@ def get_distribution(model_name, context, joint_vocab):
 
     print("input ids", input_ids)
     print("attention_mask", attention_mask)
-    outputs = model(input_ids, labels=input_ids, attention_mask=attention_mask)
+    outputs = model(input_ids, attention_mask=attention_mask)
   else:
     outputs = model(**inputs, labels=inputs["input_ids"])
   ids = range(0,tokenizer.vocab_size)
