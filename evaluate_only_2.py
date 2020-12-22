@@ -227,7 +227,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   for D in top_avg_distr.values():
 
-    plt.bar(D, alpha=.1)
+    plt.bar(range(len(D)), D, alpha=.1)
     legend()
 
   name = sentence + " controversy graph.png"
