@@ -112,7 +112,7 @@ def evaluate_sentence(model_list, sentence, joint_vocab):
     
     for model_name in model_list:
       next_word_distr = get_distribution(model_name, curr_context, joint_vocab)
-      distrs[model_name] = next_word_distr.values()
+      distrs[model_name] = list(next_word_distr.values())
 
     print(distrs.values())
     curr_js = jsd(distrs.values())
