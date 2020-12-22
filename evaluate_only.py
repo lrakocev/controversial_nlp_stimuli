@@ -76,6 +76,8 @@ def get_distribution(model_name, context, joint_vocab):
   final_outputs = [outputs_array[i] for i in id_list] 
   probabilities = softmax(final_outputs)
   distr_dict = dict(zip(final_vocab, probabilities))
+  distr_dict = {k: v for k, v in sorted(distr_dict.items(), key=lambda item: item[1])}
+  
   return distr_dict
 
 
@@ -110,7 +112,7 @@ def evaluate_sentence(model_list, sentence, joint_vocab):
     
     for model_name in model_list:
       next_word_distr = get_distribution(model_name, curr_context, joint_vocab)
-      distrs[model_name] = next_word_distr
+      distrs[model_name] = next_word_distr.values()
 
     print(distrs.values())
     curr_js = jsd(distrs.values())
