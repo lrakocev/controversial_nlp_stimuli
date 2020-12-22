@@ -184,7 +184,7 @@ def sorted_avg_dict_top_k(distrs, k):
 
   final_avg_distr = dict(zip(vocab, df_probabilities_mean))
 
-  sorted_dict_top_k = sorted(final_avg_distr, key=final_avg_distr.get, reverse=True)[:k]
+  sorted_dict_top_k = {key: final_avg_distr [key] for key in sorted(final_avg_distr , key=final_avg_distr .get, reverse=True)[:k]}
 
   return sorted_dict_top_k
 
@@ -226,9 +226,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   # now overlap these
 
   for D in top_avg_distr.values():
-
-    plt.bar(range(len(D)), D, alpha=.1)
-    
+    plt.bar(*zip(*D.items()), alpha=.1)
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)
