@@ -148,7 +148,7 @@ def get_distribution(model_name, context, vocab, n):
 
   print("model name is: ", model_name.model_name, " and it's final probabilties top 20 words are: ", sorted_vals)
 
-  final_probabilities_sorted = {k: v for k, v in sorted(final_probabilities.items(), key=lambda item: item[1])}
+  final_probabilities_sorted = {k: v for k, v in sorted(final_probabilities.items(), key=lambda item: item[0])}
   
   return final_probabilities
 
