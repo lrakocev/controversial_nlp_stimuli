@@ -87,7 +87,7 @@ def jsd(prob_distributions,logbase=math.e):
     weights = np.empty(n)
     weights.fill(1/n)
     k = zip(weights, np.asarray(prob_distributions))
-    wprobs = np.asarray([x*y for x,y in list(k)])
+    wprobs = np.asarray([[x*z for z in y] for x,y in list(k)])
     mixture = wprobs.sum(axis=0)
     entropy_of_mixture = H(mixture, base=logbase)
 
