@@ -225,7 +225,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   # now overlap these
 
-  for D in top_avg_distr.vales:
+  for D in top_avg_distr.values():
 
     plt.bar(D, alpha=.1)
     legend()
