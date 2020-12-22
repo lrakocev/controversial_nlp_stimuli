@@ -199,7 +199,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   distrs = {}
   plotting_purposes = {}
   for model_name in model_list:
-    plotting_purposes[model_name] = []
+    plotting_purposes[model_name.model_name] = []
 
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
@@ -212,7 +212,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
         distrs[model_name] = list(next_word_distr.values())
 
-        plotting_purposes[model_name].append(next_word_distr)
+        plotting_purposes[model_name.model_name].append(next_word_distr)
     
       curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
@@ -222,12 +222,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     
 
   # plotting purposes
-  top_avg_distr = {}
-  for model_name, distrs in plotting_purposes:
-    # get top K avg distr for sentence per model name
-    # gives us top 5 per model_name in form: {vocab: probabilities}
-    top_avg_distr[model_name] = sorted_avg_dict_top_k(distrs, 5)
-
+  top_avg_distr = {name: sorted_avg_dict_top_k(distrs, 5) for name, distrs in plotting_purposes}
 
   # now overlap these
 
