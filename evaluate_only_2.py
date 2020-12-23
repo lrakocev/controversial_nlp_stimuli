@@ -168,7 +168,7 @@ def jsd(prob_distributions,logbase=math.e):
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
 
-def sorted_avg_dict_top_k(distrs, k):
+def sorted_avg_dict_top_k(distrs, k,):
 
   #have list of dicts, words: probabilities
   #first want to average them
@@ -176,7 +176,7 @@ def sorted_avg_dict_top_k(distrs, k):
   sorted_distrs = []
   for d in distrs:
     sorted_distrs.append([v for (k,v) in sorted(d.items(), key = lambda x: x[0])])
-    vocab = [k for (k,v) in sorted(d.items(), key = lambda x: x[0])]
+    
 
   df_probabilities = pd.DataFrame(sorted_distrs)
 
@@ -184,7 +184,7 @@ def sorted_avg_dict_top_k(distrs, k):
 
   final_avg_distr = dict(zip(vocab, df_probabilities_mean))
 
-  sorted_dict_top_k = {key: final_avg_distr [key] for key in sorted(final_avg_distr , key=final_avg_distr .get, reverse=True)[:k]}
+  sorted_dict_top_k = {key: final_avg_distr[key] for key in sorted(final_avg_distr , key=final_avg_distr.get, reverse=True)[:k]}
 
   return sorted_dict_top_k
 
