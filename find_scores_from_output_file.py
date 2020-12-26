@@ -6,9 +6,11 @@ import sys
 def find(file):
 	
 	f = open(file, 'r')
-	data = f.read()
-	for matches in re.findall("/^new score:\d*\.?\d*$/+", data):
-		print(matches.group(0))
+	regex_unique = re.compile("/^new score:\d*\.?\d*$/+") 
+	for line in data:
+		match = re.search(regex_unique,line)
+		if match:
+			print(match.group(0))
 
 if __name__ == "__main__":
 
