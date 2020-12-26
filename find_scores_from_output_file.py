@@ -6,7 +6,7 @@ import sys
 def find(file):
 	
 	f = open(file, 'r')
-	regex_unique = re.compile("/^new score: \d*\.?\d* curr_score: \d*\.?\d*$") 
+	regex_unique = re.compile("/^\w+: \d+\.?\d* \w+: \d+\.?\d*$") 
 	for line in f:
 		match = re.search(regex_unique,line)
 		if match:
