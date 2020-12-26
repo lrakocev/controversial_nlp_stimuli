@@ -227,7 +227,8 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   # now overlap these
 
   for D in top_avg_distr.values():
-    plt.bar(*zip(*D.items()), alpha=.1)
+    if len(D) > 0:
+      plt.bar(*zip(*D.items()), alpha=.1)
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)
