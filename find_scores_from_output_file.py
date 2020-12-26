@@ -7,7 +7,7 @@ def find(file):
 	
 	f = open(file, 'r')
 	regex_unique = re.compile("/^new score:\d*\.?\d*$/+") 
-	for line in data:
+	for line in f:
 		match = re.search(regex_unique,line)
 		if match:
 			print(match.group(0))
