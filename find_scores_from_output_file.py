@@ -9,6 +9,7 @@ def find(file):
 	regex_unique = re.compile("/^\w+: \d+\.?\d* \w+: \d+\.?\d*$") 
 	for line in f:
 		match = re.search(regex_unique,line)
+		print(line)
 		if match:
 			print(match.group(0))
 
