@@ -481,11 +481,11 @@ def plot_positions(js_positions, sentence):
   plt.savefig(name)
   plt.close()
 
-def get_args(sampler, context, change_i, num_masks, top_k, replacement, pos_dict, vocab, model_list, batch_size):
+def get_args(sampler, context, change_i, num_masks, top_k, replacement, pos_dict, vocab, model_list, batch_size, rw_vocab):
 
   bert_args = (context,change_i, num_masks, top_k, replacement)
   bert_pos_args = (context,change_i, num_masks, top_k, replacement, pos_dict)
-  rw_args = (vocab, top_k)
+  rw_args = (rw_vocab, top_k)
   ad_args = (model_list, context, vocab, batch_size, top_k)
 
   sampler_dict = {sample_bert: bert_args, sample_random_words: rw_args, sample_avg_distr: ad_args, sample_bert_pos: bert_pos_args}
@@ -525,7 +525,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     # replacements 
     num_masks = random.randint(1,2)
     
-    sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, True, pos_dict, vocab, model_list, batch_size) 
+    sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, True, pos_dict, vocab, model_list, batch_size, rw_vocab) 
     new_word_list = sampler(*sampler_args)
     #sample_random_words(vocab, top_k)
     #sample_bert(sentence_split, change_i, num_masks, 50, True)
@@ -555,7 +555,7 @@ def change_sentence(sentence, evaluate_sentence, sampler, **kwargs):
     if len(sentence_split) < max_len:
       num_masks = random.randint(1,2)
 
-      sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, False, pos_dict, vocab, model_list, batch_size)
+      sampler_args = get_args(sampler, sentence_split, change_i, num_masks, top_k, False, pos_dict, vocab, model_list, batch_size, rw_vocab)
       new_word_list = sampler(*sampler_args)
       #sample_random_words(vocab, top_k)
       #sample_bert(sentence_split, change_i, num_masks, 50, False)
@@ -619,6 +619,7 @@ def sample_sentences(file_name):
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
+rw_vocab = get_vocab(filename, 10000)
 
 filename2 = "SUBTLEX-US frequency list with PoS information text version.txt"
 pos_dict = get_pos_dict(filename2)
@@ -654,6 +655,6 @@ if __name__ == "__main__":
 
   sampler = sampler_dict[sys.argv[3]]
 
-  kwargs = {"vocab": vocab, "pos_dict": pos_dict, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k}
+  kwargs = {"vocab": vocab, "pos_dict": pos_dict, "batch_size": batch_size, "convergence_criterion": convergence_criterion, "model_list": model_list, "prev_dict": prev_dict, "max_length": max_length, "top_k": top_k, "rw_vocab": rw_vocab}
 
   globals()[sys.argv[1]](sentence, evaluate_sentence, sampler, **kwargs)
