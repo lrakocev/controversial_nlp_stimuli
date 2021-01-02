@@ -21,7 +21,6 @@ from scipy.spatial import distance
 from itertools import combinations
 import pickle
 from sklearn.linear_model import LinearRegression
-import skipthoughts
 
 class ModelInfo():
 
@@ -231,6 +230,8 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   for D in top_avg_distr.values():
     if len(D) > 0:
       plt.bar(*zip(*D.items()), alpha=.1)
+      plt.xticks(rotation=90)
+      plt.legend()
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)
@@ -638,11 +639,6 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
-
-skip_thoughts_model = skipthoughts.load_model()
-SkipThoughts = ModelInfo(skip_thoughts_model, skipthoughts.Encoder(skip_thoughts_model), "_", vocab, "SkipThoughts")
-
-
 if __name__ == "__main__":
 
   sentences = [sample_sentences("sentences4lara.txt") for i in range(5)]
@@ -653,9 +649,9 @@ if __name__ == "__main__":
 
   batch_size = 100
   convergence_criterion = int(sys.argv[4])
-  model_list = [GPT2, SkipThoughts] 
+  model_list = [GPT2, Roberta, Albert, XLM, T5] 
   max_length = 8
-  top_k = 50
+  top_k = 25
   prev_dict = {} 
   evaluate_sentence = evaluate_sentence_jsd
   sampler_dict = {"sample_bert": sample_bert, "sample_random_words": sample_random_words, "sample_bert_pos": sample_bert_pos, "sample_avg_distr": sample_avg_distr}
