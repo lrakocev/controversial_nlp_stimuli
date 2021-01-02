@@ -21,6 +21,7 @@ from scipy.spatial import distance
 from itertools import combinations
 import pickle
 from sklearn.linear_model import LinearRegression
+import skipthoughts
 
 class ModelInfo():
 
@@ -150,6 +151,7 @@ def get_distribution(model_name, context, vocab, n):
 
   final_probabilities_sorted = {k: v for k, v in sorted(final_probabilities.items(), key=lambda item: item[0])}
   
+
   return final_probabilities
 
 def jsd(prob_distributions,logbase=math.e):
@@ -636,6 +638,11 @@ Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_di
 
 TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
 
+
+skip_thoughts_model = skipthoughts.load_model()
+SkipThoughts = ModelInfo(skip_thoughts_model, skipthoughts.Encoder(skip_thoughts_model), "_", vocab, "SkipThoughts")
+
+
 if __name__ == "__main__":
 
   sentences = [sample_sentences("sentences4lara.txt") for i in range(5)]
@@ -646,7 +653,7 @@ if __name__ == "__main__":
 
   batch_size = 100
   convergence_criterion = int(sys.argv[4])
-  model_list = [GPT2, Roberta, Albert, XLM, T5] 
+  model_list = [GPT2, SkipThoughts] 
   max_length = 8
   top_k = 50
   prev_dict = {} 
