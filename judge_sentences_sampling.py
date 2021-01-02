@@ -231,7 +231,11 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     if len(D) > 0:
       plt.bar(*zip(*D.items()), alpha=.1)
       plt.xticks(rotation=90)
-      plt.legend()
+      plt.legend(["GPT2", "Roberta", "Albert", "XLM", "T5"] )
+      plt.xlabel("Top Predicted Words Per Model")
+      plt.ylabel("Percent")
+      plt.title("Top 5 Average Predicted Words Across Sentence Positions")
+
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)
