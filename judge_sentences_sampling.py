@@ -472,11 +472,12 @@ def plot_scores(scores, sentence):
   plt.title("GPT2-Roberta-Albert-XLM J-S Scores for " + sentence)
   plt.show()
   name = sentence + " sampling.png"
+
+  print("sentence: ", sentence, "scores: ", scores)
   plt.savefig(name)
   plt.close()
 
 def plot_positions(js_positions, sentence):
-
 
   for pos in js_positions:
     plt.plot(pos)
