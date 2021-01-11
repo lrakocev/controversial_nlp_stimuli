@@ -648,9 +648,9 @@ TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),Transfo
 
 if __name__ == "__main__":
 
-  sentences = [sample_sentences("sentences4lara.txt") for i in range(5)]
+  sentences = [sample_sentences("sentences4lara.txt") for i in range(11)]
 
-  sent_dict = dict(zip([str(x) for x in range(1,5)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,11)], sentences))
 
   sentence = sent_dict[sys.argv[2]]
 
