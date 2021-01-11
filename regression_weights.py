@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 from scipy.spatial import distance
+import last_line_evaluate as lle
 
 def sample_sentences(file_name, n):
 
@@ -50,7 +51,7 @@ def create_sent_to_score_dict(score_name, tokenizer, model, sentences):
 
 	return sent_dict
 
-sentences = sample_sentences("sentences4lara.txt", 100) 
+sentences = lle.score_dict.keys()
 
 r_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=roberta-base,subsample=None.pkl'
 r_tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
@@ -60,26 +61,14 @@ g_score_name = '/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Per
 g_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 g_model = GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True)
 
-a_score_name ='/om2/user/gretatu/.result_caching/neural_nlp.score/benchmark=Pereira2018-encoding-weights,model=albert-base-v2,subsample=None.pkl'
-a_tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
-a_model = AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True)
-
-
-a_score_dict = create_sent_to_score_dict(a_score_name, a_tokenizer, a_model, sentences)
-
 g_score_dict = create_sent_to_score_dict(g_score_name, g_tokenizer, g_model, sentences)
 
 r_score_dict = create_sent_to_score_dict(r_score_name, r_tokenizer, r_model, sentences)
 
-
-a_scores = [v for (k,v) in sorted(a_score_dict.items(), key=lambda x: x[0], reverse=True)]
 g_scores = [v for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
 r_scores = [v for (k,v) in sorted(r_score_dict.items(), key=lambda x: x[0], reverse=True)]
 
-#cosine_distances_a_g = [distance.cosine(a_scores[i], g_scores[i]) for i in range(len(g_scores))]
 cosine_distances = [distance.cosine(r_scores[i], g_scores[i]) for i in range(len(g_scores))]
-#cosine_distances_a_r = [distance.cosine(a_scores[i], r_scores[i]) for i in range(len(g_scores))]
-
 
 sentence_list = [k for (k,v) in sorted(g_score_dict.items(), key=lambda x: x[0], reverse=True)]
 

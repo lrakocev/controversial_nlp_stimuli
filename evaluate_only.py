@@ -123,12 +123,18 @@ def evaluate_sentence(model_list, sentence, joint_vocab):
     
   return total_js/len_sentence, js_positions
 
-def sample_sentences(file_name, n):
+def sample_sentences(file_name):
 
-  with open(file_name) as f:
-    head = [next(f).strip() for x in range(n)]
+  file = open(file_name)
+  reader = csv.reader(file)
+  num_lines = len(list(reader))
+  N = random.randint(0,num_lines-1)
+  with open(file_name, 'r') as file:
+      reader = csv.reader(file)
+      line = next((x for i, x in enumerate(reader) if i == N), None)
+      line = (" ".join(line)).translate(str.maketrans('', '', string.punctuation))
 
-  return head 
+  return line
 
 filename = "SUBTLEXus74286wordstextversion.txt"
 vocab = get_vocab(filename, 3000)
@@ -137,25 +143,18 @@ GPT2 = ModelInfo(GPT2LMHeadModel.from_pretrained('gpt2', return_dict =True), GPT
 
 Roberta = ModelInfo(RobertaForCausalLM.from_pretrained('roberta-base',  return_dict=True), RobertaTokenizer.from_pretrained('roberta-base'), "_", vocab, "Roberta")
 
-Albert = ModelInfo(AlbertForMaskedLM.from_pretrained('albert-base-v2', return_dict=True), AlbertTokenizer.from_pretrained('albert-base-v2'), "_", vocab, "Albert")
 
-XLM = ModelInfo(XLMWithLMHeadModel.from_pretrained('xlm-mlm-xnli15-1024', return_dict=True), XLMTokenizer.from_pretrained('xlm-mlm-xnli15-1024'), "_", vocab, "XLM")
-
-T5 = ModelInfo(T5ForConditionalGeneration.from_pretrained("t5-base", return_dict=True), T5Tokenizer.from_pretrained("t5-base"), "_", vocab, "T5")
-
-TXL = ModelInfo(TransfoXLLMHeadModel.from_pretrained('transfo-xl-wt103'),TransfoXLTokenizer.from_pretrained('transfo-xl-wt103'), "_", vocab, "TXL")
-
-model_list = [GPT2, Roberta, XLM, T5] 
+model_list = [GPT2, Roberta]
 n = 100
 
 
 if __name__ == "__main__":
 
-  #entences = sorted(sample_sentences("sentences4lara.txt", 1000))
+  sentences = [sample_sentences("sentences4lara.txt") for i in range(2000)]
 
-  #sent_dict = dict(zip([str(x) for x in range(1,1000)], sentences))
+  sent_dict = dict(zip([str(x) for x in range(1,2000)], sentences))
 
-  sentence = "Now how about this sentence" #sent_dict[sys.argv[2]]
+  sentence = sent_dict[sys.argv[2]]
 
   globals()[sys.argv[1]](model_list, sentence, {})
 
