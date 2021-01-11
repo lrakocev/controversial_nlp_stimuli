@@ -199,7 +199,9 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   total_js = 0
   js_positions = []
   distrs = {}
-  plotting_purposes = {}
+  max_js_distr = {}
+  max_js = 0
+  model_to_top_5 = {}
   for model_name in model_list:
     plotting_purposes[model_name.model_name] = []
 
@@ -214,28 +216,28 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
         distrs[model_name] = list(next_word_distr.values())
 
-        plotting_purposes[model_name.model_name].append(next_word_distr)
-    
+        top_5_distr = {key: next_word_distr[key] for key in sorted(next_word_distr, key=next_word_distr.get, reverse=True)[:5]}
+
+        model_to_top_5[model_name] = top_5_distr
       curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
+      if curr_js > max_js:
+        max_js = curr_js
+        max_js_distr = model_to_top_5
 
     total_js += curr_js
     js_positions.append(curr_js)
-    
-  # plotting purposes
-  top_avg_distr = {name: sorted_avg_dict_top_k(distrs, 5, vocab) for (name, distrs) in plotting_purposes.items()}
 
-  # now overlap these
 
-  for D in top_avg_distr.values():
-    if len(D) > 0:
-      plt.bar(*zip(*D.items()), alpha=.1)
-      plt.xticks(rotation=90)
-      plt.legend(["GPT2", "Roberta", "Albert", "XLM", "T5"] )
-      plt.xlabel("Top Predicted Words Per Model")
-      plt.ylabel("Percent")
-      plt.title("Top 5 Average Predicted Words Across Sentence Positions")
+  # now plot max_js_distr
 
+  for (model_name, distr) in max_js_distr: 
+    plt.bar(distr.keys(), distr.values(), width=0.2, align='edge', label=model_name)
+    plt.xticks(rotation=90,labelsize=20)
+    plt.legend()
+    plt.xlabel("Top Predicted Words Per Model")
+    plt.ylabel("Percent")
+    plt.title("Top 5 Predicted Words For Highest JS Position")
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)
