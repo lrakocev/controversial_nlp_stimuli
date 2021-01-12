@@ -34,6 +34,8 @@ def create_sent_to_score_dict(score_name, tokenizer, model, sentences):
 	sent_dict = {}
 	for sent in sentences:
 
+		print(sent)
+
 		inputs = tokenizer(sent,return_tensors="pt")
 		outputs = model(**inputs, labels=inputs["input_ids"], output_hidden_states=True)
 
