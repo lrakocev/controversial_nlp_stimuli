@@ -229,7 +229,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   # now plot max_js_distr
 
-  for (model_name, distr) in max_js_distr: 
+  for (model_name, distr) in max_js_distr.items(): 
     plt.bar(distr.keys(), distr.values(), width=0.2, align='edge', label=model_name)
     plt.xticks(rotation=90,labelsize=20)
     plt.legend()
