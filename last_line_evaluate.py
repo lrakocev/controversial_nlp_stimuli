@@ -1,6 +1,6 @@
 import os
 import glob
-file_list = glob.glob('evaluate*.out')
+file_list = glob.glob('final_evaluate*.out')
 score_dict = {}
 for file in file_list:
 	a_file = open(file, "r")
