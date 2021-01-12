@@ -202,9 +202,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   max_js_distr = {}
   max_js = 0
   model_to_top_5 = {}
-  for model_name in model_list:
-    plotting_purposes[model_name.model_name] = []
-
+  
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
 
