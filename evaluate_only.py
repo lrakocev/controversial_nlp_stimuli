@@ -183,7 +183,7 @@ def jsd(prob_distributions,logbase=math.e):
     divergence = entropy_of_mixture - sum_of_entropies
     return(divergence)
 
-def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
+def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
 
   sentence_split = sentence.split(" ")
   len_sentence = len(sentence_split)
