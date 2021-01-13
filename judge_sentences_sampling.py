@@ -231,7 +231,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
   for (model_name, distr) in max_js_distr.items(): 
     plt.bar(distr.keys(), distr.values(), width=0.2, align='edge', label=model_name)
-    plt.xticks(rotation=90,labelsize=20)
+    plt.xticks(rotation=90)
     plt.legend()
     plt.xlabel("Top Predicted Words Per Model")
     plt.ylabel("Percent")
