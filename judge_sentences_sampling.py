@@ -226,21 +226,10 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     total_js += curr_js
     js_positions.append(curr_js)
 
-
-  # now plot max_js_distr
-
-  for (model_name, distr) in max_js_distr.items(): 
-    plt.bar(distr.keys(), distr.values(), width=0.2, align='edge', label=model_name)
-    plt.xticks(rotation=90,fontsize=18)
-    plt.legend()
-    plt.xlabel("Top Predicted Words Per Model")
-    plt.ylabel("Percent")
-    plt.title("Top 5 Predicted Words For Highest JS Position")
-    plt.figure(figsize=(20,10))
-
+  df = pd.DataFrame(max_js_distr)
+  fig = df.plot.bar(rot=90)
   name = sentence + " controversy graph.png"
-  plt.savefig(name)
-  plt.close()
+  fig.savefig(name)
 
   return total_js/len_sentence
 
