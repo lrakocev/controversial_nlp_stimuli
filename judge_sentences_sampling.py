@@ -229,7 +229,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
   df = pd.DataFrame(max_js_distr)
   fig = df.plot.bar(rot=90)
   name = sentence + " controversy graph.png"
-  fig.savefig(name)
+  fig.figure.savefig(name)
 
   return total_js/len_sentence
 
