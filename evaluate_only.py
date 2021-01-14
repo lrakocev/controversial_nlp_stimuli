@@ -190,6 +190,7 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
   total_js = 0
   js_positions = []
   distrs = {}
+  model_to_top_5 = {}
   
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
@@ -204,9 +205,7 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
         next_word_distr = get_distribution(model_name, curr_context, vocab, n)
         distrs[model_name] = list(next_word_distr.values())
 
-        top_5_distr = {key: next_word_distr[key] for key in sorted(next_word_distr, key=next_word_distr.get, reverse=True)[:5]}
-
-        model_to_top_5[model_name] = top_5_distr
+        
       curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
 
