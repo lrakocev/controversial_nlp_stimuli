@@ -236,6 +236,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     plt.xlabel("Top Predicted Words Per Model")
     plt.ylabel("Percent")
     plt.title("Top 5 Predicted Words For Highest JS Position")
+    plt.figure(figsize=(20,10))
 
   name = sentence + " controversy graph.png"
   plt.savefig(name)

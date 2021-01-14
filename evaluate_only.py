@@ -81,8 +81,6 @@ def get_distribution(model_name, context, joint_vocab):
 
 def get_distribution(model_name, context, vocab, n):
 
-  print("context", context)
-
   tokenizer = model_name.tokenizer 
   model = model_name.model.to('cuda')
   model_word_token_dict = model_name.word_token_dict
@@ -196,6 +194,8 @@ def evaluate_sentence(model_list, sentence, vocab, n, js_dict):
   for i in range(0, len_sentence):
     curr_context += sentence_split[i] + " "
 
+    print(curr_context)
+
     if curr_context in js_dict.keys():
       curr_js = js_dict[curr_context]
 
@@ -252,5 +252,5 @@ if __name__ == "__main__":
 
   sentence = sent_dict[sys.argv[2]]
 
-  globals()[sys.argv[1]](model_list, sentence, {})
+  globals()[sys.argv[1]](model_list, sentence, vocab, n, {})
 
