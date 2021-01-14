@@ -216,7 +216,7 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
 
         top_5_distr = {key: next_word_distr[key] for key in sorted(next_word_distr, key=next_word_distr.get, reverse=True)[:5]}
 
-        model_to_top_5[model_name] = top_5_distr
+        model_to_top_5[model_name.model_name] = top_5_distr
       curr_js = jsd(list(distrs.values()))
       js_dict[curr_context] = curr_js
       if curr_js > max_js:
@@ -227,7 +227,11 @@ def evaluate_sentence_jsd(model_list, sentence, vocab, n, js_dict):
     js_positions.append(curr_js)
 
   df = pd.DataFrame(max_js_distr)
-  fig = df.plot.bar(rot=90)
+
+
+  fig = df.plot.bar(rot=90, figsize=(8,10), title='Top 5 Predicted Words in Highest JS-Scoring Position')
+  fig.set_xlabel("Words")
+  fig.set_ylabel("Percent")
   name = sentence + " controversy graph.png"
   fig.figure.savefig(name)
 
