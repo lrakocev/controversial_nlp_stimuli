@@ -17,6 +17,9 @@ for file in file_list:
 avg_scores = list(map(np.mean, scores_list))
 std_dev_scores = list(map(np.std, scores_list))
 
+print(avg_scores)
+
+
 avg_plus_std = [avg_scores[i] + std_dev_scores[i] for i in range(avg_scores)]
 avg_minus_std = [avg_scores[i] - std_dev_scores[i] for i in range(avg_scores)]
 
