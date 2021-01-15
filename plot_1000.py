@@ -34,17 +34,16 @@ scores_list = [l + [np.nan]*(max_length - len(l))  if len(l) < max_length else l
 avg_scores = np.array(np.nanmean(scores_list, axis = 0))
 std_dev_scores = np.array(np.nanstd(scores_list, axis = 0))
 
-print("avg",avg_scores)
-print("std", std_dev_scores )
-
 avg_plus_std = [a + b for a, b in zip(avg_scores, std_dev_scores)]
 avg_minus_std = [a - b for a, b in zip(avg_scores, std_dev_scores)]
 x_marks = range(0, len(avg_scores))
 
 plt.plot(x_marks, avg_scores, 'b', label = "average convergence line")
 
-plt.plot(x_marks, avg_plus_std, 'r', label = "average + std dev convergence line")
-plt.plot(x_marks, avg_minus_std, 'r',label = "average - std dev convergence line")
+plt.errorbar(x_markslst[0::10], avg_scoreslst[0::10], std_dev_scoreslst[0::10])
+
+#plt.plot(x_marks, avg_plus_std, 'r', label = "average + std dev convergence line")
+#plt.plot(x_marks, avg_minus_std, 'r',label = "average - std dev convergence line")
 
 plt.legend()
 plt.xlabel("iterations")
