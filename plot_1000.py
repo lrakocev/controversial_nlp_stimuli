@@ -24,8 +24,14 @@ for file in file_list:
 
 		scores_list.append([float(x) for x in scores])
 
-avg_scores = list(map(np.mean, scores_list))
-std_dev_scores = list(map(np.std, scores_list))
+
+max_length = max(scores_list, key=len)
+
+scores_list = [l + ['nan']*(max_length - len(l)) if len(l) < max_length for l in scores_list]
+
+
+avg_scores = np.nanmean(scores_list, axis = 0)
+std_dev_scores = np.std(scores_list, axis = 0)
 
 print(avg_scores)
 
