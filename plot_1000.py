@@ -31,10 +31,11 @@ scores_list = [l + [np.nan]*(max_length - len(l)) for l in scores_list if len(l)
 
 print(scores_list)
 
-avg_scores = np.nanmean(scores_list, axis = 0)
-std_dev_scores = np.std(scores_list, axis = 0)
+avg_scores = np.array(np.nanmean(scores_list, axis = 0))
+std_dev_scores = np.array(np.std(scores_list, axis = 0))
 
-print(avg_scores)
+print("avg",avg_scores)
+print("std", std_dev_scores )
 
 avg_plus_std = [avg_scores[i] + std_dev_scores[i] for i in range(avg_scores)]
 avg_minus_std = [avg_scores[i] - std_dev_scores[i] for i in range(avg_scores)]
