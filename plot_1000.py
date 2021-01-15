@@ -2,6 +2,14 @@ import os
 import glob
 import numpy as np
 
+def is_valid_decimal(s):
+    try:
+        float(s)
+    except ValueError:
+        return False
+    else:
+        return True
+
 file_list = glob.glob('final_jsd_1000_*.out')
 scores_list = []
 
@@ -9,7 +17,8 @@ for file in file_list:
 	a_file = open(file, "r")
 	lines = a_file.readlines()
 	score = lines[-1].strip()
-	if score.isdecimal():
+
+	if is_valid_decimal(score):
 		print("here")
 		scores = lines[-2].strip().split(":")[2]
 		scores_list.append(scores)
