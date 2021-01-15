@@ -27,6 +27,9 @@ for file in file_list:
 
 max_length = max(scores_list, key=len)
 
+print(max_length)
+
+print(scores_list)
 scores_list = [l + ['nan']*(max_length - len(l)) for l in scores_list  if len(l) < max_length]
 
 
