@@ -20,7 +20,7 @@ for file in file_list:
 
 	if is_valid_decimal(score):
 		
-		scores = lines[-2].split(":")[2].strip()
+		scores = lines[-2].split(":")[2].strip()[1:-1].split(",")
 
 		print(scores)
 		scores_list.append([float(x) for x in scores])
