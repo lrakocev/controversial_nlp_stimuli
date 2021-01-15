@@ -19,8 +19,10 @@ for file in file_list:
 	score = lines[-1].strip()
 
 	if is_valid_decimal(score):
-		print("here")
+		
 		scores = lines[-2].strip().split(":")[2]
+
+		print(scores)
 		scores_list.append([float(x) for x in scores])
 
 avg_scores = list(map(np.mean, scores_list))
