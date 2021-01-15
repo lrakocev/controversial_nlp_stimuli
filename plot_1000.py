@@ -11,6 +11,7 @@ for file in file_list:
 	score = lines[-1].strip()
 	print(file, score)
 	if score.isnumeric():
+		print("here")
 		scores = lines[-2].strip().split(":")[2]
 		scores_list.append(scores)
 
