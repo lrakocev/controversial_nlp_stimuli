@@ -40,7 +40,7 @@ x_marks = range(0, len(avg_scores))
 
 plt.plot(x_marks, avg_scores, 'b', label = "average convergence line")
 
-plt.errorbar(x_markslst[0::10], avg_scoreslst[0::10], std_dev_scoreslst[0::10])
+plt.errorbar(x_marks[0::10], avg_scores[0::10], std_dev_scores[0::10])
 
 #plt.plot(x_marks, avg_plus_std, 'r', label = "average + std dev convergence line")
 #plt.plot(x_marks, avg_minus_std, 'r',label = "average - std dev convergence line")
