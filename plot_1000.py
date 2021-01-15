@@ -24,6 +24,7 @@ for file in file_list:
 		scores_list.append(scores)
 
 
+scores_list = np.array(scores_list).astype(np.float)
 avg_scores = list(map(np.mean, scores_list))
 std_dev_scores = list(map(np.std, scores_list))
 
