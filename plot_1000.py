@@ -9,6 +9,7 @@ for file in file_list:
 	a_file = open(file, "r")
 	lines = a_file.readlines()
 	score = lines[-1].strip()
+	print(file, score)
 	if score.isnumeric():
 		scores = lines[-2].strip().split(":")[2]
 		scores_list.append(scores)
