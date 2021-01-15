@@ -22,11 +22,12 @@ for file in file_list:
 		
 		scores = lines[-2].split(":")[2].strip()[1:-1].split(",")
 
-		print(scores)
 		scores_list.append([float(x) for x in scores])
 
 avg_scores = list(map(np.mean, scores_list))
 std_dev_scores = list(map(np.std, scores_list))
+
+print(avg_scores)
 
 avg_plus_std = [avg_scores[i] + std_dev_scores[i] for i in range(avg_scores)]
 avg_minus_std = [avg_scores[i] - std_dev_scores[i] for i in range(avg_scores)]
