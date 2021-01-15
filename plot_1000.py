@@ -36,9 +36,8 @@ std_dev_scores = np.array(np.nanstd(scores_list, axis = 0))
 print("avg",avg_scores)
 print("std", std_dev_scores )
 
-avg_plus_std = [avg_scores[i] + std_dev_scores[i] for i in range(avg_scores)]
-avg_minus_std = [avg_scores[i] - std_dev_scores[i] for i in range(avg_scores)]
-
+avg_plus_std = [a + b for a, b in zip(avg_scores, std_dev_scores)]
+avg_minus_std = [a - b for a, b in zip(avg_scores, std_dev_scores)]
 x_marks = range(0, len(avg_scores))
 
 plt.plot(x_marks, avg_scores, 'b', label = "average convergence line")
