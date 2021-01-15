@@ -27,8 +27,9 @@ for file in file_list:
 
 max_length = len(max(scores_list, key=len))
 
-scores_list = [l + ['nan']*(max_length - len(l)) for l in scores_list  if len(l) < max_length]
+scores_list = [l + [np.nan]*(max_length - len(l)) for l in scores_list if len(l) < max_length]
 
+print(scores_list)
 
 avg_scores = np.nanmean(scores_list, axis = 0)
 std_dev_scores = np.std(scores_list, axis = 0)
