@@ -28,9 +28,6 @@ scores_list = np.array(scores_list).astype(np.float)
 avg_scores = list(map(np.mean, scores_list))
 std_dev_scores = list(map(np.std, scores_list))
 
-print(avg_scores)
-
-
 avg_plus_std = [avg_scores[i] + std_dev_scores[i] for i in range(avg_scores)]
 avg_minus_std = [avg_scores[i] - std_dev_scores[i] for i in range(avg_scores)]
 
@@ -42,11 +39,9 @@ plt.plot(x_marks, avg_plus_std, 'r', label = "average + std dev convergence line
 plt.plot(x_marks, avg_minus_std, 'r',label = "average - std dev convergence line")
 
 plt.legend()
-
-
 plt.xlabel("iterations")
 plt.ylabel("j-s divergence scores")
 plt.title("Average Convergence Line with Std Deviations Shown")
-plt.savefig("JSD 1000 Convergence Graph")
+plt.savefig("Convergence Graph")
 plt.show()
 plt.close()
