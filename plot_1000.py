@@ -25,11 +25,8 @@ for file in file_list:
 		scores_list.append([float(x) for x in scores])
 
 
-max_length = max(scores_list, key=len)
+max_length = len(max(scores_list, key=len))
 
-print("max length" , max_length)
-
-print("scres list", scores_list)
 scores_list = [l + ['nan']*(max_length - len(l)) for l in scores_list  if len(l) < max_length]
 
 
