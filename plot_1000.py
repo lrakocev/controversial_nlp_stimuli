@@ -31,7 +31,7 @@ scores_list = [l + [np.nan]*(max_length - len(l))  if len(l) < max_length else l
 
 
 avg_scores = np.array(np.nanmean(scores_list, axis = 0))
-std_dev_scores = np.array(np.std(scores_list, axis = 0))
+std_dev_scores = np.array(np.nanstd(scores_list, axis = 0))
 
 print("avg",avg_scores)
 print("std", std_dev_scores )
