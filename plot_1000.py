@@ -21,10 +21,8 @@ for file in file_list:
 	if is_valid_decimal(score):
 		print("here")
 		scores = lines[-2].strip().split(":")[2]
-		scores_list.append(scores)
+		scores_list.append([float(x) for x in scores])
 
-
-scores_list = np.array(scores_list).astype(np.float)
 avg_scores = list(map(np.mean, scores_list))
 std_dev_scores = list(map(np.std, scores_list))
 
